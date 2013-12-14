@@ -1,0 +1,32 @@
+<%= render 'head' %>
+
+<body class="api">
+	<%= render 'header' %>
+	
+	<div class="sub-nav">
+		<h2><a href="/SIPjs/">API</a></h2>
+		
+		<ul>
+      <li><a href="/SIPjs/">Documentation</a></li>
+      <li><a href="/guides/" class="active">Guides</a></li>
+		</ul>
+	</div>
+	
+  <div id="wrapper">
+  	<div class="content">
+    	<%= yield %>
+    </div>
+
+		<div id="js-sidebar" class="sidebar-shell">
+		  <div class="sidebar-module">
+		    <ul>
+		      <li><h3><a href="/guides/">Overview</a></h3></li>
+		      <li><h3><a href="/guides/getting-started/">Getting Started</a></h3></li>
+				</ul>
+			</div>
+    </div>
+  </div><!-- #wrapper -->
+		
+	<%= render 'footer' %>
+</body>
+</html>
