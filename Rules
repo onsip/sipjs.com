@@ -23,7 +23,9 @@ end
 compile '/SIPjs/*' do
   filter :erb
   filter :kramdown,
-         :toc_levels => [2,3]
+         :toc_levels => [2,3],
+         :enable_coderay => true,
+         :coderay_line_numbers => nil
   filter :colorize_syntax,
          :colorizers => {:javascript => :pygmentsrb}
   layout item[:layout] || 'sipjs'

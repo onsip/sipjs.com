@@ -1,6 +1,7 @@
 ---
 title: SIP.UA | SIP.js
 ---
+
 # SIP.UA
 
 SIP.js SIP User Agent class.
@@ -54,7 +55,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description 
 -----|------|--------------
@@ -80,7 +81,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description 
 -----|------|--------------
@@ -110,7 +111,7 @@ Name | Type | Description
 `target`|`String`|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/SIPjs/uri/) instance.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description 
 -----|------|--------------
@@ -170,7 +171,7 @@ Name | Type | Description
 `body`|`String`|Message content. `String` representing the body of the message.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description 
 -----|------|--------------

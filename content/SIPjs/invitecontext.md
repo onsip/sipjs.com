@@ -47,7 +47,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -56,7 +56,7 @@ Name | Type | Description
 `RTCConstraints`|`Object`|Used similarly to `mediaConstraints`, but for the RTCMediaHandler
 `inviteWithoutSdp`|`Boolean`|Tells the InviteContext if the INVITE should be sent with or without sdp.
 `anonymous`|`Boolean`|Tells the InviteContext if the UA being used will be anonymous.
-body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
+`body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
 
 
 ### `cancel(options)`
@@ -69,7 +69,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -94,7 +94,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -116,7 +116,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -133,7 +133,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -161,7 +161,7 @@ Name | Type | Description
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `tone`|`String` or `Number`|One or multiple valid DTMF symbols.
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -208,7 +208,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -232,15 +232,13 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
-`status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the d\
-efault.
+`status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
 `reason_phrase`|`String`|The SIP reason phrase.
-`body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-\
-Type header field must be set in `extraHeaders` field).
+`body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
 `extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
 #### Throws
@@ -268,7 +266,7 @@ Name | Type | Description
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `method`|`String`|The name of the SIP request to be sent
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
@@ -285,7 +283,7 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------

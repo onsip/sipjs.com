@@ -1,7 +1,7 @@
 ---
 title: SIP.MessageContext | SIP.js
 ---
-# Class `SIP.MessageContext`
+# SIP.MessageContext
 
 SIP.js SIP MESSAGE based IM.
 
@@ -30,9 +30,9 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 
-#### Fields in <code>options</code> Object
+#### Fields in `options` Object
 
 Name | Type | Description
 -----|------|--------------
 `extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
-body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
+`body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).

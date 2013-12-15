@@ -1,5 +1,5 @@
 ---
-title: OnSIP Developer
+title: SIP.js
 layout: overview
 ---
 
