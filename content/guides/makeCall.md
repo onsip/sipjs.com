@@ -1,5 +1,5 @@
 ---
-title: Getting Started | SIP.js
+title: Make a call | SIP.js
 ---
 
 # Make a Call
@@ -62,14 +62,13 @@ var options = {
 //makes the call
 var session = userAgent.invite('sip:bob@example.com', options);
 
-//attached the recieved video stream to the Video Elements
+//attached the received video stream to the Video Elements
 remoteVideo.srcObject= session.getRemoteStreams()[0];
 localVideo.srcObject= session.getLocalStreams()[0];
 
 //plays the Video Elements
 remoteVideo.play();
 localVideo.play();
-
 
 ~~~
 
