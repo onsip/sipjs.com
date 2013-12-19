@@ -1,5 +1,7 @@
 ---
-title: A New Item
+title: Changelog
 ---
 
-Hi, I'm a new item!
+#Changelog
+
+A list of changes we made, in blog article format.

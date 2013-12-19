@@ -1,5 +1,7 @@
 ---
-title: A New Item
+title: News
 ---
 
-Hi, I'm a new item!
+#News
+
+Here we will list various news updates.
