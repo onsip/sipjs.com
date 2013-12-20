@@ -68,10 +68,10 @@ function register() {
 
 Session Event Handler Setup:
 
-    Add a check to see if there is an incoming call
-    Add an event handler for the session started event
-    Add an event handler for the session ended event
-    Add an event handler for the session failed event
+Add a check to see if there is an incoming call
+Add an event handler for the session started event
+Add an event handler for the session ended event
+Add an event handler for the session failed event
 
 ~~~ javascript
 function newRTCSessionHandler (e) {
