@@ -4,62 +4,58 @@ title: SIP.UA | SIP.js
 
 # SIP.UA
 
-SIP.js SIP User Agent class.
+A user agent (or UA) is associated with a SIP user address and acts on behalf of that user to send and receive SIP requests.  A user agent can register to receive incoming requests, as well as create and send outbound messages.  The user agent also maintains the WebSocket over which its signaling travels.
 
 * TOC
 {:toc}
 
-## Instantiation
+## Construction
 
-A User Agent is associated to a SIP user account. This class requires some configuration parameters for its initialization which are provided through a configuration object.
+A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent. Check the full list for optional [UA Configuration Parameters](/SIPjs/ua_configuration_parameters/).
 
-Check the full [UA Configuration Parameters](/SIPjs/ua_configuration_parameters/) list.
+### Examples
 
-Instantiation of this class will raise an exception if any of the mandatory parameters is not defined or due to a malformed parameter value.
-
-#### Throws
-
-* [`CONFIGURATION_ERROR`](/SIPjs/dom_exceptions/">
-
-#### Example
 ~~~ javascript
-var configuration = {
-  'ws_servers':         'ws://sip-ws.example.com',
-  'uri':                'sip:alice@example.com',
-  'password':           'superpassword'
-};
-
-var coolPhone = new SIP.UA(configuration);
+// Create a new anonymous user agent
+var myUA = new SIP.UA();
 ~~~
 
-##Instance Methods
+~~~ javascript
+// Create a user agent for Bob that will register to receive requests
+var bob = new SIP.UA({
+  uri: 'bob@example.com',
+  ws_servers: ['wss://edge.example.com'],
+  register: true
+});
+~~~
 
+## Generic Methods
 
 ### `start()`
-Connects to the WebSocket server and restores the previous state if previously stopped. For a fresh start, registers with the SIP domain if `register` parameter in the UA's configuration is set to `true`.
+
+Connect to the configured WebSocket server, and restore the previous state if previously stopped. The first time `start()` is called, the UA will also attempt to register if the `register` parameter in the UA's configuration is set to `true`.
 
 
 ### `stop()`
-Saves the current registration state and disconnects from the WebSocket server after gracefully unregistering and terminating active sessions if any.
 
+Saves the current registration state and disconnects from the WebSocket server after gracefully unregistering and terminating any active sessions.
 
-### `register(options=null)`
+### `register([options])`
 
-Registers the UA.
-
-Note: If `register` parameter is set to `true` in [UA Configuration Parameters](/SIPjs/ua_configuration_parameters/), the UA will register automatically.
+Register the UA to receive incoming requests.  Upon successful registration, the UA will emit a `registered` event.
 
 #### Parameters
 
-Name | Type | Description 
------|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see below).
+Name | Type | Description
+-----|------|-------------
+`options`|`Object`|Optional `Object` with extra parameters (see below)
+`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
 
-#### Fields in `options` Object
+#### Returns
 
-Name | Type | Description 
------|------|--------------
-`extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
+Type    | Description
+--------|----------------
+`SIP.UA`| This user agent
 
 #### Example
 
@@ -68,25 +64,26 @@ var options = {
   'extraHeaders': [ 'X-Foo: foo', 'X-Bar: bar' ]
 };
 
-coolPhone.register(options);
+myUA.register(options);
 ~~~
 
+### `unregister([options])`
 
-### `unregister(options=null)`
 Unregisters the UA.
 
 #### Parameters
 
 Name | Type | Description 
------|------|--------------
+-----|------|-------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
+`options.all`|`Boolean`|Optional `Boolean` for unregistering all bindings of the same SIP user. Default value is `false`.
+`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
 
-#### Fields in `options` Object
+#### Returns
 
-Name | Type | Description 
------|------|--------------
-`all`|`Boolean`|Optional `Boolean` for unregistering all bindings of the same SIP user. Default value is `false`.
-`extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
+Type | Description
+-----|-------------
+`SIP.UA`| This user agent
 
 #### Example
 
@@ -96,70 +93,36 @@ var options = {
   'extraHeaders': [ 'X-Foo: foo', 'X-Bar: bar' ]
 };
 
-coolPhone.unregister(options);
+myUA.unregister(options);
 ~~~
 
+### `isRegistered()`
 
-### `invite(target, options=null)`
+#### Returns
 
-Makes an outgoing multimedia call.
+Type     | Description
+---------|-------------
+`Boolean`| `true` if the UA is registered, `false` otherwise
 
-#### Parameters
+### `isConnected()`
 
-Name | Type | Description 
------|------|--------------
-`target`|`String`|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/SIPjs/uri/) instance.
-`options`|`Object`|Optional `Object` with extra parameters (see below).
+#### Returns
 
-#### Fields in `options` Object
+Type     | Description
+---------|-------------
+`Boolean`| `true` if the WebSocket connection is established, `false` otherwise.
 
-Name | Type | Description 
------|------|--------------
-`mediaConstraints`|`Object`|`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. Default value is both `audio` and `video` set to `true`.
-`mediaStream`|`MediaStream`|`MediaStream` to transmit to the other end.
-`RTCConstraints`|`Object`|`Object` representing RTCPeerconnection constraints
-`eventHandlers`|`Object`|Optional `Object` of event handlers to be registered to each call event. Define an event handler for each event you want to be notified about.
-`extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the INVITE request.
-`anonymous`|`Boolean`|`Boolean` field indicating whether the call should be done anonymously. Default value is `false`.
 
-#### Example
 
-~~~ javascript
-// HTML5 &lt;video&gt; elements in which local and remote video will be shown
-var views = {
-  'selfView':   document.getElementById('my-video'),
-  'remoteView': document.getElementById('peer-video')
-};
 
-// Register callbacks to desired call events
-var eventHandlers = {
-  'progress':   function(e){ /* Your code here */ },
-  'failed':     function(e){ /* Your code here */ },
-  'accepted':    function(e){
-    var rtcSession = e.data;
 
-    // Attach local stream to selfView
-    if (rtcSession.getLocalStreams().length &gt; 0) {
-      selfView.src = window.URL.createObjectURL(rtcSession.getLocalStreams()[0]);
-    }
 
-    // Attach remote stream to remoteView
-    if (rtcSession.getRemoteStreams().length &gt; 0) {
-      remoteView.src = window.URL.createObjectURL(rtcSession.getRemoteStreams()[0]);
-    }
-  },
-  'terminated':      function(e){ /* Your code here */ }
-};
 
-var options = {
-  'extraHeaders': [ 'X-Foo: foo', 'X-Bar: bar' ],
-  'mediaConstraints': {'audio': true, 'video': true}
-};
+## Request Methods
 
-coolPhone.call('sip:bob@example.com', options);
-~~~
+The following methods share a similar interface and are all used to send SIP requests from the UA.
 
-### `message(target, body, options=null)`
+### `message(target, body[, options])`
 
 Sends an instant message making use of SIP MESSAGE method.
 
@@ -167,130 +130,156 @@ Sends an instant message making use of SIP MESSAGE method.
 
 Name | Type | Description 
 -----|------|--------------
-`target`|`String`|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/SIPjs/uri/)> instance.
+`target`|`String|SIP.URI`|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/SIPjs/uri/) instance.
 `body`|`String`|Message content. `String` representing the body of the message.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
+`options.contentType`|`String`|Optional `String` representing the content-type of the body. Default `text/plain`.
+`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
 
-#### Fields in `options` Object
+#### Returns
 
-Name | Type | Description 
------|------|--------------
-`contentType`|`String`|Optional `String` representing the content-type of the body. Default `text/plain`.
-`eventHandlers`|`Object`|Optional `Object` of event handlers to be registered to each [`SIP.Message`](/SIPjs/message/#events)"> event. Define an event handler for each event you want to be notified about.
-`extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
+Type | Description
+-----|-------------
+`SIP.MessageClientContext`|The context surrounding the newly created MESSAGE
 
 #### Example
 
 ~~~ javascript
-var text = 'Hello Bob!';
-
-coolPhone.message('sip:bob@example.com', text, options);
+myUA.message('bob@example.com', 'Hello, Bob!');
 ~~~
 
 
-### `isRegistered()`
+### `invite(target[, options])`
 
-Returns `true` if the UA is registered, `false` otherwise.
+Invite the target to start a multimedia session.
+
+#### Parameters
+
+|Name                      | Type        | Description |
+|--------------------------|-------------|-------------|
+|`target`                  |`String|SIP.URI`     |Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/SIPjs/uri/) instance.|
+|`options`                 |`Object`     |Optional `Object` with extra parameters (see below).|
+|`options.mediaConstraints`|`Object`     |`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used.|
+|`options.mediaStream`     |`MediaStream`|`MediaStream` to transmit to the other end.|
+|`options.RTCConstraints`  |`Object`     |`Object` representing RTCPeerconnection constraints|
+|`options.extraHeaders`    |`Array`      |Optional `Array` of `Strings` with extra SIP headers for the INVITE request.|
+|`options.anonymous`       |`Boolean`    |`Boolean` field indicating whether the call should be done anonymously. Default value is `false`.|
+
+#### Returns
+
+Type | Description
+-----|-------------
+`SIP.InviteClientContext`|The context surrounding the newly created INVITE
+
+#### Example
+
+~~~ javascript
+TBD
+~~~
+
+### `request(method, target[, options])`
+
+Send a SIP message.
+
+#### Parameters
+
+Name | Type | Description 
+-----|------|--------------
+`method`|`String`|The SIP request method to send, e.g. `'INVITE'` or `'OPTIONS'`
+`target`|`String|SIP.URI`|Destination address. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/SIPjs/uri/) instance.
+`body`|`String`|Message content. `String` representing the body of the message.
+`options`|`Object`|Optional `Object` with extra parameters (see below).
+`options.body`|`String`|Optional `String` to be included as the body of the request
+`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
+
+#### Returns
+
+Type | Description
+-----|-------------
+`SIP.ClientContext`|The context surrounding the newly created request
 
 
-### `isConnected()`
 
-Returns `true` if the WebSocket connection is established, `false` otherwise.
+
+
+
+
+
+
+
+
 
 
 ## Events
 
-`SIP.UA` class defines a series of events. Each of them allows callback functions registration in order to let the user execute a handler for each given stimulus.
+User agent objects extend the [SIP.EventEmitter](/SIPjs/EventEmitter/) interface.  Each event emitted by UA passes specific relevant arguments to its callbacks.
 
-Every event handler is executed with a [SIP.Event](/SIPjs/event/) instance as the only argument.
-
-
-### `connected`
+### `on('connected', function () {})`
 
 Fired when the WebSocket connection is established.
 
-#### Event `data` fields
+#### Arguments
 
-Name | Type | Description 
------|------|--------------
-`transport`||WebSocket connection.
+*There are no documented arguments for this event*
 
-
-### `disconnected`
+### `on('disconnected', function () {})`
 
 Fired when the WebSocket connection attempt (or automatic re-attempt) fails.
 
-#### Event `data` fields
+#### Arguments
 
-Name | Type | Description 
------|------|--------------
-`transport`||WebSocket connection.
-`code`|`Number`|`Number` indicating the WebSocket disconnection code.
-`reason`|`String`|`String` indicating the WebSocket disconnection reason.
+*There are no documented arguments for this event*
 
-### `registered`
+### `on('registered', function () {})`
 
 Fired for a successful registration.
 
-#### Event `data` fields
+#### Arguments
 
-Name | Type | Description 
------|------|--------------
-`response`|[`JsSIP.IncomingResponse`](/SIPjs/incomingResponse/)|[`JsSIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 2XX response.
+*There are no documented arguments for this event*
 
-### `unregistered`
+### `on('unregistered', function (cause) {})`
 
 Fired for an unregistration. This event is fired in the following scenarios:
 
-*As a result of a unregistration request. `UA.unregister()`.
-*If being registered, a periodic re-registration fails.
+* As a result of a unregistration request. `UA.unregister()`.
+* If being registered, a periodic re-registration fails.
 
-#### Event `data` fields
+#### Arguments
 
 Name | Type | Description 
 -----|------|--------------
-`response`|[`JsSIP.IncomingResponse`](/SIPjs/incomingResponse/)|[`JsSIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP response for a (un)REGISTER SIP request
-`cause`||`null` for possitive response to un-REGISTER SIP request. In other case, one value of [Failure and End Causes](SIPjs/causes)
+`cause`||`null` for positive response to un-REGISTER SIP request. In other case, one value of [Failure and End Causes](SIPjs/causes)
 
 
-### `registrationFailed`
+### `on('registrationFailed', function (cause) {})`
 
 Fired for a registration failure.
 
-#### Event `data` fields
+#### Arguments
 
 Name | Type | Description 
 -----|------|--------------
-`response`|[`JsSIP.IncomingResponse`](/SIPjs/incomingResponse/)|[`JsSIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP negative response if the failure is generated by the recepcion of such response, null otherwise.
-`cause`||`null` for possitive response to un-REGISTER SIP request. In other case, one value of [Failure and End Causes](SIPjs/causes)
+`cause`||One value of [Failure and End Causes](SIPjs/causes)
 
 
-### `invite`
+### `on('invite', function (invite) {})`
 
-Fired for an incoming call.
+Fired when an incoming INVITE request is received.
 
-#### Event `data` fields
-
-Name | Type | Description 
------|------|--------------
-`session`|[SIP.Session](/SIPjs/session/)|[SIP.Session](/SIPjs/session/) instance of the session.
-`request`|[SIP.IncomingRequest](/SIPjs/incoming-request/)|[SIP.IncomingRequest](/SIPjs/incoming-request/) instance of the incoming INVITE request.
-
-#### Event `data` fields for an outgoing session
+#### Arguments
 
 Name | Type | Description 
 -----|------|--------------
-`session`|[SIP.Session](/SIPjs/session/)|[SIP.Session](/SIPjs/session/) instance of the session.
-`request`|[SIP.OutgoingRequest](/SIPjs/outgoing-request/)|[SIP.OutgoingRequest](/SIPjs/outgoing-request/) instance of the outgoing INVITE request.
+`invite`|[SIP.InviteServerContext](/SIPjs/invite/)| The context surrounding the recently received INVITE request.
 
 
-### `message`
+### `on('message', function (message) {})`
 
-Fired for an incoming <span class="caps">MESSAGE</span> request.
+Fired when an incoming MESSAGE request is received.
 
-#### Event `data` fields
+#### Arguments
 
 Name | Type | Description 
 -----|------|--------------
-`message`|[SIP.Message](/SIPjs/message/)|[SIP.Message](/SIPjs/message/) instance.
-`request`|[SIP.IncomingRequest](/SIPjs/incoming-request/)|[SIP.IncomingRequest](/SIPjs/incoming-request/) instance of the incoming MESSAGE request.
+`message`|[SIP.MessageServerContext](/SIPjs/message/)| The context surrounding the recently received MESSAGE request.
