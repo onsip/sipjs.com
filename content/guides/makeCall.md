@@ -25,51 +25,62 @@ The video element adds a standard way for browsers to display video over the int
   <body>
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>  
-
+	<button type="button" id="callButton">Call</button>
+	<button type="button" id="endButton">End</button>
+	
     <script src="phone.js"></script>
   </body>
 </html>
 
 ~~~
 
-In order to make and receive calls and messages you much create a new SIP user agent.  You do so by doing this.
+In order to make and receive calls and messages you must create a new SIP user agent.  You do so by doing this.
 
 ~~~ javascript
 // phone.js
 
-remoteVideo = document.getElementById('remoteVideo');
-localVideo = document.getElementById('localVideo');
 
-var configuration = {
-  'ws_servers':         'ws://sip-ws.example.com',
-  'register':           false,
-  'uri':                'sip:alice@example.com',
-  'display_name':       'Alice'
-};
-
-//Creates the user agent so that you can make calls
-var userAgent = new SIP.UA(configuration);
+//Creates the anonymous user agent so that you can make calls
+var userAgent = new SIP.UA();
 userAgent.start();
 
+userAgent.on('start', newSessionHandler);
+
 //Sets up the options so that the call is a video and audio call
-var options = {
-  mediaConstraints: {
-    audio: true,
-    video: true
-  } 
+
+
+
+function newSessionHandler()
+{
+	//here you determine whether the call has video and audio
+	userAgent.on('connected', function () {
+		var options = {
+		  mediaConstraints: {
+		    audio: true,
+		    video: true
+		  } 
+		}
+		var session = userAgent.invite('sip:bob@example.com', options);
+		session.on('accepted', onAccept)
+	})
 }
 
-//makes the call
-var session = userAgent.invite('sip:bob@example.com', options);
+function onAccept () {
 
-//attached the received video stream to the Video Elements
-remoteVideo.srcObject= session.getRemoteStreams()[0];
-localVideo.srcObject= session.getLocalStreams()[0];
+	//makes the call
 
-//plays the Video Elements
-remoteVideo.play();
-localVideo.play();
+	//gets the video elements
+	var remoteVideo = document.getElementById('remoteVideo');
+	var localVideo = document.getElementById('localVideo');
 
+	//attached the received video stream to the Video Elements
+	remoteVideo.srcObject= session.getRemoteStreams()[0];
+	localVideo.srcObject= session.getLocalStreams()[0];
+
+	//plays the Video Elements
+	remoteVideo.play();
+	localVideo.play();
+}
 ~~~
 
 
