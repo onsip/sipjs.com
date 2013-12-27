@@ -39,15 +39,13 @@ In order to make and receive calls and messages you must create a new SIP user a
 ~~~ javascript
 // phone.js
 
+function () {
+	//Creates the anonymous user agent so that you can make calls
+	var userAgent = new SIP.UA();
+	userAgent.start();
 
-//Creates the anonymous user agent so that you can make calls
-var userAgent = new SIP.UA();
-userAgent.start();
-
-userAgent.on('start', newSessionHandler);
-
-//Sets up the options so that the call is a video and audio call
-
+	userAgent.on('start', newSessionHandler);
+}
 
 
 function newSessionHandler()
@@ -60,15 +58,13 @@ function newSessionHandler()
 		    video: true
 		  } 
 		}
+		//makes the call
 		var session = userAgent.invite('sip:bob@example.com', options);
 		session.on('accepted', onAccept)
 	})
 }
 
 function onAccept () {
-
-	//makes the call
-
 	//gets the video elements
 	var remoteVideo = document.getElementById('remoteVideo');
 	var localVideo = document.getElementById('localVideo');
