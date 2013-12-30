@@ -25,8 +25,8 @@ The video element adds a standard way for browsers to display video over the int
   <body>
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>  
-	<button type="button" id="callButton">Call</button>
-	<button type="button" id="endButton">End</button>
+    <button type="button" id="callButton">Call</button>
+    <button type="button" id="endButton">End</button>
 	
     <script src="phone.js"></script>
   </body>
