@@ -8,31 +8,48 @@ SIP.js SIP MESSAGE based IM.
 * TOC
 {:toc}
 
+## Inherited Methods
+
+### From ServerContext *(MessageServerContext Only)*
+
+#### `progress()`
+
+#### `accept()`
+
+#### `reject()`
+
+#### `reply()`
+
 ## Instance Attributes
 
-### `local_identity`
+### `body`
 
-SIP.NameAddrHeader instance indicating the local identity.
+`String` - The body of the SIP message.
 
-### `remote_identity`
+### `content_type`
 
-SIP.NameAddrHeader instance indicating the remote identity.
+`String` - The content type of the message body.
 
-## Instance Method (Client)
+### `request`
 
-### `message(options)`
+`SIP.OutgoingRequest|SIP.IncomingRequest` - The SIP MESSAGE request associated with this context.
 
-Send a MESSAGE through the WebSocket connection.
+## Instance Method
+
+### `message(options)` *(MessageClientContext Only)*
+
+Send this MESSAGE.
 
 #### Parameters
 
-Name | Type | Description
------|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see below).
+Name                  | Type               | Description
+----------------------|--------------------|--------------
+`options`             |`Object`            |Optional `Object` with extra parameters (see below).
+`options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
-#### Fields in `options` Object
+#### Returns
 
-Name | Type | Description
------|------|--------------
-`extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
-`body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
+Type | Description
+-----|-------------
+`SIP.MessageClientContext`| This MessageClientContext
+
