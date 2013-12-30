@@ -40,42 +40,42 @@ In order to make and receive calls and messages you must create a new SIP user a
 // phone.js
 
 function () {
-	//Creates the anonymous user agent so that you can make calls
-	var userAgent = new SIP.UA();
-	userAgent.start();
+  //Creates the anonymous user agent so that you can make calls
+  var userAgent = new SIP.UA();
+  userAgent.start();
 
-	userAgent.on('start', newSessionHandler);
+  userAgent.on('start', newSessionHandler);
 }
 
 
 function newSessionHandler()
 {
-	//here you determine whether the call has video and audio
-	userAgent.on('connected', function () {
-		var options = {
-		  mediaConstraints: {
-		    audio: true,
-		    video: true
-		  } 
-		}
-		//makes the call
-		var session = userAgent.invite('sip:bob@example.com', options);
-		session.on('accepted', onAccept)
-	})
+  //here you determine whether the call has video and audio
+  userAgent.on('connected', function () {
+    var options = {
+      mediaConstraints: {
+        audio: true,
+        video: true
+      } 
+    }
+    //makes the call
+    var session = userAgent.invite('sip:bob@example.com', options);
+    session.on('accepted', onAccept)
+  })
 }
 
 function onAccept () {
-	//gets the video elements
-	var remoteVideo = document.getElementById('remoteVideo');
-	var localVideo = document.getElementById('localVideo');
+  //gets the video elements
+  var remoteVideo = document.getElementById('remoteVideo');
+  var localVideo = document.getElementById('localVideo');
 
-	//attached the received video stream to the Video Elements
-	remoteVideo.srcObject= session.getRemoteStreams()[0];
-	localVideo.srcObject= session.getLocalStreams()[0];
+  //attached the received video stream to the Video Elements
+  remoteVideo.srcObject= session.getRemoteStreams()[0];
+  localVideo.srcObject= session.getLocalStreams()[0];
 
-	//plays the Video Elements
-	remoteVideo.play();
-	localVideo.play();
+  //plays the Video Elements
+  remoteVideo.play();
+  localVideo.play();
 }
 ~~~
 
