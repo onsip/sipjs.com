@@ -23,7 +23,7 @@ Let's walk through core API concepts as we tackle some everyday use cases.
   <body>
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>  
-    <button type="button" id="callButton">Call</button>
+    <button type="button" id="answerButton">Answer</button>
     <button type="button" id="endButton">End</button>
 	
     <script src="phone.js"></script>
@@ -32,18 +32,17 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ~~~
 
-In order to make and receive calls and messages you must create a new SIP user agent.  You do so by doing this.
+In order to make calls and send messages you must create a new anonymous SIP user agent.  We then must start the user agent, which 
 
 ~~~ javascript
 // phone.js
 
-function () {
   //Creates the anonymous user agent so that you can make calls
   var config = {
   uri: 'bob@example.com',
   ws_servers: ['wss://edge.example.com'],
   register: true
-};
+
   var userAgent = new SIP.UA(config);
 
   var answerButton = document.getElementById('answerButton');
@@ -51,25 +50,33 @@ function () {
 
   userAgent.start();
 
-  userAgent.on('start', newSessionHandler);
-}
+userAgent.on('connected', newSessionHandler);
 
+~~~
 
-function newSessionHandler()
-{
+After we start the user agent, we can make a call to SIP address.  We do so by sending a SIP invite.
+
+~~~ javascript
+function newSessionHandler() {
   //here you determine whether the call has video and audio
-  userAgent.on('connected', function () {
-    var options = {
-      mediaConstraints: {
-        audio: true,
-        video: true
-      } 
-    }
-    //makes the call
-    var session = userAgent.invite('sip:bob@example.com', options);
-    session.on('accepted', onAccept)
-  })
+
+  var options = {
+    mediaConstraints: {
+      audio: true,
+      video: true
+    } 
+  }
+  //makes the call
+  var session = userAgent.invite('sip:bob@example.com', options);
+  session.on('accepted', onAccept)
+
 }
+
+~~~
+
+When the invitee accepts the call, we catch the "accepted" event and start playing the video elements in our browser.
+
+~~~ javascript
 
 function onAccept () {
   //gets the video elements
@@ -77,14 +84,34 @@ function onAccept () {
   var localVideo = document.getElementById('localVideo');
 
   //attached the received video stream to the Video Elements
-  remoteVideo.srcObject= session.getRemoteStreams()[0];
-  localVideo.srcObject= session.getLocalStreams()[0];
+  attachMediaStream(remoteVideo, session.getRemoteStreams()[0]);
+  attachMediaStream(localVideo, session.getLocalStreams()[0]);
 
   //plays the Video Elements
   remoteVideo.play();
   localVideo.play();
 }
+~~~
 
+This function attaches the media stream to the video element.
+
+~~~ javascript
+function attachMediaStream(element, stream) {
+  if (typeof element.srcObject !== 'undefined') {
+    element.srcObject = stream;
+  } else if (typeof element.mozSrcObject !== 'undefined') {
+    element.mozSrcObject = stream;
+  } else if (typeof element.src !== 'undefined') {
+    element.src = URL.createObjectURL(stream);
+  } else {
+    console.log('Error attaching stream to element.');
+  }
+}
+~~~
+
+Here we add the click events which allow the user to answer and end calls.
+
+~~~ javascript
 $('#answerButton').addEventListener('click',function () {
   session.answer();
 });
