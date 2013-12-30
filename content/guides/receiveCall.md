@@ -39,6 +39,11 @@ In order to make and receive calls and messages you must create a new SIP user a
 
 function () {
   //Creates the anonymous user agent so that you can make calls
+  var config = {
+  uri: 'bob@example.com',
+  ws_servers: ['wss://edge.example.com'],
+  register: true
+};
   var userAgent = new SIP.UA(config);
 
   var answerButton = document.getElementById('answerButton');
@@ -79,4 +84,12 @@ function onAccept () {
   remoteVideo.play();
   localVideo.play();
 }
+
+$('#answerButton').addEventListener('click',function () {
+  session.answer();
+});
+
+$('#endButton').addEventListener('click',function () {
+  session.terminate();
+});
 ~~~
