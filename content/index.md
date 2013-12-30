@@ -6,7 +6,7 @@ layout: overview
 <div class="wrapper feature">
   <h1>Leverage the power<br/> of SIP.js in your<br/> WebRTC app</h1>
   <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
-  <a href="/SIPjs/" class="button">Browse the Documentation</a>
+  <a href="/api/" class="button">Browse the Documentation</a>
   <img src="/shared/images/labtocat.png" class="labtocat" />
 </div>
 
@@ -20,7 +20,7 @@ layout: overview
     <li>
       <h2>SIP.js Library</h2>
       <p>We’ve got you covered. Use the SIP stack that fits your target platform.</p>
-      <a href="/SIPjs/" class="button-secondary">Library</a>
+      <a href="/api/" class="button-secondary">Library</a>
     </li>
     <li>
       <h2>Support</h2>

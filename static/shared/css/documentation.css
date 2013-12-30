@@ -141,7 +141,7 @@ h2 {
 	font-size: 14px;
 }
 
-body.sipjs .content h2 {
+body.api .content h2 {
   margin-bottom: 1em;
   margin-top: 2em;
   font-size: 22px;
@@ -331,7 +331,7 @@ a img {
   transition: color 0.2s ease-in-out 0s;
 }
 
-.overview #header .nav-overview, .sipjs #header .nav-sipjs, .webapi #header .nav-webapi, .blog #header .nav-blog {
+.overview #header .nav-overview, .api #header .nav-api, .webapi #header .nav-webapi, .blog #header .nav-blog {
 	color: #333;
 	border-bottom: 3px solid #c9c9c9;
 }
@@ -963,7 +963,7 @@ p code {
   color: #327fc7;
 }
 
-body.sipjs .content table {
+body.api .content table {
   width: 100%;
   overflow: auto;
   display: block;
@@ -972,7 +972,7 @@ body.sipjs .content table {
   border-spacing: 0;
 }
 
-body.sipjs .content thead {
+body.api .content thead {
   margin: 0;
   padding: 0;
   border: 0;
@@ -981,25 +981,25 @@ body.sipjs .content thead {
   vertical-align: baseline;
 }
 
-body.sipjs .content table th {
+body.api .content table th {
   border: 1px solid #ddd;
   padding: 6px 13px;
   font-weight: bold;
   text-align: center;
 }
 
-body.sipjs .content tbody {
+body.api .content tbody {
   vertical-align: middle;
   border-color: inherit;
 }
 
-body.sipjs .content table tr {
+body.api .content table tr {
   border-top: 1px solid #ccc;
   background-color: #fff;
   vertical-align: inherit;
 }
 
-body.sipjs .content table td {
+body.api .content table td {
   border: 1px solid #ddd;
   padding: 6px 13px;
 }

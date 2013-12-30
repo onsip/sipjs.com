@@ -299,7 +299,7 @@ INVALID_STATE_ERROR
 
 `SIP.InviteContext` class defines a series of events. Each of them allows callback functions registration in order to let the user execute a handler for each given stimulus.
 
-Every event handler is executed with a [SIP.Event](/SIPjs/event/) instance as the only argument.
+Every event handler is executed with a [SIP.Event](/api/devel/event/) instance as the only argument.
 
 ### `progress`
 
@@ -309,7 +309,7 @@ Fired when receiving or generating a 1XX SIP class response (>100) to the INVITE
 
 Name | Type | Description 
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 
@@ -321,7 +321,7 @@ Fired when the call is answered.
 
 Name | Type | Description 
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 
@@ -333,7 +333,7 @@ Fired when an established call ends.
 
 Name | Type | Description 
 -----|------|--------------
-`message`|`Object`|[`SIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 1XX response.
+`message`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `cause`||One value of Failure and End Causes
 
 
@@ -345,7 +345,7 @@ Fired when the session was unable to establish.
 
 Name | Type | Description 
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `cause`||One value of Failure and End Causes
 `code`||The SIP response code.
 
@@ -358,7 +358,7 @@ Fired when the session was canceled by the UAC.
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 
@@ -370,7 +370,7 @@ Fired when the session was unable to establish.
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/SIPjs/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 
 
 ### `dtmf`
@@ -379,5 +379,5 @@ Fired for an incoming or outgoing DTMF.
 
 Name | Type | Description 
 -----|------|--------------
-`dtmf`|`Object`|[`SIP.InviteContext.DTMF`](/SIPjs/session/dtmf/) instance.
-`request`|`Object`|[`SIP.IncomingRequest`](/SIPjs/incomingRequest/) instance of the received SIP INFO request.
+`dtmf`|`Object`|[`SIP.InviteContext.DTMF`](/api/devel/invite/dtmf/) instance.
+`request`|`Object`|[`SIP.IncomingRequest`](/api/devel/incomingRequest/) instance of the received SIP INFO request.

@@ -20,7 +20,7 @@ end
 compile '/CNAME/' do
 end
 
-compile '/SIPjs/*' do
+compile '/api/*' do
   filter :erb
   filter :kramdown,
          :toc_levels => [2,3],
@@ -28,7 +28,7 @@ compile '/SIPjs/*' do
          :coderay_line_numbers => nil
   filter :colorize_syntax,
          :colorizers => {:javascript => :pygmentsrb}
-  layout item[:layout] || 'sipjs'
+  layout item[:layout] || 'api'
 end
 
 compile '/guides/*' do
