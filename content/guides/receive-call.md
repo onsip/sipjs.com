@@ -32,23 +32,23 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ~~~
 
-In order to make calls and send messages you must create a new anonymous SIP user agent.  We then must start the user agent, which 
+In order to make calls and send messages you must create a new SIP user agent.  We then must start the user agent, which connects to the server and registers it.
 
 ~~~ javascript
 // phone.js
 
-  //Creates the anonymous user agent so that you can make calls
-  var config = {
-  uri: 'bob@example.com',
-  ws_servers: ['wss://edge.example.com'],
-  register: true
+//Creates the user agent so that you can make calls
+var config = {
+uri: 'bob@example.com',
+ws_servers: ['wss://edge.example.com'],
+register: true
+};
+var userAgent = new SIP.UA(config);
 
-  var userAgent = new SIP.UA(config);
+var answerButton = document.getElementById('answerButton');
+var endButton = document.getElementById('endButton');
 
-  var answerButton = document.getElementById('answerButton');
-  var endButton = document.getElementById('endButton');
-
-  userAgent.start();
+userAgent.start();
 
 userAgent.on('connected', newSessionHandler);
 
