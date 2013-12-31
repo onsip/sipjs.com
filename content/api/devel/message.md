@@ -3,16 +3,14 @@ title: SIP.MessageContext | SIP.js
 ---
 # SIP.MessageContext
 
-SIP.js SIP MESSAGE based IM.
+`SIP.MessageContext` represents an instant message using the SIP method MESSAGE. By default, the message is treated as plain text. However, any valid content type may be specified.
 
 * TOC
 {:toc}
 
-## Inherited Methods
-
-### From ServerContext *(MessageServerContext Only)*
-
 #### `progress()`
+
+Inherited from [`SIP.ServerContext`]
 
 #### `accept()`
 
