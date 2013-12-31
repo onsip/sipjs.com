@@ -7,7 +7,6 @@ layout: overview
   <h1>Leverage the power<br/> of SIP.js in your<br/> WebRTC app</h1>
   <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
   <a href="/api/" class="button">Browse the Documentation</a>
-  <img src="/shared/images/labtocat.png" class="labtocat" />
 </div>
 
 <div class="full-width-divider">
