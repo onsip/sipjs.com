@@ -99,7 +99,7 @@ Name | Type | Description
 `data.code` | `Integer` | The status code of the received response, between 200 and 299.
 `data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse) | The received response
 
-### `rejected`
+### `on('rejected', function (data) {})`
 
 Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event.*
 
@@ -112,7 +112,7 @@ Name | Type | Description
 `data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse/) | The received response
 `data.cause` | `String` | The reason phrase associated with the SIP response code.
 
-### `failed`
+### `on('failed', function (data) {})`
 
 Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.
 
