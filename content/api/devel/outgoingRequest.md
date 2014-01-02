@@ -4,7 +4,7 @@ title: SIP.OutgoingRequest | SIP.js
 
 # SIP.OutgoingRequest
 
-An OutgoingRequest is an Object that holds an Outgoing SIP Request for the UA.  An OutgoingRequest can send messages through the WebSocket maintained by the UA.
+An OutgoingRequest is a data structure that represents an Outgoing SIP Request and it's attributes.
 
 * TOC
 {:toc}
@@ -15,29 +15,17 @@ The OutgoingRequest constructor is intended for internal use only.
 
 ## Instance Attributes
 
-### `logger`
-
-`SIP.Logger` - The javascript logger used to log messages
-
 ### `ua`
 
-`SIP.UA` - The UA that requires the OutgoingRequest
-
-### `headers`
-
-`Object` - Headers.
+`SIP.UA` - The UA that this request is being sent from
 
 ### `method`
 
-`String` - The method used for the request
+`String` - The SIP method used for the request
 
 ### `ruri`
 
-`String` - The request uri
-
-### `extraHeaders`
-
-`Array` - The extra headers that will be used when the SIP request is sent
+`SIP.URI` - The request uri
 
 ## Instance Methods
 
@@ -117,7 +105,7 @@ Type     | Description
 
 outgoingRequest.toString();
 
-"INVITE sip:alice@example.com SIP/2.0
+'INVITE sip:alice@example.com SIP/2.0
 Via: 
 Max-Forwards: 69
 To: <sip:bob@example.com>
@@ -130,5 +118,5 @@ Content-Type: application/sdp
 Supported: outbound
 User-Agent: SIPjs
 Content-Length: 0
-"
+'
 ~~~
