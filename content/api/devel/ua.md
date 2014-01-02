@@ -16,12 +16,17 @@ A new user agent is created via the `SIP.UA` constructor.  There are no mandator
 ### Examples
 
 ~~~ javascript
-// Create a new anonymous user agent
+// Create a new anonymous user agent, and connect using the OnSIP Network
 var myUA = new SIP.UA();
 ~~~
 
 ~~~ javascript
-// Create a user agent for Bob that will register to receive requests
+// Create a user agent for Bob, and connect using the OnSIP Network
+var myUA = new SIP.UA('bob@example.com');`
+~~~
+
+~~~ javascript
+// Create a user agent for Bob, and connect using a custom WebSocket server
 var bob = new SIP.UA({
   uri: 'bob@example.com',
   ws_servers: ['wss://edge.example.com'],
