@@ -115,6 +115,10 @@ Type | Description
 -|-
 `SIP.InviteContext` | This InviteContext
 
+### `progress([options])`
+
+Inherited from `SIP.ServerContext`
+
 ### `reject([options])`
 
 Reject the received INVITE request. The default response is 480 Temporarily Unavailable.
@@ -301,7 +305,7 @@ INVALID_STATE_ERROR
 
 Every event handler is executed with a [SIP.Event](/api/devel/event/) instance as the only argument.
 
-### `.on('connecting', function (response,code) {})`
+### `on('connecting', function (response,code) {})`
 
 Fired when ICE is starting to negotiate between the peers.
 
@@ -362,7 +366,7 @@ Name | Type | Description
 `data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if there failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
-### `.on('terminated', function(message, cause) {})`
+### `on('terminated', function(message, cause) {})`
 
 Fired when an established call ends.
 
@@ -373,7 +377,7 @@ Name | Type | Description
 `message`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `cause`||One value of Failure and End Causes
 
-### `.on('canceled', function(response, code) {})`
+### `on('canceled', function(response, code) {})`
 
 Fired when the session was canceled by the UAC.
 
@@ -388,7 +392,7 @@ Type | Description
 -|-
 `SIP.Invite`| This ClientContext
 
-### `.on('referred', function(response) {})`
+### `on('referred', function(response) {})`
 
 Fired when the session was unable to establish.
 
@@ -408,14 +412,14 @@ Name | Type | Description
 `dtmf`|`Object`|[`SIP.InviteContext.DTMF`](/api/devel/invite/dtmf/) instance.
 `request`|`Object`|[`SIP.IncomingRequest`](/api/devel/incomingRequest/) instance of the received SIP INFO request.
 
-### `.on('invite', function() {})`
+### `on('invite', function() {})`
 
 Fired when an invite is sent.
 
-### `.on('preaccepted', function () {})`
+### `on('preaccepted', function () {})`
 
 Fired when a session is pre-accepted.
  
-### `.on('bye', function() {})`
+### `on('bye', function() {})`
 
 Fired when a BYE is sent.
