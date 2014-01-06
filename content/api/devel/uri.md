@@ -12,7 +12,18 @@ The class SIP.uri represents a SIP URI and provides a set of attributes and meth
 
 Typically, construction is managed by a `SIP.UA` when a URI is needed. However, advanced users may construct URIs manually.
 
-### `TODO: Add constructor`
+### new SIP.URI(scheme, user, host, port[, parameters, headers])
+
+#### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`scheme`|`String`|The scheme used for this URI
+`user`|`String`|The user used for this URI
+`host`|`String`|The host used for this URI
+`port`|`Number`|The port number to use for this URI
+`parameters`|`Array of String`|Optional parameters to use for this URI
+`headers`|`Array of String`|Optional headers to use for this URI
 
 ## Instance Variables
 
@@ -173,6 +184,8 @@ Type | Description
 ### `toString()`
 
 Returns a `String` representing the URI. Characters that can’t appear unescaped are escaped as stated in the BNF grammar of the RFC 3261.
+
+## Static Methods
 
 ### `parse(uri)`
 

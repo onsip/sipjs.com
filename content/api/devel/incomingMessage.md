@@ -11,7 +11,7 @@ An IncomingMessage is a data structure that represents an incoming SIP message a
 
 ## Construction
 
-The IncomingMessage constructor is intended for internal use only.
+An IncomingMessage cannot be constructed on it's own. It is intended to be extended by other classes such as `SIP.IncomingRequest` and `SIP.IncomingResponse`
 
 ## Instance Attributes
 
