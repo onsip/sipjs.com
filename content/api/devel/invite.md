@@ -38,7 +38,7 @@ The InviteContext constructor is intended for internal use only.
 
 ### `invite([options])`
 
-Send an INVITE request. Based on the call set up, this may prompt the user for media. Returns this InviteClientContext. This is typically called by the `UA` in `ua.invite(...)`.
+Send an INVITE request. Based on the call set up, this may prompt the user for media. This is typically called by the `UA` in `ua.invite(...)`.
 
 #### Parameters
 
@@ -46,10 +46,10 @@ Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
-`options.mediaConstraints`|`Object`|`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. Default value is both `audio` and `video` set to `true`.
-`options.RTCConstraints`|`Object`|Used similarly to `mediaConstraints`, but for the RTCMediaHandler
-`options.inviteWithoutSdp`|`Boolean`|Tells the InviteContext if the INVITE should be sent with or without sdp.
-`options.anonymous`|`Boolean`|Tells the InviteContext if the UA being used will be anonymous.
+`options.mediaConstraints`|`Object`|`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used.
+`options.RTCConstraints`|`Object`|`Object` representing RTCPeerconnection constraints.
+`options.inviteWithoutSdp`|`Boolean`|`true` if the INVITE should be sent without sdp, `false` otherwise.
+`options.anonymous`|`Boolean`|`true` if the UA being used will be anonymous, `false` otherwise.
 `options.body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
 
 #### Returns
@@ -181,7 +181,7 @@ call.sendDTMF(4);
 #### Example 2
 
 ~~~ javascript
-var tones = `1234#`;
+var tones = '1234#';
 
 var extraHeaders = [ 'X-Foo: foo', 'X-Bar: bar' ];
 
@@ -278,13 +278,13 @@ Type | Description
 
 ### `refer(target[, options])`
 
-Send a REFER request. The transfer that occurs can be attended or blind. An attended transfer is when you have there are two active call sessions and session A is being transferred to session B. Usually the person who is doing the transfer will talk to both session A and session B before making the transfer. A blind transfer is when the person who is doing the transfer will transfer the session without actually setting up the session to the receiving end. Usually the person making the transfer will not talk to the person receiving the transfer.
+Send a REFER request. A REFER occurs when persons A and B have an active call session, and A wants to transfer B to speak with C. This is called a transfer, and these transfers can be attended or blind. An attended transfer occurs when A creates a session with C before connecting B to speak with C. A blind transfer occurs when A causes B to create a session with C, so A and C have no contact.
 
 #### Parameters
 
 Name | Type | Description
 -----|------|--------------
-`target`|`SIP.InviteServerContext|SIP.InviteClientContext|String`|If the target is an InviteServerContext or InviteClientContext will start an attended transfer. Otherwise it will do a blind transfer.
+`target`|`SIP.InviteServerContext` `| SIP.InviteClientContext` `| String`|If the target is an InviteServerContext or InviteClientContext will start an attended transfer. Otherwise it will do a blind transfer.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
@@ -301,26 +301,26 @@ INVALID_STATE_ERROR
 
 ## Events
 
-`SIP.InviteContext` class defines a series of events. Each of them allows callback functions registration in order to let the user execute a handler for each given stimulus.
+`SIP.InviteContext` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
 Every event handler is executed with a [SIP.Event](/api/devel/event/) instance as the only argument.
 
-### `on('connecting', function (response,code) {})`
+### `connecting`
 
 Fired when ICE is starting to negotiate between the peers.
 
-#### Event `data` fields
+#### `on('connecting', function (response,code) {})`
 
 Name | Type | Description 
 -----|------|--------------
 `response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
-### `on('progress', function (data) {})`
+### `progress`
 
 Fired each time a provisional (100-199) response is received.
 
-#### Arguments
+#### `on('progress', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
@@ -328,11 +328,11 @@ Name | Type | Description
 `data.code`|`Integer`|The status code of the received response, between 100 and 199.
 `data.response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
 
-### `on('accepted', function (data) {})`
+### `accepted`
 
 Fired each time a successful final (200-299) response is received.
 
-#### Arguments
+#### `on('accepted', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
@@ -340,11 +340,11 @@ Name | Type | Description
 `data.code` | `Integer` | The status code of the received response, between 200 and 299.
 `data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse) | The received response
 
-### `on('rejected', function (data) {})`
+### `rejected`
 
 Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event.*
 
-#### Arguments
+#### `on('rejected', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
@@ -353,73 +353,83 @@ Name | Type | Description
 `data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse/) | The received response
 `data.cause` | `String` | The reason phrase associated with the SIP response code.
 
-### `on('failed', function (data) {})`
+### `failed`
 
 Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.
 
-#### Arguments
+#### `on('failed', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if there failure was not due to a received response.
+`data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
-### `on('terminated', function(message, cause) {})`
+### `terminated`
 
 Fired when an established call ends.
 
-#### Event `data` fields
+#### `on('terminated', function(message, cause) {})`
 
 Name | Type | Description 
 -----|------|--------------
 `message`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
-`cause`||One value of Failure and End Causes
+`cause`||One value of [Failure and End Causes](/api/devel/causes)
 
-### `on('canceled', function(response, code) {})`
+### `canceled`
 
 Fired when the session was canceled by the UAC.
 
-#### Event `data` fields
+#### `on('canceled', function(response, code) {})`
 
 Name | Type | Description
 -----|------|--------------
 `response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
-Type | Description
--|-
-`SIP.Invite`| This ClientContext
-
-### `on('referred', function(response) {})`
+### `referred`
 
 Fired when the session was unable to establish.
 
-#### Event `data` fields
+#### `on('referred', function(response) {})`
 
 Name | Type | Description
 -----|------|--------------
 `response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 
 
-### `.on('dtmf', function(dtmf, request) {})`
+### `dtmf`
 
 Fired for an incoming or outgoing DTMF.
+
+#### `.on('dtmf', function(dtmf, request) {})`
 
 Name | Type | Description 
 -----|------|--------------
 `dtmf`|`Object`|[`SIP.InviteContext.DTMF`](/api/devel/invite/dtmf/) instance.
 `request`|`Object`|[`SIP.IncomingRequest`](/api/devel/incomingRequest/) instance of the received SIP INFO request.
 
-### `on('invite', function() {})`
+### `invite`
 
 Fired when an invite is sent.
 
-### `on('preaccepted', function () {})`
+#### `on('invited', function () {})`
+
+*There are no documented arguments for this event*
+
+### `preaccepted`
 
 Fired when a session is pre-accepted.
- 
-### `on('bye', function() {})`
+
+#### `on('preaccepted', function () {})`
+
+*There are no documented arguments for this event*
+
+### `bye`
 
 Fired when a BYE is sent.
+
+#### `on('bye', function() {})`
+
+*There are no documented arguments for this event*

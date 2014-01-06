@@ -54,7 +54,7 @@ Name | Type | Description
 
 Type    | Description
 --------|----------------
-`String|undefined`| Returns the specified header, undefined if header doesn't exist 
+`String | undefined`| Returns the specified header, undefined if header doesn't exist 
 
 ### `getHeaders(name)`
 
@@ -102,7 +102,6 @@ Type     | Description
 #### Example
 
 ~~~ javascript
-
 outgoingRequest.toString();
 
 'INVITE sip:alice@example.com SIP/2.0

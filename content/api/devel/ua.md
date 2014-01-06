@@ -13,6 +13,8 @@ A user agent (or UA) is associated with a SIP user address and acts on behalf of
 
 A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent. Check the full list for optional [UA Configuration Parameters](/api/devel/ua_configuration_parameters/).
 
+### `new SIP.UA([configuration])`
+
 ### Examples
 
 ~~~ javascript
@@ -138,7 +140,7 @@ Name | Type | Description
 `target`|`String|SIP.URI`|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.
 `body`|`String`|Message content. `String` representing the body of the message.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.contentType`|`String`|Optional `String` representing the content-type of the body. Default `text/plain`.
+`options.contentType`|`String`|Optional `String` representing the content-type of the body. Default is `text/plain`.
 `options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
 
 #### Returns
@@ -217,73 +219,73 @@ Type | Description
 
 ## Events
 
-User agent objects extend the [SIP.EventEmitter](/api/devel/eventEmitter/) interface.  Each event emitted by UA passes specific relevant arguments to its callbacks.
+User agent objects extend the [SIP.EventEmitter](/api/devel/eventEmitter/) interface.  Each event emitted by the UA passes specific relevant arguments to its callbacks.
 
-### `on('connected', function () {})`
+### `connected`
 
 Fired when the WebSocket connection is established.
 
-#### Arguments
+#### `on('connected', function () {})`
 
 *There are no documented arguments for this event*
 
-### `on('disconnected', function () {})`
+### `disconnected`
 
 Fired when the WebSocket connection attempt (or automatic re-attempt) fails.
 
-#### Arguments
+#### `on('disconnected', function () {})`
 
 *There are no documented arguments for this event*
 
-### `on('registered', function () {})`
+### `registered`
 
 Fired for a successful registration.
 
-#### Arguments
+#### `on('registered', function () {})`
 
 *There are no documented arguments for this event*
 
-### `on('unregistered', function (cause) {})`
+### `unregistered`
 
 Fired for an unregistration. This event is fired in the following scenarios:
 
 * As a result of a unregistration request. `UA.unregister()`.
 * If being registered, a periodic re-registration fails.
 
-#### Arguments
+#### `on('unregistered', function (cause) {})`
 
 Name | Type | Description 
 -----|------|--------------
-`cause`||`null` for positive response to un-REGISTER SIP request. In other case, one value of [Failure and End Causes](/api/devel/causes)
+`cause`||`null` for positive response to un-REGISTER SIP request. If a reregistration fails, this is one value of [Failure and End Causes](/api/devel/causes)
 
 
-### `on('registrationFailed', function (cause) {})`
+### `registrationFailed`
 
 Fired for a registration failure.
 
-#### Arguments
+#### `on('registrationFailed', function (cause) {})`
 
 Name | Type | Description 
 -----|------|--------------
 `cause`||One value of [Failure and End Causes](/api/devel/causes)
 
 
-### `on('invite', function (invite) {})`
+### `invite`
 
 Fired when an incoming INVITE request is received.
 
-#### Arguments
+#### `on('invite', function (invite) {})`
 
 Name | Type | Description 
 -----|------|--------------
 `invite`|[SIP.InviteServerContext](/api/devel/invite/)| The context surrounding the recently received INVITE request.
 
 
-### `on('message', function (message) {})`
+### `message`
 
 Fired when an incoming MESSAGE request is received.
 
-#### Arguments
+#### `on('message', function (message) {})`
 
 Name | Type | Description 
 -----|------|--------------

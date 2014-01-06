@@ -47,7 +47,7 @@ target | `String|SIP.URI` | The destination URI for the request to send to.
 
 ### `send([options])`
 
-Send the request. A constructed `SIP.ClientContext` will not send itself until this or a similar method is called. This method does not run any custom behavior outside of the default handling of the SIP request. For request methods with their own context objects, please use the method-specific functions for sending requests defined on those objects. (For example, [`SIP.InviteClientContext`](/api/devel/invite/#inviteoptions) uses its `.invite()` method to send itself.)
+Send the request. A constructed `SIP.ClientContext` will not send itself until this or a similar method is called. This method does not run any custom behavior outside of the default handling of the SIP request. For request methods with their own context objects, please use the method-specific functions for sending requests defined on those objects. (For example, [`SIP.InviteClientContext`](/api/devel/invite/#inviteoptions) uses its `.invite()` method to send its request.)
 
 #### Parameters
 
@@ -75,11 +75,11 @@ Type | Description
 
 ## Events
 
-### `on('progress', function (data) {})`
+### `progress`
 
 Fired each time a provisional (100-199) response is received.
 
-#### Arguments
+#### `on('progress', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
@@ -87,11 +87,11 @@ Name | Type | Description
 `data.code`|`Integer`|The status code of the received response, between 100 and 199.
 `data.response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
 
-### `on('accepted', function (data) {})`
+### `accepted`
 
 Fired each time a successful final (200-299) response is received.
 
-#### Arguments
+#### `on('accepted', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
@@ -99,11 +99,11 @@ Name | Type | Description
 `data.code` | `Integer` | The status code of the received response, between 200 and 299.
 `data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse) | The received response
 
-### `on('rejected', function (data) {})`
+### `rejected`
 
 Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event.*
 
-#### Arguments
+#### `on('rejected', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
@@ -112,16 +112,15 @@ Name | Type | Description
 `data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse/) | The received response
 `data.cause` | `String` | The reason phrase associated with the SIP response code.
 
-### `on('failed', function (data) {})`
+### `failed`
 
 Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.
 
-#### Arguments
+#### `on('failed', function (data) {})`
 
 Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if there failure was not due to a received response.
+`data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
-

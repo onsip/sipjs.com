@@ -41,7 +41,7 @@ Register a method to be called each time a particular event is emitted.
 Name | Type | Description
 -----|------|-------------
 `event`|`String`|The event which must be emitted to trigger the callback
-`callback`|`Function`|The callback to be called when the event is emitted.
+`callback`|`Function`|The callback to be called when the event is emitted
 `bindTarget`|`Object`|If provided, when `callback` is called, `this` will be set to the `bindTarget`.  Otherwise, `this` will be bound to this `SIP.EventEmitter`
 
 #### Returns
@@ -60,7 +60,7 @@ Register a method to be called the next time a particular event is emitted.  The
 Name | Type | Description
 -----|------|-------------
 `event`|`String`|The event which must be emitted to trigger the callback
-`callback`|`Function`|The callback to be called when the event is emitted.
+`callback`|`Function`|The callback to be called when the event is emitted
 `bindTarget`|`Object`|If provided, when `callback` is called, `this` will be set to the `bindTarget`.  Otherwise, `this` will be bound to this `SIP.EventEmitter`
 
 #### Returns

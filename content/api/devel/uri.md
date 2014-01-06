@@ -10,7 +10,7 @@ The class SIP.uri represents a SIP URI and provides a set of attributes and meth
 
 ## Construction
 
-Typically, construction is managed by a `SIP.UA` when a URI is needed. However, advanced users may construct URI's manually.
+Typically, construction is managed by a `SIP.UA` when a URI is needed. However, advanced users may construct URIs manually.
 
 ### `TODO: Add constructor`
 
@@ -63,7 +63,7 @@ Type | Description
 
 ### `hasParam(key)`
 
-Verifies the existence of the given URI parameter. Returns `true` if the parameter exists, `false` otherwise. 
+Verifies the existence of the given URI parameter.
 
 #### Parameters
 
@@ -91,7 +91,7 @@ Name | Type | Description
 
 Type | Description
 -|-
-`String`|Value of the deleted URI parameter.
+`String`|Value of the deleted URI parameter
 
 ### `clearParams()`
 
@@ -110,7 +110,7 @@ Name | Type | Description
 
 ### `getHeader(name)`
 
-Gets the value of the given URI header. Returns an `Array` with the header value(s) for the given header name or `undefined` if the header does not exist in the header set. 
+Gets the value of the given URI header.
 
 #### Parameters
 
@@ -122,23 +122,23 @@ Name | Type | Description
 
 Type | Description
 -|-
-`Array of String`|Value of the given URI header.
+`Array of String`|Value of the given URI header, or `undefined` if the header does not exist
 
 ### `hasHeader(name)`
 
-Verifies the existence of the given URI header. Returns `true` if the header exists, `false` otherwise.
+Verifies the existence of the given URI header.
+
+#### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`name`|`String`|Header name
 
 #### Returns
 
 Type | Description
 -|-
 `boolean`|`true` if the header exists, `false` otherwise.
-
-#### Parameters
-
-Name | Type | Description
------|------|--------------
-`name`|`String`|Header name
 
 ### `deleteHeader(name)`
 
@@ -176,7 +176,7 @@ Returns a `String` representing the URI. Characters that can’t appear unescape
 
 ### `parse(uri)`
 
-Parses the given `String` against the SIP URI grammar rule. Returns a `SIP.URI` instance if parsing success, `undefined` otherwise.
+Parses the given `String` against the SIP URI grammar rule.
 
 #### Parameters
 
@@ -188,4 +188,4 @@ Name | Type | Description
 
 Type | Description
 -|-
-`SIP.URI`|The parsed `SIP.URI`
+`SIP.URI`|The parsed `SIP.URI` on success, `undefined` otherwise

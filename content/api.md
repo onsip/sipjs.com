@@ -4,7 +4,7 @@ title: SIP.js
 
 # Overview
 
-This describes the resources that make up OnSIP's official SIP WebRTC Library - SIP.js.
+This describes the resources that make up the SIP WebRTC Library created by OnSIP - SIP.js.
 
 SIP.js is a simple to use JavaScript library which leverages latest developments in [SIP](http://tools.ietf.org/html/rfc3261) and [WebRTC](http://www.webrtc.org/) to provide a fully featured SIP endpoint in any website. With SIP.js any website can get Real Time Communications features using audio, video and more with just a few lines of code.
 
@@ -16,10 +16,11 @@ SIP.js is a simple to use JavaScript library which leverages latest developments
 
 * [SIP over WebSocket](http://tools.ietf.org/html/draft-ietf-sipcore-sip-websocket) transport.
 * Audio/video calls, instant messaging and presence.
-* Lightweight! (~140KB).
+* Lightweight! (WRONG).
 * 100% pure JavaScript built from the ground up.
 * Easy to use and powerful user API.
 * Works with OverSIP, Kamailio and Asterisk servers.
+* TODO: Entire section is copied, needs to be changed.
 
 ## SIP Standards
 

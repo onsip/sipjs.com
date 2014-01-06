@@ -86,7 +86,7 @@ Name | Type | Description
 
 Type    | Description
 --------|----------------
-`String|undefined`| Returns the specified header, undefined if header doesn't exist 
+`String | undefined`| Returns the specified header, undefined if header doesn't exist 
 
 ### `getHeaders(name)`
 
@@ -135,7 +135,7 @@ Name | Type | Description
 
 Type     | Description
 ---------|-------------
-`Object|undefined`| The parsed header object or undefined if there is a parsing error or the the header is not present.
+`Object | undefined`| The parsed header object or undefined if there is a parsing error or the header is not present.
 
 ### `setHeader(name,value)`
 
@@ -146,7 +146,7 @@ Replaces the given header name with the given value.
 Name | Type | Description
 -----|------|-------------
 `name`|`String`|The name of the SIP header to replace
-`value`|`String|Array`|The value of to place in the SIP header field
+`value`|`String|Array`|The value to place in the SIP header field
 
 ### `toString()`
 
