@@ -16,7 +16,7 @@ SIP.js is a simple to use JavaScript library which leverages latest developments
 
 * [SIP over WebSocket](http://tools.ietf.org/html/draft-ietf-sipcore-sip-websocket) transport.
 * Audio/video calls, instant messaging and presence.
-* Lightweight! (WRONG).
+* Lightweight! (TODO: size).
 * 100% pure JavaScript built from the ground up.
 * Easy to use and powerful user API.
 * Works with OverSIP, Kamailio and Asterisk servers.
