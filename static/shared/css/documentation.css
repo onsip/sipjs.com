@@ -301,7 +301,7 @@ a img {
   width: 186px;
   height: 27px;
   background: url(/images/logo_developer.png) 0 0 no-repeat;
-  text-indent: -999em;
+/*  text-indent: -999em;*/
 }
 
 #header .nav {
