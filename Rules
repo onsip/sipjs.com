@@ -49,6 +49,13 @@ compile '/guides/*' do
   layout item[:layout] || 'guides'
 end
 
+compile '/aboutus/*' do
+  filter :kramdown, :toc_levels => [2]
+  filter :erb
+  filter :colorize_syntax, :default_colorizer => :pygmentsrb
+  layout item[:layout] || 'aboutus'
+end
+
 compile '*' do
   if item.binary?
     # don’t filter binary items
