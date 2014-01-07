@@ -8,6 +8,8 @@ This describes the resources that make up the SIP WebRTC Library created by OnSI
 
 SIP.js is a simple to use JavaScript library which leverages latest developments in [SIP](http://tools.ietf.org/html/rfc3261) and [WebRTC](http://www.webrtc.org/) to provide a fully featured SIP endpoint in any website. With SIP.js any website can get Real Time Communications features using audio, video and more with just a few lines of code.
 
+The most up to date version of the SIP.js documentation is located [here](/api/devel/).
+
 
 * TOC
 {:toc}
