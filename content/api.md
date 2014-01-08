@@ -2,10 +2,10 @@
 title: API
 ---
 
-# Documentation
+# Versions
 
 
-The most up to date version of the SIP.js documentation is located [here](/api/devel/).
+[Devel Version](/api/devel/).
 
 
 # Frequently Asked Questions
