@@ -1,5 +1,5 @@
 ---
-title: SIP.js
+title: API
 ---
 
 # Documentation
