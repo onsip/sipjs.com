@@ -6,6 +6,8 @@ title: SIP.ua_configuration_parameters | SIP.js
 * TOC
 {:toc}
 
+# Mandatory Parameters
+
 ## uri
 
 `String` - SIP URI associated to the User Agent. This is a SIP address given to you by your provider.  By default, URI is set to `anonymous.X@anonymous.invalid`, where X is a random token generated for each UA.
@@ -43,24 +45,28 @@ ws_servers: [
 # Optional Parameters
 
 ## authorization_user
-Username `String` to use when generating authentication credentials. If not defined the value in uri parameter is used.
+Username (`String`) to use when generating authentication credentials. If not defined the value in uri parameter is used.
 
 ~~~ javascript
 authorization_user: "alice123"
 ~~~
 
 ## connection_recovery_max_interval
-Maximum interval `Number` in seconds between WebSocket reconnection attemps. Default value is 30.
+Maximum interval (`Number`) in seconds between WebSocket reconnection attempts. Default value is 30.
+
+~~~ javascript
+connection_recovery_max_interval: 60
+~~~
 
 ## connection_recovery_min_interval
-Minimum interval `Number` in seconds between WebSocket reconnection attempts. Default value is 2.
+Minimum interval (`Number`) in seconds between WebSocket reconnection attempts. Default value is 2.
 
 ~~~ javascript
 connection_recovery_min_interval: 4
 ~~~
 
 ## display_name
-Descriptive name `String` to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the `display_name` value between double quotes).
+Descriptive name (`String`) to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the `display_name` value between double quotes).
 
 ~~~ javascript
 display_name: "Alice ¶€ĸøĸø"
@@ -92,16 +98,41 @@ instance_id: "8f1fa16a-1165-4a96-8341-785b1ef24f12"
 ~~~
 
 ## log
+`Object` providing the desired log behavior.
+
+###builtinEnabled
+
+`Boolean` indicating whether SIPjs should write log messages in the browser console. Default value is `true`.
+
+###level
+
+`Number` or `String` indicating the verbose level of the SIPjs log. Valid values are `3`, `2`, `1`, `0` or `"debug"`, `"log"`, `"warn"`, `"error"` respectively. Default value is `2` (or `log`).
+
+###connector
+
+User defined `Function` which will be called everytime a log is generated, according to the `enabled` and `level` options.
+
+The function is called with the following semantics:
+
+~~~javascript
+/* 
+  level: String representing the level of the log message ('debug', 'log', 'warn', 'error')
+  category: String representing the SIPjs instance class firing the log. ie: 'sipjs.ua'
+  label: String indicating the 'identifier' of the class instance when the log level is '3' (debug). ie: transaction.id
+  content: String representing the log message
+*/
+connector(level, category, label, content);
+~~~
 
 ## no_answer_timeout
-Time (in seconds) (`Integer`) after which an incoming call is rejected if not answered. Default value is `60`.
+Time (in seconds) (`Integer`) after which an incoming call is rejected if not answered. Default value is `30`.
 
 ~~~ javascript
 no_answer_timeout: 120
 ~~~
 
 ## password
-SIP Authentication password (`String`).
+SIP Authentication password (`String`).   Default value is `null`.
 
 ~~~ javascript
 password: "1234"
