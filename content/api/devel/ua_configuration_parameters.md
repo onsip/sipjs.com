@@ -116,9 +116,15 @@ The function is called with the following semantics:
 
 ~~~javascript
 /* 
-  level: String representing the level of the log message ('debug', 'log', 'warn', 'error')
-  category: String representing the SIPjs instance class firing the log. ie: 'sipjs.ua'
-  label: String indicating the 'identifier' of the class instance when the log level is '3' (debug). ie: transaction.id
+  level: String representing the level of the log message 
+('debug', 'log', 'warn', 'error')
+
+  category: String representing the SIPjs instance class firing 
+the log. ie: 'sipjs.ua'
+
+  label: String indicating the 'identifier' of the class instance
+ when the log level is '3' (debug). ie: transaction.id
+
   content: String representing the log message
 */
 connector(level, category, label, content);
@@ -185,21 +191,21 @@ trace_sip: true
 `Object` or `Array` of `Objects` indicating the TURN server(s) and corresponding username and password to be used for media relay. ‘url’ values can include “turn:” or “turns” schema. No TURN server is set by default.
 
 ~~~ javascript
-turn_servers: { urls:"turn:example.org", username:"turnuser", password:"turnpassword"}
+turn_servers: { urls:"turn:exam.org", username:"alice", password:"racecar"}
 ~~~
 
 ~~~ javascript
-turn_servers: { urls:["turn:example.org","turn:example2.org"], username:"turnuser", password:"turnpassword"}
+turn_servers: {urls:["turn:exam.org","turn:exam.org"], username:"Al", password:"yo"}
 ~~~
 
 ~~~ javascript
-turn_servers: [{ urls:"turn:example.org", username:"turnuser", password:"turnpassword"}]
+turn_servers: [{ urls:"turn:exam.org", username:"alice", password:"racecar"}]
 ~~~
 
 ~~~ javascript
 turn_servers: [
-  { urls:"turn:example.org", username:"turnuser", password:"turnpassword" },
-  { urls:"turn:example.org?transport=udp", username:"turnuser2", password:"turnpassword2"}
+  { urls:"turn:exam.org", username:"alice", password:"racecar" },
+  { urls:"turn:exam.org?transport=udp", username:"bob", password:"dog"}
 ]
 ~~~
 
