@@ -57,7 +57,7 @@ target | `String|SIP.URI` | The destination URI for the request to send to.
 
 ### `send([options])`
 
-Send the request. A constructed `SIP.ClientContext` will not send itself until this or a similar method is called. This method does not run any custom behavior outside of the default handling of the SIP request. For request methods with their own context objects, please use the method-specific functions for sending requests defined on those objects. (For example, [`SIP.InviteClientContext`](/api/devel/invite/#inviteoptions) uses its `.invite()` method to send its request.)
+Send the request. A constructed `SIP.ClientContext` will not send itself until this or a similar method is called. This method does not run any custom behavior outside of the default handling of the SIP request. For request methods with their own context objects, please use the method-specific functions for sending requests defined on those objects. (For example, [`SIP.InviteClientContext`](/api/devel/session/#inviteoptions) uses its `.invite()` method to send its request.)
 
 #### Parameters
 

@@ -30,7 +30,7 @@ myUA.off('invite');
 
 The EventEmitter constructor is intended *for internal use only.*
 
-## Public Methods
+## Instance Methods
 
 ### `on(event, callback[, bindTarget])`
 
