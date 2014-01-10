@@ -3,11 +3,12 @@ title: SIP.ServerContext | SIP.js
 ---
 # SIP.ServerContext
 
-A `SIP.ServerContext` encapsulates the behavior required to receive and send replies to a request.  It is typically mixed in with behavior from a method-specific context, such as [`SIP.InviteContext`](/api/devel/invite/) or [`SIP.MessageContext`](/api/devel/message).
+A `SIP.ServerContext` encapsulates the behavior required to receive and send replies to a request.  It is typically mixed in with behavior from a method-specific class, such as [`SIP.Session`](/api/devel/session/) or [`SIP.Message`](/api/devel/message/).
 
 * TOC
 {:toc}
 
+<!--
 ## Construction
 
 Typically, construction of a ServerContext is managed by a `SIP.UA` and happens automatically upon receipt of a new incoming request. However, advanced users may construct ServerContexts manually.
@@ -21,27 +22,33 @@ Name | Type | Description
 ua | `SIP.UA` | The user agent that received the request.
 request | `SIP.IncomingRequest` | The request received.
 
+-->
+
 ## Instance Attributes
 
 ### `ua`
 
-`SIP.UA` - The user agent that received the request.
+[`SIP.UA`](/api/devel/ua/) - The user agent which received the request.
+
+### `method`
+
+`String` - The SIP method of the request. For example, `"INVITE"` or `"MESSAGE"`.
 
 ### `request`
 
-`SIP.IncomingRequest` - The request received.
+[`SIP.IncomingRequest`](/api/devel/incomingMessage/) - The request received.
 
-### `local_identity`
+### `localIdentity`
 
-`SIP.NameAddrHeader` - The To header of the request, representing the identity of the local endpoint.
+[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - The To header field value, representing the local endpoint. This is typically the URI of the UA as a `SIP.NameAddrHeader`.
 
-### `remote_identity`
+### `remoteIdentity`
 
-`SIP.NameAddrHeader` - The From header of the request, representing the identity of the remote endpoint.
+[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - The From header field value, representing the remote endpoint.
 
 ### `data`
 
-`Object` - An empty object for the application to define custom attributes.  *Note: Custom attributes defined elsewhere on the object may be overwritten.*
+`Object` - An empty object.  Define custom application data here. *Note: SIP.js may overwrite any custom attributes defined outside of the data object.*
 
 
 
@@ -109,7 +116,7 @@ Type | Description
 
 ### `reply([options])`
 
-Send any (100-699) response. `reply` does not have default settings, and will fail without a specified status code.
+Send any (100-699) response. `reply` does not have default settings and will fail without a specified status code.
 
 #### Parameters
 

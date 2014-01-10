@@ -1,18 +1,34 @@
 ---
-title: SIP.InviteContext | SIP.js
+title: SIP.Session | SIP.js
 ---
-# SIP.InviteContext
+# SIP.Session
 
-The class SIP.InviteContext represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. TODO: explain context turning into session
+The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via INVITE SIP messages. Sessions also implement one of [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
 
 * TOC
 {:toc}
 
 ## Construction
 
-The InviteContext constructor is intended for internal use only.
+The Session constructor is intended for internal use only. Instead, outbound Sessions are created through the `SIP.UA.invite` method. Inbound Sessions are obtained via the `SIP.UA` `invite` event callback.
+
+### Examples
+
+~~~ javascript
+// Create a new outbound (User Agent Client) Session
+var session = myUA.invite('alice@example.com');
+~~~
+
+~~~ javascript
+// Accept an inbound (User Agent Server) Session
+myUA.on('invite', function (session) {
+  session.accept();
+});
+~~~
 
 ## Instance Attributes
+
+<!--
 
 ### `dialog`
 
@@ -26,125 +42,43 @@ The InviteContext constructor is intended for internal use only.
 
 `SIP.RTCMediaHandler` - The WebRTC Media Handler for the InviteContext which has the local and remote streams
 
-### `start_time`
+-->
 
-`DATE` - Date object indicating the time when the session started. Takes its value at the moment when the accepted event is fired.
+### `startTime`
 
-### `end_time`
+`Date` - Date object indicating the time when the session started. Takes its value at the moment when the accepted event is fired.
+
+### `endTime`
 
 `DATE` - Date object indicating the time when the session ended. Takes its value at the moment when terminated event was fired.
 
-## Instance Methods (Client)
+### `ua`
 
-### `invite([options])`
+[`SIP.UA`](/api/devel/ua/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#ua) or [`SIP.ServerContext`](/api/devel/context/server/#ua).
 
-Send an INVITE request. Based on the call set up, this may prompt the user for media. This is typically called by the `UA` in `ua.invite(...)`.
+### `method`
 
-#### Parameters
+`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/devel/context/client/#metho) or [`SIP.ServerContext`](/api/devel/context/server/#method).
 
-Name | Type | Description
------|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
-`options.mediaConstraints`|`Object`|`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used.
-`options.RTCConstraints`|`Object`|`Object` representing RTCPeerconnection constraints.
-`options.inviteWithoutSdp`|`Boolean`|`true` if the INVITE should be sent without sdp, `false` otherwise.
-`options.anonymous`|`Boolean`|`true` if the UA being used will be anonymous, `false` otherwise.
-`options.body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
+### `request`
 
-#### Returns
+[`SIP.IncomingRequest`](/api/devel/incomingMessage/) or [`SIP.OutgoingRequest`](/api/devel/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#request) or [`SIP.ServerContext`](/api/devel/context/server/#request).
 
-Type | Description
--|-
-`SIP.InviteContext` | This InviteContext
+### `localIdentity`
 
-### `cancel([options])`
+[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#localIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#localIdentity).
 
-Sends a CANCEL request following an INVITE request that has not received a 2xx response. Returns this InviteClientContext.
+### `remoteIdentity`
 
-#### Parameters
+[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#remoteIdentity).
 
-Name | Type | Description
------|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
-`options.reason_phrase`|`String`|The SIP reason phrase.
+### `data`
 
-#### Returns
+`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/devel/context/client/#data) or [`SIP.ServerContext`](/api/devel/context/server/#data).
 
-Type | Description
--|-
-`SIP.InviteContext` | This InviteContext
 
-#### Throws
 
-TypeError
-INVALID_STATE_ERROR
-
-## Instance Methods (Server)
-
-### `accept([options])`
-
-Reply to a received INVITE request with a 200 OK response. Based on the call set up, this may prompt the user for media. Returns this InviteServerContext. TODO: everything chains, do we need this last piece? I`m gonna stop doing it from here.
-
-#### Parameters
-
-Name | Type | Description
------|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
-`options.mediaConstraints`|`Object`|`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. Default value is both `audio` and `video` set to `true`.
-
-#### Returns
-
-Type | Description
--|-
-`SIP.InviteContext` | This InviteContext
-
-#### Throws
-
-INVALID_STATE_ERROR
-
-### `preaccept()`
-
-Reply to a received INVITE request with a provisional response (183 Session in Progress) after the user is prompted for media. This response contains the sdp of the UAS and is used to negotiate the media of the session before a final response is sent.
-
-#### Returns
-
-Type | Description
--|-
-`SIP.InviteContext` | This InviteContext
-
-### `progress([options])`
-
-Inherited from `SIP.ServerContext`
-
-### `reject([options])`
-
-Reject the received INVITE request. The default response is 480 Temporarily Unavailable.
-
-#### Parameters
-
-Name | Type | Description
------|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
-`options.reason_phrase`|`String`|The SIP reason phrase.
-`options.body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
-`options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
-
-#### Returns
-
-Type | Description
--|-
-`SIP.InviteContext` | This InviteContext
-
-#### Throws
-
-TypeError
-INVALID_STATE_ERROR
-
-## Instance Methods (Both)
+## Instance Methods
 
 ### `sendDTMF(tone[, options])`
 
@@ -169,7 +103,7 @@ INVALID_STATE_ERROR
 
 Type | Description
 -|-
-`SIP.InviteContext` | This InviteContext
+`SIP.Session` | This Session
 
 #### Example 1
 
@@ -194,6 +128,7 @@ var options = {
 call.sendDTMF(tones, options);
 ~~~
 
+<!--
 
 ### `terminate([options])`
 
@@ -213,12 +148,14 @@ Name | Type | Description
 
 Type | Description
 -|-
-`SIP.InviteContext` | This InviteContext
+`SIP.Session` | This Session
 
 #### Throws
 
 TypeError
 INVALID_STATE_ERROR
+
+-->
 
 ### `bye([options])`
 
@@ -241,7 +178,7 @@ INVALID_STATE_ERROR
 
 ### `getLocalStreams()`
 
-Returns a sequence of MediaStream objects representing the streams that are currently sent in this InviteContext.
+Returns a sequence of MediaStream objects representing the streams that are currently sent in this Session.
 
 #### Returns
 
@@ -251,11 +188,13 @@ Type | Description
 
 ### `getRemoteStreams()`
 
-Returns a sequence of MediaStream objects representing the streams that are currently received in this InviteContext.
+Returns a sequence of MediaStream objects representing the streams that are currently received in this session.
 
 Type | Description
 -|-
 `Array of RTCMediaStream`| The remote media stream
+
+<!--
 
 ### `sendRequest(method[, options])`
 
@@ -274,7 +213,9 @@ Name | Type | Description
 
 Type | Description
 -|-
-`SIP.InviteContext`| This InviteContext
+`SIP.Session`| This session
+
+-->
 
 ### `refer(target[, options])`
 
@@ -284,7 +225,7 @@ Send a REFER request. A REFER occurs when persons A and B have an active call se
 
 Name | Type | Description
 -----|------|--------------
-`target`|`SIP.InviteServerContext` `| SIP.InviteClientContext` `| String`|If the target is an InviteServerContext or InviteClientContext will start an attended transfer. Otherwise it will do a blind transfer.
+`target`|`SIP.Session|String`|If the target is a session, this will start an attended transfer. Otherwise, it will do a blind transfer.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
@@ -292,29 +233,44 @@ Name | Type | Description
 
 Type | Description
 -|-
-`SIP.InviteContext`| This InviteContext
+`SIP.Session`| This session
 
 #### Throws
 
 TypeError
 INVALID_STATE_ERROR
 
+## Instance Methods (Outbound/Client)
+
+### `cancel([options])`
+
+Overrides [`SIP.ClientContext.cancel`](/api/devel/context/client/#canceloptions/)
+
+## Instance Methods (Inbound/Server)
+
+### `progress([options])`
+
+Overrides [`SIP.ServerContext.progress`](/api/devel/context/server/#progressoptions)
+
+### `accept([options])`
+
+Overrides [`SIP.ServerContext.accept`](/api/devel/context/server/#acceptoptions)
+
+### `reject([options])`
+
+Overrides [`SIP.ServerContext.reject`](/api/devel/context/server/#rejectoptions)
+
+### `reply([options])`
+
+Overrides [`SIP.ServerContext.reply`](/api/devel/context/server/#replyoptions)
+
+
 ## Events
 
-`SIP.InviteContext` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
+`SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
 Every event handler is executed with a [SIP.Event](/api/devel/event/) instance as the only argument.
 
-### `connecting`
-
-Fired when ICE is starting to negotiate between the peers.
-
-#### `on('connecting', function (response,code) {})`
-
-Name | Type | Description 
------|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
-`code`||The SIP response code.
 
 ### `progress`
 
@@ -366,6 +322,22 @@ Name | Type | Description
 `data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
+
+
+
+### `connecting`
+
+Fired when ICE is starting to negotiate between the peers.
+
+#### `on('connecting', function (response,code) {})`
+
+Name | Type | Description 
+-----|------|--------------
+`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
+`code`||The SIP response code.
+
+<!--
+
 ### `terminated`
 
 Fired when an established call ends.
@@ -376,6 +348,8 @@ Name | Type | Description
 -----|------|--------------
 `message`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
 `cause`||One value of [Failure and End Causes](/api/devel/causes)
+
+-->
 
 ### `canceled`
 
@@ -407,7 +381,7 @@ Fired for an incoming or outgoing DTMF.
 
 Name | Type | Description 
 -----|------|--------------
-`dtmf`|`Object`|[`SIP.InviteContext.DTMF`](/api/devel/invite/dtmf/) instance.
+`dtmf`|`Object`|[`SIP.Session.DTMF`](/api/devel/session/dtmf/) instance.
 `request`|`Object`|[`SIP.IncomingRequest`](/api/devel/incomingRequest/) instance of the received SIP INFO request.
 
 ### `invite`
@@ -418,6 +392,8 @@ Fired when an invite is sent.
 
 *There are no documented arguments for this event*
 
+<!--
+
 ### `preaccepted`
 
 Fired when a session is pre-accepted.
@@ -425,6 +401,8 @@ Fired when a session is pre-accepted.
 #### `on('preaccepted', function () {})`
 
 *There are no documented arguments for this event*
+
+-->
 
 ### `bye`
 

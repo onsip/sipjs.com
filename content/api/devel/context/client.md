@@ -3,11 +3,12 @@ title: SIP.ClientContext | SIP.js
 ---
 # SIP.ClientContext
 
-A `SIP.ClientContext` encapsulates the behavior required to send a request, as well as handle responses and retransmissions of that request. It is typically mixed in with behavior from a method-specific context, such as [`SIP.InviteContext`](/api/devel/invite/) or [`SIP.MessageContext`](/api/devel/message/).
+A `SIP.ClientContext` encapsulates the behavior required to send a request, as well as handle responses and retransmissions of that request. It is typically mixed in with behavior from a method-specific class, such as [`SIP.Session`](/api/devel/session/) or [`SIP.Message`](/api/devel/message/).
 
 * TOC
 {:toc}
 
+<!--
 ## Construction
 
 Typically, construction and sending of a ClientContext is managed by a `SIP.UA`, through either the `ua.request(method, target)` function or through SIP method-specific functions such as `ua.invite(target)`. However, advanced users may construct ClientContexts manually.
@@ -21,29 +22,38 @@ Name | Type | Description
 ua | `SIP.UA` | The user agent from which the request will be sent.
 method | `String` | The SIP method to use on the request. For example, `INFO` or `OPTIONS`
 target | `String|SIP.URI` | The destination URI for the request to send to.
+-->
 
 ## Instance Attributes
 
 ### `ua`
 
-`SIP.UA` - The user agent from which the request was sent or will be sent.
+[`SIP.UA`](/api/devel/ua/) - The user agent from which the request was sent or will be sent.
 
 ### `method`
 
 `String` - The SIP method of the request. For example, `"INVITE"` or `"MESSAGE"`.
 
-### `target`
+### `request`
 
-`String` - The requested URI destination for the SIP message.
+[`SIP.OutgoingRequest`](/api/devel/outgoingRequest/) - The request sent or to be sent.
+
+### `localIdentity`
+
+[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - The From header field value, representing the local endpoint. This is typically the URI of the UA as a `SIP.NameAddrHeader`.
+
+### `remoteIdentity`
+
+[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - The To header field value, representing the remote endpoint.
 
 ### `data`
 
 `Object` - An empty object.  Define custom application data here. *Note: SIP.js may overwrite any custom attributes defined outside of the data object.*
 
 
-
-
 ## Instance Methods
+
+<!--
 
 ### `send([options])`
 
@@ -72,6 +82,33 @@ Name | Type | Description
 Type | Description
 -|-
 `SIP.ClientContext`| This ClientContext
+
+-->
+
+### `cancel([options])`
+
+Send a CANCEL before the original request has been accepted.
+
+#### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`options`|`Object`|Optional `Object` with extra parameters (see below).
+`options.status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
+`options.reason_phrase`|`String`|The SIP reason phrase.
+
+#### Returns
+
+Type | Description
+-|-
+`SIP.ClientContext` | This ClientContext
+
+#### Throws
+
+TypeError
+INVALID_STATE_ERROR
+
+
 
 ## Events
 

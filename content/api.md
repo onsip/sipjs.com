@@ -1,13 +1,13 @@
 ---
-title: API
+title: SIP.js | API
 ---
 
 # Versions
 
-
-[Devel Version](/api/devel/).
+* [Version devel](/api/devel/)
+* Version 0.5.0 (Future release)
 
 
 # Frequently Asked Questions
 
-F.A.Q.
+*Check back later!*

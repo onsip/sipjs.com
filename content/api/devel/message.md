@@ -1,40 +1,28 @@
 ---
-title: SIP.MessageContext | SIP.js
+title: SIP.Message | SIP.js
 ---
-# SIP.MessageContext
+# SIP.Message
 
-`SIP.MessageContext` represents an instant message using the SIP method MESSAGE. By default, the message is treated as plain text. However, any valid content type may be specified.
+`SIP.Message` represents an instant message using the SIP method MESSAGE. By default, the message is treated as plain text. However, any valid content type may be specified.
 
 * TOC
 {:toc}
 
-#### `progress()`
-
-Inherited from [`SIP.ServerContext`]
-
-#### `accept()`
-
-#### `reject()`
-
-#### `reply()`
-
 ## Instance Attributes
 
-### `body`
+`SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server/).
 
-`String` - The body of the SIP message.
+## Instance Methods
 
-### `content_type`
+`SIP.Message` inherits its instance methods from [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server/).
 
-`String` - The content type of the message body.
+## Events
 
-### `request`
+`SIP.Message` inherits its events from [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server/).
 
-`SIP.OutgoingRequest|SIP.IncomingRequest` - The SIP MESSAGE request associated with this context.
+<!--
 
-## Instance Method
-
-### `message(options)` *(MessageClientContext Only)*
+### `message(options)` *(Client Only)*
 
 Send this MESSAGE.
 
@@ -49,5 +37,7 @@ Name                  | Type               | Description
 
 Type | Description
 -----|-------------
-`SIP.MessageClientContext`| This MessageClientContext
+`SIP.Message`| This Message
+
+-->
 

@@ -11,37 +11,27 @@ A user agent (or UA) is associated with a SIP user address and acts on behalf of
 
 ## Construction
 
-A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent. Check the full list for optional [UA Configuration Parameters](/api/devel/ua_configuration_parameters/).
-
 ### `new SIP.UA([configuration])`
+
+A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent, although most applications will define at least [`uri`](/api/devel/ua_configuration_parameters/#uri) and [`ws_servers`](/api/devel/ua_configuration_parameters/#ws_servers). Check the full list for optional [UA Configuration Parameters](/api/devel/ua_configuration_parameters/).
 
 ### Examples
 
 ~~~ javascript
-// Create a new anonymous user agent, and connect using the OnSIP Network
-var myUA = new SIP.UA();
-~~~
-
-~~~ javascript
-// Create a user agent for Bob, and connect using the OnSIP Network
-var myUA = new SIP.UA('bob@example.com');`
-~~~
-
-~~~ javascript
-// Create a user agent for Bob, and connect using a custom WebSocket server
+// Create a user agent named Bob, connect, and register to receive invitations.
 var bob = new SIP.UA({
   uri: 'bob@example.com',
-  ws_servers: ['wss://edge.example.com'],
+  ws_servers: ['wss://sip-ws.example.com'],
   register: true
 });
+bob.start();
 ~~~
 
-## Generic Methods
+## Instance Methods
 
 ### `start()`
 
-Connect to the configured WebSocket server, and restore the previous state if previously stopped. The first time `start()` is called, the UA will also attempt to register if the `register` parameter in the UA's configuration is set to `true`.
-
+Connect to the configured WebSocket server, and restore the previous state if previously stopped. The first time `start()` is called, the UA will also attempt to register if the [`register`](/api/devel/ua_configuration_parameters/#register) parameter in the UA's configuration is set to `true`.
 
 ### `stop()`
 
@@ -56,7 +46,7 @@ Register the UA to receive incoming requests.  Upon successful registration, the
 Name | Type | Description
 -----|------|-------------
 `options`|`Object`|Optional `Object` with extra parameters (see below)
-`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
+`options.extraHeaders`|`Array` of `Strings`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
 
 #### Returns
 
@@ -84,7 +74,7 @@ Name | Type | Description
 -----|------|-------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.all`|`Boolean`|Optional `Boolean` for unregistering all bindings of the same SIP user. Default value is `false`.
-`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
+`options.extraHeaders`|`Array` of `Strings`|Optional `Array` of `Strings` with extra SIP headers for each REGISTER request.
 
 #### Returns
 
@@ -125,10 +115,6 @@ Type     | Description
 
 
 
-## Request Methods
-
-The following methods share a similar interface and are all used to send SIP requests from the UA.
-
 ### `message(target, body[, options])`
 
 Sends an instant message making use of SIP MESSAGE method.
@@ -137,22 +123,25 @@ Sends an instant message making use of SIP MESSAGE method.
 
 Name | Type | Description 
 -----|------|--------------
-`target`|`String|SIP.URI`|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.
+`target`|`String|`[`SIP.URI`](/api/devel/uri/)|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.
 `body`|`String`|Message content. `String` representing the body of the message.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.contentType`|`String`|Optional `String` representing the content-type of the body. Default is `text/plain`.
-`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
+`options.extraHeaders`|`Array` of `Strings`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
 
 #### Returns
 
-Type | Description
------|-------------
-`SIP.MessageClientContext`|The context surrounding the newly created MESSAGE
+*The return value of this method implements multiple interfaces.*
+
+Types | Description
+------|-------------
+[`SIP.Message`](/api/devel/message/), [`SIP.ClientContext`](/api/devel/context/client/) | The newly created MESSAGE. The new Message object implements the shared ClientContext interface for outbound requests.
 
 #### Example
 
 ~~~ javascript
-myUA.message('bob@example.com', 'Hello, Bob!');
+var message = myUA.message('bob@example.com', 'Hello, Bob!');
+console.log(message.body); // 'Hello, Bob!'
 ~~~
 
 
@@ -164,19 +153,21 @@ Invite the target to start a multimedia session.
 
 |Name                      | Type        | Description |
 |--------------------------|-------------|-------------|
-|`target`                  |`String|SIP.URI`     |Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.|
+|`target`                  |`String|`[`SIP.URI`](/api/devel/uri/)     |Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.|
 |`options`                 |`Object`     |Optional `Object` with extra parameters (see below).|
 |`options.mediaConstraints`|`Object`     |`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used.|
 |`options.mediaStream`     |`MediaStream`|`MediaStream` to transmit to the other end.|
 |`options.RTCConstraints`  |`Object`     |`Object` representing RTCPeerconnection constraints|
-|`options.extraHeaders`    |`Array`      |Optional `Array` of `Strings` with extra SIP headers for the INVITE request.|
+|`options.extraHeaders`    |`Array` of `Strings` |Optional `Array` of `Strings` with extra SIP headers for the INVITE request.|
 |`options.anonymous`       |`Boolean`    |`Boolean` field indicating whether the call should be done anonymously. Default value is `false`.|
 
 #### Returns
 
-Type | Description
------|-------------
-`SIP.InviteClientContext`|The context surrounding the newly created INVITE
+*The return value of this method implements multiple interfaces.*
+
+Types | Description
+------|-------------
+[`SIP.Session`](/api/devel/session/), [`SIP.ClientContext`](/api/devel/context/client/)| The session the target is invited to.  The new Session object implements the shared ClientContext interface for outbound requests. The Session is in a provisional or early state until accepted by the remote target.  Please refer to the Session documentation for more information.
 
 #### Example
 
@@ -193,17 +184,17 @@ Send a SIP message.
 Name | Type | Description 
 -----|------|--------------
 `method`|`String`|The SIP request method to send, e.g. `'INVITE'` or `'OPTIONS'`
-`target`|`String|SIP.URI`|Destination address. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.
+`target`|`String|`[`SIP.URI`](/api/devel/uri/)|Destination address. `String` representing a destination username or complete SIP URI, or a [`SIP.URI`](/api/devel/uri/) instance.
 `body`|`String`|Message content. `String` representing the body of the message.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.body`|`String`|Optional `String` to be included as the body of the request
-`options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
+`options.extraHeaders`|`Array` of `Strings`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
 
 #### Returns
 
 Type | Description
 -----|-------------
-`SIP.ClientContext`|The context surrounding the newly created request
+[`SIP.ClientContext`](/api/devel/context/client/)| The context surrounding the new outbound request.
 
 
 
@@ -249,7 +240,7 @@ Fired for a successful registration.
 
 Fired for an unregistration. This event is fired in the following scenarios:
 
-* As a result of a unregistration request. `UA.unregister()`.
+* As a result of an unregistration request, `UA.unregister()`.
 * If being registered, a periodic re-registration fails.
 
 #### `on('unregistered', function (cause) {})`
@@ -274,12 +265,13 @@ Name | Type | Description
 
 Fired when an incoming INVITE request is received.
 
-#### `on('invite', function (invite) {})`
+#### `on('invite', function (session) {})`
 
-Name | Type | Description 
------|------|--------------
-`invite`|[SIP.InviteServerContext](/api/devel/invite/)| The context surrounding the recently received INVITE request.
+*The argument passed to this event implements multiple interfaces.*
 
+Name | Types | Description 
+-----|-------|-------------
+`session`|[`SIP.Session`](/api/devel/message/), [`SIP.ServerContext`](/api/devel/context/server/)| The inbound session the user agent was invited to. This argument also implements the shared [`SIP.ServerContext`](/api/devel/context/server/) behavior for inbound requests.
 
 ### `message`
 
@@ -287,6 +279,8 @@ Fired when an incoming MESSAGE request is received.
 
 #### `on('message', function (message) {})`
 
-Name | Type | Description 
------|------|--------------
-`message`|[SIP.MessageServerContext](/api/devel/message/)| The context surrounding the recently received MESSAGE request.
+*The argument passed to this event implements multiple interfaces.*
+
+Name | Types | Description 
+-----|-------|-------------
+`message`|[`SIP.Message`](/api/devel/message/), [`SIP.ServerContext`](/api/devel/context/server/)| The inbound message received. This argument also implements the shared [`SIP.ServerContext`](/api/devel/context/server/) behavior for inbound requests.
