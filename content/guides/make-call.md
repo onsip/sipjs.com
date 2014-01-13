@@ -13,7 +13,30 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ### Setup
 
-The video element adds a standard way for browsers to display video over the internet without additional plugins. This makes video elements perfect for WebRTC. The local video stream should always be muted to prevent feedback.
+In order to make a video call, we first need a way to display the video call on your screen.  We can use a video element for this.  The video element adds a standard way for browsers to display video over the internet without additional plugins. This makes video elements perfect for WebRTC. The local video stream should always be muted to prevent feedback.
+
+In this example, within the <body> tags, we have a "remoteVideo" video element, to display the video of the person you are calling, as well as a "localVideo" video element, to display your video that you are sending to the person you are calling.  
+
+We are also loading the SIPjs library, within the <head> tags.  We are not doing anything with the SIPjs library yet.
+
+<iframe
+  style="width: 100%; height: 300px"
+  src="http://jsfiddle.net/mgc2e/1/embedded/">
+</iframe>
+
+These video elements are not useful if we aren't calling anyone, so lets make a call.  
+
+
+
+<iframe
+  style="width: 100%; height: 300px"
+  src="http://jsfiddle.net/T4Kv2/1/embedded/">
+</iframe>
+
+<iframe
+  style="width: 100%; height: 300px"
+  src="http://jsfiddle.net/qWmG7/1/embedded/">
+</iframe>
 
 
 ~~~ html
@@ -33,10 +56,10 @@ The video element adds a standard way for browsers to display video over the int
   </html>
 ~~~
 
-In order to make calls and send messages you must create a new anonymous SIP user agent.  We then must start the user agent, which 
+In order to make calls and send messages you must create a new anonymous SIP user agent.  We then must start the user agent.
 
 ~~~ javascript
-  // phone.js
+  // main.js
 
   //Creates the anonymous user agent so that you can make calls
   var userAgent = new SIP.UA();
@@ -59,7 +82,7 @@ After we start the user agent, we can make a call to SIP address.  We do so by s
     }
     //makes the call
     var session = userAgent.invite('sip:bob@example.com', options);
-    session.on('accepted', onAccept)
+    session.on('accepted', onAccept);
   }
 ~~~
 
