@@ -13,13 +13,13 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ### Setup and Video Elements
 
-First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be download here, as well as the main.js file.
+First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
 
 In order to make a video call, we first need a way to display the video call on your screen.  We can use a `<video>` element for this.  The `<video>` adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` perfect for WebRTC. The local video stream should always be muted to prevent feedback.
 
 In this example, within the `<body>` tags, we have a `remoteVideo` `<video>`, to display the video of the person you are calling, as well as a `localVideo` `<video>`, to display your video that you are sending to the person you are calling.  
 
-We are also loading the SIP.js library, within the `<head>` tags.  We are not doing anything with the SIP.js library yet.
+Although we are loading the SIP.js library, we are not doing anything with it yet.
 
 <iframe
   style="width: 100%; height: 300px"
@@ -50,6 +50,8 @@ To send an invite we must first create a javascript object, which contains the `
 We must then call the `.invite` method, along with the address that we are sending the invite to and the `options` media constraint javascript object.
 
 Once we send the invite the other party has the choice of either accepting or rejecting the call.
+
+We will also add an `endCall` button, which terminates the session using the `.terminate()` method.
 
 <iframe
   style="width: 100%; height: 410px"
