@@ -23,7 +23,7 @@ We are also loading the SIP.js library, within the `<head>` tags.  We are not do
 
 <iframe
   style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/mgc2e/4/embedded/html,js,css,result/">
+  src="http://jsfiddle.net/mgc2e/9/embedded/html,js,css,result/">
 </iframe>
 
 ### Making the Call
@@ -36,7 +36,7 @@ In order to make calls and send messages you must create a SIP user agent.  For 
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/4m7dc/4/embedded/">
+  src="http://jsfiddle.net/4m7dc/9/embedded/">
 </iframe>
 
 
@@ -53,7 +53,7 @@ Once we send the invite the other party has the choice of either accepting or re
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/7/embedded/">
+  src="http://jsfiddle.net/T4Kv2/14/embedded/">
 </iframe>
 
 
@@ -69,7 +69,7 @@ The function `attachMediaStream` attaches the media stream to the video element.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/9/embedded/">
+  src="http://jsfiddle.net/qWmG7/18/embedded/">
 </iframe>
 
 
