@@ -13,7 +13,7 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ### Setup and Video Elements
 
-First we must create the files index.html, main.js, and style.css in the same folder.  
+First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be download here, as well as the main.js file.
 
 In order to make a video call, we first need a way to display the video call on your screen.  We can use a `<video>` element for this.  The `<video>` adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` perfect for WebRTC. The local video stream should always be muted to prevent feedback.
 
@@ -45,7 +45,7 @@ In order to make calls and send messages you must create a SIP user agent.  For 
 
 After the user agent has connected to the SIP server we can send an invite to make a call.  We must first catch the `connected` SIP event, to ensure that the user agent has been created and has connected.  Once the connected event has happened, our example calls the `newSessionHandler()` method.  This method then creates a SIP session by sending an invite.  
 
-To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we can say whether the session contains audio and video (ie whether it is a video call or an audio call).  
+To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we can say whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
 
 We must then call the `.invite` method, along with the address that we are sending the invite to and the `options` media constraint javascript object.
 
