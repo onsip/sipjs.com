@@ -1,5 +1,5 @@
 ---
-title: SIP.js | API
+title: API | SIP.js
 ---
 
 # Versions

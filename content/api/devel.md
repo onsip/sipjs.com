@@ -1,5 +1,5 @@
 ---
-title: SIP.js | devel
+title: devel | SIP.js
 ---
 
 # Overview
