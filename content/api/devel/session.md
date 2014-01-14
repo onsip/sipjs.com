@@ -384,6 +384,8 @@ Name | Type | Description
 `dtmf`|`Object`|[`SIP.Session.DTMF`](/api/devel/session/dtmf/) instance.
 `request`|`Object`|[`SIP.IncomingRequest`](/api/devel/incomingRequest/) instance of the received SIP INFO request.
 
+<!--
+
 ### `invite`
 
 Fired when an invite is sent.
@@ -391,8 +393,6 @@ Fired when an invite is sent.
 #### `on('invited', function () {})`
 
 *There are no documented arguments for this event*
-
-<!--
 
 ### `preaccepted`
 
