@@ -15,9 +15,9 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
 
-In order to make a video call, we first need a way to display the video call on your screen.  We can use a `<video>` element for this.  The `<video>` adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` perfect for WebRTC. The local video stream should always be muted to prevent feedback.
+In order to make a video call, we need a way to display the video call on your screen.  We can use a `<video>` element for this.  The `<video>` adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` perfect for WebRTC. The local video stream should always be muted to prevent feedback.
 
-In this example, within the `<body>` tags, we have a `remoteVideo` `<video>`, to display the video of the person you are calling, as well as a `localVideo` `<video>`, to display your video that you are sending to the person you are calling.  
+In this example, within the `<body>` tags, we have a `remoteVideo` `<video>`, to display the video of the person you are calling.  We also have a `localVideo` `<video>`, to display the video stream that you are sending to the person you are calling.  
 
 Although we are loading the SIP.js library, we are not doing anything with it yet.
 
@@ -34,7 +34,7 @@ These video elements are not useful if we aren't calling anyone, so lets make a 
 
 #### Creating the User Agent
 
-In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then must start the user agent. After starting the user agent we will catch the `connected` event, which will fire when the user agent is created.
+In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then we must start the user agent. After starting the user agent we will catch the `connected` event, which will fire when the user agent is created.
 
 <iframe
   style="width: 100%; height: 410px"
@@ -47,11 +47,11 @@ In order to make calls and send messages you must create a SIP user agent.  For 
 
 After the user agent has connected to the SIP server (which is a public Google server by default) we can send an invite to make a call.  We must first catch the `connected` SIP event, to ensure that the user agent has been created and has connected.  Once the connected event has happened, our example calls the `onConnected()` method.  This method then creates a SIP session by sending an invite.  
 
-To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we can say whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
+To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we specify whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
 
 We must then call the `.invite()` method, along with the address that we are sending the invite to and the `options` media constraint javascript object.
 
-When we make the call, the browser will ask for permission to access the camera and microphone.  We must allow this in order to make the call.  Once we send the invite the other party has the choice of either accepting or rejecting the call.  
+When we make the call the browser will ask for permission to access the camera and microphone.  We must allow this in order to make the call.  Once we send the invite the other party has the choice of either accepting or rejecting the call.  
 
 We will also add an `endCall` button, which terminates the session using the `.bye()` method.
 
