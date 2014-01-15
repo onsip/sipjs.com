@@ -23,7 +23,7 @@ Although we are loading the SIP.js library, we are not doing anything with it ye
 
 <iframe
   style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/mgc2e/9/embedded/html,js,css,result/">
+  src="http://jsfiddle.net/mgc2e/10/embedded/html,js,css,result/">
 </iframe>
 
 ### Making the Call
@@ -32,30 +32,30 @@ These video elements are not useful if we aren't calling anyone, so lets make a 
 
 #### Creating the User Agent
 
-In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then must start the user agent. 
+In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then must start the user agent. After starting the user agent we will catch the `connected` event, which will fire when the user agent is created.
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/4m7dc/9/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/4m7dc/10/embedded/js,html,css,result/">
 </iframe>
 
 
 #### Sending the Invite
 
 
-After the user agent has connected to the SIP server we can send an invite to make a call.  We must first catch the `connected` SIP event, to ensure that the user agent has been created and has connected.  Once the connected event has happened, our example calls the `onConnected()` method.  This method then creates a SIP session by sending an invite.  
+After the user agent has connected to the SIP server (which is a public Google server by default) we can send an invite to make a call.  We must first catch the `connected` SIP event, to ensure that the user agent has been created and has connected.  Once the connected event has happened, our example calls the `onConnected()` method.  This method then creates a SIP session by sending an invite.  
 
 To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we can say whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
 
-We must then call the `.invite` method, along with the address that we are sending the invite to and the `options` media constraint javascript object.
+We must then call the `.invite()` method, along with the address that we are sending the invite to and the `options` media constraint javascript object.
 
-Once we send the invite the other party has the choice of either accepting or rejecting the call.
+When we make the call, the browser will ask for permission to access the camera and microphone.  We must allow this in order to make the call.  Once we send the invite the other party has the choice of either accepting or rejecting the call.  
 
 We will also add an `endCall` button, which terminates the session using the `.bye()` method.
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/14/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/T4Kv2/15/embedded/js,html,css,result/">
 </iframe>
 
 
@@ -71,7 +71,7 @@ The function `attachMediaStream` attaches the media stream to the video element.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/18/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/qWmG7/19/embedded/js,html,css,result/">
 </iframe>
 
 
