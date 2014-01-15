@@ -36,14 +36,14 @@ In order to make calls and send messages you must create a SIP user agent.  For 
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/4m7dc/9/embedded/">
+  src="http://jsfiddle.net/4m7dc/9/embedded/js,html,css,result/">
 </iframe>
 
 
 #### Sending the Invite
 
 
-After the user agent has connected to the SIP server we can send an invite to make a call.  We must first catch the `connected` SIP event, to ensure that the user agent has been created and has connected.  Once the connected event has happened, our example calls the `newSessionHandler()` method.  This method then creates a SIP session by sending an invite.  
+After the user agent has connected to the SIP server we can send an invite to make a call.  We must first catch the `connected` SIP event, to ensure that the user agent has been created and has connected.  Once the connected event has happened, our example calls the `onConnected()` method.  This method then creates a SIP session by sending an invite.  
 
 To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we can say whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
 
@@ -51,11 +51,11 @@ We must then call the `.invite` method, along with the address that we are sendi
 
 Once we send the invite the other party has the choice of either accepting or rejecting the call.
 
-We will also add an `endCall` button, which terminates the session using the `.terminate()` method.
+We will also add an `endCall` button, which terminates the session using the `.bye()` method.
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/14/embedded/">
+  src="http://jsfiddle.net/T4Kv2/14/embedded/js,html,css,result/">
 </iframe>
 
 
@@ -71,7 +71,7 @@ The function `attachMediaStream` attaches the media stream to the video element.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/18/embedded/">
+  src="http://jsfiddle.net/qWmG7/18/embedded/js,html,css,result/">
 </iframe>
 
 
