@@ -21,9 +21,11 @@ In this example, within the `<body>` tags, we have a `remoteVideo` `<video>`, to
 
 Although we are loading the SIP.js library, we are not doing anything with it yet.
 
+In the style.css file we will put a border around the `<video>` elements, to visualize them better.
+
 <iframe
   style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/mgc2e/10/embedded/html,js,css,result/">
+  src="http://jsfiddle.net/mgc2e/11/embedded/html,js,css,result/">
 </iframe>
 
 ### Making the Call
@@ -36,7 +38,7 @@ In order to make calls and send messages you must create a SIP user agent.  For 
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/4m7dc/10/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/4m7dc/11/embedded/js,html,css,result/">
 </iframe>
 
 
@@ -55,7 +57,7 @@ We will also add an `endCall` button, which terminates the session using the `.b
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/15/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/T4Kv2/16/embedded/js,html,css,result/">
 </iframe>
 
 
@@ -71,7 +73,7 @@ The function `attachMediaStream` attaches the media stream to the video element.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/19/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/qWmG7/20/embedded/js,html,css,result/">
 </iframe>
 
 

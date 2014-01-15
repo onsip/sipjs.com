@@ -12,12 +12,7 @@ title: Receive a Call | SIP.js
 
 ### Setup
 
-We will start with the code that we produced at the end of the make a call example.
-
-<iframe
-  style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/19/embedded/js,html,css,result/">
-</iframe>
+We will start with the code that we produced at the end of the [make a call](/guides/make-call/) example.
 
 
 ### Register A SIP User Agent
@@ -27,7 +22,7 @@ In order to receive calls we need to create a registered SIP user agent, instead
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/5aqm7/2/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/5aqm7/3/embedded/js,html,css,result/">
 </iframe>
 
 ### Accept a Call Button
@@ -36,6 +31,6 @@ Finally, we need a way to accept a call that we are receiving.  We can do this b
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/tEGgn/2/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/tEGgn/3/embedded/js,html,css,result/">
 </iframe>
 
