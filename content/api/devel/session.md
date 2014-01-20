@@ -282,7 +282,7 @@ Name | Type | Description
 -----|------|------------
 `data`|`Object`|A wrapper object containing the event data
 `data.code`|`Integer`|The status code of the received response, between 100 and 199.
-`data.response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`data.response`|[`SIP.IncomingMessage`](/api/devel/incomingMessage)|The received response
 
 ### `accepted`
 
@@ -294,7 +294,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 200 and 299.
-`data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse) | The received response
+`data.response` | [`SIP.IncomingMessage`](/api/devel/incomingMessage) | The received response
 
 ### `rejected`
 
@@ -306,7 +306,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 300 and 699.
-`data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse/) | The received response
+`data.response` | [`SIP.IncomingMessage`](/api/devel/incomingMessage/) | The received response
 `data.cause` | `String` | The reason phrase associated with the SIP response code.
 
 ### `failed`
@@ -319,7 +319,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if the failure was not due to a received response.
+`data.response` | [`SIP.IncomingMessage|null`](/api/devel/incomingMessage/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
 
@@ -333,7 +333,7 @@ Fired when ICE is starting to negotiate between the peers.
 
 Name | Type | Description 
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 <!--
@@ -359,7 +359,7 @@ Fired when the session was canceled by the UAC.
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 ### `referred`
@@ -370,7 +370,7 @@ Fired when the session was unable to establish.
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP 1XX response.
 
 
 ### `dtmf`
@@ -381,8 +381,8 @@ Fired for an incoming or outgoing DTMF.
 
 Name | Type | Description 
 -----|------|--------------
-`dtmf`|`Object`|[`SIP.Session.DTMF`](/api/devel/session/dtmf/) instance.
-`request`|`Object`|[`SIP.IncomingRequest`](/api/devel/incomingRequest/) instance of the received SIP INFO request.
+`dtmf`|`Object`|`SIP.Session.DTMF` instance.
+`request`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP INFO request.
 
 <!--
 
