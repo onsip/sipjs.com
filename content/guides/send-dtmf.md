@@ -20,9 +20,15 @@ We will start with the code that we produced at the end of the [make a call](/gu
 In order to send dtmf, we need to create a dial pad to accept user input.  We will do this by creating buttons which, when clicked, send the appropriate dial tone.
 
 
+
+<iframe
+  style="width: 100%; height: 600px"
+  src="http://jsfiddle.net/4NMLQ/2/embedded/js,html,css,result/">
+</iframe>
+
 ### Send the Dial Tone
 
-Now we need to send the dtmf dial tone.  This is done by using the `sendDTMF(number)` method.  Using this method you can send one or multiple dial tones at the same time.  
+These buttons don't do anything yet, though.  Now we need to send the dtmf dial tone when the buttons are clicked.  This is done by using the `sendDTMF(number)` method.  Using this method you can send one or multiple dial tones at the same time.  
 
 <iframe
   style="width: 100%; height: 600px"
