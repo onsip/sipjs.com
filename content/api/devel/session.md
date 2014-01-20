@@ -269,7 +269,7 @@ Overrides [`SIP.ServerContext.reply`](/api/devel/context/server/#replyoptions)
 
 `SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
-Every event handler is executed with a [SIP.Event](/api/devel/event/) instance as the only argument.
+Every event handler is executed with a [SIP.Event](/api/devel/eventEmitter/) instance as the only argument.
 
 
 ### `progress`
