@@ -58,7 +58,7 @@ myUA.on('invite', function (session) {
 
 ### `method`
 
-`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/devel/context/client/#metho) or [`SIP.ServerContext`](/api/devel/context/server/#method).
+`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/devel/context/client/#method) or [`SIP.ServerContext`](/api/devel/context/server/#method).
 
 ### `request`
 
@@ -66,11 +66,11 @@ myUA.on('invite', function (session) {
 
 ### `localIdentity`
 
-[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#localIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#localIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#localIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#localIdentity).
 
 ### `remoteIdentity`
 
-[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#remoteIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#remoteIdentity).
 
 ### `data`
 
