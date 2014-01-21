@@ -21,7 +21,7 @@ We are also including a `<button>` element which we will use to determine when t
 
 
 <iframe
-  style="width: 100%; height: 300px"
+  style="width: 100%; height: 250px"
   src="http://jsfiddle.net/5JbvL/1/embedded/html,js,css,result/">
 </iframe>
 
@@ -32,8 +32,8 @@ We are also including a `<button>` element which we will use to determine when t
 In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then we must start the user agent.
 
 <iframe
-  style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/4m7dc/11/embedded/js,html,css,result/">
+  style="width: 100%; height: 250px"
+  src="http://jsfiddle.net/gk3p4/2/embedded/js,html,css,result/">
 </iframe>
 
 
@@ -48,7 +48,7 @@ We will add a click event to the `<button>` element, which calls the `message()`
 
 
 <iframe
-  style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/16/embedded/js,html,css,result/">
+  style="width: 100%; height: 250px"
+  src="http://jsfiddle.net/8Cg6M/3/embedded/js,html,css,result/">
 </iframe>
 
