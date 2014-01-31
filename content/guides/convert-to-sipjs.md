@@ -29,6 +29,10 @@ The event `.on("newMessage", funct)` has been changed to `.on("message", funct)`
 
 The `.on("started", funct)` event has been changed to `.on("accepted", funct)`.
 
+The `.on("newDtmf", funct)` event has been changed to `.on("dtmf", funct)`.
+
+There are also a few new session events, such as `referred`, `canceled`, and `failed`.
+
 A larger change was made to the `newRTCSession` event.  This event has been changed to `invite`.  Also, it previously fired when receive an invite as well as when sending an invite.  Now, the `invite` only fires upon receiving an event.  
 
 In order to get the session from an invite that you are sending, you must get the return value from the `invite()` method.  For example, if you were previous doing this:  
