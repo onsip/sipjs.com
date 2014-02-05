@@ -4,7 +4,7 @@ title: License
 
 #License
 
-Name: SIPjs
+Name: SIP.js
 
 
 Copyright (c) 2014 Junction Networks, Inc. <http://www.onsip.com>
