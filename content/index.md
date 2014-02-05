@@ -6,7 +6,7 @@ layout: overview
 <div class="wrapper feature">
   <h1>Bring your<br/>WebRTC app to life<br/> with SIP.js</h1>
   <p class="intro">A simple, intuitive, and powerful JavaScript library to add signaling to your app.</p>
-  <a href="/api/" class="button">Documentation</a>
+  <a href="/api/" class="button">Browse Documentation</a>
   <img src="/shared/images/labtocat.png" class="labtocat" />
 </div>
 
