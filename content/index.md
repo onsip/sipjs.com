@@ -21,7 +21,7 @@ layout: overview
     <li>
       <h2>Version devel</h2>
       <p>Latest development version of SIP.js.</p>
-      <a href="/api/devel/" class="button-secondary">Documentation</a>
+      <a href="/api/devel/" class="button-secondary">Version devel</a>
       <img class="octocat" src="/shared/images/gundamcat-small.png" />
     </li>
     <li>
