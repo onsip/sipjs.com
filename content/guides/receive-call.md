@@ -27,10 +27,10 @@ In order to receive calls we need to create a registered SIP user agent, instead
 
 ### Accept a Call Button
 
-Finally, we need a way to accept a call that we are receiving.  We can do this by creating an `acceptCall` `<button>` which calls the `.accept()` method when it is clicked.
+Finally, we need a way to accept a call that we are receiving.  We can do this by catching the `invite` event.  Then, we take the session that the invite event returns and we call the `.accept()` method on it.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/tEGgn/3/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/tEGgn/4/embedded/js,html,css,result/">
 </iframe>
 
