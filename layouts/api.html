@@ -2,22 +2,19 @@
 
 <body class="api">
 	<%= render 'header' %>
-	
-	<div class="sub-nav">
-		<h2><a href="/api/">API</a></h2>
-		<ul>
-      <li><a href="/api/" class="active">API</a></li>     
-		</ul>
-	</div>
-	
-  <div id="wrapper">
-  	<div class="content">
-    	<%= yield %>
-    </div>
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+		</header>
+		<div id="content">
+			<%= yield %>
+		</div>
 
 		<%= render 'api-sidebar' %>
-  </div><!-- #wrapper -->
-		
+
+	</article>
+
 	<%= render 'footer' %>
 </body>
 </html>

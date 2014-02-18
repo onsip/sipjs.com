@@ -1,5 +1,6 @@
 ---
 title: About Us | SIP.js
+layout: aboutus
 ---
 
 # About Us

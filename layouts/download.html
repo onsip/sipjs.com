@@ -1,0 +1,17 @@
+<%= render 'head' %>
+
+<body class="download">
+  <%= render 'header' %>
+
+  <article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/download/">Download</a></h1>
+		</header>
+		<div id="content">
+			<%= yield %>
+		</div>
+	</article>
+
+  <%= render 'footer' %>
+</body>
+</html>
