@@ -3,31 +3,17 @@
 <body class="guides">
   <%= render 'header' %>
 
-  <div class="sub-nav">
-    <h2>Guides</h2>
-    <ul>
-      <li><a href="/guides/" class="active">Guides</a></li>
-    </ul>
-  </div>
-
-  <div id="wrapper">
-    <div class="content">
+  <article id="main" class="wrapper group">
+    <header id="sectionHeader">
+      <h1><a href="/guides/">Guides</a></h1>
+    </header>
+    <div id="content">
       <%= yield %>
     </div>
 
-    <div id="js-sidebar" class="sidebar-shell">
-      <div class="sidebar-module">
-          <ul>
-            <li><h3><a href="/guides/">Overview</a></h3></li>
-            <li><h3><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></h3></li>
-            <li><h3><a href="/guides/make-call/">Make a Call</a></h3></li>
-            <li><h3><a href="/guides/receive-call/">Receive a Call</a></h3></li>
-            <li><h3><a href="/guides/send-dtmf/">Send Dtmf</a></h3></li>
-            <li><h3><a href="/guides/send-message/">Send Message</a></h3></li>
-          </ul>
-      </div>
-    </div>
-  </div><!-- #wrapper -->
+    <%= render 'guides-sidebar' %>
+
+  </article>
 
   <%= render 'footer' %>
 </body>

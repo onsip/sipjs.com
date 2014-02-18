@@ -1,8 +1,7 @@
 ---
 title: Download | SIP.js
+layout: download
 ---
-
-# Download
 
 ## Version devel
 

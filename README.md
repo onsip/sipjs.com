@@ -1,4 +1,4 @@
-developer.onsip.com
+sipjs.com
 ===================
 
-OnSIP developer documentation http://developer.onsip.com
+SIP.Js developer documentation http://sipjs.com
