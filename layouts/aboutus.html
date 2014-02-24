@@ -1,18 +1,12 @@
 <%= render 'head' %>
 
-<body class="aboutus">
-  <%= render 'header' %>
+<body>
+	<%= render 'header' %>
 
+	<article id="main" class="wrapper group">
+		<%= yield %>
+	</article>
 
-
-  <div id="wrapper">
-    <div class="content">
-      <%= yield %>
-    </div>
-
-
-  </div><!-- #wrapper -->
-
-  <%= render 'footer' %>
+	<%= render 'footer' %>
 </body>
 </html>

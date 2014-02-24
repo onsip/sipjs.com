@@ -3,13 +3,10 @@
 <body>
 	<%= render 'header' %>
 
-  <div id="wrapper">
-  	<div class="content">
-    	<%= yield %>
-    </div>
+	<article id="main" class="wrapper group">
+		<%= yield %>
+	</article>
 
-  </div><!-- #wrapper -->
-		
 	<%= render 'footer' %>
 </body>
 </html>

@@ -37,8 +37,14 @@ ws_servers: [
 
 ~~~ javascript
 ws_servers: [
-  {ws_uri: "ws://sip-ws-1.example.com", weight: 10}, // First connection attempt
-  {ws_uri: "ws://sip-ws-2.example.com", weight: 1}
+  { // First connection attempt
+    ws_uri: "ws://sip-ws-1.example.com",
+    weight: 10
+  },
+  {
+    ws_uri: "ws://sip-ws-2.example.com",
+    weight: 1
+  }
 ]
 ~~~
 
@@ -191,21 +197,42 @@ trace_sip: true
 `Object` or `Array` of `Objects` indicating the TURN server(s) and corresponding username and password to be used for media relay. ‘url’ values can include “turn:” or “turns” schema. No TURN server is set by default.
 
 ~~~ javascript
-turn_servers: { urls:"turn:exam.org", username:"alice", password:"racecar"}
+turn_servers: {
+  urls:"turn:exam.org",
+  username:"alice",
+  password:"racecar"
+}
 ~~~
 
 ~~~ javascript
-turn_servers: {urls:["turn:exam.org","turn:exam.org"], username:"Al", password:"yo"}
+turn_servers: {
+  urls:["turn:exam.org",
+  "turn:exam.org"],
+  username:"Al",
+  password:"yo"
+}
 ~~~
 
 ~~~ javascript
-turn_servers: [{ urls:"turn:exam.org", username:"alice", password:"racecar"}]
+turn_servers: [{
+  urls:"turn:exam.org",
+  username:"alice",
+  password:"racecar"
+}]
 ~~~
 
 ~~~ javascript
 turn_servers: [
-  { urls:"turn:exam.org", username:"alice", password:"racecar" },
-  { urls:"turn:exam.org?transport=udp", username:"bob", password:"dog"}
+  {
+    urls:"turn:exam.org",
+    username:"alice",
+    password:"racecar"
+  },
+  {
+    urls:"turn:exam.org?transport=udp",
+    username:"bob",
+    password:"dog"
+  }
 ]
 ~~~
 
