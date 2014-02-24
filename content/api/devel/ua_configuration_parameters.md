@@ -225,3 +225,10 @@ use_preloaded_route: true
 ~~~
 
 The Route header will look like Route: `<sip:example.org:8443;lr;transport=ws>`
+
+##autostart
+If set to true, the user agent calls the `.start()` method upon being created.  
+
+~~~ javascript
+autostart: true
+~~~

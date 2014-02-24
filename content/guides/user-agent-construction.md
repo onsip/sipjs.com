@@ -27,6 +27,8 @@ This configuration variable needs a `uri`.  This will have a username and a doma
 
 Further descriptions of the configuration variables can be found [here](/api/devel/ua_configuration_parameters/).
 
+Directions for authenticating a user agent using OnSIP can be found [here](http://developer.onsip.com/guides/useragentauthentication/).
+
 <iframe
   style="width: 100%; height: 300px"
   src="http://jsfiddle.net/V6WMY/2/embedded/html,js,css,result/">
