@@ -29,7 +29,7 @@ session.<span style="color:#06B;font-weight:bold">on</span>(<span style="backgro
 			<div class="highlight-icon-wrapper">
 				<div class="highlight-icon icon-arrow">
 					<div class="hoverstate">
-						<a href="/github/">Github</a>
+						<a href="https://github.com/onsip/sip.js" target="_blank">Github</a>
 						<hr>
 						<a href="/download/">Download</a>
 					</div>
