@@ -2,33 +2,67 @@
 title: SIP.js
 layout: overview
 ---
+<article class="wrapper group home-feature">
+	<div class="feature">
+		<h1>Leverage the power of SIP.js in your WebRTC app</h1>
+		<p class="intro">Build audio, video, and realtime data into your into your application. SIP.js is fast, lightweight, and easy to use.</p>
+	</div>
+	<pre>
+<span style="color:#080;font-weight:bold">var</span> ua = <span style="color:#080;font-weight:bold">new</span> SIP.<span style="color:#06B;font-weight:bold">UA</span>();
+ua.<span style="color:#06B;font-weight:bold">message</span>(
+  <span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>,
+  <span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>Hello, world!<span style="color:#710">'</span></span>
+);
 
-<div class="wrapper feature">
-  <h1>Bring your<br/>WebRTC app to life<br/> with SIP.js</h1>
-  <p class="intro">A simple, intuitive, and powerful JavaScript library to add signaling to your app.</p>
-  <a href="/api/" class="button">Browse Documentation</a>
-  <img src="/shared/images/labtocat.png" class="labtocat" />
-</div>
+<span style="color:#080;font-weight:bold">var</span> session = ua.<span style="color:#06B;font-weight:bold">invite</span>(<span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>);
+session.<span style="color:#06B;font-weight:bold">on</span>(<span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>accepted<span style="color:#710">'</span></span>, function () {
+  this.<span style="color:#06B;font-weight:bold">bye</span>();
+});
+	</pre>
+	<div class="clearfix"></div>
+</article>
 
 <div class="full-width-divider">
-  <ul class="wrapper highlights">
-    <li>
-      <h2>Start Here</h2>
-      <p>Guides to get started with SIP.js in a snap.</p>
-      <a href="/guides/" class="button-secondary">Guides</a>
-      <img class="octocat professorcat" src="/shared/images/professorcat.png" />
-    </li>
-    <li>
-      <h2>Version devel</h2>
-      <p>Latest development version of SIP.js.</p>
-      <a href="/api/devel/" class="button-secondary">Version devel</a>
-      <img class="octocat" src="/shared/images/gundamcat-small.png" />
-    </li>
-    <li>
-      <h2>Support</h2>
-      <p>A support group for help.</p>
-      <a href="https://groups.google.com/forum/#!forum/sip_js" class="button-secondary">Join</a>
-      <img class="octocat" src="/shared/images/supportocat.png" />
-    </li>
-  </ul>
+	<ul class="wrapper highlights">
+		<li>
+			<h2>Get SIP.js</h2>
+			<div class="highlight-icon-wrapper">
+				<div class="highlight-icon icon-arrow">
+					<div class="hoverstate">
+						<a href="/github/">Github</a>
+						<hr>
+						<a href="/download/">Download</a>
+					</div>
+				</div>
+			</div>
+			<p class="subpara">Version devel is the development version and should not be used for production.</p>
+		</li>
+		<li>
+			<h2>Learn</h2>
+			<div class="highlight-icon-wrapper">
+				<div class="highlight-icon icon-books">
+					<div class="hoverstate">
+						<a href="/guides/">Guides</a>
+						<hr>
+						<a href="/api/">API Docs</a>
+					</div>
+				</div>
+			</div>
+			<p class="subpara">New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
+		</li>
+		<li>
+			<h2>Connect</h2>
+			<div class="highlight-icon-wrapper">
+				<div class="highlight-icon icon-chat">
+					<div class="hoverstate">
+						<a href="https://groups.google.com/forum/#!forum/sip_js">Support</a>
+						<hr>
+						<a href="https://groups.google.com/forum/#!forum/sip_js">Newsletter</a>
+					</div>
+				</div>
+			</div>
+			<p class="subpara">Get answers, stay up to date and become part of the SIP.js community.</p>
+		</li>
+		<div class="clearfix"></div>
+	</ul>
 </div>
