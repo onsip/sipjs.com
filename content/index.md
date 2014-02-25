@@ -27,10 +27,8 @@ session.<span style="color:#06B;font-weight:bold">on</span>(<span style="backgro
 		<li>
 			<h2>Get SIP.js</h2>
 			<div class="highlight-icon-wrapper">
-				<div class="highlight-icon icon-arrow">
+				<div class="highlight-icon icon-arrow" onclick="window.location='/download/'">
 					<div class="hoverstate">
-						<a href="https://github.com/onsip/sip.js" target="_blank">Github</a>
-						<hr>
 						<a href="/download/">Download</a>
 					</div>
 				</div>
@@ -40,11 +38,9 @@ session.<span style="color:#06B;font-weight:bold">on</span>(<span style="backgro
 		<li>
 			<h2>Learn</h2>
 			<div class="highlight-icon-wrapper">
-				<div class="highlight-icon icon-books">
+				<div class="highlight-icon icon-books" onclick="window.location='/guides/'">
 					<div class="hoverstate">
 						<a href="/guides/">Guides</a>
-						<hr>
-						<a href="/api/">API Docs</a>
 					</div>
 				</div>
 			</div>
@@ -53,11 +49,9 @@ session.<span style="color:#06B;font-weight:bold">on</span>(<span style="backgro
 		<li>
 			<h2>Connect</h2>
 			<div class="highlight-icon-wrapper">
-				<div class="highlight-icon icon-chat">
+				<div class="highlight-icon icon-chat" onclick="window.location='https://groups.google.com/forum/#!forum/sip_js'">
 					<div class="hoverstate">
 						<a href="https://groups.google.com/forum/#!forum/sip_js">Support</a>
-						<hr>
-						<a href="https://groups.google.com/forum/#!forum/sip_js">Newsletter</a>
 					</div>
 				</div>
 			</div>
