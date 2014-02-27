@@ -57,7 +57,7 @@ We will also add an `endCall` button, which terminates the session using the `.b
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/16/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/T4Kv2/17/embedded/js,html,css,result/">
 </iframe>
 
 
