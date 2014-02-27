@@ -80,7 +80,7 @@ myUA.on('invite', function (session) {
 
 ## Instance Methods
 
-### `sendDTMF(tone[, options])`
+### `dtmf(tone[, options])`
 
 Send one or multiple DTMF tones making use of SIP INFO method.
 
@@ -108,8 +108,8 @@ Type | Description
 #### Example 1
 
 ~~~ javascript
-call.sendDTMF(1);
-call.sendDTMF(4);
+call.dtmf(1);
+call.dtmf(4);
 ~~~
 
 #### Example 2
@@ -125,7 +125,7 @@ var options = {
   'extraHeaders': extraHeaders
 };
 
-call.sendDTMF(tones, options);
+call.dtmf(tones, options);
 ~~~
 
 <!--

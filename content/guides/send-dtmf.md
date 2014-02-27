@@ -28,7 +28,7 @@ In order to send dtmf, we need to create a dial pad to accept user input.  We wi
 
 ### Send the Dial Tone
 
-These buttons don't do anything yet, though.  Now we need to send the dtmf dial tone when the buttons are clicked.  This is done by using the `sendDTMF(number)` method.  Using this method you can send one or multiple dial tones at the same time.  We will add a click event for each button so that it sends the appropriate DTMF tone.
+These buttons don't do anything yet, though.  Now we need to send the dtmf dial tone when the buttons are clicked.  This is done by using the `dtmf(number)` method.  Using this method you can send one or multiple dial tones at the same time.  We will add a click event for each button so that it sends the appropriate DTMF tone.
 
 <iframe
   style="width: 100%; height: 600px"
