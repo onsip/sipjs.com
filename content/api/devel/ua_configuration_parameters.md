@@ -106,15 +106,15 @@ instance_id: "8f1fa16a-1165-4a96-8341-785b1ef24f12"
 ## log
 `Object` providing the desired log behavior.
 
-###builtinEnabled
+### -   builtinEnabled
 
 `Boolean` indicating whether SIPjs should write log messages in the browser console. Default value is `true`.
 
-###level
+### -   level
 
 `Number` or `String` indicating the verbose level of the SIPjs log. Valid values are `3`, `2`, `1`, `0` or `"debug"`, `"log"`, `"warn"`, `"error"` respectively. Default value is `2` (or `log`).
 
-###connector
+### -   connector
 
 User defined `Function` which will be called everytime a log is generated, according to the `enabled` and `level` options.
 
