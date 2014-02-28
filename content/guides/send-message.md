@@ -13,7 +13,7 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ### Setup and Video Elements
 
-Like in the make a call example, we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
+Like in the make a call example, we must create the files index.html and main.js in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
 
 Although we are loading the SIP.js library, we are not doing anything with it yet.
 
