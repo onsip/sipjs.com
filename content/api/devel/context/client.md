@@ -116,48 +116,42 @@ INVALID_STATE_ERROR
 
 Fired each time a provisional (100-199) response is received.
 
-#### `on('progress', function (data) {})`
+#### `on('progress', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|------------
-`data`|`Object`|A wrapper object containing the event data
-`data.code`|`Integer`|The status code of the received response, between 100 and 199.
-`data.response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`cause`|`String`|The SIP cause of the event
 
 ### `accepted`
 
 Fired each time a successful final (200-299) response is received.
 
-#### `on('accepted', function (data) {})`
+#### `on('accepted', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|------------
-`data` | `Object` | A wrapper object containing the event data
-`data.code` | `Integer` | The status code of the received response, between 200 and 299.
-`data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse) | The received response
+`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`cause`|`String`|The SIP cause of the event
 
 ### `rejected`
 
 Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event.*
 
-#### `on('rejected', function (data) {})`
+#### `on('rejected', function (response,cause) {})`
 
 Name | Type | Description
 -----|------|------------
-`data` | `Object` | A wrapper object containing the event data
-`data.code` | `Integer` | The status code of the received response, between 300 and 699.
-`data.response` | [`SIP.IncomingResponse`](/api/devel/incomingResponse/) | The received response
-`data.cause` | `String` | The reason phrase associated with the SIP response code.
+`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`cause`|`String`|The SIP cause of the event
 
 ### `failed`
 
 Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.
 
-#### `on('failed', function (data) {})`
+#### `on('failed', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|------------
-`data` | `Object` | A wrapper object containing the event data
-`data.code` | `Integer` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingResponse|null`](/api/devel/incomingResponse/) | The received response, or `null` if the failure was not due to a received response.
-`data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
+`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response, on a non SIP related failure this will be null
+`cause`|`String`|The SIP cause of the event
