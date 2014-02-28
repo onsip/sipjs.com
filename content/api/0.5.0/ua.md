@@ -286,7 +286,7 @@ Name | Types | Description
 `message`|[`SIP.Message`](/api/devel/message/), [`SIP.ServerContext`](/api/devel/context/server/)| The inbound message received. This argument also implements the shared [`SIP.ServerContext`](/api/devel/context/server/) behavior for inbound requests.
 
 ### Example
-
+ 
 ~~~ javascript
 // Create a user agent named Bob, connect, and register to receive invitations.
 var bob = new SIP.UA({
