@@ -4,8 +4,8 @@ title: API | SIP.js
 
 # What Version Do You Want?
 
-* Version Devel ([docs](/api/devel/) , [guides](/guides/))
-* Version 0.5.0 (Coming Soon...)
+* Version Devel 
+* Version 0.5.0 ([docs](/api/0.5.0/) , [guides](/guides/))
 
 
 # Frequently Asked Questions
