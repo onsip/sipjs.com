@@ -20,7 +20,7 @@ end
 compile '/CNAME/' do
 end
 
-compile '/api/devel/*' do
+compile '/api/0.5.0/*' do
   filter :erb
   filter :kramdown,
          :toc_levels => [2,3],
@@ -28,7 +28,7 @@ compile '/api/devel/*' do
          :coderay_line_numbers => nil
   filter :colorize_syntax,
          :colorizers => {:javascript => :pygmentsrb}
-  layout item[:layout] || 'devel'
+  layout item[:layout] || '0.5.0'
 end
 
 compile '/api/*' do
