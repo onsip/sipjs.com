@@ -14,7 +14,7 @@ SIP stands for Session Initiation Protocol and is used for setting up communicat
 A user agent (UA for short) is generally a software agent that is acting on behalf of a user. In the land of SIP, the term user agent refers to both end points of a communications session. OnSIP associates a SIP address to a UA, and that SIP address and can make and receive requests on that user's behalf. The UA also maintains the WebSocket, on which the signaling travels.
 
 ## I see references to something called a context in your documentation. That's not a SIP term! What is it?
-This is a term we created in order to group together related SIP transactions.  For an in-depth explanation, check out [this context page](/api/devel/context/)
+This is a term we created in order to group together related SIP transactions.  For an in-depth explanation, check out [this context page](/api/0.5.0/context/)
 
 ## Does SIP.js work in every web browser?
 SIP.js requires the browser to have WebRTC support. The current browsers that support WebRTC are listed by Google's [WebRTC project site](http://www.webrtc.org/). SIP.js also uses SIP over websockets for transporting SIP requests. To check out browser support there, we suggest [Can I Use Webosockets? http://caniuse.com/websockets](http://caniuse.com/websockets)

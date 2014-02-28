@@ -3,7 +3,7 @@ title: SIP.Session | SIP.js
 ---
 # SIP.Session
 
-The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via INVITE SIP messages. Sessions also implement one of [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
+The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via INVITE SIP messages. Sessions also implement one of [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
 
 * TOC
 {:toc}
@@ -54,27 +54,27 @@ myUA.on('invite', function (session) {
 
 ### `ua`
 
-[`SIP.UA`](/api/devel/ua/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#ua) or [`SIP.ServerContext`](/api/devel/context/server/#ua).
+[`SIP.UA`](/api/0.5.0/ua/) - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#ua) or [`SIP.ServerContext`](/api/0.5.0/context/server/#ua).
 
 ### `method`
 
-`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/devel/context/client/#method) or [`SIP.ServerContext`](/api/devel/context/server/#method).
+`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#method) or [`SIP.ServerContext`](/api/0.5.0/context/server/#method).
 
 ### `request`
 
-[`SIP.IncomingRequest`](/api/devel/incomingMessage/) or [`SIP.OutgoingRequest`](/api/devel/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#request) or [`SIP.ServerContext`](/api/devel/context/server/#request).
+[`SIP.IncomingRequest`](/api/0.5.0/incomingMessage/) or [`SIP.OutgoingRequest`](/api/0.5.0/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#request) or [`SIP.ServerContext`](/api/0.5.0/context/server/#request).
 
 ### `localIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#localIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#localIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.5.0/context/server/#localIdentity).
 
 ### `remoteIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/devel/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/devel/context/server/#remoteIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.5.0/context/server/#remoteIdentity).
 
 ### `data`
 
-`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/devel/context/client/#data) or [`SIP.ServerContext`](/api/devel/context/server/#data).
+`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#data) or [`SIP.ServerContext`](/api/0.5.0/context/server/#data).
 
 
 
@@ -244,32 +244,32 @@ INVALID_STATE_ERROR
 
 ### `cancel([options])`
 
-Overrides [`SIP.ClientContext.cancel`](/api/devel/context/client/#canceloptions/)
+Overrides [`SIP.ClientContext.cancel`](/api/0.5.0/context/client/#canceloptions/)
 
 ## Instance Methods (Inbound/Server)
 
 ### `progress([options])`
 
-Overrides [`SIP.ServerContext.progress`](/api/devel/context/server/#progressoptions)
+Overrides [`SIP.ServerContext.progress`](/api/0.5.0/context/server/#progressoptions)
 
 ### `accept([options])`
 
-Overrides [`SIP.ServerContext.accept`](/api/devel/context/server/#acceptoptions)
+Overrides [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions)
 
 ### `reject([options])`
 
-Overrides [`SIP.ServerContext.reject`](/api/devel/context/server/#rejectoptions)
+Overrides [`SIP.ServerContext.reject`](/api/0.5.0/context/server/#rejectoptions)
 
 ### `reply([options])`
 
-Overrides [`SIP.ServerContext.reply`](/api/devel/context/server/#replyoptions)
+Overrides [`SIP.ServerContext.reply`](/api/0.5.0/context/server/#replyoptions)
 
 
 ## Events
 
 `SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
-Every event handler is executed with a [SIP.Event](/api/devel/eventEmitter/) instance as the only argument.
+Every event handler is executed with a [SIP.Event](/api/0.5.0/eventEmitter/) instance as the only argument.
 
 
 ### `progress`
@@ -282,7 +282,7 @@ Name | Type | Description
 -----|------|------------
 `data`|`Object`|A wrapper object containing the event data
 `data.code`|`Integer`|The status code of the received response, between 100 and 199.
-`data.response`|[`SIP.IncomingMessage`](/api/devel/incomingMessage)|The received response
+`data.response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The received response
 
 ### `accepted`
 
@@ -294,7 +294,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 200 and 299.
-`data.response` | [`SIP.IncomingMessage`](/api/devel/incomingMessage) | The received response
+`data.response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage) | The received response
 
 ### `rejected`
 
@@ -306,7 +306,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 300 and 699.
-`data.response` | [`SIP.IncomingMessage`](/api/devel/incomingMessage/) | The received response
+`data.response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) | The received response
 `data.cause` | `String` | The reason phrase associated with the SIP response code.
 
 ### `failed`
@@ -319,7 +319,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Integer` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingMessage|null`](/api/devel/incomingMessage/) | The received response, or `null` if the failure was not due to a received response.
+`data.response` | [`SIP.IncomingMessage|null`](/api/0.5.0/incomingMessage/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
 
@@ -333,7 +333,7 @@ Fired when ICE is starting to negotiate between the peers.
 
 Name | Type | Description 
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 <!--
@@ -346,8 +346,8 @@ Fired when an established call ends.
 
 Name | Type | Description 
 -----|------|--------------
-`message`|`Object`|[`SIP.IncomingResponse`](/api/devel/incomingResponse/) instance of the received SIP 1XX response.
-`cause`||One value of [Failure and End Causes](/api/devel/causes)
+`message`|`Object`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse/) instance of the received SIP 1XX response.
+`cause`||One value of [Failure and End Causes](/api/0.5.0/causes)
 
 -->
 
@@ -359,7 +359,7 @@ Fired when the session was canceled by the UAC.
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
 `code`||The SIP response code.
 
 ### `referred`
@@ -370,7 +370,7 @@ Fired when the session was unable to establish.
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP 1XX response.
+`response`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
 
 
 ### `dtmf`
@@ -382,7 +382,7 @@ Fired for an incoming or outgoing DTMF.
 Name | Type | Description 
 -----|------|--------------
 `dtmf`|`Object`|`SIP.Session.DTMF` instance.
-`request`|`Object`|[`SIP.IncomingMessage`](/api/devel/incomingMessage/) instance of the received SIP INFO request.
+`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP INFO request.
 
 <!--
 

@@ -3,7 +3,7 @@ title: SIP.ClientContext | SIP.js
 ---
 # SIP.ClientContext
 
-A `SIP.ClientContext` encapsulates the behavior required to send a request, as well as handle responses and retransmissions of that request. It is typically mixed in with behavior from a method-specific class, such as [`SIP.Session`](/api/devel/session/) or [`SIP.Message`](/api/devel/message/).
+A `SIP.ClientContext` encapsulates the behavior required to send a request, as well as handle responses and retransmissions of that request. It is typically mixed in with behavior from a method-specific class, such as [`SIP.Session`](/api/0.5.0/session/) or [`SIP.Message`](/api/0.5.0/message/).
 
 * TOC
 {:toc}
@@ -28,7 +28,7 @@ target | `String|SIP.URI` | The destination URI for the request to send to.
 
 ### `ua`
 
-[`SIP.UA`](/api/devel/ua/) - The user agent from which the request was sent or will be sent.
+[`SIP.UA`](/api/0.5.0/ua/) - The user agent from which the request was sent or will be sent.
 
 ### `method`
 
@@ -36,15 +36,15 @@ target | `String|SIP.URI` | The destination URI for the request to send to.
 
 ### `request`
 
-[`SIP.OutgoingRequest`](/api/devel/outgoingRequest/) - The request sent or to be sent.
+[`SIP.OutgoingRequest`](/api/0.5.0/outgoingRequest/) - The request sent or to be sent.
 
 ### `localIdentity`
 
-[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - The From header field value, representing the local endpoint. This is typically the URI of the UA as a `SIP.NameAddrHeader`.
+[`SIP.NameAddrHeader`](/api/0.5.0/nameAddrHeader/) - The From header field value, representing the local endpoint. This is typically the URI of the UA as a `SIP.NameAddrHeader`.
 
 ### `remoteIdentity`
 
-[`SIP.NameAddrHeader`](/api/devel/nameAddrHeader/) - The To header field value, representing the remote endpoint.
+[`SIP.NameAddrHeader`](/api/0.5.0/nameAddrHeader/) - The To header field value, representing the remote endpoint.
 
 ### `data`
 
@@ -57,7 +57,7 @@ target | `String|SIP.URI` | The destination URI for the request to send to.
 
 ### `send([options])`
 
-Send the request. A constructed `SIP.ClientContext` will not send itself until this or a similar method is called. This method does not run any custom behavior outside of the default handling of the SIP request. For request methods with their own context objects, please use the method-specific functions for sending requests defined on those objects. (For example, [`SIP.InviteClientContext`](/api/devel/session/#inviteoptions) uses its `.invite()` method to send its request.)
+Send the request. A constructed `SIP.ClientContext` will not send itself until this or a similar method is called. This method does not run any custom behavior outside of the default handling of the SIP request. For request methods with their own context objects, please use the method-specific functions for sending requests defined on those objects. (For example, [`SIP.InviteClientContext`](/api/0.5.0/session/#inviteoptions) uses its `.invite()` method to send its request.)
 
 #### Parameters
 
@@ -120,7 +120,7 @@ Fired each time a provisional (100-199) response is received.
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The received response
 `cause`|`String`|The SIP cause of the event
 
 ### `accepted`
@@ -131,7 +131,7 @@ Fired each time a successful final (200-299) response is received.
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The received response
 `cause`|`String`|The SIP cause of the event
 
 ### `rejected`
@@ -142,7 +142,7 @@ Fired each time an unsuccessful final (300-699) response is received. *Note: Thi
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response
+`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The received response
 `cause`|`String`|The SIP cause of the event
 
 ### `failed`
@@ -153,5 +153,5 @@ Fired when the request fails, whether due to an unsuccessful final response or d
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/devel/incomingResponse)|The received response, on a non SIP related failure this will be null
+`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The received response, on a non SIP related failure this will be null
 `cause`|`String`|The SIP cause of the event

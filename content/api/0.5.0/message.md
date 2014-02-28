@@ -14,15 +14,15 @@ The Message constructor is intended for internal use only. Instead, outbound Mes
 
 ## Instance Attributes
 
-`SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server/).
+`SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
 
 ## Instance Methods
 
-`SIP.Message` inherits its instance methods from [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server/).
+`SIP.Message` inherits its instance methods from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
 
 ## Events
 
-`SIP.Message` inherits its events from [`SIP.ClientContext`](/api/devel/context/client/) or [`SIP.ServerContext`](/api/devel/context/server/).
+`SIP.Message` inherits its events from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
 
 <!--
 
