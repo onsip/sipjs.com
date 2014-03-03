@@ -4,8 +4,8 @@ layout: overview
 ---
 <article class="wrapper group home-feature">
 	<div class="feature">
-		<h1>Leverage the power of SIP.js in your WebRTC app</h1>
-		<p class="intro">Build audio, video, and realtime data into your into your application. SIP.js is fast, lightweight, and easy to use.</p>
+		<h1>Bring your WebRTC app to life with SIP.js</h1>
+		<p class="intro">A simple, intuitive, and powerful JavaScript library to add signaling to your app.</p>
 	</div>
 	<pre>
 <span style="color:#080;font-weight:bold">var</span> ua = <span style="color:#080;font-weight:bold">new</span> SIP.<span style="color:#06B;font-weight:bold">UA</span>();
