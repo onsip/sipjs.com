@@ -37,7 +37,7 @@ These video elements are not useful if we aren't calling anyone, so lets make a 
 In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then the user agent will `autostart`.
 
 <iframe
-  style="width: 100%; height: 410px"
+  style="width: 100%; height: 300px"
   src="http://jsfiddle.net/4m7dc/12/embedded/js,html,css,result/">
 </iframe>
 
