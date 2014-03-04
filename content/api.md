@@ -8,6 +8,7 @@ title: API | SIP.js
 * Version 0.5.0 ([docs](/api/0.5.0/) , [guides](/guides/))
 
 
-# Frequently Asked Questions
+# Questions?
 
-*Check back later!*
+Check out our [Frequently Asked Questions](/faq/) page.
+
