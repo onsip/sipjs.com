@@ -30,6 +30,6 @@ Further descriptions of the configuration variables can be found [here](/api/dev
 Directions for authenticating a user agent using OnSIP can be found [here](http://developer.onsip.com/guides/useragentauthentication/).
 
 <iframe
-  style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/V6WMY/2/embedded/html,js,css,result/">
+  style="width: 100%; height: 250px"
+  src="http://jsfiddle.net/V6WMY/2/embedded/js,result/">
 </iframe>
