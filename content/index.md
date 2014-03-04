@@ -10,12 +10,12 @@ layout: overview
 	<pre>
 <span style="color:#080;font-weight:bold">var</span> ua = <span style="color:#080;font-weight:bold">new</span> SIP.<span style="color:#06B;font-weight:bold">UA</span>();
 ua.<span style="color:#06B;font-weight:bold">message</span>(
-  <span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>,
-  <span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>Hello, world!<span style="color:#710">'</span></span>
+  <span style=" color:#ea4b35;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>,
+  <span style=" color:#ea4b35;"><span style="color:#710">'</span>Hello, world!<span style="color:#710">'</span></span>
 );
 
-<span style="color:#080;font-weight:bold">var</span> session = ua.<span style="color:#06B;font-weight:bold">invite</span>(<span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>);
-session.<span style="color:#06B;font-weight:bold">on</span>(<span style="background-color:hsla(0,100%,50%,0.05); color:#D20;"><span style="color:#710">'</span>accepted<span style="color:#710">'</span></span>, function () {
+<span style="color:#080;font-weight:bold">var</span> session = ua.<span style="color:#06B;font-weight:bold">invite</span>(<span style=" color:#ea4b35;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>);
+session.<span style="color:#06B;font-weight:bold">on</span>(<span style=" color:#ea4b35;"><span style="color:#710">'</span>accepted<span style="color:#710">'</span></span>, function () {
   this.<span style="color:#06B;font-weight:bold">bye</span>();
 });
 	</pre>
