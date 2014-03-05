@@ -329,12 +329,9 @@ Name | Type | Description
 
 Fired when ICE is starting to negotiate between the peers.
 
-#### `on('connecting', function (response,code) {})`
+#### `on('connecting', function () {})`
 
-Name | Type | Description 
------|------|--------------
-`response`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
-`code`||The SIP response code.
+*There are no documented arguments for this event*
 
 <!--
 
@@ -351,26 +348,24 @@ Name | Type | Description
 
 -->
 
-### `canceled`
+### `cancel`
 
 Fired when the session was canceled by the UAC.
 
-#### `on('canceled', function(response, code) {})`
+#### `on('cancel', function() {})`
 
-Name | Type | Description
------|------|--------------
-`response`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
-`code`||The SIP response code.
+*There are no documented arguments for this event*
 
 ### `referred`
 
 Fired when the session was unable to establish.
 
-#### `on('referred', function(response) {})`
+#### `on('referred', function(request,newSession) {})`
 
 Name | Type | Description
 -----|------|--------------
-`response`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
+`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
+`newSession`|`Object`|[`SIP.Session`](/api/0.5.0/session/) the new session created by the refer.
 
 
 ### `dtmf`
@@ -408,6 +403,8 @@ Fired when a session is pre-accepted.
 
 Fired when a BYE is sent.
 
-#### `on('bye', function() {})`
+#### `on('bye', function(request) {})`
 
-*There are no documented arguments for this event*
+Name | Type | Description 
+-----|------|--------------
+`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP INFO request.
