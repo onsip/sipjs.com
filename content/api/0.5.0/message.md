@@ -12,6 +12,20 @@ title: SIP.Message | SIP.js
 
 The Message constructor is intended for internal use only. Instead, outbound Messages are created through the [`SIP.UA.message`](/api/devel/ua/#messagetarget-body-options) method. Inbound Messages are obtained via the `SIP.UA` [`message`](/api/devel/ua/#message) event callback.
 
+### Examples
+
+~~~ javascript
+// Sends a new message
+myUA.message('alice@example.com', 'Hello Alice!');
+~~~
+
+~~~ javascript
+// When receiving a message, prints it out
+myUA.on('message', function (message) {
+  console.log(message.body);
+});
+~~~
+
 ## Instance Attributes
 
 `SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
