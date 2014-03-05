@@ -276,13 +276,11 @@ Every event handler is executed with a [SIP.Event](/api/0.5.0/eventEmitter/) ins
 
 Fired each time a provisional (100-199) response is received.
 
-#### `on('progress', function (data) {})`
+#### `on('progress', function (response) {})`
 
 Name | Type | Description
 -----|------|------------
-`data`|`Object`|A wrapper object containing the event data
-`data.code`|`Integer`|The status code of the received response, between 100 and 199.
-`data.response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The received response
+`response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The received response
 
 ### `accepted`
 
@@ -300,14 +298,12 @@ Name | Type | Description
 
 Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event.*
 
-#### `on('rejected', function (data) {})`
+#### `on('rejected', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|------------
-`data` | `Object` | A wrapper object containing the event data
-`data.code` | `Integer` | The status code of the received response, between 300 and 699.
-`data.response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) | The received response
-`data.cause` | `String` | The reason phrase associated with the SIP response code.
+`response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) | The received response
+`cause` | `String` | The reason phrase associated with the SIP response code.
 
 ### `failed`
 
