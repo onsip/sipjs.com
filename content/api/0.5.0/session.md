@@ -364,7 +364,7 @@ Fired when the session was unable to establish.
 
 Name | Type | Description
 -----|------|--------------
-`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP 1XX response.
+`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP REFER request.
 `newSession`|`Object`|[`SIP.Session`](/api/0.5.0/session/) the new session created by the refer.
 
 
