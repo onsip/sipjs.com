@@ -123,7 +123,7 @@ Sends an instant message making use of SIP MESSAGE method.
 
 Name | Type | Description 
 -----|------|--------------
-`target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination of the call. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance.
+`target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination of the message. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance.
 `body`|`String`|Message content. `String` representing the body of the message.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.contentType`|`String`|Optional `String` representing the content-type of the body. Default is `text/plain`.
@@ -144,6 +144,33 @@ var message = myUA.message('bob@example.com', 'Hello, Bob!');
 console.log(message.body); // 'Hello, Bob!'
 ~~~
 
+### `subscribe(target, event[, options])`
+
+Creates a [`SIP.Subscription`](/api/0.5.0/subscription/) to a certain event of another user.
+
+#### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination of the subscription. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance.
+`event`|`String`|Message content. `String` representing the name of the event-package to be subscribed to.
+`options`|`Object`|Optional `Object` with extra parameters (see below).
+`options.expires`|`Number`|Optional `Number` representing the desired duration of the subscription. Default (and minimum) is 3600 (1 hour).
+`options.extraHeaders`|`Array` of `Strings`|Optional `Array` of `Strings` with extra SIP headers for the MESSAGE request.
+
+#### Returns
+
+*The return value of this method implements multiple interfaces.*
+
+Types | Description
+------|-------------
+[`SIP.Subscription`](/api/0.5.0/subscription/), [`SIP.ClientContext`](/api/0.5.0/context/client/) | The newly created Subscription. The new Subscription object implements the shared ClientContext interface for outbound requests.
+
+#### Example
+
+~~~ javascript
+var subscription = myUA.subscribe('bob@example.com', 'presence');
+~~~
 
 ### `invite(target[, options])`
 
