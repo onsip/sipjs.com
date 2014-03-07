@@ -10,7 +10,7 @@ title: SIP.Message | SIP.js
 
 ## Construction
 
-The Message constructor is intended for internal use only. Instead, outbound Messages are created through the [`SIP.UA.message`](/api/devel/ua/#messagetarget-body-options) method. Inbound Messages are obtained via the `SIP.UA` [`message`](/api/devel/ua/#message) event callback.
+The Message constructor is intended for internal use only. Instead, outbound Messages are created through the [`SIP.UA.message`](/api/0.5.0/ua/#messagetarget-body-options) method. Inbound Messages are obtained via the `SIP.UA` [`message`](/api/0.5.0/ua/#message) event callback.
 
 ### Examples
 
