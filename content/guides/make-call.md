@@ -73,7 +73,7 @@ The function `attachMediaStream` attaches the media stream to the video element.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/25/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/qWmG7/26/embedded/js,html,css,result/">
 </iframe>
 
 
