@@ -9,23 +9,22 @@ title: User Agent Construction | SIP.js
 
 Let's walk through the process of creating a SIP user agent.
 
-## Overview
 
 ### Anonymous User Agent
 
 First we need to include the SIP.js library, which can be downloaded [here](/download/).  
 
-In order to make calls and send messages you must create a SIP user agent.  One way to do this is to create an anonymous user agent.  To do this we will call the `SIP.UA()` method without sending anything into it.  An anonymous user agent allows you to make calls and send messages only to other SIP user agents, and not to the PSTN. 
+In order to make calls and send messages you must create a SIP user agent.  In this example, we will create an anonymous user agent.  To do this call the `SIP.UA()` method, with no arguments.  An anonymous user agent can make calls and send messages to SIP endpoints.  It cannot receive calls or messages.
 
 
 
 ### Authenticated User Agent
 
-To create an authenticated user agent, so that you can receive calls and make calls to the PSTN, we need to pass in a configuration variable.  
+To create an authenticated user agent, pass a configuration argument to the sip.ua constructor. 
 
-This configuration variable needs a `uri`.  This will have a username and a domain.  It will look something like `examplename@test.onsip.com` The `authorizationUser` and `password` are used to authenticate with your SIP provider.  
+This configuration object needs a `uri`.  This will have a username and a domain.  It will look something like `examplename@test.onsip.com` The `authorizationUser` and `password` are used to authenticate with your SIP provider.  
 
-Further descriptions of the configuration variables can be found [here](/api/devel/ua_configuration_parameters/).
+Further descriptions of the configuration object can be found [here](/api/0.5.0/ua_configuration_parameters/).
 
 Directions for authenticating a user agent using OnSIP can be found [here](http://developer.onsip.com/guides/useragentauthentication/).
 
