@@ -15,7 +15,7 @@ We will start with the code that we produced at the end of the [make a call](/gu
 
 ### Register A SIP User Agent
 
-In order to receive calls we need to create a registered SIP user agent, instead of an anonymous user agent.  Instead of calling the `SIP.UA()` method without any parameters, pass in an configuration object that contains a `uri`, a `ws_servers`, and a `password`.
+In order to receive calls we need to create a registered SIP user agent, instead of an anonymous user agent.  Instead of calling the `SIP.UA()` method without any parameters, pass in a configuration object that contains a `uri`, a `ws_servers`, and a `password`.
 
 We will also remove `session.invite()`, so that our app stops making calls.
 
@@ -25,9 +25,9 @@ We will also remove `session.invite()`, so that our app stops making calls.
   src="http://jsfiddle.net/5aqm7/5/embedded/js,html,css,result/">
 </iframe>
 
-### Accept a Call Button
+### Accept a Call
 
-Finally, we need a way to accept a call that we are receiving.  We can do this by catching the `invite` event.  Then, we take the session that the invite event returns and we call the `.accept()` method on it.
+Finally, To accept a call that is being received, catch the `invite` event.  This event is emitted with a session that the `.accept()` method must be called on.
 
 <iframe
   style="width: 100%; height: 600px"
