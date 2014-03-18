@@ -9,23 +9,23 @@ title: Send a Message | SIP.js
 
 Let's walk through how to send a message.
 
-### Setup and Video Elements
+### Setup
 
 We must create the files index.html and main.js in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
 
-We are also including a `<button>` element which we will use to determine when to send the message.
+A `<button>` element is included to determine when to send the message.
 
 
 <iframe
   style="width: 100%; height: 250px"
-  src="http://jsfiddle.net/5JbvL/2/embedded/html,js,result/">
+  src="http://jsfiddle.net/5JbvL/3/embedded/html,js,result/">
 </iframe>
 
 
 
 ### Creating the User Agent
 
-In order to make calls and send messages, create a SIP user agent.  Calling `SIP.UA()` method, with no parameters, creates an anonymous user agent.
+In order to send messages, create a SIP user agent.  Calling `SIP.UA()` method, with no parameters, creates an anonymous user agent.
 
 <iframe
   style="width: 100%; height: 250px"
@@ -36,11 +36,11 @@ In order to make calls and send messages, create a SIP user agent.  Calling `SIP
 ### Sending the Message
 
 
-After the user agent has connected to the SIP server we can send the message.
+After the user agent has been created we can send the message.
 
-To send the message, call the `.message(target, body)` method, along with the address that the message is being sent to in the `target` variable and the message that we are sending in the `body` variable.
+To send the message, call the `.message(target, body)` method, along with the address that the message is being sent to in the `target` argument and the message that we are sending in the `body` argument.
 
-We will add a click event to the `<button>` element, which calls the `message()` method.
+Add a click event to the `<button>` element, that calls the `message()` method.
 
 
 <iframe
