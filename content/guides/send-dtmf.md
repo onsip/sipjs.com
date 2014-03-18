@@ -16,7 +16,7 @@ We will start with the code that we produced at the end of the [make a call](/gu
 
 ### Create The Dial Pad
 
-In order to send dtmf, lets create a dial pad to accept user input.
+In order to send dtmf, let's create a dial pad to accept user input.
 
 
 <iframe
