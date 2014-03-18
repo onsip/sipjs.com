@@ -44,7 +44,7 @@ In order to make calls and send messages, create a SIP user agent.  Calling `SIP
 
 After the user agent has connected to the SIP server, we can send an invite to make a call and thereby create a SIP session.
 
-To send an invite first create a javascript object, which contains the `media` variable in which that specifies whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
+To send an invite first create a javascript object, which contains the `media` variable that specifies whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
 
 Then call the `.invite()` method with the target address and the `options` object containing media information.
 

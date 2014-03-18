@@ -8,8 +8,6 @@ title: Receive a Call | SIP.js
 {:toc}
 
 
-## Overview
-
 ### Setup
 
 We will start with the code that we produced at the end of the [make a call](/guides/make-call/) example.
@@ -17,14 +15,14 @@ We will start with the code that we produced at the end of the [make a call](/gu
 
 ### Register A SIP User Agent
 
-In order to receive calls we need to create a registered SIP user agent, instead of an anonymous user agent.  Instead of calling the `SIP.UA()` method without any parameters, we need to give it a `uri`, a `ws_servers`, a `password`, and set `register` equal to `true`.
+In order to receive calls we need to create a registered SIP user agent, instead of an anonymous user agent.  Instead of calling the `SIP.UA()` method without any parameters, pass in an configuration object that contains a `uri`, a `ws_servers`, and a `password`.
 
-We will also remove the session invite, so that our app stops making calls.
+We will also remove `session.invite()`, so that our app stops making calls.
 
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/5aqm7/4/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/5aqm7/5/embedded/js,html,css,result/">
 </iframe>
 
 ### Accept a Call Button
@@ -33,6 +31,6 @@ Finally, we need a way to accept a call that we are receiving.  We can do this b
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/tEGgn/4/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/tEGgn/5/embedded/js,html,css,result/">
 </iframe>
 
