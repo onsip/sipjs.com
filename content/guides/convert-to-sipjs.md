@@ -9,17 +9,15 @@ title: Convert to SIP.js| SIP.js
 
 
 
-## Overview
-
-SIP.js is a hard fork of the library JsSIP.  As such, if you want to convert your JsSIP application to use the SIP.js library there are a few changes that need to be made.  Below is a checklist of things that you will need to change.
+SIP.js is a hard fork of the library [JsSIP].  As such, if you want to convert your JsSIP application to use the SIP.js library there are a few changes that need to be made.  Below is a checklist of things that you will need to change.
 
 Most importantly, you need to change the loaded library from  `JsSIP-devel.js` to `sip-devel.js`.
 
 ###User Agent creation
-JsSIP user agents are created using the line `MyPhone = new JSIP.UA(configuration);`.  In SIP.js this needs to be changed to `MyPhone = new SIP.UA(configuration);`.
+JsSIP user agents are created using the line `MyPhone = new JSSIP.UA(configuration);`.  In SIP.js this needs to be changed to `MyPhone = new SIP.UA(configuration);`.
 
 ###Methods
-In SIP.js we have changed some of the method names to terms that are more SIP appropriate.  `sendMessage()` is now `message()`
+In SIP.js we have changed some of the method names to terms that are more SIP appropriate.  `sendMessage()` is now `message()`.
 
 The method `call()` is now `invite()`.  `invite()` now also returns the `session`.
 
@@ -31,11 +29,11 @@ The `.on("started", funct)` event has been changed to `.on("accepted", funct)`.
 
 The `.on("newDtmf", funct)` event has been changed to `.on("dtmf", funct)`.
 
-There are also a few new session events, such as `referred`, `canceled`, and `failed`.
+There are also a few new session events, such as `referred`, `cancel`, and `failed`.
 
-A larger change was made to the `newRTCSession` event.  This event has been changed to `invite`.  Also, it previously fired when receive an invite as well as when sending an invite.  Now, the `invite` only fires upon receiving an event.  
+A larger change was made to the `newRTCSession` event.  This event has been changed to `invite`.  Also, it previously fired when receiving an invite as well as when sending an invite.  Now, the `invite` only fires upon receiving an event.  
 
-In order to get the session from an invite that you are sending, you must get the return value from the `invite()` method.  For example, if you were previous doing this:  
+When you call `invite`, the return value of that function call will be the session.  For example, if you were previously doing this:  
 
 ~~~ javascript
 function call(userAgent) {
@@ -46,7 +44,7 @@ MyPhone.on('newRTCSession', function(e) {
   display_session(e.session);
 });
 
-function display_session(e) {
+function display_session(session) {
   //display phone session in video element
 }
 ~~~
@@ -59,16 +57,16 @@ function call(userAgent) {
   display_session(session);
 }
 
-MyPhone.on('invite', function(e) {
-  display_session(e.session);
+MyPhone.on('invite', function(session) {
+  display_session(session);
 });
 
-function display_session(e) {
+function display_session(session) {
   //display phone session in video element
 }
 ~~~
 
-### Name Address Header Attributes
+### Session Attributes
 A `session` has various attributes.  A few names of the attributes have been changed.
 
 The `remote_identity` attribute is now named `remoteIdentity`.

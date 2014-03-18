@@ -2,7 +2,7 @@
 title: User Agent Construction | SIP.js
 ---
 
-# Make a Call
+# User Agent Construction
 
 * TOC
 {:toc}
