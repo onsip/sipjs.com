@@ -9,15 +9,14 @@ title: Make a call | SIP.js
 
 Let's walk through core API concepts as we tackle some everyday use cases.
 
-## Overview
 
 ### Setup and Video Elements
 
 First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
 
-In order to make a video call, we need a way to display the video call on your screen.  We can use a `<video>` element for this.  The `<video>` adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` perfect for WebRTC. The local video stream should always be muted to prevent feedback.
+In order to make a video call, we need a way to display the video call on your screen.  We can use a `<video>` element for this.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC. The local video stream should always be muted to prevent feedback.
 
-In this example, within the `<body>` tags, we have a `remoteVideo` `<video>`, to display the video of the person you are calling.  We also have a `localVideo` `<video>`, to display the video stream that you are sending to the person you are calling.  
+In this example, within the `<body>` tags, we have a `remoteVideo` `<video>` element, to display the video of the person you are calling.  We also have a `localVideo` `<video>` element, to display the video stream that you are sending to the person you are calling.  
 
 Although we are loading the SIP.js library, we are not doing anything with it yet.
 
@@ -30,11 +29,11 @@ In the style.css file we will put a border around the `<video>` elements, to vis
 
 ### Making the Call
 
-These video elements are not useful if we aren't calling anyone, so lets make a call.
+These `<video>` elements are not useful if we aren't calling anyone, so let's make a call.
 
 #### Creating the User Agent
 
-In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method and then the user agent will `autostart`.
+In order to make calls and send messages you must create a SIP user agent.  For this example, we will create an anonymous user agent.  To do this we will call the `SIP.UA()` method.
 
 <iframe
   style="width: 100%; height: 300px"
@@ -47,9 +46,9 @@ In order to make calls and send messages you must create a SIP user agent.  For 
 
 After the user agent has connected to the SIP server, we can send an invite to make a call and thereby create a SIP session.
 
-To send an invite we must first create a javascript object, which contains the `mediaConstraints` variable in which we specify whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
+To send an invite we must first create a javascript object, which contains the `media` variable in which we specify whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
 
-We must then call the `.invite()` method, along with the address that we are sending the invite to and the `options` media constraint javascript object.
+We must then call the `.invite()` method, along with the address that we are sending the invite to, and the `options` object containing media information.
 
 When we make the call the browser will ask for permission to access the camera and microphone.  We must allow this in order to make the call.  Once we send the invite the other party has the choice of either accepting or rejecting the call.  
 
