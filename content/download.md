@@ -3,13 +3,13 @@ title: Download | SIP.js
 layout: download
 ---
 
-## Version devel
-
-Version devel is the development version of SIP.js and should not be used in production environments. The download offered here is a snapshot of ongoing development. For the bleeding edge, please [download and build from source](//github.com/onsip/SIP.js).
-
-* Development (uncompressed code, 679KB) <a href="/download/sip-devel.js" download="sip-devel.js">sip-devel.js</a>
-* Production (minified code, 220KB) <a href="/download/sip-devel.min.js" download="sip-devel.min.js">sip-devel.min.js</a>
-
 ## Version 0.5.0
 
-*Coming Soon!*
+*Updated on 2014-03-19 - Git commit [4cec730](https://github.com/onsip/SIP.js/commit/4cec730830de1a6e8e6ee0e83cd14659028f8ba2)*
+
+* Development (uncompressed code, 667KB) <a href="/download/sip-0.5.0.js" download="sip-0.5.0.js">sip-0.5.0.js</a>
+* Production (minified code, 225KB) <a href="/download/sip-0.5.0.min.js" download="sip-0.5.0.min.js">sip-0.5.0.min.js</a>
+
+## Version devel
+
+For the bleeding edge, please [download and build from source](//github.com/onsip/SIP.js).
