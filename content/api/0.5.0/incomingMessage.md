@@ -4,66 +4,66 @@ title: SIP.IncomingMessage | SIP.js
 
 # SIP.IncomingMessage
 
-An IncomingMessage is a data structure that represents an incoming SIP message and it's attributes.
+An IncomingMessage is a data structure that represents an incoming SIP message and its attributes.
 
 * TOC
 {:toc}
 
 ## Construction
 
-An IncomingMessage cannot be constructed on it's own. It is intended to be extended by other classes such as `SIP.IncomingRequest` and `SIP.IncomingResponse`
+An IncomingMessage cannot be constructed on it's own. It is intended to be extended by other classes such as `SIP.IncomingRequest` and `SIP.IncomingResponse`.
 
 ## Instance Attributes
 
 ### `data`
 
-`String` - A string representation of the SIP message
+`String` - A string representation of the SIP message.
 
 ### `method`
 
-`String` - The method of the incoming SIP message
+`String` - The method of the incoming SIP message.
 
 ### `via`
 
-`Object` - An object containing the VIA information of the SIP message
+`Object` - An object containing the VIA information of the SIP message.
 
 ### `via_branch`
 
-`String` - The name of the VIA branch of the SIP message
+`String` - The name of the VIA branch of the SIP message.
 
 ### `call_id`
 
-`String` - The Call-ID header on the SIP message
+`String` - The Call-ID header on the SIP message.
 
 ### `cseq`
 
-`Number` - The cseq on the SIP message
+`Number` - The cseq on the SIP message.
 
 ### `from`
 
-`SIP.NameAddrHeader` - Instance representing the from header value of the SIP message
+`SIP.NameAddrHeader` - Instance representing the from header value of the SIP message.
 
 ### `from_tag`
 
-`String` - The name of the from tag header on the SIP message
+`String` - The name of the from tag header on the SIP message.
 
 ### `to`
 
-`SIP.NameAddrHeader` - Instance representing the from header value of the SIP message
+`SIP.NameAddrHeader` - Instance representing the from header value of the SIP message.
 
 ### `to_tag`
 
-`String` - The to tag header on the SIP message
+`String` - The to tag header on the SIP message.
 
 ### `body`
 
-`String` - The body of the SIP message
+`String` - The body of the SIP message.
 
 ## Instance Methods
 
 ### `addHeader(name,value)`
 
-Inserts a header with the given name and value into the last position of the header array
+Inserts a header with the given name and value into the last position of the header array.
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Type    | Description
 
 ### `hasHeader(name)`
 
-Verify the existence of the given header name
+Verify the existence of the given header name.
 
 #### Parameters
 
@@ -150,7 +150,7 @@ Name | Type | Description
 
 ### `toString()`
 
-Returns the data of the message
+Returns the data of the message.
 
 #### Returns
 
