@@ -105,6 +105,7 @@ pre {
 	border: 1px solid #a9a8a6;
 	border-radius: 3px;
 	color: #3f4446;
+	overflow: auto;
 }
 
 /*  LISTS
