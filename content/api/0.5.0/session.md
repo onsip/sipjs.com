@@ -3,7 +3,7 @@ title: SIP.Session | SIP.js
 ---
 # SIP.Session
 
-The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via INVITE SIP messages. Sessions also implement one of [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
+The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via SIP INVITE messages. Sessions also implement one of [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
 
 * TOC
 {:toc}
@@ -50,7 +50,7 @@ myUA.on('invite', function (session) {
 
 ### `endTime`
 
-`DATE` - Date object indicating the time when the session ended. Takes its value at the moment when terminated event was fired.
+`DATE` - Date object indicating the time when the session ended. Takes its value at the moment when the terminated event was fired.
 
 ### `ua`
 
@@ -178,21 +178,21 @@ INVALID_STATE_ERROR
 
 ### `getLocalStreams()`
 
-Returns a sequence of MediaStream objects representing the streams that are currently sent in this Session.
+Returns an array of MediaStream objects representing the streams that are currently sent in this Session.
 
 #### Returns
 
 Type | Description
 -|-
-`Array of RTCMediaStream`| The local media stream
+`Array of MediaStream`| The local media stream
 
 ### `getRemoteStreams()`
 
-Returns a sequence of MediaStream objects representing the streams that are currently received in this session.
+Returns an array of MediaStream objects representing the streams that are currently received in this session.
 
 Type | Description
 -|-
-`Array of RTCMediaStream`| The remote media stream
+`Array of MediaStream`| The remote media stream
 
 <!--
 

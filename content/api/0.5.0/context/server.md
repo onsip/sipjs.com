@@ -63,7 +63,7 @@ Send a provisional (100-199) response. By default, `progress` will send a `180 R
 Name | Type | Description
 -|-|-
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.statusCode`|`Integer`|Optional SIP response code between 100 and 199 to be used in the reply. By default, 180 will be used.
+`options.statusCode`|`Number`|Optional SIP response code between 100 and 199 to be used in the reply. By default, 180 will be used.
 `options.reasonPhrase`|`String`|Optional SIP description of the response code. If not specified, the reason phrase for the response code from SIP.C.REASON_PHRASE will be used, or the empty string.
 `options.extraHeaders`|`Array` of `String`|Optional list of extra headers to be added to the response.
 `options.body`|`String`|Optional body to include with the response.
@@ -83,7 +83,7 @@ Send a successful (200-299) response. By default, `accept` will send a `200 OK` 
 Name | Type | Description
 -|-|-
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.statusCode`|`Integer`|Optional SIP response code between 200 and 299 to be used in the reply. By default, 200 will be used.
+`options.statusCode`|`Number`|Optional SIP response code between 200 and 299 to be used in the reply. By default, 200 will be used.
 `options.reasonPhrase`|`String`|Optional SIP description of the response code. If not specified, the reason phrase for the response code from SIP.C.REASON_PHRASE will be used, or the empty string.
 `options.extraHeaders`|`Array` of `String`|Optional list of extra headers to be added to the response.
 `options.body`|`String`|Optional body to include with the response.
@@ -103,7 +103,7 @@ Send a failure (300-699) response. By default, `reject` will send a `480 Tempora
 Name | Type | Description
 -|-|-
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.statusCode`|`Integer`|Optional SIP response code between 300 and 699 to be used in the reply. By default, 480 will be used.
+`options.statusCode`|`Number`|Optional SIP response code between 300 and 699 to be used in the reply. By default, 480 will be used.
 `options.reasonPhrase`|`String`|Optional SIP description of the response code. If not specified, the reason phrase for the response code from SIP.C.REASON_PHRASE will be used, or the empty string.
 `options.extraHeaders`|`Array` of `String`|Optional list of extra headers to be added to the response.
 `options.body`|`String`|Optional body to include with the response.
@@ -123,7 +123,7 @@ Send any (100-699) response. `reply` does not have default settings and will fai
 Name | Type | Description
 -|-|-
 `options`|`Object`|`Object` with extra parameters (see below).
-`options.statusCode`|`Integer`|SIP response code between 100 and 699 to be used in the reply.
+`options.statusCode`|`Number`|SIP response code between 100 and 699 to be used in the reply.
 `options.reasonPhrase`|`String`|Optional SIP description of the response code. If not specified, the reason phrase for the response code from SIP.C.REASON_PHRASE will be used, or the empty string.
 `options.extraHeaders`|`Array` of `String`|Optional list of extra headers to be added to the response.
 `options.body`|`String`|Optional body to include with the response.
