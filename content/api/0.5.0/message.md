@@ -3,7 +3,7 @@ title: SIP.Message | SIP.js
 ---
 # SIP.Message
 
-`SIP.Message` represents an instant message using the SIP method MESSAGE. By default, the message is treated as plain text. However, any valid content type may be specified.
+`SIP.Message` represents an instant message using the SIP MESSAGE request. By default, the message is treated as plain text. However, any valid content type may be specified.
 
 * TOC
 {:toc}

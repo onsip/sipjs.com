@@ -3,14 +3,14 @@ title: SIP.Subscription | SIP.js
 ---
 # SIP.Subscription
 
-`SIP.Subscription` represents a subscription to an event (presence or dialog, for example) of a sip address using the SIP method SUBSCRIBE. Currently, only outgoing subscriptions are available, so incoming SUBSCRIBEs will be ignored.
+`SIP.Subscription` represents a subscription to an event (presence or dialog, for example) of a sip address using the SIP SUBSCRIBE request. Currently, only outgoing subscriptions are available, so incoming SUBSCRIBEs will be ignored.
 
 * TOC
 {:toc}
 
 ## Construction
 
-The Subscription constructor is intended for internal use only. Subscriptions are obtained via the `SIP.UA` [`subscribe`](/api/devel/ua/#subscribe) event callback.
+The Subscription constructor is intended for internal use only. Subscriptions are obtained via the `SIP.UA` [`subscribe`](/api/devel/ua/#subscribe) method.
 
 ### Examples
 
