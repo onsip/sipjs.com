@@ -219,13 +219,13 @@ Type | Description
 
 ### `refer(target[, options])`
 
-Send a REFER request. A REFER occurs when persons A and B have an active call session, and A wants to transfer B to speak with C. This is called a transfer, and these transfers can be attended or blind. An attended transfer occurs when A creates a session with C before connecting B to speak with C. A blind transfer occurs when A causes B to create a session with C, so A and C have no contact.
+Send a REFER request. A REFER occurs when persons A and B have an active call session, and A wants to transfer B to speak with C. This is called a transfer, and these transfers can be attended or blind. An attended transfer occurs when A creates a session with C before connecting B to speak with C. A blind transfer occurs when A causes B to create a session with C, so A and C have no contact.  SIP.js only supports blind transfers.
 
 #### Parameters
 
 Name | Type | Description
 -----|------|--------------
-`target`|`SIP.Session|String`|If the target is a session, this will start an attended transfer. Otherwise, it will do a blind transfer.
+`target`|`String`|The target address to be referred to.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
@@ -267,7 +267,7 @@ Overrides [`SIP.ServerContext.reply`](/api/0.5.0/context/server/#replyoptions)
 
 ## Events
 
-`SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
+The `SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
 Every event handler is executed with a [SIP.Event](/api/0.5.0/eventEmitter/) instance as the only argument.
 
@@ -291,7 +291,7 @@ Fired each time a successful final (200-299) response is received.
 Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
-`data.code` | `Integer` | The status code of the received response, between 200 and 299.
+`data.code` | `Number` | The status code of the received response, between 200 and 299.
 `data.response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage) | The received response
 
 ### `rejected`
@@ -314,7 +314,7 @@ Fired when the request fails, whether due to an unsuccessful final response or d
 Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
-`data.code` | `Integer` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
+`data.code` | `Number` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
 `data.response` | [`SIP.IncomingMessage|null`](/api/0.5.0/incomingMessage/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
@@ -323,7 +323,7 @@ Name | Type | Description
 
 ### `connecting`
 
-Fired when ICE is starting to negotiate between the peers.
+Fired when [ICE](http://www.html5rocks.com/en/tutorials/webrtc/infrastructure/#after-signaling-using-ice-to-cope-with-nats-and-firewalls) is starting to negotiate between the peers.
 
 #### `on('connecting', function () {})`
 
@@ -346,7 +346,7 @@ Name | Type | Description
 
 ### `cancel`
 
-Fired when the session was canceled by the UAC.
+Fired when the session was canceled by the client.
 
 #### `on('cancel', function() {})`
 
@@ -354,7 +354,7 @@ Fired when the session was canceled by the UAC.
 
 ### `referred`
 
-Fired when the session was unable to establish.
+Fired after the user is referred, when the transfer begins.
 
 #### `on('referred', function(request,newSession) {})`
 
@@ -403,4 +403,4 @@ Fired when a BYE is sent.
 
 Name | Type | Description 
 -----|------|--------------
-`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP INFO request.
+`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP BYE request.
