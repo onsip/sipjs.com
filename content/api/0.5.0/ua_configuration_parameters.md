@@ -86,7 +86,7 @@ displayName: "Alice ¶€ĸøĸø"
 ~~~
 
 ## hackIpInContact
-Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are `true` and `false` (`Boolean`). Default value is a `false`.
+Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
 
 ~~~ javascript
 hackIpInContact: true
@@ -147,7 +147,7 @@ connector(level, category, label, content);
 A function(session, options) that returns an object that acts like a SIP.MediaHandler. See SIP.WebRTC.MediaHandler.defaultFactory for an example.
 
 ## noAnswerTimeout
-Time (in seconds) (`Integer`) after which an incoming call is rejected if not answered. Default value is `30`.
+Time (in seconds) (`Number`) after which an incoming call is rejected if not answered. Default value is `30`.
 
 ~~~ javascript
 noAnswerTimeout: 120
@@ -161,14 +161,14 @@ password: "1234"
 ~~~
 
 ## register
-Indicate if JsSIP User Agent should register automatically when starting. Valid values are `true` and `false` (`Boolean`). Default value is `true`.
+Indicate if a SIP User Agent should register automatically when starting. Valid values are `true` and `false` (`Boolean`). Default value is `true`.
 
 ~~~ javascript
 register: false
 ~~~
 
 ## registerExpires
-Registration expiry time (in seconds) (`Integer`). Default value is `600`.
+Registration expiry time (in seconds) (`Number`). Default value is `600`.
 
 ~~~ javascript
 registerExpires: 300

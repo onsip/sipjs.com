@@ -1,16 +1,16 @@
 ---
-title: SIP.uri | SIP.js
+title: SIP.URI | SIP.js
 ---
-# SIP.uri
+# SIP.URI
 
-The class SIP.uri represents a SIP URI and provides a set of attributes and methods to access and set different parts of a URI.
+The class SIP.URI represents a SIP URI and provides a set of attributes and methods to access and set different parts of a URI.
 
 * TOC
 {:toc}
 
 ## Construction
 
-Typically, construction is managed by a `SIP.UA` when a URI is needed. However, advanced users may construct URIs manually.
+Typically, construction is managed by a [`SIP.UA`](/api/0.5.0/ua) when a URI is needed. However, advanced users may construct URIs manually.
 
 ### new SIP.URI(scheme, user, host, port[, parameters, headers])
 
@@ -29,25 +29,25 @@ Name | Type | Description
 
 ### `scheme`
 
-`String` - Represents the URI scheme (converted to lower case when set)
+`String` - Represents the URI scheme (converted to lower case when set).
 
 ### `user`
 
-`String` - Represents the URI user
+`String` - Represents the URI user.
 
 ### `host`
 
-`String` - Represents the URI host (converted to lower case when set)
+`String` - Represents the URI host (converted to lower case when set).
 
 ### `port`
 
-`Number` - Represents the URI port
+`Number` - Represents the URI port.
 
 ## Instance Methods
 
 ### `setParam(key[, value])`
 
-Creates or replaces the given URI parameter with the given value or null if no value is provided
+Creates or replaces the given URI parameter with the given value or null if no value is provided.
 
 #### Parameters
 
@@ -165,7 +165,7 @@ Name | Type | Description
 
 Type | Description
 -|-
-`Array of String`|Value of the deleted URI header.
+`Array of String`|Value of the deleted URI header
 
 ### `clearHeaders()`
 
@@ -195,7 +195,7 @@ Parses the given `String` against the SIP URI grammar rule.
 
 Name | Type | Description
 -----|------|--------------
-`uri`|`String`|String to parse against the SIP URI grammar rule.
+`uri`|`String`|String to parse against the SIP URI grammar rule
 
 #### Returns
 

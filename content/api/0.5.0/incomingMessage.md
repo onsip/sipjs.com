@@ -49,7 +49,7 @@ An IncomingMessage cannot be constructed on it's own. It is intended to be exten
 
 ### `to`
 
-`SIP.NameAddrHeader` - Instance representing the from header value of the SIP message.
+`SIP.NameAddrHeader` - Instance representing the to header value of the SIP message.
 
 ### `to_tag`
 
