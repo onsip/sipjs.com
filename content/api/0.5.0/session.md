@@ -352,9 +352,28 @@ Fired when the session was canceled by the client.
 
 *There are no documented arguments for this event*
 
+### `refer`
+
+Fired when a REFER is received, and the user would like to handle the
+transfer at the application level. This event will not be emitted if
+it is not listened for.
+NOTE: This event does not exist in tagged release 0.5.0.
+
+#### `on('refer', function(target,request) {})`
+
+Name | Type | Description
+-----|------|--------------
+`target`|`Object`|[`SIP.URI`](/api/0.5.0/uri) instance of the sip address to be referred to.
+`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP REFER request.
+
 ### `referred`
 
-Fired after the user is referred, when the transfer begins.
+Fired when a REFER is received and the user wants SIP.js to handle the
+details of setting up the new session. This new session is set up in a
+generic way, and then emitted with the event. This event
+will not be emitted if it is not listened for.
+NOTE: In tagged release 0.5.0, this is how all REFERS are handled, and
+will always be emitted.
 
 #### `on('referred', function(request,newSession) {})`
 
