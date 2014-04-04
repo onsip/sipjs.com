@@ -13,7 +13,7 @@ A user agent (or UA) is associated with a SIP user address and acts on behalf of
 
 ### `new SIP.UA([configuration])`
 
-A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent, although most applications will define at least [`uri`](/api/0.5.0/ua_configuration_parameters/#uri) and [`ws_servers`](/api/0.5.0/ua_configuration_parameters/#ws_servers). Check the full list for optional [UA Configuration Parameters](/api/0.5.0/ua_configuration_parameters/).
+A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent, although most applications will define at least [`uri`](/api/0.5.0/ua_configuration_parameters/#uri) and [`ws_servers`](/api/0.5.0/ua_configuration_parameters/#ws_servers). Check the full list for optional [UA Configuration Parameters](/api/0.5.0/ua_configuration_parameters/).  If no parameters are passed then an anonymous user agent is created.   If only a string is passed, then just the uri is set to that string.
 
 ### Examples
 
