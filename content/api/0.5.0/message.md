@@ -1,5 +1,6 @@
 ---
-title: SIP.Message | SIP.js
+title: SIP.Message for WebRTC apps| SIP.js
+description: In SIP.js, a SIP.Message represents an instant message using the SIP MESSAGE request.
 ---
 # SIP.Message
 

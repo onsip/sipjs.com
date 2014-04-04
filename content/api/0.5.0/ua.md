@@ -1,5 +1,6 @@
 ---
-title: SIP.UA | SIP.js
+title: SIP User Agent with WebRTC | SIP.js
+description: A SIP user agent (or UA) sends and receives SIP requests. Here is how to construct a UA and connect to the configured WebSocket server with SIP.js. 
 ---
 
 # SIP.UA

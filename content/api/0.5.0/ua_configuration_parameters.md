@@ -1,5 +1,7 @@
 ---
-title: SIP.ua_configuration_parameters | SIP.js
+title: SIP.UA Configuration Parameters | SIP.js
+description: A list of configuration parameters for SIP user agents in SIP.js.
+
 ---
 # SIP.UA Configuration Parameters
 

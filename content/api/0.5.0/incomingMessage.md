@@ -1,5 +1,6 @@
 ---
 title: SIP.IncomingMessage | SIP.js
+description: In SIP.js library for WebRTC developers, an incomingMessage is a data structure that represents an incoming SIP message and its attributes.
 ---
 
 # SIP.IncomingMessage

@@ -1,5 +1,6 @@
 ---
 title: SIP.EventEmitter | SIP.js
+description: In SIP.js, SIP.EventEmitter provides an interface for managing event callbacks, via on() and off() methods, as well as triggering those events, via emit().
 ---
 
 # SIP.EventEmitter
