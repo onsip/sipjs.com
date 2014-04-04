@@ -6,7 +6,7 @@ title: SIP.ua_configuration_parameters | SIP.js
 * TOC
 {:toc}
 
-# Mandatory Parameters
+# Parameters
 
 ## uri
 
@@ -14,7 +14,7 @@ title: SIP.ua_configuration_parameters | SIP.js
 
 ## wsServers
 
-Set of WebSocket URIs to connect to. If not specified, port 80 will be used for WS URIs and port 443 will be used for WSS URIs. This parameter can be expressed in multiple ways:
+Set of WebSocket URIs to connect to. By default, the WebSocket URI is set to `wss://edge.sip.onsip.com`. If not specified, port 80 will be used for WS URIs and port 443 will be used for WSS URIs. This parameter can be expressed in multiple ways:
 
 * `String` to define a single WebSocket URI.
 * `Array` of `Strings` to define multiple WebSocket URIs.
@@ -47,8 +47,6 @@ wsServers: [
   }
 ]
 ~~~
-
-# Optional Parameters
 
 ## authorizationUser
 Username (`String`) to use when generating authentication credentials. If not defined the value in uri parameter is used.
