@@ -1,5 +1,6 @@
 ---
 title: Receive a Call | SIP.js
+description: How to enable your WebRTC application to accept calls from peers and third parties by registering a SIP user agent. 
 ---
 
 # Receive a Call

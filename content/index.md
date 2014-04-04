@@ -1,6 +1,7 @@
 ---
-title: SIP.js
+title: SIP Signaling JavaScript Library for WebRTC Developers | SIP.js
 layout: overview
+description: Add SIP signaling to your WebRTC app with this simple, open source JavaScript library - SIP.js.
 ---
 <article class="wrapper group home-feature">
 	<div class="feature">

@@ -1,5 +1,6 @@
 ---
 title: Send a Message | SIP.js
+description: How to send a SIP message from your WebRTC application with SIP.js.
 ---
 
 # Send a Message

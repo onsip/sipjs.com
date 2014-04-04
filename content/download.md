@@ -1,6 +1,7 @@
 ---
 title: Download | SIP.js
 layout: download
+description: Get started now. Download production and development versions of the SIP.js library.
 ---
 
 ## Version 0.5.0

@@ -1,5 +1,6 @@
 ---
 title: Convert to SIP.js| SIP.js
+description: Easily convert your JsSIP application to use the SIP.js library. Here's how.
 ---
 
 # Converting to SIP.js

@@ -1,6 +1,7 @@
 ---
 title: Development Guides | SIP.js
 layout: guides
+description: The SIP.js Development Guides will show you how to add a full SIP signaling stack to your WebRTC application in no time.
 ---
 
 # Development Guides

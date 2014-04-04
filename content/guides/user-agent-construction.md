@@ -1,5 +1,6 @@
 ---
 title: User Agent Construction | SIP.js
+description: Create a SIP user agent using SIP.js so your WebRTC application can send and receive calls and messages.
 ---
 
 # User Agent Construction

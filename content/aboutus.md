@@ -1,5 +1,6 @@
 ---
 title: About Us | SIP.js
+description: SIP.js is an open source JavaScript library that enables developers to add a SIP signaling stack to their WebRTC applications.
 ---
 
 # About Us

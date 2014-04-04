@@ -1,5 +1,6 @@
 ---
 title: Make a call | SIP.js
+description: How to enable your WebRTC application to make voice and video calls and render the video via HTML5 video elements.
 ---
 
 # Make a Call
