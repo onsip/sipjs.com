@@ -1,5 +1,6 @@
 ---
 title: SIP.URI | SIP.js
+description: In SIP.js, the class SIP.URI represents a SIP URI and provides a set of attributes and methods to access and set different parts of a URI.
 ---
 # SIP.URI
 

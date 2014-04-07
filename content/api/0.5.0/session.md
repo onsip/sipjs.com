@@ -1,5 +1,6 @@
 ---
 title: SIP.Session | SIP.js
+description: In SIP.js, the class SIP.Session represents a WebRTC media (audio/video) session.
 ---
 # SIP.Session
 

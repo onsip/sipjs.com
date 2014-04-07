@@ -1,10 +1,11 @@
 ---
 title: SIP.OutgoingRequest | SIP.js
+description: In SIP.js, an OutgoingRequest is a data structure that represents an Outgoing SIP Request and its attributes.
 ---
 
 # SIP.OutgoingRequest
 
-An OutgoingRequest is a data structure that represents an Outgoing SIP Request and it's attributes.
+An OutgoingRequest is a data structure that represents an Outgoing SIP Request and its attributes.
 
 * TOC
 {:toc}
