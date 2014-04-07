@@ -27,3 +27,7 @@ Now we want to share SIP.js with the world. In keeping with the spirit of innova
 ### Eric Green
 
 * <eric.green@onsip.com>
+
+### Joseph Frazier
+
+* <joseph@onsip.com>
