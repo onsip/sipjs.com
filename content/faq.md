@@ -1,5 +1,6 @@
 ---
 title: FAQ | SIP.js
+description: Answers to FAQ about SIP.js API, including - What can I do with SIP.js? What is SIP? What browsers support SIP.js (and WebRTC)? 
 ---
 
 # Frequently Asked Questions
