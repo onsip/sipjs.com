@@ -13,7 +13,7 @@ Let's walk through core API concepts as we tackle some everyday use cases.
 
 ### Setup and Video Elements
 
-First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the SIP.js library, which can be downloaded [here](/download/), as well as the main.js file.  
+First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the [SIP.js library](/download/), as well as the main.js file.  
 
 A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC. 
 

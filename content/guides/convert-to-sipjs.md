@@ -12,7 +12,7 @@ description: Easily convert your JsSIP application to use the SIP.js library. He
 
 SIP.js is a hard fork of the library [JsSIP](http://www.jssip.net/).  As such, if you want to convert your JsSIP application to use the SIP.js library there are a few changes that need to be made.  Below is a checklist of things that you will need to change.
 
-Most importantly, you need to change the loaded library from  `JsSIP-devel.js` to `sip-devel.js`, which can be downloaded [here](/download/).
+Most importantly, you need to change the loaded library from  `JsSIP-devel.js` to [`sip-devel.js`](/download/).
 
 ###User Agent creation
 JsSIP user agents are created using the line `MyPhone = new JSSIP.UA(configuration);`.  In SIP.js this needs to be changed to `MyPhone = new SIP.UA(configuration);`.
