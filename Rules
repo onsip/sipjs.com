@@ -51,7 +51,12 @@ compile '/api/*' do
 end
 
 compile '/guides/*' do
-  filter :kramdown, :toc_levels => [2]
+  filter :kramdown,
+         :toc_levels => [2],
+         :enable_coderay => true,
+         :coderay_line_numbers => :table,
+         :coderay_css => :class,
+         :coderay_bold_every => false
   filter :erb
   filter :colorize_syntax, :default_colorizer => :pygmentsrb
   layout item[:layout] || 'guides'

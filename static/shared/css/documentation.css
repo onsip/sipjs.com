@@ -98,14 +98,31 @@ p code {
 
 /*  Styles for code blocks only  */
 pre {
-	margin: 1em 0;
-	padding: 1em;
 	font-size: .75em;
-	background-color: #f3f2ee;
-	border: 1px solid #a9a8a6;
+	background-color: #f4f6f7;
 	border-radius: 3px;
 	color: #3f4446;
 	overflow: auto;
+}
+
+table.CodeRay {
+  margin: 1.618em 0;
+  border: 1px solid #cecece;
+  background: #f4f6f7;
+  overflow: auto;
+}
+
+td.code, td.line-numbers {
+  padding: 1em 2em;
+  border: none;
+}
+
+td.code {
+  padding-left: 0;
+}
+
+td.line-numbers {
+  padding-right: 0;
 }
 
 /*  LISTS
