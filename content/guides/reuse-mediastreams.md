@@ -63,4 +63,7 @@ Once the stream is available, it can be used to make or receive calls.
 
 ## Live Example
 
-**TODO**
+<iframe
+  style="width: 100%; height: 600px"
+  src="http://jsfiddle.net/XsKmL/embedded/js,html,css,result/">
+</iframe>
