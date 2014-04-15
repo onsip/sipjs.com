@@ -38,7 +38,7 @@ Note: the following code blocks assume you already have a `SIP.UA` named `ua`. P
   SIP.WebRTC.getUserMedia(mediaConstraints, getUserMediaSuccess, getUserMediaFailure);
 ~~~
 
-Once the stream is available, it can be used to make or receive calls.
+After `getUserMediaSuccess` has been called, the stream can be used to make or receive calls.
 
 ## Making a call
 
