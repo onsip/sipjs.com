@@ -5,14 +5,9 @@ description: How to reuse MediaStreams between calls with SIP.js.
 
 # Reuse MediaStreams
 
-* TOC
-{:toc}
+In order to provide a more streamlined user experience, applications built with SIP.js may wish to minimize the number of times the user is prompted to allow access to their microphone/camera. This is especially useful when the user makes multiple calls, since only Chrome and Opera on secure (i.e. https://) pages will remember media allowances.
 
-In order to provide a more streamlined user experience, applications built with SIP.js may wish to minimize the number of times the user is prompted to allow access to their microphone/camera. This is especially useful when the user makes multiple calls, since only Chrome and Opera on https:// pages will remember media allowances.
-
-When making or receiving a call, SIP.js allows applications to specify the desired `MediaStream` as the `media` key of the `options` argument to [`UA.invite`](../../api/0.5.0/ua/#invitetarget-options) and [`Session.accept`](../../api/0.5.0/session/#acceptoptions), respectively.
-
-SIP.js applications can get a reference to a `MediaStream` using `SIP.WebRTC.getUserMedia`:
+When making or receiving a call, SIP.js allows applications to specify the desired `MediaStream` as an option to [`UA.invite`](../../api/0.5.0/ua/#invitetarget-options) and [`Session.accept`](../../api/0.5.0/session/#acceptoptions), respectively. SIP.js applications can get a reference to a `MediaStream` using `SIP.WebRTC.getUserMedia`.
 
 ## Setup
 
