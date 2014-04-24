@@ -16,17 +16,26 @@ The OutgoingRequest constructor is intended for internal use only.
 
 ## Instance Attributes
 
-### `ua`
-
-`SIP.UA` - The UA that this request is being sent from
-
 ### `method`
 
-`String` - The SIP method used for the request
+`String` - The SIP method used for the request.
 
 ### `ruri`
 
-`SIP.URI` - The request uri
+`SIP.URI` - The request uri, or the SIP address that the request will be sent to.
+
+### `ua`
+
+`SIP.UA` - The UA that this request is being sent from.
+
+### `headers`
+
+`Object` - An object containing extra SIP headers for the request.
+
+### `body`
+
+`String` - The body of the request, which will follow the SIP headers.
+
 
 ## Instance Methods
 
