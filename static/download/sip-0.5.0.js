@@ -3186,7 +3186,7 @@ Dialog.prototype = {
       request = this.createRequest(method, extraHeaders, body),
       request_sender = new RequestSender(this, applicant, request);
 
-      request_sender.send();
+    request_sender.send();
   },
 
   /**
@@ -3389,9 +3389,6 @@ RegisterContext = function (ua) {
 
   // Set status
   this.registered = false;
-
-  // Save into ua instance
-  ua.registrationContext = this;
 
   this.logger = ua.getLogger('sip.registercontext');
   this.initMoreEvents(events);
@@ -3627,6 +3624,7 @@ RegisterContext.prototype = {
 
 SIP.RegisterContext = RegisterContext;
 }(SIP));
+
 
 /**
  * @fileoverview MediaHandler
@@ -4025,11 +4023,7 @@ DTMF.prototype.receiveResponse = function(response) {
 
     default:
       cause = SIP.Utils.sipErrorCause(response.status_code);
-      this.emit('failed', {
-        originator: 'remote',
-        response: response,
-        cause: cause
-      });
+      this.emit('failed', response, cause);
       break;
   }
 };
@@ -4038,10 +4032,7 @@ DTMF.prototype.receiveResponse = function(response) {
  * @private
  */
 DTMF.prototype.onRequestTimeout = function() {
-  this.emit('failed', {
-    originator: 'system',
-    cause: SIP.C.causes.REQUEST_TIMEOUT
-  });
+  this.emit('failed', null, SIP.C.causes.REQUEST_TIMEOUT);
   this.owner.onRequestTimeout();
 };
 
@@ -4049,10 +4040,7 @@ DTMF.prototype.onRequestTimeout = function() {
  * @private
  */
 DTMF.prototype.onTransportError = function() {
-  this.emit('failed', {
-    originator: 'system',
-    cause: SIP.C.causes.CONNECTION_ERROR
-  });
+  this.emit('failed', null, SIP.C.causes.CONNECTION_ERROR);
   this.owner.onTransportError();
 };
 
@@ -4060,11 +4048,7 @@ DTMF.prototype.onTransportError = function() {
  * @private
  */
 DTMF.prototype.onDialogError = function(response) {
-  this.emit('failed', {
-    originator: 'remote',
-    response: response,
-    cause: SIP.C.causes.DIALOG_ERROR
-  });
+  this.emit('failed', response, SIP.C.causes.DIALOG_ERROR);
   this.owner.onDialogError(response);
 };
 
@@ -4139,6 +4123,7 @@ Session = function (mediaHandlerFactory) {
   'invite',
   'cancel',
   'referred',
+  'refer',
   'bye',
   'hold',
   'unhold',
@@ -4324,10 +4309,11 @@ Session.prototype = {
 
     // Check Session Status
     if (this.status === C.STATUS_TERMINATED) {
-      throw new SIP.Exceptions.InvalidStateError(this.status);
+      this.logger.error('Error: Attempted to send BYE in a terminated session.');
+      return this;
     }
 
-    this.logger.log('terminating RTCSession');
+    this.logger.log('terminating Session');
 
     if (statusCode && (statusCode < 200 || statusCode >= 700)) {
       throw new TypeError('Invalid statusCode: '+ statusCode);
@@ -4375,7 +4361,8 @@ Session.prototype = {
     return this.
       sendRequest(SIP.C.REFER, {
         extraHeaders: extraHeaders,
-        body: options.body
+        body: options.body,
+        receiveResponse: function() {}
       }).
       terminate();
   },
@@ -4383,6 +4370,7 @@ Session.prototype = {
   sendRequest: function(method,options) {
     options = options || {};
     var self = this;
+
     var request = new SIP.OutgoingRequest(
       method,
       this.dialog.remote_target,
@@ -4750,7 +4738,6 @@ Session.prototype = {
   },
 
   receiveRequest: function (request) {
-    var referSession, contentType;
     switch (request.method) {
       case SIP.C.BYE:
         request.reply(200);
@@ -4767,7 +4754,7 @@ Session.prototype = {
         break;
       case SIP.C.INFO:
         if(this.status === C.STATUS_CONFIRMED || this.status === C.STATUS_WAITING_FOR_ACK) {
-          contentType = request.getHeader('content-type');
+          var contentType = request.getHeader('content-type');
           if (contentType && (contentType.match(/^application\/dtmf-relay/i))) {
             new DTMF(this).init_incoming(request);
           }
@@ -4777,33 +4764,42 @@ Session.prototype = {
         if(this.status ===  C.STATUS_CONFIRMED) {
           this.logger.log('REFER received');
           request.reply(202, 'Accepted');
-          this.sendRequest(SIP.C.NOTIFY,
-            { 
-              extraHeaders:[
-                'Event: refer',
-                'Subscription-State: terminated',
-                'Content-Type: message/sipfrag'
-               ],
-               body:'SIP/2.0 100 Trying'
-            });
+          var
+            hasReferListener = this.checkListener('refer'),
+            hasReferredListener = this.checkListener('referred'),
+            notifyBody = (hasReferListener || hasReferredListener) ?
+              'SIP/2.0 100 Trying' :
+              // RFC 3515.2.4.2: 'the UA MAY decline the request.'
+              'SIP/2.0 603 Declined'
+          ;
 
-          // HACK: Stop localMedia so Chrome doesn't get confused about gUM
-          // TODO close the mediaHandler instead?
-          if (this.mediaHandler && this.mediaHandler.localMedia) {
-            this.mediaHandler.localMedia.stop();
-          }
-
-          /*
-            Harmless race condition.  Both sides of REFER
-            may send a BYE, but in the end the dialogs are destroyed.
-          */
-          referSession = this.ua.invite(request.parseHeader('refer-to').uri, {
-            media: this.mediaHint
+          this.sendRequest(SIP.C.NOTIFY, {
+            extraHeaders:[
+              'Event: refer',
+              'Subscription-State: terminated',
+              'Content-Type: message/sipfrag'
+            ],
+            body: notifyBody,
+            receiveResponse: function() {}
           });
 
-          this.referred(request,referSession);
+          if (hasReferListener) {
+            this.emit('refer', request.parseHeader('refer-to').uri, request);
+          } else if (hasReferredListener) {
+            SIP.Hacks.Chrome.getsConfusedAboutGUM(this);
 
-          this.terminate();
+            /*
+              Harmless race condition.  Both sides of REFER
+              may send a BYE, but in the end the dialogs are destroyed.
+            */
+            var referSession = this.ua.invite(request.parseHeader('refer-to').uri, {
+              media: this.mediaHint
+            });
+
+            this.referred(request,referSession);
+
+            this.terminate();
+          }
         }
         break;
     }
@@ -4994,14 +4990,8 @@ Session.prototype = {
   },
 
   failed: function(response, cause) {
-    var code = response ? response.status_code : null;
-
     this.close();
-    return this.emit('failed', {
-      response: response || null,
-      cause: cause,
-      code: code
-    });
+    return this.emit('failed', response, cause);
   },
 
   rejected: function(response, cause) {
@@ -5072,11 +5062,8 @@ InviteServerContext = function(ua, request) {
   }
 
   //TODO: move this into media handler
-  if (request.body && window.mozRTCPeerConnection !== undefined) {
-    request.body = request.body.
-      replace(/relay/g,"host generation 0").
-      replace(/ \r\n/g, "\r\n");
-  }
+  SIP.Hacks.Firefox.cannotHandleRelayCandidates(request);
+  SIP.Hacks.Firefox.cannotHandleExtraWhitespace(request);
 
   SIP.Utils.augment(this, SIP.ServerContext, [ua, request]);
   SIP.Utils.augment(this, SIP.Session, [ua.configuration.mediaHandlerFactory]);
@@ -5121,6 +5108,11 @@ InviteServerContext = function(ua, request) {
   this.mediaHandler = this.mediaHandlerFactory(this, {
     RTCConstraints: {"optional": [{'DtlsSrtpKeyAgreement': 'true'}]}
   });
+
+  if (this.mediaHandler && this.mediaHandler.getRemoteStreams) {
+    this.getRemoteStreams = this.mediaHandler.getRemoteStreams.bind(this.mediaHandler);
+    this.getLocalStreams = this.mediaHandler.getLocalStreams.bind(this.mediaHandler);
+  }
 
   function fireNewSession() {
     var options = {extraHeaders: ['Contact: ' + self.contact]};
@@ -5535,6 +5527,9 @@ InviteServerContext.prototype = {
         if (!this.hasAnswer) {
           if(request.body && request.getHeader('content-type') === 'application/sdp') {
             // ACK contains answer to an INVITE w/o SDP negotiation
+            SIP.Hacks.Firefox.cannotHandleRelayCandidates(request);
+            SIP.Hacks.Firefox.cannotHandleExtraWhitespace(request);
+
             this.hasAnswer = true;
             this.mediaHandler.setDescription(
               request.body,
@@ -5739,6 +5734,11 @@ InviteClientContext = function(ua, target, options) {
     stunServers: this.stunServers,
     turnServers: this.turnServers
   });
+
+  if (this.mediaHandler && this.mediaHandler.getRemoteStreams) {
+    this.getRemoteStreams = this.mediaHandler.getRemoteStreams.bind(this.mediaHandler);
+    this.getLocalStreams = this.mediaHandler.getLocalStreams.bind(this.mediaHandler);
+  }
 };
 
 InviteClientContext.prototype = {
@@ -5811,10 +5811,21 @@ InviteClientContext.prototype = {
                                             body: SIP.Utils.generateFakeSDP(response.body)
                                           });
         this.earlyDialogs[id].sendRequest(this, SIP.C.BYE);
-        //session.failed(response, SIP.C.causes.WEBRTC_ERROR);
+
+        /* NOTE: This fails because the forking proxy does not recognize that an unanswerable
+         * leg (due to peerConnection limitations) has been answered first. If your forking
+         * proxy does not hang up all unanswered branches on the first branch answered, remove this.
+         */
+        if(this.status !== C.STATUS_CONFIRMED) {
+          this.failed(response, SIP.C.causes.WEBRTC_ERROR);
+        }
         return;
       } else if (this.status === C.STATUS_CONFIRMED) {
         this.sendRequest(SIP.C.ACK,{cseq: response.cseq});
+        return;
+      } else if (!this.hasAnswer) {
+        // invite w/o sdp is waiting for callback
+        //an invite with sdp must go on, and hasAnswer is true
         return;
       }
     }
@@ -5884,10 +5895,8 @@ InviteClientContext.prototype = {
             return;
           }
 
-          if (response.body && window.mozRTCPeerConnection !== undefined) {
-            response.body = response.body.replace(/relay/g, 'host generation 0');
-            response.body = response.body.replace(/ \r\n/g, '\r\n');
-          }
+          SIP.Hacks.Firefox.cannotHandleRelayCandidates(response);
+          SIP.Hacks.Firefox.cannotHandleExtraWhitespace(response);
 
           if (!response.body) {
             extraHeaders.push('RAck: ' + response.getHeader('rseq') + ' ' + response.getHeader('cseq'));
@@ -6012,10 +6021,8 @@ InviteClientContext.prototype = {
           break;
         }
 
-        if (response.body && window.mozRTCPeerConnection !== undefined) {
-          response.body = response.body.replace(/relay/g, 'host generation 0');
-          response.body = response.body.replace(/ \r\n/g, '\r\n');
-        }
+        SIP.Hacks.Firefox.cannotHandleRelayCandidates(response);
+        SIP.Hacks.Firefox.cannotHandleExtraWhitespace(response);
 
         // This is an invite without sdp
         if (!this.hasOffer) {
@@ -6059,37 +6066,11 @@ InviteClientContext.prototype = {
                     if(session.isCanceled || session.status === C.STATUS_TERMINATED) {
                       return;
                     }
-                    /*
-                     * This is a Firefox hack to insert valid sdp when getDescription is
-                     * called with the constraint offerToReceiveVideo = false.
-                     * We search for either a c-line at the top of the sdp above all
-                     * m-lines. If that does not exist then we search for a c-line
-                     * beneath each m-line. If it is missing a c-line, we insert
-                     * a fake c-line with the ip address 0.0.0.0. This is then valid
-                     * sdp and no media will be sent for that m-line.
-                     *
-                     * Valid SDP is:
-                     * m=
-                     * i=
-                     * c=
-                     */
-                    if (sdp.indexOf('c=') > sdp.indexOf('m=')) {
-                      var insertAt;
-                      var mlines = (sdp.match(/m=.*\r\n.*/g));
-                      for (var i=0; i<mlines.length; i++) {
-                        if (mlines[i].toString().search(/i=.*/) >= 0) {
-                          insertAt = sdp.indexOf(mlines[i].toString())+mlines[i].toString().length;
-                          if (sdp.substr(insertAt,2)!=='c=') {
-                            sdp = sdp.substr(0,insertAt) + '\r\nc=IN IP 4 0.0.0.0' + sdp.substr(insertAt);
-                          }
-                        } else if (mlines[i].toString().search(/c=.*/) < 0) {
-                          insertAt = sdp.indexOf(mlines[i].toString().match(/.*/))+mlines[i].toString().match(/.*/).toString().length;
-                          sdp = sdp.substr(0,insertAt) + '\r\nc=IN IP4 0.0.0.0' + sdp.substr(insertAt);
-                        }
-                      }
-                    }
+
+                    sdp = SIP.Hacks.Firefox.hasMissingCLineInSDP(sdp);
 
                     session.status = C.STATUS_CONFIRMED;
+                    session.hasAnswer = true;
 
                     session.unmute();
                     /*localMedia = session.mediaHandler.localMedia;
@@ -6210,7 +6191,8 @@ InviteClientContext.prototype = {
       this.isCanceled = true;
       this.cancelReason = cancel_reason;
     } else if (this.status === C.STATUS_INVITE_SENT ||
-               this.status === C.STATUS_1XX_RECEIVED) {
+               this.status === C.STATUS_1XX_RECEIVED ||
+               this.status === C.STATUS_EARLY_MEDIA) {
       this.request.cancel(cancel_reason);
     }
 
@@ -6499,14 +6481,8 @@ SIP.Subscription.prototype = {
   },
 
   failed: function(response, cause) {
-    var code = response ? response.status_code : null;
-
     this.close();
-    return this.emit('failed', {
-      response: response || null,
-      cause: cause,
-      code: code
-    });
+    return this.emit('failed', response, cause);
   },
 
   /**
@@ -6580,10 +6556,10 @@ var MediaHandler = function(session, options) {
   var idx, length, server,
     self = this,
     servers = [],
-    constraints = options.constraints || {},
     stunServers = options.stunServers || null,
     turnServers = options.turnServers || null,
     config = this.session.ua.configuration;
+  this.RTCConstraints = options.RTCConstraints || {};
 
   if (!stunServers) {
     stunServers = config.stunServers;
@@ -6608,7 +6584,7 @@ var MediaHandler = function(session, options) {
     });
   }
 
-  this.peerConnection = new SIP.WebRTC.RTCPeerConnection({'iceServers': servers}, constraints);
+  this.peerConnection = new SIP.WebRTC.RTCPeerConnection({'iceServers': servers}, this.RTCConstraints);
 
   this.peerConnection.onaddstream = function(e) {
     self.logger.log('stream added: '+ e.stream.id);
@@ -6629,13 +6605,14 @@ var MediaHandler = function(session, options) {
   this.peerConnection.oniceconnectionstatechange = function() {  //need e for commented out case
     self.logger.log('ICE connection state changed to "'+ this.iceConnectionState +'"');
     //Bria state changes are always connected -> disconnected -> connected on accept, so session gets terminated
-    if (this.iceConnectionState === 'failed') {
+    //normal calls switch from failed to connected in some cases, so checking for failed and terminated
+    /*if (this.iceConnectionState === 'failed') {
       self.session.terminate({
         cause: SIP.C.causes.RTP_TIMEOUT,
         status_code: 200,
         reason_phrase: SIP.C.causes.RTP_TIMEOUT
-      });
-    }/* else if (e.currentTarget.iceGatheringState === 'complete' && this.iceConnectionState !== 'closed') {
+      }); 
+    } else if (e.currentTarget.iceGatheringState === 'complete' && this.iceConnectionState !== 'closed') {
       self.onIceCompleted();
     }*/
   };
@@ -6686,7 +6663,7 @@ MediaHandler.prototype = {
 
     /* Last functions first, to quiet JSLint */
     function streamAdditionSucceeded() {
-      self.createOfferOrAnswer(onSuccess, onFailure);
+      self.createOfferOrAnswer(onSuccess, onFailure, self.RTCConstraints);
     }
 
     function acquireSucceeded(stream) {
@@ -6696,7 +6673,8 @@ MediaHandler.prototype = {
       self.addStream(
         stream,
         streamAdditionSucceeded,
-        onFailure
+        onFailure,
+        self.RTCConstraints
       );
     }
 
@@ -6876,8 +6854,12 @@ MediaHandler.prototype = {
     var self = this;
 
     function readySuccess () {
+      var sdp = self.peerConnection.localDescription.sdp;
+
+      sdp = SIP.Hacks.Chrome.needsExplicitlyInactiveSDP(sdp);
+
       self.ready = true;
-      onSuccess(self.peerConnection.localDescription.sdp);
+      onSuccess(sdp);
     }
 
     function onSetLocalDescriptionSuccess() {
@@ -7275,7 +7257,7 @@ UA = function(configuration) {
   this.registerContext.on('registered', selfEmit('registered'));
   this.registerContext.on('unregistered', selfEmit('unregistered'));
 
-  if(configuration.autostart !== false) {
+  if(this.configuration.autostart) {
     this.start();
   }
 };
@@ -7965,7 +7947,7 @@ UA.prototype.loadConfig = function(configuration) {
       hackIpInContact: false,
 
       //autostarting
-      autostart: false,
+      autostart: true,
 
       //Reliable Provisional Responses
       reliable: 'none',
@@ -8966,6 +8948,106 @@ Utils= {
 };
 
 SIP.Utils = Utils;
+}(SIP));
+
+
+/**
+ * @fileoverview Hacks - This file contains all of the things we
+ * wish we didn't have to do, just for interop.  It is similar to
+ * Utils, which provides actually useful and relevant functions for
+ * a SIP library. Methods in this file are grouped by vendor, so
+ * as to most easily track when particular hacks may not be necessary anymore.
+ */
+
+(function (SIP) {
+
+var Hacks;
+
+Hacks = {
+
+  Firefox: {
+    /* Condition to detect if hacks are applicable */
+    isFirefox: function () {
+      return window.mozRTCPeerConnection !== undefined;
+    },
+
+    cannotHandleRelayCandidates: function (message) {
+      if (this.isFirefox() && message.body) {
+        message.body = message.body.replace(/relay/g, 'host generation 0');
+      }
+    },
+
+    cannotHandleExtraWhitespace: function (message) {
+      if (this.isFirefox() && message.body) {
+        message.body = message.body.replace(/ \r\n/g, "\r\n");
+      }
+    },
+
+    hasMissingCLineInSDP: function (sdp) {
+      /*
+       * This is a Firefox hack to insert valid sdp when getDescription is
+       * called with the constraint offerToReceiveVideo = false.
+       * We search for either a c-line at the top of the sdp above all
+       * m-lines. If that does not exist then we search for a c-line
+       * beneath each m-line. If it is missing a c-line, we insert
+       * a fake c-line with the ip address 0.0.0.0. This is then valid
+       * sdp and no media will be sent for that m-line.
+       *
+       * Valid SDP is:
+       * m=
+       * i=
+       * c=
+       */
+      var insertAt, mlines;
+      if (sdp.indexOf('c=') > sdp.indexOf('m=')) {
+
+        // Find all m= lines
+        mlines = sdp.match(/m=.*\r\n.*/g);
+        for (var i=0; i<mlines.length; i++) {
+
+          // If it has an i= line, check if the next line is the c= line
+          if (mlines[i].toString().search(/i=.*/) >= 0) {
+            insertAt = sdp.indexOf(mlines[i].toString())+mlines[i].toString().length;
+            if (sdp.substr(insertAt,2)!=='c=') {
+              sdp = sdp.substr(0,insertAt) + '\r\nc=IN IP 4 0.0.0.0' + sdp.substr(insertAt);
+            }
+
+          // else add the C line if it's missing
+          } else if (mlines[i].toString().search(/c=.*/) < 0) {
+            insertAt = sdp.indexOf(mlines[i].toString().match(/.*/))+mlines[i].toString().match(/.*/).toString().length;
+            sdp = sdp.substr(0,insertAt) + '\r\nc=IN IP4 0.0.0.0' + sdp.substr(insertAt);
+          }
+        }
+      }
+      return sdp;
+    }
+  },
+
+  Chrome: {
+    needsExplicitlyInactiveSDP: function (sdp) {
+      var sub, index;
+      if (Hacks.Firefox.isFirefox()) { // Fix this in Firefox before sending
+        index = sdp.indexOf('m=video 0');
+        if (index !== -1) {
+          sub = sdp.substr(index);
+          sub = sub.replace(/\r\nc=IN IP4.*\r\n$/,
+                            '\r\nc=IN IP4 0.0.0.0\r\na=inactive\r\n');
+          return sdp.substr(0, index) + sub;
+        }
+      }
+      return sdp;
+    },
+
+    getsConfusedAboutGUM: function (session) {
+      if (session.mediaHandler) {
+        session.mediaHandler.close();
+      }
+    }
+  }
+};
+
+
+SIP.Hacks = Hacks;
 }(SIP));
 
 
