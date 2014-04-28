@@ -16,12 +16,10 @@ The Subscription constructor is intended for internal use only. Subscriptions ar
 
 ~~~ javascript
 //Subscribes to the presence information of alice@example.com
-myUA.subscribe('alice@example.com', 'presence');
-~~~
+var subscription = myUA.subscribe('alice@example.com', 'presence');
 
-~~~ javascript
 // Once subscribed, receive notifications and print out the presence information
-myUA.on('notify', function (notification) {
+subscription.on('notify', function (notification) {
   console.log(notification.body);
 });
 ~~~
