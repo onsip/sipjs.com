@@ -251,11 +251,29 @@ Overrides [`SIP.ClientContext.cancel`](/api/0.5.0/context/client/#canceloptions/
 
 ### `progress([options])`
 
-Overrides [`SIP.ServerContext.progress`](/api/0.5.0/context/server/#progressoptions)
+Overrides [`SIP.ServerContext.progress`](/api/0.5.0/context/server/#progressoptions). Additional parameters specific to INVITE requests can be specified.
+
+As per [RFC 3262](http://tools.ietf.org/html/rfc3262), non-100 provisional responses may be transmitted reliably. Support for this is determined by the initial invite request (see the [`rel100`](/api/0.5.0/ua/#invitetarget-options) parameter on `ua.invite()`). If the INVITE prohibits reliable provisional responses, all responses sent with `progress` will be transmitted unreliably. Likewise, if the INVITE requires 100rel, all non-100 responses will be sent reliably. If 100rel is supported, reliable transmission is determined by the `options.rel100` parameter. Note that reliable provisional responses typically contain the SDP answer and so an `options.media` parameter is also provided.
+
+#### Parameters
+
+Name | Type | Description
+-|-|-
+`options.rel100` | `Boolean` | If the INVITE request supports 100rel, progress responses will be transmitted reliably based on this option. If the INVITE request requires or does not support 100rel, this option is ignored.
+`options.media` | `Object` | Media constraints to use in a reliable provisional response. After the response is PRACKed, early media will begin. If the session is later accepted, these media constraints will be used.
+ServerContext Parameters | | See [`SIP.ServerContext.progress`](/api/0.5.0/context/server/#progressoptions).
 
 ### `accept([options])`
 
-Overrides [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions)
+Overrides [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions).  Additional parameters specific to INVITE requests can be specified.
+
+#### Parameters
+
+Name | Type | Description
+-|-|-
+`options.media` | Object | Media constraints to use for the Session. For example, `{ audio: true, video: true }`.
+`options.mediaConstraints` | Object | *Deprecated* - Same as `options.media`
+ServerContext Parameters | | See [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions).
 
 ### `reject([options])`
 
