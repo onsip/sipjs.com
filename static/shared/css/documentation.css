@@ -93,6 +93,7 @@ p code, li code {
 
 /*  Extra spacing for paragraph code  */
 p code {
+    white-space: nowrap;
 	margin: 0 .1618em;
 }
 
