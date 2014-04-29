@@ -20,7 +20,7 @@ var subscription = myUA.subscribe('alice@example.com', 'presence');
 
 // Once subscribed, receive notifications and print out the presence information
 subscription.on('notify', function (notification) {
-  console.log(notification.body);
+  console.log(notification.request.body);
 });
 ~~~
 
