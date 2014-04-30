@@ -23,17 +23,17 @@ Once the install was complete, run `yum update`, then install the dependencies w
 ## Install Freeswitch
 
 Freeswitch recommends using the latest version of Freeswitch from the [Freesiwtch git](http://git.freeswitch.org/git/freeswitch/). SIP.js is tested and works with Freeswitch tag v1.5.11, which is what will be used for this example.
-In the `/usr/local/src/` folder git clone Asterisk with `git clone git://git.freeswitch.org/freeswitch.git`.  
+In the `/usr/local/src/` folder git clone Asterisk with `git clone git://git.freeswitch.org/freeswitch.git`.
 Enter the Freeswitch directory: `cd /usr/local/src/freeswitch`.
-Checkout Freeswitch tag v1.5.11 `git checkout v1.5.11`.  
-Run the Freeswitch bootstrap script: `./bootstrap.sh`.  
+Checkout Freeswitch tag v1.5.11 `git checkout v1.5.11`.
+Run the Freeswitch bootstrap script: `./bootstrap.sh`.
 Run the Freeswitch configure script: `./configure`.
 Compile Freeswitch (this might take a few minutes): `make`.
 Install Freeswitch: `make install`.
 
 ## Configure Freeswitch
 
-The default configuration files for Freeswitch are located in `/usr/local/freeswitch/conf`. 
+The default configuration files for Freeswitch are located in `/usr/local/freeswitch/conf`.
 
 Start by editing the internal SIP profile `sip_profiles/internal.conf`. Uncomment the line `<param name="ws-binding"  value=":5066"/>`. This will allow web sockets to talk to Freeswitch. No other configuration changes are necissary to make Freeswitch work with WebRTC.
 
