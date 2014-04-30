@@ -10,6 +10,7 @@ description: Get started now. Download production and development versions of th
 
 * Development (uncompressed code, 656KB) <a href="/download/sip-0.5.0.js" download="sip-0.5.0.js">sip-0.5.0.js</a>
 * Production (minified code, 208KB) <a href="/download/sip-0.5.0.min.js" download="sip-0.5.0.min.js">sip-0.5.0.min.js</a>
+* Use Bower? Download this release with `bower install sip.js#0.5.0+bower`.
 
 ## Version devel
 
