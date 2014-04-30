@@ -47,8 +47,8 @@ Start Freeswitch `/usr/local/freeswitch/bin/freeswitch`.
 ## Configure SIP.js
 
 SIP.js works with Freeswitch without any special configuration parameters. The following UA is configured to connect to a default Freeswitch configuration. Replace 127.0.0.1 with the IP address of your Freeswitch server.
-~~~ javascript
 
+~~~javascript
 var config = {
   uri: '1000@127.0.0.1', // Replace this IP address with your Freeswitch IP address
   ws_servers: ['ws://127.0.0.1:5066'], // Replace this IP address with your Freeswitch IP address and the port with your Freeswitch port from the sip_profiles/internal.xml file
@@ -57,7 +57,6 @@ var config = {
 };
 
 var ua = new SIP.UA(config);
-
 ~~~
 
 ## Troubleshooting
