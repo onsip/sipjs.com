@@ -1,48 +1,64 @@
 ---
-title: Install & Configure Asterisk | SIP.js
+title: Asterisk Installation & Configuration | SIP.js
 description: Easily install & configure Asterisk to work with SIP.js
 ---
 
 # Configure Asterisk
 
-SIP.js is tested and will work with [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz) without any modification to the source code of SIP.js or Asterisk.
+SIP.js is tested and will work with [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
 
 ## System Setup
 
-This is the sample system that we used to test Asterisk.
+Asterisk and SIP.js were tested using the following setup:
 
-* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
+* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/).
 * [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz)
 * [libsrtp 1.4.2](http://srtp.sourceforge.net/srtp-1.4.2.tgz)
-* Hardware connected directly to the internet to avoid NAT scenarios on the server side.
+* A public IP address to avoid NAT scenarios on the server side.
 
-## CentOS
+## Required Packages
 
-Install CentOS minimal with all of the default settings, running all commands as the root user unless specified otherwise.
-Once the install was complete, run `yum update`, then install the dependencies with `yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite3-devel libsrtp-devel libuuid-devel`.
+Install the following dependencies:
+
+* wget
+* gcc
+* gcc-c++
+* ncurses-devel
+* libxml2-devel
+* sqlite3-devel
+* libsrtp-devel
+* libuuid-devel
+
+Using YUM, all dependencies can be installed with:
+
+`yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite3-devel libsrtp-devel libuuid-devel`.
 
 ## Install libsrtp
-By default, libsrtp is not included in the Asterisk yum repository. Installing it from source is not difficult.  
-In the `/usr/src/` folder, download libsrtp using `wget http://srtp.sourceforge.net/srtp-1.4.2.tgz`.  
-Extract libsrtp: `tar zxvf srtp-1.4.2.tgz`.  
-Enter the srtp directory: `cd /usr/src/srtp*`.  
-Configure srtp: `./configure CFLAGS=-fPIC`.  
-Compile and install srtp: `make && make install`.  
+
+By default, libsrtp is not included in the Asterisk yum repository. Installing it from source is not difficult.
+
+1. `cd /usr/src/`
+2. `wget http://srtp.sourceforge.net/srtp-1.4.2.tgz`
+3. `tar zxvf srtp-1.4.2.tgz`
+4. `cd /usr/src/srtp`
+5. `./configure CFLAGS=-fPIC`
+6. `make && make install`
 
 ## Install Asterisk
 
-In the `/usr/src/` folder downlaod Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz`.  
-Extract Asterisk: `tar zxvf asterisk*`.  
-Enter the Asterisk directory: `cd /usr/src/asterisk*`.  
-Run the Asterisk configure script: `./configure --libdir=/usr/lib64`.  
-Run the Asterisk menuselect tool: `make menuselect`.  
-In the menuselect, go to the resources option and ensure that res_srtp is enabled. If there are 3 x's next to res_srtp, there is a problem with the srtp library and you must reinstall it. Save the configuration (press x).  
-Compile and install Asterisk: `make && make install`.  
-If you need the sample configs you can run `make samples` to install the sample configs. If you need to install the Asterisk startup script you can run `make config`.
+1. `cd /usr/src/`
+2. Downlaod Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz`.
+3. Extract Asterisk: `tar zxvf asterisk*`.
+4. Enter the Asterisk directory: `cd /usr/src/asterisk*`.
+5. Run the Asterisk configure script: `./configure --libdir=/usr/lib64`.
+6. Run the Asterisk menuselect tool: `make menuselect`.
+7. In the menuselect, go to the resources option and ensure that res_srtp is enabled. If there are 3 x's next to res_srtp, there is a problem with the srtp library and you must reinstall it. Save the configuration (press x).
+8. Compile and install Asterisk: `make && make install`.
+9. If you need the sample configs you can run `make samples` to install the sample configs. If you need to install the Asterisk startup script you can run `make config`.
 
-## Configure Asterisk
+## Configure Asterisk For WebRTC
 
-For WebRTC, a lot of the settings that are needed MUST be in the peer settings. The global settings do not flow down into the peer settings very well.
+For WebRTC, a lot of the settings that are needed MUST be in the **peer settings**. The global settings do not flow down into the peer settings very well.
 By default, Asterisk config files are located in `/etc/asterisk/`.
 Start by editing `http.conf` and make sure that the following lines are uncommented:
 
@@ -54,9 +70,9 @@ bindaddr=127.0.0.1 ; Replace this with your IP address
 bindport=8088 ; Replace this with the port you want to listen on
 ~~~
 
-Change the IP address and port to the IP address of your server and the port that you would like Asterisk to listen for web socket connections on.  
+Change the IP address and port to the IP address of your server and the port that you would like Asterisk to listen for web socket connections on.
 
-Next, edit sip.conf. Here you will setup two peers, one for the WebRTC client and one for the legacy SIP client. The WebRTC peer requires encryption, avpf, and icesupport to all be enabled. In most cases, directmedia should be disabled. Also under the WebRTC client, the transport needs to be listed as 'ws' to allow websocket connections. All of these config lines should be under the peer itself; setting these config lines globally might not work.
+Next, edit `sip.conf`. Here you will set up two peers, one for a WebRTC client and one for a non-WebRTC SIP client. The WebRTC peer requires encryption, avpf, and icesupport to be enabled. In most cases, directmedia should be disabled. Also under the WebRTC client, the transport needs to be listed as 'ws' to allow websocket connections. All of these config lines should be under the peer itself; setting these config lines globally might not work.
 
 ~~~
 ;sip.conf
@@ -85,7 +101,7 @@ secret=password
 context=default
 ~~~
 
-Lastly, you will need to setup the extensions.conf to allow the two peers to call each other.
+Lastly, set up `extensions.conf` to allow the two peers to call each other.
 
 ~~~
 ;extensions.conf
@@ -98,23 +114,32 @@ Restart Asterisk using `service asterisk restart` to ensure that the new setting
 
 ## Configure SIP.js
 
-By adding a single configuration line, SIP.js will work with Asterisk. When creating a UA, you will need to add the configuration parameter [hackIpInContact](http://sipjs.com/api/0.5.0/ua_configuration_parameters/#hackipincontact). If you are missing this property you will be able to make calls from WebRTC, but not receive calls.  
+Asterisk does not accept Contact headers with the `.invalid` domain. When creating a UA, add the configuration parameter [hackIpInContact](http://sipjs.com/api/0.5.0/ua_configuration_parameters/#hackipincontact). If you are missing this property you will be able to make calls from WebRTC, but not receive calls through Asterisk will fail.
+
 The following configuration example creates a UA for the Asterisk configuration above. Replace the values with the values from your config.
 
 ~~~ javascript
-
 var config = {
-  uri: '1060@127.0.0.1', // Replace this IP address with your Asterisk IP address
-  ws_servers: ['ws://127.0.0.1:8088/ws'], // Replace this IP address with your Asterisk IP address and the port with your Asterisk port from the http.conf file
-  authorizationUser: '1060' // Rplace this with the username from your sip.conf file
-  password: 'password', // Replace this with the password from your sip.conf file
-  hackIpInContact: true // This is required to work with Asterisk
+  // Replace this IP address with your Asterisk IP address
+  uri: '1060@127.0.0.1',
+
+  // Replace this IP address with your Asterisk IP address,
+  // and replace the port with your Asterisk port from the http.conf file
+  ws_servers: ['ws://127.0.0.1:8088/ws'],
+
+  // Replace this with the username from your sip.conf file
+  authorizationUser: '1060',
+
+  // Replace this with the password from your sip.conf file
+  password: 'password',
+
+  // This is required to route requests through Asterisk
+  hackIpInContact: true
 };
 
 var ua = new SIP.UA(config);
-
 ~~~
 
 ## Troubleshooting
 
-This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk. 
+This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk.
