@@ -13,7 +13,7 @@ No system setup is required.
 
 ## Sign up for the OnSIP Network
 
-You will need an [OnSIP Developer account](https://signup.onsip.com/network).
+The OnSIP Network is a free hosted SIP signaling platform. The OnSIP Network allows you to write your apps and not worry about the signaling. [Get started with the OnSIP Network for FREE](https://signup.onsip.com/network)!
 
 ## Configure SIP.js
 

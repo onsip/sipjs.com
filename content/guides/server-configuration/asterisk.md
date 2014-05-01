@@ -62,7 +62,7 @@ For WebRTC, a lot of the settings that are needed MUST be in the **peer settings
 By default, Asterisk config files are located in `/etc/asterisk/`.
 Start by editing `http.conf` and make sure that the following lines are uncommented:
 
-~~~
+~~~ text
 ;http.conf
 [general]
 enabled=yes
@@ -74,7 +74,7 @@ Change the IP address and port to the IP address of your server and the port tha
 
 Next, edit `sip.conf`. Here you will set up two peers, one for a WebRTC client and one for a non-WebRTC SIP client. The WebRTC peer requires encryption, avpf, and icesupport to be enabled. In most cases, directmedia should be disabled. Also under the WebRTC client, the transport needs to be listed as 'ws' to allow websocket connections. All of these config lines should be under the peer itself; setting these config lines globally might not work.
 
-~~~
+~~~ text
 ;sip.conf
 [general]
 realm=127.0.0.1 ; Replace this with your IP address
@@ -103,7 +103,7 @@ context=default
 
 Lastly, set up `extensions.conf` to allow the two peers to call each other.
 
-~~~
+~~~ text
 ;extensions.conf
 [default]
 exten => 1060,1,Dial(SIP/1060) ; Dialing 1060 will call the SIP client registered to 1060
@@ -125,7 +125,7 @@ var config = {
 
   // Replace this IP address with your Asterisk IP address,
   // and replace the port with your Asterisk port from the http.conf file
-  ws_servers: ['ws://127.0.0.1:8088/ws'],
+  ws_servers: 'ws://127.0.0.1:8088/ws',
 
   // Replace this with the username from your sip.conf file
   authorizationUser: '1060',
