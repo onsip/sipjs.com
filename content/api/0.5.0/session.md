@@ -378,11 +378,10 @@ transfer at the application level. This event will not be emitted if
 it is not listened for.
 NOTE: This event does not exist in tagged release 0.5.0.
 
-#### `on('refer', function(target,request) {})`
+#### `on('refer', function(request) {})`
 
 Name | Type | Description
 -----|------|--------------
-`target`|`Object`|[`SIP.URI`](/api/0.5.0/uri) instance of the sip address to be referred to.
 `request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP REFER request.
 
 ### `referred`
