@@ -5,31 +5,47 @@ description: Easily install & configure FreeSWITCH to work with SIP.js
 
 # Configure FreeSWITCH
 
-SIP.js is tested and will work with [FreeSWITCH 1.5.11](https://confluence.freeswitch.org/display/FREESWITCH/Linux+Quick+Install+Guide#LinuxQuickInstallGuide-Download) without any modification to the source code of SIP.js or FreeSWITCH.
+SIP.js has been tested with [FreeSWITCH 1.5.11](https://confluence.freeswitch.org/display/FREESWITCH/Linux+Quick+Install+Guide#LinuxQuickInstallGuide-Download) without any modification to the source code of SIP.js or FreeSWITCH. Later versions of FreeSWITCH will require similar configuration.
 
 ## System Setup
 
-This is the sample system that we used to test Asterisk.
+FreeSWITCH and SIP.js were tested using the following setup:
 
 * [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
 * [FreeSWITCH 1.5.11](https://confluence.freeswitch.org/display/FREESWITCH/Linux+Quick+Install+Guide#LinuxQuickInstallGuide-Download)
-* Hardware connected directly to the internet to avoid NAT scenarios on the server side.
+* A public IP address to avoid NAT scenarios on the server side.
 
-## CentOS
+## Required Packages
 
-Install CentOS minimal with all of the default settings, running all commands as the root user unless specified otherwise.
-Once the install was complete, run `yum update`, then install the dependencies with `yum install git autoconf automake libtool gcc-c++ libuuid-devel zlib-devel libjpeg-devel ncurses-devel openssl-devel`.
+Install the following dependencies:
+
+* git
+* autoconf
+* automake
+* libtool
+* gcc-c++
+* libuuid-devel
+* zlib-devel
+* libjpeg-devel
+* ncurses-devel
+* openssl-devel
+
+Using YUM, all dependencies can be installed with:
+
+`yum install git autoconf automake libtool gcc-c++ libuuid-devel zlib-devel libjpeg-devel ncurses-devel openssl-devel`
 
 ## Install FreeSWITCH
 
-FreeSWITCH recommends using the latest version of FreeSWITCH from the [FreeSWITCH git](http://git.freeswitch.org/git/freeswitch/). SIP.js is tested and works with FreeSWITCH tag v1.5.11, which is what will be used for this example.
-In the `/usr/local/src/` folder, git clone FreeSWITCH with `git clone git://git.freeswitch.org/freeswitch.git`.
-Enter the FreeSWITCH directory: `cd /usr/local/src/freeswitch`.
-Checkout FreeSWITCH tag v1.5.11: `git checkout v1.5.11`.
-Run the FreeSWITCH bootstrap script: `./bootstrap.sh`.
-Run the FreeSWITCH configure script: `./configure`.
-Compile FreeSWITCH (this might take a few minutes): `make`.
-Install FreeSWITCH: `make install`.
+FreeSWITCH recommends using the latest version of FreeSWITCH from the [FreeSWITCH git repo](http://git.freeswitch.org/git/freeswitch/). This example uses FreeSWITCH tag v1.5.11.
+
+* `cd /usr/local/src/`
+* `git clone git://git.freeswitch.org/freeswitch.git`
+* `cd /usr/local/src/freeswitch`
+* `git checkout v1.5.11`
+* `./bootstrap.sh`
+* `./configure`
+* `make` (This may take a few minutes.)
+* `make install`
 
 ## Configure FreeSWITCH
 
@@ -39,6 +55,7 @@ Start by editing the internal SIP profile `sip_profiles/internal.conf`. Uncommen
 
 ~~~ xml
 <!--internal.xml-->
+<!-- Uncomment the following: -->
 <param name="ws-binding"  value=":5066"/>
 ~~~
 
@@ -46,7 +63,7 @@ Start FreeSWITCH: `/usr/local/freeswitch/bin/freeswitch`.
 
 ## Configure SIP.js
 
-SIP.js works with FreeSWITCH without any special configuration parameters. The following UA is configured to connect to a default FreeSWITCH configuration. Replace 127.0.0.1 with the IP address of your FreeSWITCH server.
+SIP.js works with FreeSWITCH without any special configuration parameters. The following UA is configured to connect to a default FreeSWITCH configuration. Replace `127.0.0.1` with the IP address of your FreeSWITCH server.
 
 ~~~ javascript
 var config = {

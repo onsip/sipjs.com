@@ -6,4 +6,8 @@ description: The SIP.js Server Configuration Guides will show you how to configu
 
 # Server Configuration Guides
 
-This section of the documentation is intended to help you configure your softswitch to work with SIP.js. If you do not have a softswitch, consider using the <a href="/guides/server-configuration/onsip-network">OnSIP Network</a>.
+This section of the documentation is intended to help you configure SIP.js to work with your softswitch or SIP platform service.
+
+* [FreeSWITCH](./freeswitch/)
+* [Asterisk](./asterisk/)
+* [OnSIP Network](./onsip-network/)

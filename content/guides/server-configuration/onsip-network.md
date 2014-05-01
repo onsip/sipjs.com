@@ -5,7 +5,7 @@ description: Easily install & configure the OnSIP Network to work with SIP.js
 
 # Configure the OnSIP Network
 
-SIP.js is tested and will work with the [OnSIP Network](https://confluence.freeswitch.org/display/FREESWITCH/Linux+Quick+Install+Guide#LinuxQuickInstallGuide-Download) without any modification to the source code of SIP.js.
+SIP.js works with the [OnSIP Network](http://www.onsip.com/webrtc-sip-network) without any modification.
 
 ## System Setup
 
@@ -13,11 +13,11 @@ No system setup is required.
 
 ## Sign up for the OnSIP Network
 
-The OnSIP Network is a free hosted SIP signaling platform. The OnSIP Network allows you to write your apps and not worry about the signaling. [Get started with the OnSIP Network for FREE](https://signup.onsip.com/network)!
+The OnSIP Network is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](http://www.onsip.com/webrtc-sip-network).
 
 ## Configure SIP.js
 
-SIP.js works with the OnSIP Network without any special configuration parameters.
+If no Web Socket server is specified, SIP.js attempts to connect to the OnSIP Network. Creating and registering user agents with the OnSIP Network is as simple as specifying a SIP address to use:
 
 ~~~javascript
 // Replace 'any_username' with any username and 'your_subdomain' with your OnSIP Network subdomain
@@ -26,4 +26,4 @@ var ua = new SIP.UA('any_username@your_subdomain.onsip.com');
 
 ## Troubleshooting
 
-Please see the [OnSIP Developer Documentation](http://developer.onsip.com/).
+Please see the [OnSIP Network Developer Documentation](http://developer.onsip.com/).

@@ -5,13 +5,13 @@ description: Easily install & configure Asterisk to work with SIP.js
 
 # Configure Asterisk
 
-SIP.js is tested and will work with [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
+SIP.js has been tested with [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
 
 ## System Setup
 
 Asterisk and SIP.js were tested using the following setup:
 
-* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/).
+* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
 * [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz)
 * [libsrtp 1.4.2](http://srtp.sourceforge.net/srtp-1.4.2.tgz)
 * A public IP address to avoid NAT scenarios on the server side.
