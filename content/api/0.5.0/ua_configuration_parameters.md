@@ -182,7 +182,7 @@ registrarServer: 'sip:registrar.mydomain.com'
 ~~~
 
 ## rel100
-`String` representing whether the UA should do 100rel. Accepts `none`, `supported`, and `required`.
+`String` representing whether the UA should do 100rel. Accepts `none`, `supported`, and `required`. Default value is `none`.
 
 ~~~ javascript
 rel100: "supported"
