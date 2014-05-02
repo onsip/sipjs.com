@@ -181,6 +181,13 @@ Set the SIP registrar URI. Valid value is a SIP URI without username. Default va
 registrarServer: 'sip:registrar.mydomain.com'
 ~~~
 
+## rel100
+`String` representing whether the UA should do 100rel. Accepts `none`, `supported`, and `required`.
+
+~~~ javascript
+rel100: "supported"
+~~~
+
 ## stunServers
 `String` or `Array` of `Strings` indicating the STUN server(s) to use for IP address discovery. Values must include “stun:” or “stuns:” schema. Default value is [`"stun:stun.l.google.com:19302"`].
 
