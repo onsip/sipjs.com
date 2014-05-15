@@ -37,7 +37,7 @@ request | `SIP.IncomingRequest` | The request received.
 
 ### `request`
 
-[`SIP.IncomingRequest`](/api/0.5.0/incomingMessage/) - The request received.
+[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) - The request received.
 
 ### `localIdentity`
 
@@ -150,7 +150,7 @@ Fired each time a provisional (100-199) response is sent.
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The sent response
+`response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The sent response
 `cause`|`String`|The SIP cause of the event
 
 ### `accepted`
@@ -161,7 +161,7 @@ Fired each time a successful final (200-299) response is sent.
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The sent response
+`response`|`String`| The SIP message sent
 `cause`|`String`|The SIP cause of the event
 
 ### `rejected`
@@ -172,7 +172,7 @@ Fired each time an unsuccessful final (300-699) response is sent. *Note: This wi
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The sent response
+`response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The sent response
 `cause`|`String`|The SIP cause of the event
 
 ### `failed`
@@ -183,6 +183,6 @@ Fired when the request fails, whether due to an unsuccessful final response or d
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse)|The received response, on a non SIP related failure this will be null
+`response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The received response, on a non SIP related failure this will be null
 `cause`|`String`|The SIP cause of the event
 

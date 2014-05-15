@@ -307,11 +307,15 @@ Fired each time a successful final (200-299) response is received.
 
 #### `on('accepted', function (data) {})`
 
+Outbound sessions emit `accepted` with the following parameters:
+
 Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Number` | The status code of the received response, between 200 and 299.
 `data.response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage) | The received response
+
+Inbound sessions do not currently provide any parameters when emitting the `accepted` event. [Track this bug on GitHub.](https://github.com/onsip/SIP.js/issues/15)
 
 ### `rejected`
 
