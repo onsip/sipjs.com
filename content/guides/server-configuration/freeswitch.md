@@ -51,7 +51,7 @@ FreeSWITCH recommends using the latest version of FreeSWITCH from the [FreeSWITC
 
 The default configuration files for FreeSWITCH are located in `/usr/local/freeswitch/conf`.
 
-Start by editing the internal SIP profile `sip_profiles/internal.conf`. Uncomment the line `<param name="ws-binding"  value=":5066"/>` to allow web sockets to talk to FreeSWITCH. No other configuration changes are necessary to make FreeSWITCH work with WebRTC.
+Start by editing the internal SIP profile `sip_profiles/internal.xml`. Uncomment the line `<param name="ws-binding"  value=":5066"/>` to allow web sockets to talk to FreeSWITCH. No other configuration changes are necessary to make FreeSWITCH work with WebRTC.
 
 ~~~ xml
 <!--internal.xml-->
