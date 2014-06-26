@@ -75,7 +75,7 @@ var config = {
   ws_servers: 'ws://127.0.0.1:5066',
   
   // FreeSWITCH Default Username
-  authorizationUser: '1000'
+  authorizationUser: '1000',
   
   // FreeSWITCH Default Password
   password: '1234'
