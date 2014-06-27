@@ -182,10 +182,10 @@ registrarServer: 'sip:registrar.mydomain.com'
 ~~~
 
 ## rel100
-`String` representing whether the UA should do 100rel. Accepts `none`, `supported`, and `required`. Default value is `none`.
+`Constant` representing whether the UA should do 100rel. Accepts SIP.C.supported.REQUIRED, SIP.C.supported.SUPPORTED, and `required`. Default value is SIP.C.supported.UNSUPPORTED.
 
 ~~~ javascript
-rel100: "supported"
+rel100: "SIP.C.supported.REQUIRED"
 ~~~
 
 ## stunServers
