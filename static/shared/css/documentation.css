@@ -587,3 +587,14 @@ footer {
 #instance-attributes {
     margin-top: 50px;
 }
+
+
+/*  HIDE .DEV
+		========================================  */
+#dev, .dev {
+    display: none;
+}
+
+#dev:target ~ * .dev {
+    display: block;
+}
