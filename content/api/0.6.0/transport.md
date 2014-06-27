@@ -27,6 +27,7 @@ and responses over network transports. For SIP.js, this includes maintaining the
 {: .no_toc }
 
 #### SIP.UA
+{: .no_toc }
 
 * .getLogger
 * .transport
@@ -44,6 +45,7 @@ and responses over network transports. For SIP.js, this includes maintaining the
 * WebSocket server
 
 #### wsServer
+{: .no_toc }
 
 * .ws_uri
 
