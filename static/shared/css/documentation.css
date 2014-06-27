@@ -595,6 +595,18 @@ footer {
     display: none;
 }
 
+#dev:target {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    display: block;
+    height: 100%;
+    width: 1em;
+
+    background: #ea4b35;
+}
+
 #dev:target ~ * .dev {
     display: block;
 }
