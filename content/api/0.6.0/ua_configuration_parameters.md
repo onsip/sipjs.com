@@ -58,7 +58,7 @@ authorizationUser: "alice123"
 ~~~
 
 ## autostart
-If set to true, the user agent calls the `.start()` method upon being created.  
+If set to true, the user agent calls the `.start()` method upon being created.  Default value is true.
 
 ~~~ javascript
 autostart: true

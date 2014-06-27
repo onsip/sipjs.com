@@ -25,7 +25,6 @@ var bob = new SIP.UA({
   ws_servers: ['wss://sip-ws.example.com'],
   register: true
 });
-bob.start();
 ~~~
 
 ## Instance Methods
