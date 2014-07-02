@@ -2,12 +2,23 @@
 title: SIP.URI | SIP.js
 description: In SIP.js, the class SIP.URI represents a SIP URI and provides a set of attributes and methods to access and set different parts of a URI.
 ---
+
 # SIP.URI
 
-The class SIP.URI represents a SIP URI and provides a set of attributes and methods to access and set different parts of a URI.
+The SIP.URI constructor represents a SIP URI and provides a set of attributes and methods to access and set different parts of a URI.
 
 * TOC
 {:toc}
+
+<div markdown="1" class="dev">
+
+## Dependencies
+{: .no_toc}
+
+* SIP.C
+* SIP.Grammar
+
+</div>
 
 ## Construction
 
@@ -43,6 +54,20 @@ Name | Type | Description
 ### `port`
 
 `Number` - Represents the URI port.
+
+<div markdown="1" class="dev">
+
+### `parameters`
+{: .no_toc}
+
+`Object` - An internal object for storing raw parameter data.  Use `getParam()` `setParam()`, `hasParam()`, `deleteParam()`, or `clearParams()` methods instead of this variable.
+
+### `headers`
+{: .no_toc}
+
+`Object` - An internal object for storing raw parameter data.  Use `getHeader()`, `setHeader()`, `hasHeader()`, `deleteHeader()`, or `clearHeaders()` methods instead of this variable.
+
+</div>
 
 ## Instance Methods
 
@@ -184,7 +209,7 @@ Type | Description
 
 ### `toString()`
 
-Returns a `String` representing the URI. Characters that can’t appear unescaped are escaped as stated in the BNF grammar of the RFC 3261.
+Returns a `String` representing the URI. Characters that can’t appear unescaped are escaped as stated in the BNF grammar of RFC 3261.
 
 ## Static Methods
 
