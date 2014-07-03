@@ -10,7 +10,7 @@
           <main>
             <div id="subtitle">
               <h1>DEMO <%= @item[:caller] %> USER</h1>
-              <a href="/devcon/<%= @item[:callee] %>" target="_blank">Click here to open tab for <%= @item[:callee] %> User</a>
+              <a href="/devcon/<%= @item[:callee] %>/" target="_blank" data-tokenize data-tokenize-after="You should have a <%= @item[:callee] %> User opened in another tab. If not, please click to open a new <%= @item[:callee] %> User tab.">Click here to open tab for <%= @item[:callee] %> User</a>
             </div>
 
             <div id="phone">
@@ -66,5 +66,6 @@
 	</article>
 
 	<%= render 'footer' %>
+	<script src="/devcon/token.js"></script>
 </body>
 </html>
