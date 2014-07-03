@@ -1,0 +1,70 @@
+<%= render 'head' %>
+
+<body>
+	<%= render 'header' %>
+
+	<article id="main" class="wrapper group devcon">
+	  <header>
+          </header>
+
+          <main>
+            <div id="subtitle">
+              <h1>DEMO <%= @item[:caller] %> USER</h1>
+              <a href="/devcon/<%= @item[:callee] %>" target="_blank">Click here to open tab for <%= @item[:callee] %> User</a>
+            </div>
+
+            <div id="phone">
+              <video></video>
+              <p>CALL <%= @item[:callee] %>:</p>
+              <button id="audio">AUDIO</button>
+              <button id="video">VIDEO</button>
+            </div>
+
+            <div id="message">
+              <h2>SEND MESSAGE TO <%= @item[:callee] %></h2>
+              <div id="msgreceive">
+                <p><%= @item[:callee] %>:</p>
+                <p>No messages sent yet</p>
+              </div>
+              <div id="msgsend">
+                <p><%= @item[:caller] %>:</p>
+                <textarea rows="2" maxlength="140" columns="70" placeholder="Enter your message to Bob here, 140 characters or less"></textarea>
+                <button id="sendMessage">SEND</button>
+              </div>
+            </div>
+
+            <div id="data">
+              <h2>SEND DATA TO <%= @item[:callee] %></h2>
+              <div id="datareceive">
+                <p><%= @item[:callee] %>'s User Agent:</p>
+                <p>No data sent yet</p>
+              </div>
+              <div id="datasend">
+                <p>Tell <%= @item[:callee] %>'s app what browser you are using by clicking the Send button below.</p>
+                <button id="sendData">SEND</button>
+              </div>
+            </div>
+
+            <div id="note">
+              <h2>IMPORTANT NOTE</h2>
+              <p>This demo is using the OnSIP Network to create <%= @item[:callee] %>'s SIP address <%= @item[:callee] %>@example.onsip.com on the fly and register this user agent as <%= @item[:caller] %>@example.onsip.com</p>
+              <button id="signup">
+                <p>Get Started Fast, Free</p>
+                <p>Open an OnSIP sandbox account</p>
+              </button>
+            </div>
+
+            <div id="code">
+              <h2>CODE</h2>
+              <div id="codebox">
+                
+              </div>
+            </div>
+          </main>
+          <footer>
+          </footer>
+	</article>
+
+	<%= render 'footer' %>
+</body>
+</html>
