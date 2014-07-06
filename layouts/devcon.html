@@ -24,11 +24,11 @@
         <h2>SEND MESSAGE TO <%= @item[:callee] %></h2>
         <div id="msgreceive">
           <p><%= @item[:callee] %>:</p>
-          <p>No messages sent yet</p>
+          <p id="incomingMessage">No messages sent yet</p>
         </div>
         <div id="msgsend">
           <p><%= @item[:caller] %>:</p>
-          <textarea rows="2" maxlength="140" columns="70" placeholder="Enter your message to <%= @item[:callee] %> here, 140 characters or less"></textarea>
+          <textarea rows="2" maxlength="140" columns="70" id="messageContent" placeholder="Enter your message to <%= @item[:callee] %> here, 140 characters or less"></textarea>
           <button id="sendMessage">SEND</button>
         </div>
       </div>
@@ -66,6 +66,9 @@
 	</article>
 
 	<%= render 'footer' %>
+	<script src="/devcon/sip.js"></script>
 	<script src="/devcon/token.js"></script>
+        <script src=<%= @item[:jsvars] %> ></script>
+	<script src="/devcon/ua.js"></script>
 </body>
 </html>
