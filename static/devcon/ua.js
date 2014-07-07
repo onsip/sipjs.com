@@ -10,16 +10,56 @@
   var audio = document.getElementById("audio"),
       video = document.getElementById("video"),
       accept = document.getElementById("accept"),
-      hangup = document.getElementById("hangup"),
-      vidStream = document.getElementById("videoStream");
+      reject = document.getElementById("reject"),
+      bye = document.getElementById("bye"),
+      vidStream = document.getElementById("videoStream"),
+      incomingcall = document.getElementById("incomingcall"),
+      beforecall = document.getElementById("beforecall"),
+      duringcall = document.getElementById("duringcall"),
+      states;
 
-  function disableHangup() {
-    hangup.disable = true;
-    vidStream.src = null;
-  }
+  states = {
+    before: function () {
+      audio.disabled = false;
+      video.disabled = false;
+      reject.disabled = true;
+      accept.disabled = true;
+      bye.disabled = true;
+
+      beforecall.className = 'show';
+      incomingcall.className = 'hide';
+      duringcall.className = 'hide';
+
+      vidStream.src = null;
+    },
+
+    incoming: function () {
+      audio.disabled = true;
+      video.disabled = true;
+      accept.disabled = false;
+      reject.disabled = false;
+      bye.disabled = true;
+
+      beforecall.className = 'hide';
+      incomingcall.className = 'show';
+      duringcall.className = 'hide';
+    },
+
+    during: function () {
+      audio.disabled = true;
+      video.disabled = true;
+      accept.disabled = true;
+      reject.disabled = true;
+      bye.disabled = false;
+
+      beforecall.className = 'hide';
+      incomingcall.className = 'hide';
+      duringcall.className = 'show';
+    }
+  };
 
   function call(vid) {
-    window.session = window.ua.invite(
+    var session =  window.session = window.ua.invite(
       window.target,
       {
         media: {
@@ -36,15 +76,15 @@
       }
     );
 
-    window.session.on("accepted", function() {
-      hangup.disabled = false;
-    });
+    states.during();
 
-    window.session.on("bye", disableHangup);
+    session.on("rejected", states.before);
+    session.on("accepted", states.during);
+    session.on("bye", states.before);
   }
 
   window.ua.on("invite", function (incomingSession) {
-    accept.disabled = false;
+    states.incoming();
     window.session = incomingSession;
   });
 
@@ -52,9 +92,7 @@
   video.addEventListener("click", function() { call(true);}, false);
 
   accept.addEventListener("click", function () {
-    accept.disabled = true;
-    hangup.disabled = false;
-
+    states.during();
     window.session.accept(
       {
         media: {
@@ -67,12 +105,17 @@
       }
     );
 
-    window.session.on("bye", disableHangup);
+    window.session.on("bye", states.before);
   }, false);
 
-  hangup.addEventListener("click", function() {
+  reject.addEventListener("click", function () {
+    states.before();
+    window.session.reject();
+  }, false);
+
+  bye.addEventListener("click", function() {
+    states.before();
     window.session.bye();
-    hangup.disabled = true;
   }, false);
 })(window, document);
 

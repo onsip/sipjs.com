@@ -36,11 +36,20 @@
 
       <div id="phone">
         <video id="videoStream" poster="/devcon/demo_<%= @item[:gender] %>.png"></video>
-        <p class="all-caps">Call <%= @item[:callee] %>:</p>
-        <button type="button" id="video">Video</button>
-        <button type="button" id="audio">Audio</button>
-        <button type="button" id="accept" disabled>Accept</button>
-        <button type="button" id="hangup" disabled>Hangup</button>
+        <div id="beforecall" class="show">
+          <p>Call <%= @item[:callee] %>:</p>
+          <button type="button" id="video">Video</button>
+          <button type="button" id="audio">Audio</button>
+        </div>
+        <div id="incomingcall">
+          <p>Incoming call from <%= @item[:callee] %></p>
+          <button type="button" id="accept" disabled>Accept</button>
+          <button type="button" id="reject" disabled>Reject</button>
+        </div>
+        <div id="duringcall">
+          <p>On a call with <%= @item[:callee] %></p>
+          <button type="button" id="bye" disabled>Bye</button>
+        </div>
       </div>
 
       <div id="message">

@@ -32,7 +32,7 @@ button {
 
 button:disabled {
     cursor: default;
-    background: #a7a7a7;
+    background: #bebdb4;
 }
 
 button:not(:disabled):hover,
@@ -155,6 +155,7 @@ textarea {
 #phone p {
     display: inline-block;
     line-height: 3em;
+    text-transform: uppercase;
 }
 
 #phone button {
@@ -204,6 +205,37 @@ h1 {
 
 #subtitle {
     margin-bottom: 3em;
+}
+
+#incomingcall {
+    position: absolute;
+    top: 6em;
+    left: 0;
+    width: 60%;
+
+    margin: 0 5%;
+    padding: 1em 0;
+    border: 0.25em solid #bebdb4;
+
+    line-height: 1em;
+    background: white;
+    text-align: center;
+}
+
+#beforecall,
+#incomingcall,
+#duringcall {
+    display: none;
+}
+
+#beforecall.show,
+#incomingcall.show,
+#duringcall.show {
+    display: block;
+}
+
+#incomingcall button {
+    float: none;
 }
 
 #note h2 {
