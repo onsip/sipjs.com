@@ -139,5 +139,44 @@
 })(window, document);
 
 (function (window, document, undefined) {
+  var dataSend = document.getElementById("sendData"),
+      dataReceive = document.getElementById("incomingdata");
 
+  window.dataua = new SIP.UA({
+    traceSip: true,
+    uri: 'data' + window.uri
+  });
+
+  window.dataua.on('invite', function (dataSession) {
+    window.dataSession = dataSession;
+    window.dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
+      dataChannel.onmessage = function (e) {
+        console.log('Data Channel received message: ', e.data);
+        dataReceive.innerHTML = "The browser is " + e.data;
+        window.dataSession.bye();
+      };
+    });
+
+    dataSession.accept();
+  });
+
+  data.addEventListener('click', function () {
+    var browser = (navigator.userAgent.search("Chrome") > 0) ? "Chrome" : "Firefox";
+
+    window.dataSession = window.dataua.invite(
+      'data' + window.target,
+      {
+        media: {
+          dataChannel: true
+        }
+      }
+    );
+
+
+    window.dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
+      dataChannel.onopen = function () {
+        dataChannel.send(browser);
+      };
+    });
+  });
 })(window, document);
