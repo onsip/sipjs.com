@@ -11,7 +11,7 @@ description: In SIP.js, a SIP.Message represents an instant message using the SI
 
 ## Construction
 
-The Message constructor is intended for internal use only. Instead, outbound Messages are created through the [`SIP.UA.message`](/api/0.5.0/ua/#messagetarget-body-options) method. Inbound Messages are obtained via the `SIP.UA` [`message`](/api/0.5.0/ua/#message) event callback.
+The Message constructor is intended for internal use only. Instead, outbound Messages are created through the [`SIP.UA.message`](/api/0.6.0/ua/#messagetarget-body-options) method. Inbound Messages are obtained via the `SIP.UA` [`message`](/api/0.6.0/ua/#message) event callback.
 
 ### Examples
 
@@ -29,15 +29,15 @@ myUA.on('message', function (message) {
 
 ## Instance Attributes
 
-`SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
+`SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/0.6.0/context/client/) or [`SIP.ServerContext`](/api/0.6.0/context/server/).
 
 ## Instance Methods
 
-`SIP.Message` inherits its instance methods from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
+`SIP.Message` inherits its instance methods from [`SIP.ClientContext`](/api/0.6.0/context/client/) or [`SIP.ServerContext`](/api/0.6.0/context/server/).
 
 ## Events
 
-`SIP.Message` inherits its events from [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server/).
+`SIP.Message` inherits its events from [`SIP.ClientContext`](/api/0.6.0/context/client/) or [`SIP.ServerContext`](/api/0.6.0/context/server/).
 
 <!--
 

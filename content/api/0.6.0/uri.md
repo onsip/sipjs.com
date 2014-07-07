@@ -22,7 +22,7 @@ The SIP.URI constructor represents a SIP URI and provides a set of attributes an
 
 ## Construction
 
-Typically, construction is managed by a [`SIP.UA`](/api/0.5.0/ua) when a URI is needed. However, advanced users may construct URIs manually.
+Typically, construction is managed by a [`SIP.UA`](/api/0.6.0/ua) when a URI is needed. However, advanced users may construct URIs manually.
 
 ### new SIP.URI(scheme, user, host, port[, parameters, headers])
 

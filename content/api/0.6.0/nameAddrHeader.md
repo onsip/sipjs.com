@@ -22,7 +22,7 @@ The SIP.NameAddrHeader constructor represents the common SIP header format conta
 
 ## Construction
 
-Construction of a NameAddrHeader is typically managed by a [`SIP.UA`](/api/0.5.0/ua) when headers are parsed.  However, advanced users may construct NameAddrHeaders manually.
+Construction of a NameAddrHeader is typically managed by a [`SIP.UA`](/api/0.6.0/ua) when headers are parsed.  However, advanced users may construct NameAddrHeaders manually.
 
 ### `new SIP.NameAddrHeader(uri, displayName, parameters)`
 

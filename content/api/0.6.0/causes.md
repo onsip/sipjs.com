@@ -25,7 +25,7 @@ session.on('failed', function (request) {
 
 Constant | Value | Description 
 -----|------|-------------
-`INVALID_TARGET` | 'Invalid target' | The specified target can not be parsed as a valid [`SIP.URI`](/api/0.5.0/uri/).
+`INVALID_TARGET` | 'Invalid target' | The specified target can not be parsed as a valid [`SIP.URI`](/api/0.6.0/uri/).
 `CONNECTION_ERROR` | 'Connection Error' | WebSocket connection error occurred.
 `REQUEST_TIMEOUT` | 'Request Timeout' | The timeout expired for the client transaction before a response was received.
 `SIP_FAILURE_CODE` | 'SIP Failure Code' | A negative SIP response was received which is not part of any of the groups defined in the table below.

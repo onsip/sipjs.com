@@ -26,7 +26,7 @@ subscription.on('notify', function (notification) {
 
 ## Instance Attributes
 
-`SIP.Subscription` inherits some of its instance attributes from [`SIP.ClientContext`](/api/0.5.0/context/client/).
+`SIP.Subscription` inherits some of its instance attributes from [`SIP.ClientContext`](/api/0.6.0/context/client/).
 
 ### `id`
 
@@ -54,27 +54,27 @@ subscription.on('notify', function (notification) {
 
 ### `ua`
 
-[`SIP.UA`](/api/0.5.0/ua/) - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#ua) or [`SIP.ServerContext`](/api/0.5.0/context/server/#ua).
+[`SIP.UA`](/api/0.6.0/ua/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#ua) or [`SIP.ServerContext`](/api/0.6.0/context/server/#ua).
 
 ### `method`
 
-`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#method) or [`SIP.ServerContext`](/api/0.5.0/context/server/#method).
+`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#method) or [`SIP.ServerContext`](/api/0.6.0/context/server/#method).
 
 ### `request`
 
-[`SIP.IncomingRequest`](/api/0.5.0/incomingMessage/) or [`SIP.OutgoingRequest`](/api/0.5.0/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#request) or [`SIP.ServerContext`](/api/0.5.0/context/server/#request).
+[`SIP.IncomingRequest`](/api/0.6.0/incomingMessage/) or [`SIP.OutgoingRequest`](/api/0.6.0/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#request) or [`SIP.ServerContext`](/api/0.6.0/context/server/#request).
 
 ### `localIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.5.0/context/server/#localIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#localIdentity).
 
 ### `remoteIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.5.0/context/server/#remoteIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#remoteIdentity).
 
 ### `data`
 
-`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#data) or [`SIP.ServerContext`](/api/0.5.0/context/server/#data).
+`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#data) or [`SIP.ServerContext`](/api/0.6.0/context/server/#data).
 
 
 ## Instance Methods
@@ -99,7 +99,7 @@ Unsubscribes this subscription, terminates its dialog, and removes it from the U
 
 ## Events
 
-`SIP.Subscription` inherits events from [`SIP.ClientContext`](/api/0.5.0/context/client/). Each event allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
+`SIP.Subscription` inherits events from [`SIP.ClientContext`](/api/0.6.0/context/client/). Each event allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
 ### `notify`
 

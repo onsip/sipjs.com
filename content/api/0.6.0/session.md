@@ -4,7 +4,7 @@ description: In SIP.js, the class SIP.Session represents a WebRTC media (audio/v
 ---
 # SIP.Session
 
-The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via SIP INVITE messages. Sessions also implement one of [`SIP.ClientContext`](/api/0.5.0/context/client/) or [`SIP.ServerContext`](/api/0.5.0/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
+The class SIP.Session represents a WebRTC media (audio/video) session. It can be initiated by the local user or by a remote peer. Sessions are created via SIP INVITE messages. Sessions also implement one of [`SIP.ClientContext`](/api/0.6.0/context/client/) or [`SIP.ServerContext`](/api/0.6.0/context/server), depending on if they are the result of outbound (client) or inbound (server) INVITE requests.
 
 * TOC
 {:toc}
@@ -55,27 +55,27 @@ myUA.on('invite', function (session) {
 
 ### `ua`
 
-[`SIP.UA`](/api/0.5.0/ua/) - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#ua) or [`SIP.ServerContext`](/api/0.5.0/context/server/#ua).
+[`SIP.UA`](/api/0.6.0/ua/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#ua) or [`SIP.ServerContext`](/api/0.6.0/context/server/#ua).
 
 ### `method`
 
-`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#method) or [`SIP.ServerContext`](/api/0.5.0/context/server/#method).
+`String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#method) or [`SIP.ServerContext`](/api/0.6.0/context/server/#method).
 
 ### `request`
 
-[`SIP.IncomingRequest`](/api/0.5.0/incomingMessage/) or [`SIP.OutgoingRequest`](/api/0.5.0/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#request) or [`SIP.ServerContext`](/api/0.5.0/context/server/#request).
+[`SIP.IncomingRequest`](/api/0.6.0/incomingMessage/) or [`SIP.OutgoingRequest`](/api/0.6.0/outgoingRequest/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#request) or [`SIP.ServerContext`](/api/0.6.0/context/server/#request).
 
 ### `localIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.5.0/context/server/#localIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#localIdentity).
 
 ### `remoteIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.5.0/context/server/#remoteIdentity).
+`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#remoteIdentity).
 
 ### `data`
 
-`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/0.5.0/context/client/#data) or [`SIP.ServerContext`](/api/0.5.0/context/server/#data).
+`Object` - Empty object for application to define custom data. Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#data) or [`SIP.ServerContext`](/api/0.6.0/context/server/#data).
 
 
 
@@ -261,15 +261,15 @@ Name | Type | Description
 
 ### `cancel([options])`
 
-Overrides [`SIP.ClientContext.cancel`](/api/0.5.0/context/client/#canceloptions/)
+Overrides [`SIP.ClientContext.cancel`](/api/0.6.0/context/client/#canceloptions/)
 
 ## Instance Methods (Inbound/Server)
 
 ### `progress([options])`
 
-Overrides [`SIP.ServerContext.progress`](/api/0.5.0/context/server/#progressoptions). Additional parameters specific to INVITE requests can be specified.
+Overrides [`SIP.ServerContext.progress`](/api/0.6.0/context/server/#progressoptions). Additional parameters specific to INVITE requests can be specified.
 
-As per [RFC 3262](http://tools.ietf.org/html/rfc3262), non-100 provisional responses may be transmitted reliably. Support for this is determined by the initial invite request (see the [`rel100`](/api/0.5.0/ua/#invitetarget-options) parameter on `ua.invite()`). If the INVITE prohibits reliable provisional responses, all responses sent with `progress` will be transmitted unreliably. Likewise, if the INVITE requires 100rel, all non-100 responses will be sent reliably. If 100rel is supported, reliable transmission is determined by the `options.rel100` parameter. Note that reliable provisional responses typically contain the SDP answer and so an `options.media` parameter is also provided.
+As per [RFC 3262](http://tools.ietf.org/html/rfc3262), non-100 provisional responses may be transmitted reliably. Support for this is determined by the initial invite request (see the [`rel100`](/api/0.6.0/ua/#invitetarget-options) parameter on `ua.invite()`). If the INVITE prohibits reliable provisional responses, all responses sent with `progress` will be transmitted unreliably. Likewise, if the INVITE requires 100rel, all non-100 responses will be sent reliably. If 100rel is supported, reliable transmission is determined by the `options.rel100` parameter. Note that reliable provisional responses typically contain the SDP answer and so an `options.media` parameter is also provided.
 
 #### Parameters
 
@@ -277,33 +277,33 @@ Name | Type | Description
 -|-|-
 `options.rel100` | `Boolean` | If the INVITE request supports 100rel, progress responses will be transmitted reliably based on this option. If the INVITE request requires or does not support 100rel, this option is ignored.
 `options.media` | `Object` | Media constraints to use in a reliable provisional response. After the response is PRACKed, early media will begin. If the session is later accepted, these media constraints will be used.
-ServerContext Parameters | | See [`SIP.ServerContext.progress`](/api/0.5.0/context/server/#progressoptions).
+ServerContext Parameters | | See [`SIP.ServerContext.progress`](/api/0.6.0/context/server/#progressoptions).
 
 ### `accept([options])`
 
-Overrides [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions).  Additional parameters specific to INVITE requests can be specified.
+Overrides [`SIP.ServerContext.accept`](/api/0.6.0/context/server/#acceptoptions).  Additional parameters specific to INVITE requests can be specified.
 
 #### Parameters
 
 Name | Type | Description
 -|-|-
 `options.media` | Object | Media constraints to use for the Session. For example, `{ audio: true, video: true }`.
-ServerContext Parameters | | See [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions).
+ServerContext Parameters | | See [`SIP.ServerContext.accept`](/api/0.6.0/context/server/#acceptoptions).
 
 ### `reject([options])`
 
-Overrides [`SIP.ServerContext.reject`](/api/0.5.0/context/server/#rejectoptions)
+Overrides [`SIP.ServerContext.reject`](/api/0.6.0/context/server/#rejectoptions)
 
 ### `reply([options])`
 
-Overrides [`SIP.ServerContext.reply`](/api/0.5.0/context/server/#replyoptions)
+Overrides [`SIP.ServerContext.reply`](/api/0.6.0/context/server/#replyoptions)
 
 
 ## Events
 
 The `SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
 
-Every event handler is executed with a [SIP.Event](/api/0.5.0/eventEmitter/) instance as the only argument.
+Every event handler is executed with a [SIP.Event](/api/0.6.0/eventEmitter/) instance as the only argument.
 
 
 ### `progress`
@@ -314,7 +314,7 @@ Fired each time a provisional (100-199) response is received.
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage)|The received response
+`response`|[`SIP.IncomingMessage`](/api/0.6.0/incomingMessage)|The received response
 
 ### `accepted`
 
@@ -328,7 +328,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Number` | The status code of the received response, between 200 and 299.
-`data.response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage) | The received response
+`data.response` | [`SIP.IncomingMessage`](/api/0.6.0/incomingMessage) | The received response
 
 Inbound sessions do not currently provide any parameters when emitting the `accepted` event. [Track this bug on GitHub.](https://github.com/onsip/SIP.js/issues/15)
 
@@ -340,7 +340,7 @@ Fired each time an unsuccessful final (300-699) response is received. *Note: Thi
 
 Name | Type | Description
 -----|------|------------
-`response` | [`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) | The received response
+`response` | [`SIP.IncomingMessage`](/api/0.6.0/incomingMessage/) | The received response
 `cause` | `String` | The reason phrase associated with the SIP response code.
 
 ### `failed`
@@ -353,7 +353,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Number` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingMessage|null`](/api/0.5.0/incomingMessage/) | The received response, or `null` if the failure was not due to a received response.
+`data.response` | [`SIP.IncomingMessage|null`](/api/0.6.0/incomingMessage/) | The received response, or `null` if the failure was not due to a received response.
 `data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
 
 
@@ -377,8 +377,8 @@ Fired when an established call ends.
 
 Name | Type | Description 
 -----|------|--------------
-`message`|`Object`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse/) instance of the received SIP 1XX response.
-`cause`||One value of [Failure and End Causes](/api/0.5.0/causes)
+`message`|`Object`|[`SIP.IncomingResponse`](/api/0.6.0/incomingResponse/) instance of the received SIP 1XX response.
+`cause`||One value of [Failure and End Causes](/api/0.6.0/causes)
 
 -->
 
@@ -400,7 +400,7 @@ the refer, use the `session.followRefer(callback)` function.
 
 Name | Type | Description
 -----|------|--------------
-`request`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/)|Instance of the received SIP REFER request.
+`request`|[`SIP.IncomingMessage`](/api/0.6.0/incomingMessage/)|Instance of the received SIP REFER request.
 
 #### `on('refer', session.followRefer(callback)`
 
@@ -417,7 +417,7 @@ Fired for an incoming or outgoing DTMF.
 Name | Type | Description 
 -----|------|--------------
 `dtmf`|`SIP.Session.DTMF`|DTMF instance.
-`request`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/)|Instance of the received SIP INFO request.
+`request`|[`SIP.IncomingMessage`](/api/0.6.0/incomingMessage/)|Instance of the received SIP INFO request.
 
 ### `muted`
 
@@ -471,4 +471,4 @@ Fired when a BYE is sent.
 
 Name | Type | Description 
 -----|------|--------------
-`request`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/)|Instance of the received SIP BYE request.
+`request`|[`SIP.IncomingMessage`](/api/0.6.0/incomingMessage/)|Instance of the received SIP BYE request.

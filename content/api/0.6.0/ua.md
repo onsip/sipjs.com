@@ -14,7 +14,7 @@ A user agent (or UA) is associated with a SIP user address and acts on behalf of
 
 ### `new SIP.UA([configuration])`
 
-A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent, although most applications will define at least [`uri`](/api/0.5.0/ua_configuration_parameters/#uri) and [`ws_servers`](/api/0.5.0/ua_configuration_parameters/#ws_servers). Check the full list for optional [UA Configuration Parameters](/api/0.5.0/ua_configuration_parameters/).  If no parameters are passed then an anonymous user agent is created.   If only a string is passed, then just the uri is set to that string.
+A new user agent is created via the `SIP.UA` constructor.  There are no mandatory parameters for creating a new user agent, although most applications will define at least [`uri`](/api/0.6.0/ua_configuration_parameters/#uri) and [`ws_servers`](/api/0.6.0/ua_configuration_parameters/#ws_servers). Check the full list for optional [UA Configuration Parameters](/api/0.6.0/ua_configuration_parameters/).  If no parameters are passed then an anonymous user agent is created.   If only a string is passed, then just the uri is set to that string.
 
 ### Examples
 
@@ -31,7 +31,7 @@ var bob = new SIP.UA({
 
 ### `start()`
 
-Connect to the configured WebSocket server, and restore the previous state if previously stopped. The first time `start()` is called, the UA will also attempt to register if the [`register`](/api/0.5.0/ua_configuration_parameters/#register) parameter in the UA's configuration is set to `true`.
+Connect to the configured WebSocket server, and restore the previous state if previously stopped. The first time `start()` is called, the UA will also attempt to register if the [`register`](/api/0.6.0/ua_configuration_parameters/#register) parameter in the UA's configuration is set to `true`.
 
 ### `stop()`
 
@@ -123,7 +123,7 @@ Sends an instant message making use of SIP MESSAGE request.
 
 Name | Type | Description 
 -----|------|--------------
-`target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination of the message. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance
+`target`|`String|`[`SIP.URI`](/api/0.6.0/uri/)|Destination of the message. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.6.0/uri/) instance
 `body`|`String`|Message content. `String` representing the body of the message
 `options`|`Object`|Optional `Object` with extra parameters (see below)
 `options.contentType`|`String`|Optional `String` representing the content-type of the body. Default is `text/plain`
@@ -135,7 +135,7 @@ Name | Type | Description
 
 Types | Description
 ------|-------------
-[`SIP.Message`](/api/0.5.0/message/), [`SIP.ClientContext`](/api/0.5.0/context/client/) | The newly created MESSAGE. The new Message object implements the shared ClientContext interface for outbound requests
+[`SIP.Message`](/api/0.6.0/message/), [`SIP.ClientContext`](/api/0.6.0/context/client/) | The newly created MESSAGE. The new Message object implements the shared ClientContext interface for outbound requests
 
 #### Example
 
@@ -146,13 +146,13 @@ console.log(message.body); // 'Hello, Bob!'
 
 ### `subscribe(target, event[, options])`
 
-Creates a [`SIP.Subscription`](/api/0.5.0/subscription/) to a certain event of another user.
+Creates a [`SIP.Subscription`](/api/0.6.0/subscription/) to a certain event of another user.
 
 #### Parameters
 
 Name | Type | Description
 -----|------|--------------
-`target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination of the subscription. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance
+`target`|`String|`[`SIP.URI`](/api/0.6.0/uri/)|Destination of the subscription. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.6.0/uri/) instance
 `event`|`String`|Message content. `String` representing the name of the event-package to be subscribed to
 `options`|`Object`|Optional `Object` with extra parameters (see below)
 `options.expires`|`Number`|Optional `Number` representing the desired duration of the subscription. Default (and minimum) is 3600 (1 hour)
@@ -164,7 +164,7 @@ Name | Type | Description
 
 Types | Description
 ------|-------------
-[`SIP.Subscription`](/api/0.5.0/subscription/), [`SIP.ClientContext`](/api/0.5.0/context/client/) | The newly created Subscription. The new Subscription object implements the shared ClientContext interface for outbound requests
+[`SIP.Subscription`](/api/0.6.0/subscription/), [`SIP.ClientContext`](/api/0.6.0/context/client/) | The newly created Subscription. The new Subscription object implements the shared ClientContext interface for outbound requests
 
 #### Example
 
@@ -180,7 +180,7 @@ Invite the target to start a multimedia session.
 
 |Name                      | Type        | Description |
 |--------------------------|-------------|-------------|
-|`target`                  |`String|`[`SIP.URI`](/api/0.5.0/uri/)     |Destination of the call. `String` representing a destination, username, a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance|
+|`target`                  |`String|`[`SIP.URI`](/api/0.6.0/uri/)     |Destination of the call. `String` representing a destination, username, a complete SIP URI, or a [`SIP.URI`](/api/0.6.0/uri/) instance|
 |`options`                 |`Object`     |Optional `Object` with extra parameters (see below)|
 |`options.mediaConstraints`|`Object`     |`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used|
 |`options.mediaStream`     |`MediaStream`|`MediaStream` to transmit to the other end|
@@ -196,7 +196,7 @@ Invite the target to start a multimedia session.
 
 Types | Description
 ------|-------------
-[`SIP.Session`](/api/0.5.0/session/), [`SIP.ClientContext`](/api/0.5.0/context/client/)| The session the target is invited to.  The new Session object implements the shared ClientContext interface for outbound requests. The Session is in a provisional or early state until accepted by the remote target.  Please refer to the Session documentation for more information.
+[`SIP.Session`](/api/0.6.0/session/), [`SIP.ClientContext`](/api/0.6.0/context/client/)| The session the target is invited to.  The new Session object implements the shared ClientContext interface for outbound requests. The Session is in a provisional or early state until accepted by the remote target.  Please refer to the Session documentation for more information.
 
 
 ### `request(method, target[, options])`
@@ -208,7 +208,7 @@ Send a SIP message.
 Name | Type | Description 
 -----|------|--------------
 `method`|`String`|The SIP request method to send, e.g. `'INVITE'` or `'OPTIONS'`
-`target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination address. `String` representing a destination username or complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance
+`target`|`String|`[`SIP.URI`](/api/0.6.0/uri/)|Destination address. `String` representing a destination username or complete SIP URI, or a [`SIP.URI`](/api/0.6.0/uri/) instance
 `body`|`String`|Message content. `String` representing the body of the message
 `options`|`Object`|Optional `Object` with extra parameters (see below)
 `options.body`|`String`|Optional `String` to be included as the body of the request
@@ -218,7 +218,7 @@ Name | Type | Description
 
 Type | Description
 -----|-------------
-[`SIP.ClientContext`](/api/0.5.0/context/client/)| The context surrounding the new outbound request
+[`SIP.ClientContext`](/api/0.6.0/context/client/)| The context surrounding the new outbound request
 
 
 
@@ -234,7 +234,7 @@ Type | Description
 
 ## Events
 
-User agent objects extend the [SIP.EventEmitter](/api/0.5.0/eventEmitter/) interface.  Each event emitted by the UA passes specific relevant arguments to its callbacks.
+User agent objects extend the [SIP.EventEmitter](/api/0.6.0/eventEmitter/) interface.  Each event emitted by the UA passes specific relevant arguments to its callbacks.
 
 ### `connected`
 
@@ -271,7 +271,7 @@ Fired for an unregistration. This event is fired in the following scenarios:
 
 Name | Type | Description 
 -----|------|--------------
-`cause`||`null` for positive response to un-REGISTER SIP request. If a reregistration fails, this is one value of [Failure and End Causes](/api/0.5.0/causes)
+`cause`||`null` for positive response to un-REGISTER SIP request. If a reregistration fails, this is one value of [Failure and End Causes](/api/0.6.0/causes)
 
 
 ### `registrationFailed`
@@ -282,7 +282,7 @@ Fired for a registration failure.
 
 Name | Type | Description 
 -----|------|--------------
-`cause`||One value of [Failure and End Causes](/api/0.5.0/causes)
+`cause`||One value of [Failure and End Causes](/api/0.6.0/causes)
 
 
 ### `invite`
@@ -295,7 +295,7 @@ Fired when an incoming INVITE request is received.
 
 Name | Types | Description 
 -----|-------|-------------
-`session`|[`SIP.Session`](/api/0.5.0/message/), [`SIP.ServerContext`](/api/0.5.0/context/server/)| The inbound session the user agent was invited to. This argument also implements the shared [`SIP.ServerContext`](/api/0.5.0/context/server/) behavior for inbound requests
+`session`|[`SIP.Session`](/api/0.6.0/message/), [`SIP.ServerContext`](/api/0.6.0/context/server/)| The inbound session the user agent was invited to. This argument also implements the shared [`SIP.ServerContext`](/api/0.6.0/context/server/) behavior for inbound requests
 
 ### `message`
 
@@ -307,7 +307,7 @@ Fired when an incoming MESSAGE request is received.
 
 Name | Types | Description 
 -----|-------|-------------
-`message`|[`SIP.Message`](/api/0.5.0/message/), [`SIP.ServerContext`](/api/0.5.0/context/server/)| The inbound message received. This argument also implements the shared [`SIP.ServerContext`](/api/0.5.0/context/server/) behavior for inbound requests
+`message`|[`SIP.Message`](/api/0.6.0/message/), [`SIP.ServerContext`](/api/0.6.0/context/server/)| The inbound message received. This argument also implements the shared [`SIP.ServerContext`](/api/0.6.0/context/server/) behavior for inbound requests
 
 ### Example
  

@@ -25,7 +25,7 @@ While some people may like plain ice cream or snacking on chocolate chips, creat
 
 ## Read on
 
-* [`SIP.ClientContext`](/api/0.5.0/context/client/) and [`SIP.ServerContext`](/api/0.5.0/context/server/) documentation
-* [`SIP.Session`](/api/0.5.0/session) documentation
-* [`SIP.Message`](/api/0.5.0/message) documentation
+* [`SIP.ClientContext`](/api/0.6.0/context/client/) and [`SIP.ServerContext`](/api/0.6.0/context/server/) documentation
+* [`SIP.Session`](/api/0.6.0/session) documentation
+* [`SIP.Message`](/api/0.6.0/message) documentation
 
