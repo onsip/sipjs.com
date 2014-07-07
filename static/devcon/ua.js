@@ -11,11 +11,11 @@
       video = document.getElementById("video"),
       accept = document.getElementById("accept"),
       hangup = document.getElementById("hangup"),
-      audStream = document.getElementById("audioStream"),
       vidStream = document.getElementById("videoStream");
 
   function disableHangup() {
     hangup.disable = true;
+    vidStream.src = null;
   }
 
   function call(vid) {
@@ -29,7 +29,6 @@
           },
           render: {
             remote: {
-              audio: audStream,
               video: vidStream
             }
           }
@@ -61,7 +60,6 @@
         media: {
           render: {
             remote: {
-              audio: audStream,
               video: vidStream
             }
           }
