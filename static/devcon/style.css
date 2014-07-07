@@ -32,9 +32,12 @@ button {
 
 button:disabled {
     cursor: default;
+    background: #a7a7a7;
 }
 
-button:not(:disabled):hover {
+button:not(:disabled):hover,
+button:not(:disabled):focus,
+button:not(:disabled):active {
     background: #c63a27;
 }
 
@@ -72,6 +75,7 @@ textarea {
     left: 0;
 
     width: 50%;
+    margin-bottom: 3em;
 }
 
 #phone {
@@ -87,7 +91,7 @@ textarea {
     float: right;
 }
 
-#note {
+#note { /* banner */
     display: block;
     clear: both;
     position: relative;
@@ -95,7 +99,49 @@ textarea {
     left: 0;
     width: 100%;
 
+    margin: 3em 0;
+    padding: 3em 0;
+    border-top: 1px solid #a7a7a7;
+    border-bottom: 1px solid #a7a7a7;
+    overflow: auto;
 }
+
+#note > p { /* major */
+    display: inline-block;
+    width: 60%;
+}
+
+#note #signup {
+    /* minor */
+    display: block;
+    float: right;
+
+    /* a.button */
+    padding: 1em 2em;
+    background: #ea4b35;
+    color: white;
+    border-radius: 0.25em;
+    text-align: center;
+}
+
+#note #signup:hover,
+#note #signup:focus,
+#note #signup:active {
+    background: #c63a27;
+}
+
+#signup p {
+    font-size: 0.8em;
+    line-height: 1em;
+    margin: 0;
+}
+
+#signup p:first-child {
+    font-size: 1.5em;
+    margin-bottom: 0.33em;
+}
+
+
 
 /**
  * Custom
@@ -149,4 +195,17 @@ textarea {
 #data #sendinstructions {
     width: 80%;
     color: inherit;
+}
+
+/** Random **/
+h1 {
+    margin: 3em 0 0 0;
+}
+
+#subtitle {
+    margin-bottom: 3em;
+}
+
+#note h2 {
+    color: #ea4b35;
 }
