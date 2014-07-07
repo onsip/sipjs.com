@@ -1,0 +1,152 @@
+/**
+ * BUILDING BLOCKS
+ **/
+
+/* Headers */
+.all-caps {
+    text-transform: uppercase;
+}
+
+/* Buttons */
+button {
+    -webkit-appearance: none;
+    font-size: 1em;
+    line-height: 1em;
+
+    border: none;
+    border-radius: 0.25em;
+    background: #ea4b35;
+
+    color: white;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    /* button[type="submit"] */
+    display: block;
+    float: right;
+    clear: both;
+    margin: 1em 0;
+    padding: 1em 3em;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+button:not(:disabled):hover {
+    background: #c63a27;
+}
+
+button[type="button"] {
+    display: inline-block;
+    float: none;
+    clear: none;
+
+    margin: 0 0 0 1em;
+    padding: 1em;
+    vertical-align: middle;
+}
+
+/* Inputs */
+
+textarea {
+    font-size: 1em;
+
+    padding: 0.5em;
+
+    box-sizing: border-box;
+    border: 0.25em solid rgb(190, 189, 180);
+    border-radius: 0.25em;
+
+    resize: none;
+}
+
+/**
+ * LAYOUT
+ **/
+#phone, #message, #data {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+
+    width: 50%;
+}
+
+#phone {
+    float: left;
+    padding-right: 15%; /* staccato */
+}
+
+#message {
+    float: right;
+}
+
+#data {
+    float: right;
+}
+
+#note {
+    display: block;
+    clear: both;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+}
+
+/**
+ * Custom
+ **/
+
+/* Voice/Video */
+#phone video {
+    width: 100%;
+}
+
+#phone p {
+    display: inline-block;
+    line-height: 3em;
+}
+
+#phone button {
+    float: right;
+}
+
+/* Message */
+#message p {
+    display: inline-block;
+    color: #ea4b35;
+    width: 20%;
+}
+
+#message #incomingMessage,
+#message #incomingmessage,
+textarea {
+    width: 80%;
+    color: inherit;
+}
+
+textarea {
+    vertical-align: top;
+}
+
+
+/* Data */
+#data p {
+    display: inline-block;
+    color: #ea4b35;
+    width: 20%;
+}
+
+#data #incomingdata {
+    width: 80%;
+    color: inherit;
+}
+
+#data #sendinstructions {
+    width: 80%;
+    color: inherit;
+}
