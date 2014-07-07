@@ -51,7 +51,7 @@ myUA.on('invite', function (session) {
 
 ### `endTime`
 
-`DATE` - Date object indicating the time when the session ended. Takes its value at the moment when the terminated event was fired.
+`Date` - Date object indicating the time when the session ended. Takes its value at the moment when the terminated event was fired.
 
 ### `ua`
 
@@ -241,6 +241,22 @@ Type | Description
 TypeError
 INVALID_STATE_ERROR
 
+### `mute([options])`
+
+Helper function that will call through to the MediaHandler mute function, then emit a [mute](#) event.
+
+Name | Type | Description
+-----|------|--------------
+`options`|`Object`|Optional `Object` with extra parameters (see [MediaHandler.mute()](#)).
+
+### `unmute([options])`
+
+Helper function that will call through to the MediaHandler unmute function, then emit an [unmute](#) event.
+
+Name | Type | Description
+-----|------|--------------
+`options`|`Object`|Optional `Object` with extra parameters (see [MediaHandler.unmute()](#)).
+
 ## Instance Methods (Outbound/Client)
 
 ### `cancel([options])`
@@ -272,7 +288,6 @@ Overrides [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions)
 Name | Type | Description
 -|-|-
 `options.media` | Object | Media constraints to use for the Session. For example, `{ audio: true, video: true }`.
-`options.mediaConstraints` | Object | *Deprecated* - Same as `options.media`
 ServerContext Parameters | | See [`SIP.ServerContext.accept`](/api/0.5.0/context/server/#acceptoptions).
 
 ### `reject([options])`
@@ -378,32 +393,20 @@ Fired when the session was canceled by the client.
 ### `refer`
 
 Fired when a REFER is received, and the user would like to handle the
-transfer at the application level. This event will not be emitted if
-it is not listened for.
-NOTE: This event does not exist in tagged release 0.5.0.
+transfer at the application level. To have SIP.js automatically follow
+the refer, use the `session.followRefer(callback)` function.
 
 #### `on('refer', function(request) {})`
 
 Name | Type | Description
 -----|------|--------------
-`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP REFER request.
+`request`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/)|Instance of the received SIP REFER request.
 
-### `referred`
-
-Fired when a REFER is received and the user wants SIP.js to handle the
-details of setting up the new session. This new session is set up in a
-generic way, and then emitted with the event. This event
-will not be emitted if it is not listened for.
-NOTE: In tagged release 0.5.0, this is how all REFERS are handled, and
-will always be emitted.
-
-#### `on('referred', function(request,newSession) {})`
+#### `on('refer', session.followRefer(callback)`
 
 Name | Type | Description
 -----|------|--------------
-`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP REFER request.
-`newSession`|`Object`|[`SIP.Session`](/api/0.5.0/session/) the new session created by the refer.
-
+`callback`|`function`|Callback function to be called after the refer is followed.
 
 ### `dtmf`
 
@@ -413,8 +416,32 @@ Fired for an incoming or outgoing DTMF.
 
 Name | Type | Description 
 -----|------|--------------
-`dtmf`|`Object`|`SIP.Session.DTMF` instance.
-`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP INFO request.
+`dtmf`|`SIP.Session.DTMF`|DTMF instance.
+`request`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/)|Instance of the received SIP INFO request.
+
+### `muted`
+
+Fired when the session's mute function is called and the MediaHandler's mute function returns.
+
+#### `on('muted', function(data) {})`
+
+Name | Type | Description
+-----|------|--------------
+`data`|`Object`|Contains which parts of the media stream were muted (See below).
+`data.audio`|`boolean`|True if audio is muted, False if unmuted.
+`data.video`|`boolean`|True if video is muted, False if unmuted.
+
+### `unmuted`
+
+Fired when the session's unmute function is called and the MediaHandler's unmute function returns.
+
+#### `on('unmuted', function(data) {})`
+
+Name | Type | Description
+-----|------|--------------
+`data`|`Object`|Contains which parts of the media stream were muted (See below).
+`data.audio`|`boolean`|True if audio is unmuted, False if muted.
+`data.video`|`boolean`|True if video is unmuted, False if muted.
 
 <!--
 
@@ -444,4 +471,4 @@ Fired when a BYE is sent.
 
 Name | Type | Description 
 -----|------|--------------
-`request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP BYE request.
+`request`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/)|Instance of the received SIP BYE request.
