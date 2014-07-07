@@ -198,6 +198,67 @@ textarea {
     color: inherit;
 }
 
+/* Code */
+#codebox ul {
+    list-style:none;
+    margin:0;
+    float:left;
+}
+
+#codebox ul li {
+    float: left;
+    border-bottom: 40px solid #bebdb4;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    height: 0;
+    width: 165px;
+}
+
+#codebox ul li div {
+    display: block;
+    border-bottom: 36px solid white;
+    border-left: 18px solid transparent;
+    border-right: 17px solid transparent;
+    height: 0;
+    width: 158px;
+    float: left;
+    margin-left: -17px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+#codebox ul li div.active {
+    border-bottom: 35px solid #bebdb4;
+}
+
+#codebox ul li div a {
+    display:block;
+    margin-top: 6px;
+    text-transform:uppercase;
+    color: #bebdb4;
+}
+
+#codebox ul li div a:hover {
+    cursor: pointer;
+}
+
+#codebox ul li div.active a {
+    color: white;
+}
+
+#codebox .code {
+    display:none;
+    width: 100%;
+    height: 300px;
+    border: 2px solid #bebdb4;
+    float:left;
+    margin-top: -10px;
+    overflow-y: scroll;
+}
+
+#codebox .active.code {
+    display: block;
+}
 /** Random **/
 h1 {
     margin: 3em 0 0 0;

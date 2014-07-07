@@ -86,7 +86,42 @@
       <div id="code">
         <h2 class="all-caps">Code</h2>
         <div id="codebox">
-          
+          <ul id="codelist">
+            <li>
+              <div class="active">
+                <a data-tab="1">Voice Call</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a data-tab="2"> Video Call</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a data-tab="3">Message</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a data-tab="4">Data</a>
+              </div>
+            </li>
+          </ul>
+          <div id="code-tabs">
+            <div data-tab="1" class="active code">
+              some code
+            </div>
+            <div data-tab="2" class="code">
+              different code
+            </div>
+            <div data-tab="3" class="code">
+              hah
+            </div>
+            <div data-tab="4" class="code">
+              blah
+            </div>
+        </div>
         </div>
       </div>
     </main>
@@ -99,6 +134,7 @@
 	<script src="/devcon/token.js"></script>
         <script src=<%= @item[:jsvars] %> ></script>
 	<script src="/devcon/ua.js"></script>
+    <script src="/devcon/tabs.js" type="text/javascript"></script>
 </body>
 </html>
 v
