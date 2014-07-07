@@ -5828,6 +5828,8 @@ InviteServerContext.prototype = {
             self.failed(null, SIP.C.causes.CONNECTION_ERROR);
           };
 
+        self.mediaHandler.render();
+
         extraHeaders.push('Contact: ' + self.contact);
 
         if(!self.hasOffer) {

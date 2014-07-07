@@ -35,10 +35,12 @@
       </div>
 
       <div id="phone">
-        <video poster="/devcon/demo_<%= @item[:gender] %>.png"></video>
+        <video id="videoStream" poster="/devcon/demo_<%= @item[:gender] %>.png"></video>
         <p class="all-caps">Call <%= @item[:callee] %>:</p>
         <button type="button" id="video">Video</button>
         <button type="button" id="audio">Audio</button>
+        <button type="button" id="accept" disabled>Accept</button>
+        <button type="button" id="hangup" disabled>Hangup</button>
       </div>
 
       <div id="message">
@@ -90,3 +92,4 @@
 	<script src="/devcon/ua.js"></script>
 </body>
 </html>
+v
