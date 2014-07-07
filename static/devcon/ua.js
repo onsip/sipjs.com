@@ -1,4 +1,9 @@
 (function (window, document, undefined) {
+  document.getElementById('remote-uri').innerHTML = window.target;
+  document.getElementById( 'local-uri').innerHTML = window.uri;
+})(window, document);
+
+(function (window, document, undefined) {
   window.ua  = new SIP.UA({
           traceSip: true,
           uri: window.uri,

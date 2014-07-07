@@ -241,3 +241,7 @@ h1 {
 #note h2 {
     color: #ea4b35;
 }
+
+#local-uri, #remote-uri {
+    color: #ea4b35;
+}
