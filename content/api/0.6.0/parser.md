@@ -1,6 +1,6 @@
 ---
 title: Parser | SIP.js
-description: TODO
+description: The SIP.js Parser object provides methods for extracting and parsing SIP messages in SIP.js.
 ---
 
 # SIP.Parser

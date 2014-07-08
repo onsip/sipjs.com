@@ -1,11 +1,11 @@
 ---
 title: SIP Messages | SIP.js
-description: TODO
+description: SIP.js contains several data structures for representing SIP messages, including OutgoingRequests, IncomingRequests, and IncomingResponses.
 ---
 
 # SIP Messages
 
-TODO - This page describes data structures for SIP packets:  Incoming Messages, Incoming Requests, Incoming Responses, and Outgoing Requests.  For some reason, there are no Outgoing Responses.
+This page describes data structures for SIP packets:  Incoming Messages, Incoming Requests, Incoming Responses, and Outgoing Requests. While each has its own constructor, they share much similar structure, properties, and methods. As such, they are all documented together below.
 
 * TOC
 {:toc}

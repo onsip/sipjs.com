@@ -1,6 +1,6 @@
 ---
 title: Transport | SIP.js
-description: TODO
+description: SIP.js Transport provides a transport layer for SIP over WebSocket connections.
 ---
 
 # SIP.Transport
@@ -115,7 +115,7 @@ Send a message along the WebSocket
 
 Name | Type | Description
 -|-|-
-`msg` | `SIP.OutgoingRequest|String` | A SIP Request (represented as a String or [SIP.OutgoingRequest](#TODO)) to send along the WebSocket.
+`msg` | `SIP.OutgoingRequest|String` | A SIP Request (represented as a String or [SIP.OutgoingRequest](/api/0.6.0/sipMessage/)) to send along the WebSocket.
 
 #### Returns
 
@@ -129,22 +129,31 @@ Create and open a new WebSocket connection to the configured WebSocket server.
 
 Disconnect from the WebSocket and cancel any reconnection attempts.
 
-### `reConnect()`
+<div markdown="1" class="dev">
 
-*Internal* Reconnect to the WebSocket in the event of unexpected disconnection. This will attempt to reconnect up to [`ua.configuration.wsServerMaxReconnection`](#TODO) times, with a gap of [`ua.configuration.wsServerReconnectionTimeout`](#TODO) seconds between each request.
+### `reConnect()`
+{: .no_toc }
+
+*Internal* Reconnect to the WebSocket in the event of unexpected disconnection. This will attempt to reconnect up to [`ua.configuration.wsServerMaxReconnection`](/api/0.6.0/ua_configuration_parameters/#TODO) times, with a gap of [`ua.configuration.wsServerReconnectionTimeout`](/api/0.6.0/ua_configuration_parameters/#TODO) seconds between each request.
 
 ### `onOpen()`
+{: .no_toc }
 
 *Internal* This method is called when the WebSocket is opened. Its primary purpose is to clear the reconnection attempts and notify the UA.
 
 ### `onClose()`
+{: .no_toc }
 
 *Internal* This method is called when the WebSocket is closed. Its primary purpose is to notify the UA and attempt to reconnect if necessary.
 
 ### `onMessage()`
+{: .no_toc }
 
 *Internal* This method is called when a message is received from the WebSocket. It parses the SIP message, runs sanity checks, and passes it to the UA (for requests) or transaction (for responses) for processing.
 
 ### `onError()`
+{: .no_toc }
 
 *Internal* Logs an error when the WebSocket errors. Errors typically also disconnect the WebSocket, so no extra handling is done here.
+
+</div>

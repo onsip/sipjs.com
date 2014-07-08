@@ -1,6 +1,6 @@
 ---
 title: SIP.NameAddrHeader | SIP.js
-description: TODO
+description: The SIP.NameAddrHeader constructor represents the common SIP header format containing a SIP URI and optional display name.
 ---
 
 # SIP.NameAddrHeader
