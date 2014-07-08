@@ -17,58 +17,47 @@
  **/
 (function (window, document, undefined) {
 
+  var elements = [
+    'audio',
+    'video',
+    'accept',
+    'reject',
+    'bye',
+    'videoStream',
+    'beforecall',
+    'incomingcall',
+    'duringcall'
+  ].reduce(function (previousValue, currentValue) {
+    previousValue[currentValue] = document.getElementById(currentValue);
+    return previousValue;
+  }, {});
+
   /** UI **/
-  var audio = document.getElementById("audio"),
-      video = document.getElementById("video"),
-      accept = document.getElementById("accept"),
-      reject = document.getElementById("reject"),
-      bye = document.getElementById("bye"),
-      vidStream = document.getElementById("videoStream"),
-      incomingcall = document.getElementById("incomingcall"),
-      beforecall = document.getElementById("beforecall"),
-      duringcall = document.getElementById("duringcall"),
-      states;
+  var updateUI = function (state) {
+    function update(before, incoming, during) {
+      elements.audio.disabled = !before;
+      elements.video.disabled = !before;
+      elements.reject.disabled = !incoming;
+      elements.accept.disabled = !incoming;
+      elements.bye.disabled = !during;
 
-  states = {
-    before: function () {
-      audio.disabled = false;
-      video.disabled = false;
-      reject.disabled = true;
-      accept.disabled = true;
-      bye.disabled = true;
+      elements.beforecall.className = before ? 'show' : 'hide';
+      elements.incomingcall.className = incoming ? 'show' : 'hide';
+      elements.duringcall.className = during ? 'show' : 'hide';
 
-      beforecall.className = 'show';
-      incomingcall.className = 'hide';
-      duringcall.className = 'hide';
+      if (before) {
+        videoStream.src = null;
+      }
+    }
 
-      vidStream.src = null;
-    },
-
-    incoming: function () {
-      audio.disabled = true;
-      video.disabled = true;
-      accept.disabled = false;
-      reject.disabled = false;
-      bye.disabled = true;
-
-      beforecall.className = 'hide';
-      incomingcall.className = 'show';
-      duringcall.className = 'hide';
-    },
-
-    during: function () {
-      audio.disabled = true;
-      video.disabled = true;
-      accept.disabled = true;
-      reject.disabled = true;
-      bye.disabled = false;
-
-      beforecall.className = 'hide';
-      incomingcall.className = 'hide';
-      duringcall.className = 'show';
+    if (state === 'before') {
+      update(true, false, false);
+    } else if (state === 'incoming') {
+      update(false, true, false);
+    } else if (state === 'during') {
+      update(false, false, true);
     }
   };
-
 
   /** SIP **/
   var session,
@@ -86,52 +75,52 @@
           },
           render: {
             remote: {
-              video: vidStream
+              video: elements.videoStream
             }
           }
         }
       }
     );
 
-    states.during();
+    updateUI('during');
 
-    session.on("rejected", states.before);
-    session.on("accepted", states.during);
-    session.on("bye", states.before);
+    session.on("rejected", updateUI.bind(null, 'before'));
+    session.on("accepted", updateUI.bind(null, 'during'));
+    session.on("bye", updateUI.bind(null, 'before'));
   }
 
   ua.on("invite", function (incomingSession) {
-    states.incoming();
+    updateUI('incoming');
     session = incomingSession;
   });
 
-  audio.addEventListener("click", call.bind(null, false), false);
-  video.addEventListener("click", call.bind(null, true),  false);
+  elements.audio.addEventListener("click", call.bind(null, false), false);
+  elements.video.addEventListener("click", call.bind(null, true),  false);
 
-  accept.addEventListener("click", function () {
-    states.during();
+  elements.accept.addEventListener("click", function () {
+    updateUI('during');
     session.accept(
       {
         media: {
           render: {
             remote: {
-              video: vidStream
+              video: elements.videoStream
             }
           }
         }
       }
     );
 
-    session.on("bye", states.before);
+    session.on("bye", updateUI.bind(null, 'before'));
   }, false);
 
-  reject.addEventListener("click", function () {
-    states.before();
+  elements.reject.addEventListener("click", function () {
+    updateUI('before');
     session.reject();
   }, false);
 
-  bye.addEventListener("click", function() {
-    states.before();
+  elements.bye.addEventListener("click", function() {
+    updateUI('before');
     session.bye();
   }, false);
 })(window, document);
@@ -165,9 +154,9 @@
   */
   SIP.WebRTC.isSupported();
 
-  var dataua, dataSession;
+  var dataUA;
 
-  dataua = new SIP.UA({
+  dataUA = new SIP.UA({
     traceSip: true,
     uri: 'data' + window.uri,
     mediaHandlerFactory: function mediaHandlerFactory(session, options) {
@@ -194,23 +183,21 @@
     }
   });
 
-  dataua.on('invite', function (incomingSession) {
-    dataSession = incomingSession;
-    dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
+  dataUA.on('invite', function (session) {
+    session.mediaHandler.on("dataChannel", function (dataChannel) {
       dataChannel.onmessage = function (e) {
-        console.log('Data Channel received message: ', e.data);
         dataReceive.innerHTML = "The browser is " + e.data;
-        dataSession.bye();
+        session.bye();
       };
     });
 
-    dataSession.accept();
+    session.accept();
   });
 
   data.addEventListener('click', function () {
     var browser = (navigator.userAgent.search("Chrome") > 0) ? "Chrome" : "Firefox";
 
-    dataSession = dataua.invite(
+    session = dataUA.invite(
       'data' + window.target,
       {
         media: {
@@ -219,11 +206,11 @@
       }
     );
 
-
-    dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
+    session.mediaHandler.on("dataChannel", function (dataChannel) {
       dataChannel.onopen = function () {
         dataChannel.send(browser);
       };
     });
   });
+
 })(window, document);
