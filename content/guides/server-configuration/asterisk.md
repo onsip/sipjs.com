@@ -114,7 +114,7 @@ Restart Asterisk using `service asterisk restart` to ensure that the new setting
 
 ## Configure SIP.js
 
-Asterisk does not accept Contact headers with the `.invalid` domain. When creating a UA, add the configuration parameter [hackIpInContact](http://sipjs.com/api/0.5.0/ua_configuration_parameters/#hackipincontact). If you are missing this property you will be able to make calls from WebRTC, but not receive calls through Asterisk will fail.
+Asterisk does not accept Contact headers with the `.invalid` domain. When creating a UA, add the configuration parameter [hackIpInContact](http://sipjs.com/api/0.6.0/ua_configuration_parameters/#hackipincontact). If you are missing this property you will be able to make calls from WebRTC, but not receive calls through Asterisk will fail.
 
 The following configuration example creates a UA for the Asterisk configuration above. Replace the values with the values from your config.
 

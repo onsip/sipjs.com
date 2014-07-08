@@ -27,7 +27,7 @@ myUA.on('message', function (message) {
 });
 ~~~
 
-## Instance Attributes
+## Instance Variables
 
 `SIP.Message` inherits its instance attributes from [`SIP.ClientContext`](/api/0.6.0/context/client/) or [`SIP.ServerContext`](/api/0.6.0/context/server/).
 

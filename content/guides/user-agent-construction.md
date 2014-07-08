@@ -23,7 +23,7 @@ In order to make calls and send messages you must create a SIP user agent.  In t
 
 To create an authenticated user agent, pass a configuration object to the `SIP.UA` constructor. 
 
-This [configuration object](/api/0.5.0/ua_configuration_parameters/) needs a `uri`.  This will have a username and a domain.  It will look something like `examplename@test.onsip.com` The `authorizationUser` and `password` are used to authenticate with your SIP provider.  
+This [configuration object](/api/0.6.0/ua_configuration_parameters/) needs a `uri`.  This will have a username and a domain.  It will look something like `examplename@test.onsip.com` The `authorizationUser` and `password` are used to authenticate with your SIP provider.  
 
 If you are authenticating a user agent using OnSIP, follow [these instructions](http://developer.onsip.com/guides/platform/sip-ua-authentication/).
 

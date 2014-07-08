@@ -22,7 +22,7 @@ The SIP Grammar provides rules and parsing mechanisms for SIP requests, response
 
 </div>
 
-## Instance Attributes
+## Instance Variables
 
 ### `SyntaxError`
 

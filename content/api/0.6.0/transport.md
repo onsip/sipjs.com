@@ -58,7 +58,7 @@ The construction of a transport is not meant to be done manually. Instead, SIP.j
 
 When constructed, the new Transport will assign itself as the UA's transport property before automatically attempting to connect to the designated WebSocket server.
 
-## Instance Attributes
+## Instance Variables
 
 ### `logger`
 

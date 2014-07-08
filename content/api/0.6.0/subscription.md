@@ -24,7 +24,7 @@ subscription.on('notify', function (notification) {
 });
 ~~~
 
-## Instance Attributes
+## Instance Variables
 
 `SIP.Subscription` inherits some of its instance attributes from [`SIP.ClientContext`](/api/0.6.0/context/client/).
 

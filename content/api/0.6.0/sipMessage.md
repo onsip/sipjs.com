@@ -10,7 +10,7 @@ This page describes data structures for SIP packets:  Incoming Messages, Incomin
 * TOC
 {:toc}
 
-## Instance Attributes
+## Instance Variables
 
 ### `logger`
 

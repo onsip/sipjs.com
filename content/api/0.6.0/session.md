@@ -27,7 +27,7 @@ myUA.on('invite', function (session) {
 });
 ~~~
 
-## Instance Attributes
+## Instance Variables
 
 <!--
 

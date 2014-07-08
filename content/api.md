@@ -5,7 +5,7 @@ description: A list of versions of SIP.js, a JavaScript API for WebRTC developer
 
 # What Version Do You Want?
 
-* Version 0.5.0 ([docs](/api/0.5.0/) , [guides](/guides/))
+* Version 0.6.0 ([docs](/api/0.6.0/) , [guides](/guides/))
 
 
 # Questions?
