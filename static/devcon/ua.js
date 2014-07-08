@@ -4,7 +4,7 @@
 })(window, document);
 
 (function (window, document, undefined) {
-  window.ua  = new SIP.UA({
+  window.ua = new SIP.UA({
           traceSip: true,
           uri: window.uri,
           displayName: window.caller
@@ -12,8 +12,12 @@
 })(window, document);
 
 
-/** VOICE + VIDEO **/
+/**
+ * VOICE + VIDEO
+ **/
 (function (window, document, undefined) {
+
+  /** UI **/
   var audio = document.getElementById("audio"),
       video = document.getElementById("video"),
       accept = document.getElementById("accept"),
@@ -65,9 +69,15 @@
     }
   };
 
+
+  /** SIP **/
+  var session,
+      ua = window.ua,
+      target = window.target;
+
   function call(vid) {
-    var session =  window.session = window.ua.invite(
-      window.target,
+    session = ua.invite(
+      target,
       {
         media: {
           constraints: {
@@ -90,17 +100,17 @@
     session.on("bye", states.before);
   }
 
-  window.ua.on("invite", function (incomingSession) {
+  ua.on("invite", function (incomingSession) {
     states.incoming();
-    window.session = incomingSession;
+    session = incomingSession;
   });
 
-  audio.addEventListener("click", function() { call(false);}, false);
-  video.addEventListener("click", function() { call(true);}, false);
+  audio.addEventListener("click", call.bind(null, false), false);
+  video.addEventListener("click", call.bind(null, true),  false);
 
   accept.addEventListener("click", function () {
     states.during();
-    window.session.accept(
+    session.accept(
       {
         media: {
           render: {
@@ -112,17 +122,17 @@
       }
     );
 
-    window.session.on("bye", states.before);
+    session.on("bye", states.before);
   }, false);
 
   reject.addEventListener("click", function () {
     states.before();
-    window.session.reject();
+    session.reject();
   }, false);
 
   bye.addEventListener("click", function() {
     states.before();
-    window.session.bye();
+    session.bye();
   }, false);
 })(window, document);
 
@@ -132,11 +142,14 @@
       msgContent = document.getElementById("messageContent"),
       showMessage = document.getElementById("incomingMessage");
 
+  var ua = window.ua,
+      target = window.target;
+
   msg.addEventListener("click", function() {
-    window.ua.message(window.target, msgContent.value);
+    ua.message(target, msgContent.value);
   }, false);
 
-  window.ua.on('message', function (request) {
+  ua.on('message', function (request) {
     showMessage.innerHTML = request.body;
   });
 })(window, document);
@@ -152,7 +165,9 @@
   */
   SIP.WebRTC.isSupported();
 
-  window.dataua = new SIP.UA({
+  var dataua, dataSession;
+
+  dataua = new SIP.UA({
     traceSip: true,
     uri: 'data' + window.uri,
     mediaHandlerFactory: function mediaHandlerFactory(session, options) {
@@ -179,13 +194,13 @@
     }
   });
 
-  window.dataua.on('invite', function (dataSession) {
-    window.dataSession = dataSession;
-    window.dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
+  dataua.on('invite', function (incomingSession) {
+    dataSession = incomingSession;
+    dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
       dataChannel.onmessage = function (e) {
         console.log('Data Channel received message: ', e.data);
         dataReceive.innerHTML = "The browser is " + e.data;
-        window.dataSession.bye();
+        dataSession.bye();
       };
     });
 
@@ -195,7 +210,7 @@
   data.addEventListener('click', function () {
     var browser = (navigator.userAgent.search("Chrome") > 0) ? "Chrome" : "Firefox";
 
-    window.dataSession = window.dataua.invite(
+    dataSession = dataua.invite(
       'data' + window.target,
       {
         media: {
@@ -205,7 +220,7 @@
     );
 
 
-    window.dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
+    dataSession.mediaHandler.on("dataChannel", function (dataChannel) {
       dataChannel.onopen = function () {
         dataChannel.send(browser);
       };
