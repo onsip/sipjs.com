@@ -31,7 +31,7 @@
     <main>
       <div id="subtitle">
         <h1 class="all-caps">Demo <%= @item[:caller] %> User</h1>
-        <a href="/devcon/<%= @item[:callee] %>/" target="_blank" data-tokenize data-tokenize-after="You should have a <%= @item[:callee] %> User opened in another tab. If not, please click to open a new <%= @item[:callee] %> User tab.">Click here to open tab for <%= @item[:callee] %> User</a>
+        <a href="/devcon/<%= @item[:callee].downcase %>/" target="_blank" data-tokenize data-tokenize-after="You should have a <%= @item[:callee] %> User opened in another tab. If not, please click to open a new <%= @item[:callee] %> User tab.">Click here to open tab for <%= @item[:callee] %> User</a>
       </div>
 
       <div id="phone">
