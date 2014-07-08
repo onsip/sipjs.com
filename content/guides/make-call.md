@@ -23,7 +23,7 @@ In the style.css file we will put a border around the `<video>` elements, to vis
 
 <iframe
   style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/mgc2e/11/embedded/html,js,css,result/">
+  src="http://jsfiddle.net/OnSIP/BLBKL/embedded/html,js,css,result/">
 </iframe>
 
 ### Making the Call
@@ -36,7 +36,7 @@ In order to make calls and send messages, create a SIP user agent.  Calling `SIP
 
 <iframe
   style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/4m7dc/12/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/OnSIP/R4FHe/embedded/js,html,css,result/">
 </iframe>
 
 
@@ -45,7 +45,10 @@ In order to make calls and send messages, create a SIP user agent.  Calling `SIP
 
 After the user agent has connected to the SIP server, we can send an invite to make a call and thereby create a SIP session.
 
-To send an invite first create a javascript object, which contains the `media` variable that specifies whether the session contains audio and video (i.e. whether it is a video call or an audio call).  
+To send an invite first create a javascript object, which contains the `media` variable that specifies:
+
+1. The session's media constraints (whether it contains audio, video, or both)
+2. The `<video>` elements that will display the local and remote videos.
 
 Then call the `.invite()` method with the target address and the `options` object containing media information.
 
@@ -55,28 +58,5 @@ An `endCall` button is added to terminate the session using the `.bye()` method.
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/T4Kv2/18/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/OnSIP/W93H6/embedded/js,html,css,result/">
 </iframe>
-
-
-###Displaying the Call
-
-Although we are now able to make calls, we are not yet displaying the videos on the screen.  To do this attach the video streams to the `<video>` elements.  
-
-The streams cannot be attached until the call begins. Catch the `accepted` event and attach the video streams after this point.  
-
-Create a new function called onAccepted(), and bind it to the `accepted` event.  Inside this function, call the `attachMediaStream` function on both media streams, and then play both video elements.
-
-The function `attachMediaStream` attaches the media stream to the video element.
-
-<iframe
-  style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/qWmG7/26/embedded/js,html,css,result/">
-</iframe>
-
-
-
-
-
-
-

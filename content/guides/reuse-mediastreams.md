@@ -40,7 +40,9 @@ After `getUserMediaSuccess` has been called, the stream can be used to make or r
 ~~~ javascript
   var target = 'someone@domain.tld';
   var options = {
-    media: mediaStream
+    media: {
+      stream: mediaStream
+    }
   };
   ua.invite(target, options);
 ~~~
@@ -50,7 +52,9 @@ After `getUserMediaSuccess` has been called, the stream can be used to make or r
 ~~~ javascript
   ua.on('invite', function (session) {
     var options = {
-      media: mediaStream
+      media: {
+        stream: mediaStream
+      }
     };
     session.accept(options);
   });
@@ -60,5 +64,5 @@ After `getUserMediaSuccess` has been called, the stream can be used to make or r
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/XsKmL/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/OnSIP/b3vCY/embedded/js,html,css,result/">
 </iframe>

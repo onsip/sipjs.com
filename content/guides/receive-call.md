@@ -21,17 +21,12 @@ In order to receive calls we need to create a registered SIP user agent, instead
 We will also remove `session.invite()`, so that our app stops making calls.
 
 
-<iframe
-  style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/5aqm7/5/embedded/js,html,css,result/">
-</iframe>
-
 ### Accept a Call
 
 Finally, To accept a call that is being received, catch the `invite` event.  This event is emitted with a session that the `.accept()` method must be called on.
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/tEGgn/5/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/OnSIP/vW7Lw/embedded/js,html,css,result/">
 </iframe>
 
