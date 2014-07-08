@@ -243,19 +243,19 @@ INVALID_STATE_ERROR
 
 ### `mute([options])`
 
-Helper function that will call through to the MediaHandler mute function, then emit a [mute](#) event.
+Helper function that will call through to the MediaHandler mute function, then emit a muted event.
 
 Name | Type | Description
 -----|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see [MediaHandler.mute()](#)).
+`options`|`Object`|Optional `Object` with extra parameters.
 
 ### `unmute([options])`
 
-Helper function that will call through to the MediaHandler unmute function, then emit an [unmute](#) event.
+Helper function that will call through to the MediaHandler unmute function, then emit an unmuted event.
 
 Name | Type | Description
 -----|------|--------------
-`options`|`Object`|Optional `Object` with extra parameters (see [MediaHandler.unmute()](#)).
+`options`|`Object`|Optional `Object` with extra parameters.
 
 ## Instance Methods (Outbound/Client)
 
