@@ -13,7 +13,7 @@ description: The WebRTC Media Handler is the default media handler for SIP.js.
 
 A WebRTC Media Handler will be automatically constructed by SIP.js.
 
-## Instance Attributes
+## Instance Variables
 
 There are no public instance attributes for the MediaHandler.
 
