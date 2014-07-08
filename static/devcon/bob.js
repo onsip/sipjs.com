@@ -1,6 +1,6 @@
 (function (window, document, undefined) {
   window.caller = 'Bob';
-  window.uri = 'bob.' + window.token + '@onslip.onsip.com';
+  window.uri = 'bob.' + window.token + '@devcon5.onsip.com';
   window.callee = 'Alice';
-  window.target = 'alice.' + window.token + '@onslip.onsip.com';
+  window.target = 'alice.' + window.token + '@devcon5.onsip.com';
 }) (window, document);
