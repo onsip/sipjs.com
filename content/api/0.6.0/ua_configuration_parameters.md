@@ -128,11 +128,11 @@ User defined `Function` which will be called everytime a log is generated, accor
 The function is called with the following semantics:
 
 ~~~javascript
-/* 
-  level: String representing the level of the log message 
+/*
+  level: String representing the level of the log message
 ('debug', 'log', 'warn', 'error')
 
-  category: String representing the SIPjs instance class firing 
+  category: String representing the SIPjs instance class firing
 the log. ie: 'sipjs.ua'
 
   label: String indicating the 'identifier' of the class instance
@@ -254,7 +254,8 @@ turnServers: [
 ~~~
 
 ## usePreloadedRoute
-If set to true every SIP initial request sent by SIPjs includes a Route header with the SIP URI associated to the WebSocket server as value. Some SIP Outbound Proxies require such a header. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
+
+If set to true every SIP initial request sent by SIP.js includes a Route header with the SIP URI associated to the WebSocket server as value. Some SIP Outbound Proxies require such a header. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
 
 ~~~ javascript
 wsServers: "ws://example.org/sip-ws"
@@ -271,10 +272,19 @@ usePreloadedRoute: true
 The Route header will look like Route: `<sip:example.org:8443;lr;transport=ws>`
 
 ## userAgentString
+
 If this is set then the User-Agent header will have this string appended after name and version.
 
 ~~~ javascript
 userAgentString: "myAwesomeApp"
 ~~~
 
-The User-Agent header will look like User-Agent: SIP.js/0.5.0-devel myAwesomeApp
+The User-Agent header will look like User-Agent: SIP.js/0.6.0 myAwesomeApp
+
+## wsServerMaxReconnection
+
+The number of times to attempt to reconnect to a WebSocket when the connection drops. The default value is 3.
+
+## wsServerReconnectionTimeout
+
+The time (in seconds) to wait between WebSocket reconnection attempts. The default timeout is 4 seconds.

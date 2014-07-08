@@ -134,7 +134,7 @@ Disconnect from the WebSocket and cancel any reconnection attempts.
 ### `reConnect()`
 {: .no_toc }
 
-*Internal* Reconnect to the WebSocket in the event of unexpected disconnection. This will attempt to reconnect up to [`ua.configuration.wsServerMaxReconnection`](/api/0.6.0/ua_configuration_parameters/#TODO) times, with a gap of [`ua.configuration.wsServerReconnectionTimeout`](/api/0.6.0/ua_configuration_parameters/#TODO) seconds between each request.
+*Internal* Reconnect to the WebSocket in the event of unexpected disconnection. This will attempt to reconnect up to [`ua.configuration.wsServerMaxReconnection`](/api/0.6.0/ua_configuration_parameters/#wsservermaxreconnection) times, with a gap of [`ua.configuration.wsServerReconnectionTimeout`](/api/0.6.0/ua_configuration_parameters/#wsserverreconnectiontimeout) seconds between each request.
 
 ### `onOpen()`
 {: .no_toc }
