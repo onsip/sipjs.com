@@ -11,6 +11,8 @@
   });
 })(window, document);
 
+
+/** VOICE + VIDEO **/
 (function (window, document, undefined) {
   var audio = document.getElementById("audio"),
       video = document.getElementById("video"),
@@ -124,6 +126,7 @@
   }, false);
 })(window, document);
 
+/** MESSAGE **/
 (function (window, document, undefined) {
   var msg = document.getElementById("sendMessage"),
       msgContent = document.getElementById("messageContent"),
@@ -138,13 +141,42 @@
   });
 })(window, document);
 
+/** DATA **/
 (function (window, document, undefined) {
   var dataSend = document.getElementById("sendData"),
       dataReceive = document.getElementById("incomingdata");
 
+  /*
+    Custom media handler factories don't have great compatibility with
+    our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
+  */
+  SIP.WebRTC.isSupported();
+
   window.dataua = new SIP.UA({
     traceSip: true,
-    uri: 'data' + window.uri
+    uri: 'data' + window.uri,
+    mediaHandlerFactory: function mediaHandlerFactory(session, options) {
+
+      /* Like a default mediaHandler, but no streams to manage */
+      var self = new SIP.WebRTC.MediaHandler(session, {
+        mediaStreamManager: {
+          acquire: function (onSuccess) {
+            // Must be async for on('dataChannel') callback to have a chance
+            setTimeout(onSuccess.bind(null, {}), 0);
+          },
+          release: function (onSuccess) {
+            setTimeout(onSuccess, 0);
+          }
+        }
+      });
+
+      // No stream to add.  Assume success.
+      self.addStream = function addStream(stream, success, failure) {
+        success();
+      };
+
+      return self;
+    }
   });
 
   window.dataua.on('invite', function (dataSession) {
