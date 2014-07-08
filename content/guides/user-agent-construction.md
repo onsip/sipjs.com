@@ -29,5 +29,5 @@ If you are authenticating a user agent using OnSIP, follow [these instructions](
 
 <iframe
   style="width: 100%; height: 250px"
-  src="http://jsfiddle.net/V6WMY/3/embedded/js,result/">
+  src="http://jsfiddle.net/OnSIP/ycv2n/embedded/js,result/">
 </iframe>
