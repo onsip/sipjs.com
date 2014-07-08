@@ -148,7 +148,7 @@ Gets the array of values for the headers with the given name.
 
 ### `hasHeader(name)`
 
-Tests for the existance of a given header.
+Tests for the existence of a given header.
 
 ### `parseHeader(name, idx)`
 
