@@ -47,7 +47,7 @@ By default, libsrtp is not included in the Asterisk yum repository. Installing i
 ## Install Asterisk
 
 1. `cd /usr/src/`
-2. Downlaod Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz`.
+2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz`.
 3. Extract Asterisk: `tar zxvf asterisk*`.
 4. Enter the Asterisk directory: `cd /usr/src/asterisk*`.
 5. Run the Asterisk configure script: `./configure --libdir=/usr/lib64`.
