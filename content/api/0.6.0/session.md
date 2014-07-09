@@ -287,7 +287,11 @@ Overrides [`SIP.ServerContext.accept`](/api/0.6.0/context/server/#acceptoptions)
 
 Name | Type | Description
 -|-|-
-`options.media` | Object | Media constraints to use for the Session. For example, `{ audio: true, video: true }`.
+`options.media`                  |`Object`     | Optional `Object` with media related parameters (see below) |
+`options.media.constraints`      |`Object`     |`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used|
+`options.media.stream`           |`MediaStream`|`MediaStream` to transmit to the other end|
+`options.media.RTCConstraints`   |`Object`     |`Object` representing RTCPeerconnection constraints|
+`options.media.render`           |`Object`     |Video or audio elements that streams should be automatically rendered in.  For example: `{ remote: { video: element, audio: element } }`
 ServerContext Parameters | | See [`SIP.ServerContext.accept`](/api/0.6.0/context/server/#acceptoptions).
 
 ### `reject([options])`
