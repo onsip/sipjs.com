@@ -35,7 +35,7 @@ Using YUM, all dependencies can be installed with:
 
 ## Install libsrtp
 
-By default, libsrtp is not included in the Asterisk yum repository. Installing it from source is not difficult.
+By default, libsrtp is not included in the CentOS yum repository. Installing it from source is not difficult.
 
 1. `cd /usr/src/`
 2. `wget http://srtp.sourceforge.net/srtp-1.4.2.tgz`
