@@ -1,6 +1,6 @@
 ---
 title: SIP.ClientContext | SIP.js
-description: In SIP.js, a SIP.ClientContext encapsulates the behavior required to send a request, as well as handle responses and retransmissions of that request. 
+description: In SIP.js, a SIP.ClientContext encapsulates the behavior required to send a request, as well as handle responses and retransmissions of that request.
 ---
 # SIP.ClientContext
 

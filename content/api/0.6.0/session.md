@@ -351,16 +351,12 @@ Name | Type | Description
 
 Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.
 
-#### `on('failed', function (data) {})`
+#### `on('failed', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|------------
-`data` | `Object` | A wrapper object containing the event data
-`data.code` | `Number` | The status code of the received response, between 300 and 699, or 0 if the failure was not due to a received response.
-`data.response` | [`SIP.IncomingMessage|null`](/api/0.6.0/message/) | The received response, or `null` if the failure was not due to a received response.
-`data.cause` | `String` | The reason phrase associated with the SIP response code, or one of `SIP.C.causes` if the failure was not due to a received response.
-
-
+`response` | [`SIP.IncomingMessage`](/api/0.6.0/incomingMessage/) | The received response. On a failure not due to a SIP message, this will be null.
+`cause` | `String` | The reason phrase associated with the SIP response code, or one of [Failure and End Causes](/api/0.6.0/causes).
 
 
 ### `connecting`
