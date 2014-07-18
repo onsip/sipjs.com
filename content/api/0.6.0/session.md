@@ -416,12 +416,12 @@ Name | Type | Description
 
 Fired for an incoming or outgoing DTMF.
 
-#### `.on('dtmf', function(dtmf, request) {})`
+#### `.on('dtmf', function(request, dtmf) {})`
 
 Name | Type | Description 
 -----|------|--------------
-`dtmf`|`SIP.Session.DTMF`|DTMF instance.
 `request`|[`SIP.IncomingMessage`](/api/0.6.0/message/)|Instance of the received SIP INFO request.
+`dtmf`|`SIP.Session.DTMF`|DTMF instance.
 
 ### `muted`
 
