@@ -5,15 +5,15 @@ description: Easily install & configure Asterisk to work with SIP.js
 
 # Configure Asterisk
 
-SIP.js has been tested with [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
+SIP.js has been tested with [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
 
 ## System Setup
 
 Asterisk and SIP.js were tested using the following setup:
 
 * [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
-* [Asterisk 11.9.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz)
-* [libsrtp 1.4.2](http://srtp.sourceforge.net/srtp-1.4.2.tgz)
+* [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz)
+* OpenSSL 1.0.1e-fips 11 Feb 2013 or later.
 * A public IP address to avoid NAT scenarios on the server side.
 
 ## Required Packages
@@ -25,36 +25,32 @@ Install the following dependencies:
 * gcc-c++
 * ncurses-devel
 * libxml2-devel
-* sqlite3-devel
+* sqlite-devel
 * libsrtp-devel
 * libuuid-devel
+* openssl-devel
 
 Using YUM, all dependencies can be installed with:
 
-`yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite3-devel libsrtp-devel libuuid-devel`.
-
-## Install libsrtp
-
-By default, libsrtp is not included in the CentOS yum repository. Installing it from source is not difficult.
-
-1. `cd /usr/src/`
-2. `wget http://srtp.sourceforge.net/srtp-1.4.2.tgz`
-3. `tar zxvf srtp-1.4.2.tgz`
-4. `cd /usr/src/srtp`
-5. `./configure CFLAGS=-fPIC`
-6. `make && make install`
+`yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite-devel libsrtp-devel libuuid-devel openssl-devel`.
 
 ## Install Asterisk
 
-1. `cd /usr/src/`
-2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.9.0.tar.gz`.
+1. `cd /usr/local/src/`
+2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz`.
 3. Extract Asterisk: `tar zxvf asterisk*`.
-4. Enter the Asterisk directory: `cd /usr/src/asterisk*`.
+4. Enter the Asterisk directory: `cd /usr/local/src/asterisk*`.
 5. Run the Asterisk configure script: `./configure --libdir=/usr/lib64`.
 6. Run the Asterisk menuselect tool: `make menuselect`.
 7. In the menuselect, go to the resources option and ensure that res_srtp is enabled. If there are 3 x's next to res_srtp, there is a problem with the srtp library and you must reinstall it. Save the configuration (press x).
 8. Compile and install Asterisk: `make && make install`.
 9. If you need the sample configs you can run `make samples` to install the sample configs. If you need to install the Asterisk startup script you can run `make config`.
+
+## Setup DTLS Certificates
+
+1. `mkdir /etc/asterisk/keys`
+2. Enter the Asterisk scripts directory: `/cd /usr/local/src/asterisk*/contrib/scripts`.
+3. Create the DTLS certificates (replace pbx.mycomany.com with your ip address or dns name, replace My Super Company with your company name): `./ast_tls_cert -C pbx.mycompany.com -O "My Super Company" -d /etc/asterisk/keys`. 
 
 ## Configure Asterisk For WebRTC
 
@@ -92,6 +88,12 @@ icesupport=yes ; Tell Asterisk to use ICE for this peer
 context=default ; Tell Asterisk which context to use when this peer is dialing
 directmedia=no ; Asterisk will relay media for this peer
 transport=udp,ws ; Asterisk will allow this peer to register on UDP or WebSockets
+force_avp=yes ; Force Asterisk to use avp. Introduced in Asterisk 11.11
+dtlsenable=yes ; Tell Asterisk to enable DTLS for this peer
+dtlsverify=no ; Tell Asterisk to not verify your DTLS certs
+dtlscertfile=/etc/asterisk/keys/asterisk.pem ; Tell Asterisk where your DTLS cert file is
+dtlsprivatekey=/etc/asterisk/keys/asterisk.pem ; Tell Asterisk where your DTLS private key is
+dtlssetup=actpass ; Tell Asterisk to use actpass SDP parameter when setting up DTLS
 
 [1061] ; This will be the legacy SIP client
 type=friend
@@ -132,9 +134,6 @@ var config = {
 
   // Replace this with the password from your sip.conf file
   password: 'password',
-
-  // This is required to route requests through Asterisk
-  hackIpInContact: true
 };
 
 var ua = new SIP.UA(config);
@@ -143,3 +142,4 @@ var ua = new SIP.UA(config);
 ## Troubleshooting
 
 This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk.
+[Asterisk Secure Calling Guide](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial)
