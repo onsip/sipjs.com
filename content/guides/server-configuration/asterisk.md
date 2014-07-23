@@ -11,8 +11,8 @@ SIP.js has been tested with [Asterisk 11.11.0](http://downloads.asterisk.org/pub
 
 Asterisk and SIP.js were tested using the following setup:
 
-* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
-* [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz)
+* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/).
+* [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz).
 * OpenSSL 1.0.1e-fips 11 Feb 2013 or later.
 * A public IP address to avoid NAT scenarios on the server side.
 
@@ -32,11 +32,26 @@ Install the following dependencies:
 
 Using YUM, all dependencies can be installed with:
 
-`yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite-devel libsrtp-devel libuuid-devel openssl-devel`.
+`yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite-devel libuuid-devel openssl-devel`.
+
+## Install libsrtp
+
+First try installing libsrtp from the repo.
+
+`yum install libsrtp-devel` 
+
+If libsrtp is not available in the repo install it from source.
+
+1. `cd /usr/local/src/`
+2. `wget http://srtp.sourceforge.net/srtp-1.4.2.tgz`
+3. `tar zxvf srtp-1.4.2.tgz`
+4. `cd /usr/local/src/srtp`
+5. `./configure CFLAGS=-fPIC`
+6. `make && make install`
 
 ## Install Asterisk
 
-1. `cd /usr/local/src/`
+1. `cd /usr/local/src/`.
 2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz`.
 3. Extract Asterisk: `tar zxvf asterisk*`.
 4. Enter the Asterisk directory: `cd /usr/local/src/asterisk*`.
