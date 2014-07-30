@@ -133,6 +133,8 @@ Restart Asterisk using `service asterisk restart` to ensure that the new setting
 
 Asterisk does not accept Contact headers with the `.invalid` domain. When creating a UA, add the configuration parameter [hackIpInContact](http://sipjs.com/api/0.6.0/ua_configuration_parameters/#hackipincontact). If you are missing this property you will be able to make calls from WebRTC, but not receive calls through Asterisk will fail.
 
+Additionally this guide will only work with audio calls, Asterisk will reject video calls.
+
 The following configuration example creates a UA for the Asterisk configuration above. Replace the values with the values from your config.
 
 ~~~ javascript
@@ -149,12 +151,22 @@ var config = {
 
   // Replace this with the password from your sip.conf file
   password: 'password',
+  
+  // HackIpInContact for Asterisk
+  hackIpInContact: true
 };
 
 var ua = new SIP.UA(config);
+
+// Invite with audio only
+ua.invite('1061',{
+  audio: true,
+  video: false
+});
 ~~~
 
 ## Troubleshooting
 
 This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk.
-[Asterisk Secure Calling Guide](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial)
+
+[Asterisk Secure Calling Guide](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial) can help you setup dtls certificates.
