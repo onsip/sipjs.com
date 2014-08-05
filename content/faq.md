@@ -18,7 +18,7 @@ A user agent (UA for short) is generally a software agent that is acting on beha
 This is a term we created in order to group together related SIP transactions.  For more information, we have [an in-depth explanation in our documentation](/api/0.6.0/context/).
 
 ## Does SIP.js work in every web browser?
-SIP.js requires the browser to have WebRTC support. The current browsers that support WebRTC are listed by Google's [WebRTC project site](http://www.webrtc.org/). SIP.js also uses SIP over WebSockets for transporting SIP requests. To check out browser support there, we suggest [Can I Use Webosockets? http://caniuse.com/websockets](http://caniuse.com/websockets)
+SIP.js requires the browser to have WebRTC support. The current browsers that support WebRTC are listed by Google's [WebRTC project site](http://www.webrtc.org/). SIP.js also uses SIP over WebSockets for transporting SIP requests. To check out browser support there, we suggest [Can I Use WebSockets?](http://caniuse.com/websockets)
 
 ## My SIP.js application isn’t working!  Where do I get help?
 The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js).
