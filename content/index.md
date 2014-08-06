@@ -3,7 +3,7 @@ title: SIP Signaling JavaScript Library for WebRTC Developers | SIP.js
 layout: overview
 description: Add SIP signaling to your WebRTC app with this simple, open source JavaScript library - SIP.js.
 ---
-<article class="wrapper group home-feature">
+<article class="wrapper group home-feature" id="feature-selector">
 	<div class="feature">
 		<h1>WebRTC Made Easy for Javascript Developers</h1>
 		<h4 class="intro">A simple yet powerful JS library that takes care of WebRTC and SIP signaling for you</h4>
@@ -26,6 +26,12 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
         <h3>data channel</h3>
       </li>
     </ul>
+    <!-- This draws an arrow that we use to indicate the highlighted feature -->
+    <svg id="feature-arrow" width="80" height="45">
+      <polygon points="40,5 75,40 5,40"
+               style="fill:rgb(193,191,182); stroke:rgb(193,191,182); stroke-width:10;"
+               stroke-linejoin="round" />
+    </svg>
 </article>
 
 <div class="full-width-divider mid-gray feature">

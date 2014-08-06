@@ -495,8 +495,8 @@ footer {
 	background-position: bottom center;
 }
 
-/*
-	Homepage
+/* Homepage
+   ========================================
 */
 /* padding-top should be related to .feature h2 font size */
 .full-width-divider {
@@ -514,7 +514,7 @@ footer {
     margin-top: 4%;
 }
 .home-feature {
-	padding: 50px 0 50px 0;
+	padding: 50px 0 10px 0;
 }
 .feature {
 }
@@ -528,13 +528,21 @@ footer {
 .feature h1 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
     color: #ea4b35;
-    /* font-size: 39px; */
     font-size: 2.5em;
     font-weight: 700;
     text-align: center;
+    margin-bottom: 0.5em;
 }
 .feature h2 {
     color: white;
+}
+#feature-selector {
+    position: relative;
+}
+#feature-arrow {
+    position: absolute;
+    bottom: -7px;
+    left: calc(16.5% - 40px);
 }
 .two-column-boxes {
     width: 100%;
