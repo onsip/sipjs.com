@@ -10,19 +10,25 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
 	</div>
     <ul class="wrapper highlights">
       <!-- TODO allow for highlighting of a list item. -->
-      <li>
-        <img src="/shared/img/video-audio.png" alt="video + audio" />
-        <img src="/shared/img/video-audio-highlight.png" alt="video + audio highlight" />
+      <li id="feature-video-audio">
+        <img class="icon-unselected"
+             src="/shared/img/video-audio.png" alt="video + audio" />
+        <img class="icon-selected"
+             src="/shared/img/video-audio-highlight.png" alt="video + audio highlight" />
         <h3>video + audio</h3>
       </li>
-      <li>
-        <img src="/shared/img/message.png" alt="message" />
-        <img src="/shared/img/message-highlight.png" alt="message highlight" />
+      <li id="feature-message">
+        <img class="icon-unselected"
+             src="/shared/img/message.png" alt="message" />
+        <img class="icon-selected"
+             src="/shared/img/message-highlight.png" alt="message highlight" />
         <h3>message</h3>
       </li>
-      <li>
-        <img src="/shared/img/data-channel.png" alt="message" />
-        <img src="/shared/img/data-channel-highlight.png" alt="message highlight" />
+      <li id="feature-data-channel">
+        <img class="icon-unselected"
+             src="/shared/img/data-channel.png" alt="message" />
+        <img class="icon-selected"
+             src="/shared/img/data-channel-highlight.png" alt="message highlight" />
         <h3>data channel</h3>
       </li>
     </ul>
@@ -35,12 +41,20 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
 </article>
 
 <div class="full-width-divider mid-gray feature">
-  <h2>In-browser Video Chat is Now a Breeze</h2>
-  <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
-  <div class="two-column-boxes wrapper">
-    <div class="column-box" style="background-color:red;"></div>
-    <div class="column-box" style="background-color:blue;"></div>
-    <div class="clearfix"></div>
+  <div id="content-video-audio">
+    <h2>In-browser Video Chat is Now a Breeze</h2>
+    <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
+    <div class="two-column-boxes wrapper">
+      <div class="column-box" style="background-color:red;"></div>
+      <div class="column-box" style="background-color:blue;"></div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div id="content-message">
+    <h2>Real-Time Messaging with a Dozen Lines of Code</h2>
+  </div>
+  <div id="content-data-channel">
+    <h2>Send Real-Time Data In A Flash</h2>
   </div>
 </div>
 <div class="full-width-divider orange">
