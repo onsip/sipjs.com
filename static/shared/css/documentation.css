@@ -36,7 +36,7 @@ body {
 }
 /*  BASIC TYPOGRAPHY
 		========================================  */
-h1, h2, h3, h4 { 
+h1, h2, h3, h4 {
 	font-family: 'Varela Round', sans-serif;
 	font-weight: normal;
 	color: #8a7c7a;
@@ -64,13 +64,37 @@ p {
 	line-height: 23px;
 	letter-spacing: .02em;
 }
-p.intro {
+h4.intro {
 	font-family: 'Varela Round', sans-serif;
 	letter-spacing: .02em;
+    margin-top: 0;
 	margin-bottom: 0;
 	font-size: 1.2em;
 	line-height: 1.4em;
 	color: #3f4446;
+    text-align: center;
+}
+
+/* VARIABLES
+   ========================================
+   Classes that are really simple and are basically just used as variables to
+   mix in with other classes.
+*/
+.light-gray {
+    background-color: rgb(240,239,234);
+    color: rgb(240,239,234);
+}
+.mid-gray {
+    background-color: rgb(193,191,182);
+    color: rgb(193,191,182);
+}
+.dark-gray {
+    background-color: rgb(65,71,73);
+    color: rgb(65,71,73);
+}
+.orange {
+    background-color: rgb(234, 75, 53);
+    color: rgb(234, 75, 53);
 }
 
 /*  CODE
@@ -154,6 +178,24 @@ li ol {
 }
 li ul {
 	list-style: circle;
+}
+.multicolumn {
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-gap: 6em;
+    -webkit-column-gap: 6em;
+    -moz-column-gap: 6em;
+    /* This is an annoying hack to get bullet points to appear again */
+    list-style-position: inside;
+}
+.multicolumn li {
+    page-break-inside: avoid;
+    -moz-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    /* This is so line wraps in list elements are properly indented. */
+    padding-left: 1em;
+    text-indent: -1em;
 }
 
 /*  LINKS & NAVIGATION
@@ -456,12 +498,25 @@ footer {
 /*
 	Homepage
 */
+/* padding-top should be related to .feature h2 font size */
+.full-width-divider {
+    padding-top: 3.375em;
+}
+.full-width-divider h2 {
+    color: #53595b;
+    font-size: 2.5em;
+    font-weight: 400;
+    margin-bottom:0;
+    padding-bottom:0.1em;
+    text-align:center;
+}
+.full-width-divider ul {
+    margin-top: 4%;
+}
 .home-feature {
 	padding: 50px 0 50px 0;
 }
 .feature {
-	width: 370px;
-	float: left;
 }
 .home-feature pre {
 	width: 535px;
@@ -471,16 +526,27 @@ footer {
 	font-size: 1em;
 }
 .feature h1 {
-	font-size: 36px;
-	line-height: 54px;
-	color: #ea4b35;
-	text-transform: uppercase;
-	margin-bottom: 20px;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+    color: #ea4b35;
+    /* font-size: 39px; */
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
 }
-
-
-.full-width-divider {
-	background-color: #f3f2ee;
+.feature h2 {
+    color: white;
+}
+.two-column-boxes {
+    width: 100%;
+    margin: auto;
+}
+.column-box {
+    float:left;
+    width: 50%;
+    padding: 2.5% 2.5% 2.5% 2.5%;
+    background-clip: content-box;
+    height: 400px;
+    background-color: green;
 }
 .highlights {
 	list-style-type: none;

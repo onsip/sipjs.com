@@ -5,81 +5,134 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
 ---
 <article class="wrapper group home-feature">
 	<div class="feature">
-		<h1>Bring your WebRTC app to life with SIP.js</h1>
-		<p class="intro">A simple, intuitive, and powerful JavaScript library to add signaling to your app.</p>
+		<h1>WebRTC Made Easy for Javascript Developers</h1>
+		<h4 class="intro">A simple yet powerful JS library that takes care of WebRTC and SIP signaling for you</h4>
 	</div>
-	<pre>
-<span style="color:#080;font-weight:bold">var</span> ua = <span style="color:#080;font-weight:bold">new</span> SIP.<span style="color:#06B;font-weight:bold">UA</span>();
-ua.<span style="color:#06B;font-weight:bold">message</span>(
-  <span style=" color:#ea4b35;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>,
-  <span style=" color:#ea4b35;"><span style="color:#710">'</span>Hello, world!<span style="color:#710">'</span></span>
-);
-
-<span style="color:#080;font-weight:bold">var</span> session = ua.<span style="color:#06B;font-weight:bold">invite</span>(<span style=" color:#ea4b35;"><span style="color:#710">'</span>will@example.onsip.com<span style="color:#710">'</span></span>);
-session.<span style="color:#06B;font-weight:bold">on</span>(<span style=" color:#ea4b35;"><span style="color:#710">'</span>accepted<span style="color:#710">'</span></span>, function () {
-  this.<span style="color:#06B;font-weight:bold">bye</span>();
-});
-	</pre>
-	<div class="clearfix"></div>
+    <ul class="wrapper highlights">
+      <!-- TODO allow for highlighting of a list item. -->
+      <li>
+        <img src="/shared/img/video-audio.png" alt="video + audio" />
+        <img src="/shared/img/video-audio-highlight.png" alt="video + audio highlight" />
+        <h3>video + audio</h3>
+      </li>
+      <li>
+        <img src="/shared/img/message.png" alt="message" />
+        <img src="/shared/img/message-highlight.png" alt="message highlight" />
+        <h3>message</h3>
+      </li>
+      <li>
+        <img src="/shared/img/data-channel.png" alt="message" />
+        <img src="/shared/img/data-channel-highlight.png" alt="message highlight" />
+        <h3>data channel</h3>
+      </li>
+    </ul>
 </article>
 
-<div class="full-width-divider">
-	<ul class="wrapper highlights">
-		<li>
-			<h2>Get SIP.js</h2>
-			<div class="highlight-icon-wrapper">
-				<div class="highlight-icon icon-arrow" onclick="window.location='/download/'">
-					<div class="hoverstate">
-						<a href="/download/">Download</a>
-					</div>
-				</div>
-			</div>
-			<p class="subpara">Version devel is the development version and should not be used for production.</p>
-		</li>
-		<li>
-			<h2>Learn</h2>
-			<div class="highlight-icon-wrapper">
-				<div class="highlight-icon icon-books" onclick="window.location='/guides/'">
-					<div class="hoverstate">
-						<a href="/guides/">Guides</a>
-					</div>
-				</div>
-			</div>
-			<p class="subpara">New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
-		</li>
-		<li>
-			<h2>Connect</h2>
-			<div class="highlight-icon-wrapper">
-				<div class="highlight-icon icon-chat" onclick="window.location='https://groups.google.com/forum/#!forum/sip_js'">
-					<div class="hoverstate">
-						<a href="https://groups.google.com/forum/#!forum/sip_js">Support</a>
-					</div>
-				</div>
-			</div>
-			<p class="subpara">Get answers, stay up to date and become part of the SIP.js community.</p>
-		</li>
-		<div class="clearfix"></div>
-	</ul>
+<div class="full-width-divider mid-gray feature">
+  <h2>In-browser Video Chat is Now a Breeze</h2>
+  <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
+  <div class="two-column-boxes wrapper">
+    <div class="column-box" style="background-color:red;"></div>
+    <div class="column-box" style="background-color:blue;"></div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div class="full-width-divider orange">
+  <div class="two-column-boxes wrapper">
+    <div class="column-box">
+      <h3>See How It's Done</h3>
+      <p>
+        The code displayed on the right is what powers the selected demo from yAlice’s end, although Bob’s code would be very similar.  SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
+      </p>
+
+      <a href="/">See Full Demo Code</a>
+    </div>
+    <div class="column-box">
+      <pre style="height:100%">
+var session,
+ua = window.ua,
+target = window.target;
+
+function call(vid) {
+  session = ua.invite(
+    target,
+    {
+      media: {
+        constraints: {
+          audio: true,
+          video: vid
+        },
+        render: {
+          remote: {
+            video: elements.videoStream
+          }
+        }
+      }
+    });
+}
+      </pre>
+    </div>
+    <div class="clearfix"></div>
+  </div>
 </div>
 
-<div class="wrapper">
+<div class="wrapper full-width-divider">
+  <h2>Don't Want to Bother with the Back End?</h2>
+  <p>
+    If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source FreeSWITCH or Asterisk, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
+  </p>
+  <a href="/">Sign up for a free OnSIP sandbox account</a>
+</div>
+
+<div class="full-width-divider light-gray">
+  <div class="two-column-boxes wrapper">
+    <div class="column-box">
+      <h3>Learn</h3>
+      <p>New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
+    </div>
+    <div class="column-box">
+      <h3>Connect</h3>
+      <p>Get answers, stay up to date, and become part of the SIP.js community.</p>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="full-width-divider dark-gray">
+  <h3>Built An App Using SIP.js?</h3>
+  <a href="/">We want to hear about it!</a>
+</div>
+
+<div class="wrapper full-width-divider">
   <h2>Features</h2>
 
-  <ul>
+  <ul class="multicolumn">
     <li>Register <a href="/faq/#what-is-sip">SIP</a> User Agents using the <a href="http://tools.ietf.org/html/rfc7118">SIP over WebSocket</a> transport</li>
     <li>Create Audio and Video sessions</li>
     <li>Send <a href="/guides/send-message/">Instant Messages</a> and view Presence</li>
-    <li>Utilize advanced call features such as early media, call hold and resume, and transfers</li>
     <li>Share your screen or desktop from Chrome</li>
+    <li>Utilize advanced call features such as early media, call hold and resume, and transfers</li>
     <li>Send DTMF with SIP INFO</li>
     <li>100% open source, 100% JavaScript</li>
     <li>Chrome, Firefox, and Opera supported</li>
   </ul>
-
+</div>
+<div class="full-width-divider light-gray">
+  <div class="two-column-boxes">
+    <div class="column-box">
+      <img src="/shared/img/github.png" alt="github: social coding" />
+    </div>
+    <div class="column-box">
+      <img src="/shared/img/mit-license.png" alt="MIT open-source license" />
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div class="wrapper full-width-divider">
   <h2>SIP Standards</h2>
   <p><strong>SIP.js</strong> implements the following standard RFCs:</p>
 
-  <ul>
+  <ul class="multicolumn">
     <li><a href="http://tools.ietf.org/html/rfc3261">[3261] SIP: Session Initiation Protocol</a></li>
     <li><a href="http://tools.ietf.org/html/rfc3262">[3262] Reliability of Provisional Responses in SIP</a></li>
     <li><a href="http://tools.ietf.org/html/rfc3326">[3326] The Reason Header Field for SIP</a></li>
