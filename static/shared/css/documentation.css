@@ -22,18 +22,6 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
-.left {
-	float: left;
-}
-.right {
-	float: right;
-}
-.clearfix {
-	clear: both;
-}
-.hidden {
-	display: none;
-}
 /*  BASIC TYPOGRAPHY
 		========================================  */
 h1, h2, h3, h4 {
@@ -53,7 +41,8 @@ h2 {
 }
 h3 {
 	font-size: 24px;
-	margin: 1.618em 0 .8em;
+	/* margin: 1.618em 0 .8em; */
+    margin: 0.8em 0 0.8em 0;
 }
 h4 {
 	font-size: 18px;
@@ -64,41 +53,23 @@ p {
 	line-height: 23px;
 	letter-spacing: .02em;
 }
+h2+p {
+    margin-top: 1.5em;
+}
 h4.intro {
-	font-family: 'Varela Round', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 	letter-spacing: .02em;
     margin-top: 0;
 	margin-bottom: 0;
 	font-size: 1.2em;
+    font-weight: 400;
 	line-height: 1.4em;
-	color: #3f4446;
+    color: #404547;
     text-align: center;
 }
 
-/* VARIABLES
-   ========================================
-   Classes that are really simple and are basically just used as variables to
-   mix in with other classes.
-*/
-.light-gray {
-    background-color: rgb(240,239,234);
-    color: rgb(240,239,234);
-}
-.mid-gray {
-    background-color: rgb(193,191,182);
-    color: rgb(193,191,182);
-}
-.dark-gray {
-    background-color: rgb(65,71,73);
-    color: rgb(65,71,73);
-}
-.orange {
-    background-color: rgb(234, 75, 53);
-    color: rgb(234, 75, 53);
-}
-
 /*  CODE
-		========================================  */
+    ========================================  */
 /*  Type & color for all code  */
 code, pre {
 	font-family: 'Consolas', 'Courier New', 'Courier', monospace;
@@ -153,8 +124,8 @@ td.line-numbers {
   padding-right: 1em;;
 }
 
-/*  LISTS
-		========================================  */
+/* LISTS
+   ========================================  */
 /*  Top level lists  */
 ol, ul {
 	margin: 0 0 2em 1.2em;
@@ -199,7 +170,7 @@ li ul {
 }
 
 /*  LINKS & NAVIGATION
-		========================================  */
+    ========================================  */
 a {
 	text-decoration: none;
 	color: #ea4b35;
@@ -226,6 +197,28 @@ a > code:hover {
 	cursor: pointer;
 	color: #c63a27;
 	border-color: #c63a27;
+}
+.button {
+    display: inline-block;
+    width: auto;
+    margin: 10px;
+    padding: 10px 30px;
+    color: white;
+    background-color: rgb(234, 75, 53);
+    border-radius: 0.25em;
+}
+button {
+    display: inline-block;
+    width: auto;
+    margin: 10px;
+    padding: 10px 30px;
+    color: white;
+    background-color: rgb(234, 75, 53);
+    border-radius: 0.25em;
+    border: none;
+}
+p .button {
+    margin-left: 0;
 }
 
 /*  Horizontal nav styles  */
@@ -499,15 +492,13 @@ footer {
    ========================================
 */
 /* padding-top should be related to .feature h2 font size */
-.full-width-divider {
-    padding-top: 3.375em;
-}
 .full-width-divider h2 {
-    color: #53595b;
+    /* color: #53595b; */
     font-size: 2.5em;
     font-weight: 400;
-    margin-bottom:0;
+    padding-top: 1em;
     padding-bottom:0.1em;
+    margin-bottom:0;
     text-align:center;
 }
 .full-width-divider ul {
@@ -546,15 +537,14 @@ footer {
 }
 .two-column-boxes {
     width: 100%;
+    padding: 2.5% 0;
     margin: auto;
 }
 .column-box {
     float:left;
     width: 50%;
-    padding: 2.5% 2.5% 2.5% 2.5%;
+    padding: 0 2.5%;
     background-clip: content-box;
-    height: 400px;
-    background-color: green;
 }
 .highlights {
 	list-style-type: none;
@@ -564,8 +554,16 @@ footer {
 	float: left;
 	margin: 0;
 	width: 33%;
+    background-clip: padding-box;
 	text-align: center;
-	padding: 60px 60px 40px 60px;
+	padding: 30px 30px 10px 30px;
+    border: 30px solid rgba(0, 0, 0, 0.0);
+}
+.highlights img {
+    height: 74px;
+}
+.highlights li:hover {
+    background-color: rgb(245,244,239);
 }
 .highlights h2 {
 	font-size: 28px;
@@ -662,6 +660,27 @@ footer {
     margin-top: 50px;
 }
 
+.demo-window {
+    background-color: white;
+}
+.demo-window h4 {
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #ea4b35;
+    margin: 0;
+}
+.demo-window h5 {
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+    font-size: 0.75em;
+    font-weight: 400;
+    color: #53595b;
+}
+.demo-view {
+    width: 400px;
+    height: 400px;
+}
+
 
 /*  HIDE .DEV
 		========================================  */
@@ -683,4 +702,75 @@ footer {
 
 #dev:target ~ * .dev {
     display: block;
+}
+
+/* VARIABLES
+   ========================================
+   Classes that are really simple and are basically just used as variables to
+   mix in with other classes.
+   These go at the bottom so they override other styles with same level of
+   specificity.
+*/
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.align-left {
+    text-align: left;
+}
+.align-center {
+    text-align: center;
+}
+.align-right {
+    text-align: right;
+}
+.clearfix {
+	clear: both;
+}
+.hidden {
+	display: none;
+}
+
+.light-gray-bg {
+    background-color: rgb(240,239,234);
+}
+.light-gray-fg {
+    color: rgb(240,239,234);
+}
+
+.mid-gray-bg {
+    background-color: rgb(193,191,182);
+}
+.mid-gray-fg {
+    color: rgb(193,191,182);
+}
+
+.dark-gray-bg {
+    background-color: rgb(65,71,73);
+}
+.dark-gray-bg h3 {
+    color: white;
+}
+.dark-gray-bg .button {
+    background-color: rgb(234, 75, 53);
+    width: 90%;
+}
+.dark-gray-fg {
+    color: rgb(65,71,73);
+}
+
+.orange-bg {
+    background-color: rgb(234, 75, 53);
+}
+.orange-fg {
+    color: rgb(234, 75, 53);
+}
+.orange-bg h3, .orange-bg p, .orange-bg a {
+    color: #ffffff;
+}
+.orange-bg .button {
+    background-color: rgb(103, 101, 94);
+    margin-left: 0;
 }

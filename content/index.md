@@ -40,13 +40,29 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
     </svg>
 </article>
 
-<div class="full-width-divider mid-gray feature">
+<div class="full-width-divider mid-gray-bg feature">
   <div id="content-video-audio">
     <h2>In-browser Video Chat is Now a Breeze</h2>
     <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
     <div class="two-column-boxes wrapper">
-      <div class="column-box" style="background-color:red;"></div>
-      <div class="column-box" style="background-color:blue;"></div>
+      <div class="column-box demo-window">
+        <div class="demo-view"></div>
+        <div class="left">
+          <h4>Alice's View</h4>
+          <h5>Demo user one</h5>
+        </div>
+        <button class="right" type="button">video</button>
+        <div class="clearfix"></div>
+      </div>
+      <div class="column-box demo-window">
+        <div class="demo-view"></div>
+        <div class="left">
+          <h4>Bob's View</h4>
+          <h5>Demo user two</h5>
+        </div>
+        <button class="right" type="button">video</button>
+        <div class="clearfix"></div>
+      </div>
       <div class="clearfix"></div>
     </div>
   </div>
@@ -57,15 +73,15 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
     <h2>Send Real-Time Data In A Flash</h2>
   </div>
 </div>
-<div class="full-width-divider orange">
-  <div class="two-column-boxes wrapper">
+<div class="full-width-divider orange-bg">
+  <div class="two-column-boxes wrapper align-left">
     <div class="column-box">
       <h3>See How It's Done</h3>
       <p>
-        The code displayed on the right is what powers the selected demo from yAlice’s end, although Bob’s code would be very similar.  SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
+        The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
       </p>
 
-      <a href="/">See Full Demo Code</a>
+      <a class="button" href="/">See Full Demo Code</a>
     </div>
     <div class="column-box">
       <pre style="height:100%">
@@ -97,15 +113,16 @@ function call(vid) {
 </div>
 
 <div class="wrapper full-width-divider">
-  <h2>Don't Want to Bother with the Back End?</h2>
-  <p>
-    If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source FreeSWITCH or Asterisk, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
+  <h2 class="orange-fg">Don't Want to Bother with the Back End?</h2>
+  <p class="multicolumn">
+    If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
+  <a class="button left" href="/">Sign up for a free OnSIP sandbox account</a>
   </p>
-  <a href="/">Sign up for a free OnSIP sandbox account</a>
+  <div class="clearfix"></div>
 </div>
 
-<div class="full-width-divider light-gray">
-  <div class="two-column-boxes wrapper">
+<div class="full-width-divider light-gray-bg">
+  <div class="two-column-boxes wrapper align-center">
     <div class="column-box">
       <h3>Learn</h3>
       <p>New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
@@ -118,9 +135,16 @@ function call(vid) {
   </div>
 </div>
 
-<div class="full-width-divider dark-gray">
-  <h3>Built An App Using SIP.js?</h3>
-  <a href="/">We want to hear about it!</a>
+<div class="full-width-divider dark-gray-bg">
+  <div class="two-column-boxes align-center">
+    <div class="column-box">
+    <h3>Built An App Using SIP.js?</h3>
+    </div>
+    <div class="column-box">
+    <a class="button" href="/">We want to hear about it!</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
 </div>
 
 <div class="wrapper full-width-divider">
@@ -137,8 +161,8 @@ function call(vid) {
     <li>Chrome, Firefox, and Opera supported</li>
   </ul>
 </div>
-<div class="full-width-divider light-gray">
-  <div class="two-column-boxes">
+<div class="full-width-divider light-gray-bg">
+  <div class="two-column-boxes align-center">
     <div class="column-box">
       <img src="/shared/img/github.png" alt="github: social coding" />
     </div>
@@ -150,7 +174,7 @@ function call(vid) {
 </div>
 <div class="wrapper full-width-divider">
   <h2>SIP Standards</h2>
-  <p><strong>SIP.js</strong> implements the following standard RFCs:</p>
+  <h4 class="intro"><strong>SIP.js</strong> implements the following standard RFCs:</h4>
 
   <ul class="multicolumn">
     <li><a href="http://tools.ietf.org/html/rfc3261">[3261] SIP: Session Initiation Protocol</a></li>
