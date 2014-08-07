@@ -45,23 +45,27 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
     <h2>In-browser Video Chat is Now a Breeze</h2>
     <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
     <div class="two-column-boxes wrapper">
-      <div class="column-box demo-window">
-        <div class="demo-view"></div>
-        <div class="left">
-          <h4>Alice's View</h4>
-          <h5>Demo user one</h5>
+      <div class="column-box">
+        <div class="demo-window">
+          <div class="demo-view"></div>
+          <div class="left">
+            <h4>Alice's View</h4>
+            <h5>Demo user one</h5>
+          </div>
+          <button class="right" type="button">video</button>
+          <div class="clearfix"></div>
         </div>
-        <button class="right" type="button">video</button>
-        <div class="clearfix"></div>
       </div>
-      <div class="column-box demo-window">
-        <div class="demo-view"></div>
-        <div class="left">
-          <h4>Bob's View</h4>
-          <h5>Demo user two</h5>
+      <div class="column-box">
+        <div class="demo-window">
+          <div class="demo-view"></div>
+          <div class="left">
+            <h4>Bob's View</h4>
+            <h5>Demo user two</h5>
+          </div>
+          <button class="right" type="button">video</button>
+          <div class="clearfix"></div>
         </div>
-        <button class="right" type="button">video</button>
-        <div class="clearfix"></div>
       </div>
       <div class="clearfix"></div>
     </div>

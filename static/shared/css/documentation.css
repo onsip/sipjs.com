@@ -202,7 +202,7 @@ a > code:hover {
     display: inline-block;
     width: auto;
     margin: 10px;
-    padding: 10px 30px;
+    padding: 15px 40px;
     color: white;
     background-color: rgb(234, 75, 53);
     border-radius: 0.25em;
@@ -211,7 +211,7 @@ button {
     display: inline-block;
     width: auto;
     margin: 10px;
-    padding: 10px 30px;
+    padding: 15px 40px;
     color: white;
     background-color: rgb(234, 75, 53);
     border-radius: 0.25em;
@@ -662,13 +662,15 @@ footer {
 
 .demo-window {
     background-color: white;
+    padding: 4%;
+    background-color: rgb(240,239,234);
 }
 .demo-window h4 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
     font-size: 1.5em;
     font-weight: 400;
     color: #ea4b35;
-    margin: 0;
+    margin: 6% 0 0 0;
 }
 .demo-window h5 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
@@ -677,8 +679,9 @@ footer {
     color: #53595b;
 }
 .demo-view {
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 300px;
+    background-color: rgb(65,71,73);
 }
 
 
