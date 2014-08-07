@@ -33,14 +33,12 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
       </li>
     </ul>
     <!-- This draws an arrow that we use to indicate the highlighted feature -->
-    <svg id="feature-arrow" width="80" height="45">
-      <polygon points="40,5 75,40 5,40"
-               style="fill:rgb(193,191,182); stroke:rgb(193,191,182); stroke-width:10;"
-               stroke-linejoin="round" />
+    <svg class="arrow" id="feature-arrow" width="80" height="45">
+      <polygon points="40,5 75,40 5,40" />
     </svg>
 </article>
 
-<div class="full-width-divider mid-gray-bg feature">
+<div class="full-width-divider mid-gray-bg feature" id="feature-demo">
   <div id="content-video-audio">
     <h2>In-browser Video Chat is Now a Breeze</h2>
     <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
@@ -76,7 +74,11 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
   <div id="content-data-channel">
     <h2>Send Real-Time Data In A Flash</h2>
   </div>
+    <svg class="arrow" id="demo-arrow" width="80" height="45">
+      <polygon points="40,5 75,40 5,40" />
+    </svg>
 </div>
+
 <div class="full-width-divider orange-bg">
   <div class="two-column-boxes wrapper align-left">
     <div class="column-box">

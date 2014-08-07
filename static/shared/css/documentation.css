@@ -530,10 +530,8 @@ footer {
 #feature-selector {
     position: relative;
 }
-#feature-arrow {
-    position: absolute;
-    bottom: -7px;
-    left: calc(16.5% - 40px);
+#feature-demo {
+    position: relative;
 }
 .two-column-boxes {
     width: 100%;
@@ -672,6 +670,9 @@ footer {
     margin-top: 50px;
 }
 
+#feature-demo {
+    padding-bottom: 3em;
+}
 .demo-window {
     background-color: white;
     padding: 4%;
@@ -717,6 +718,36 @@ footer {
 
 #dev:target ~ * .dev {
     display: block;
+}
+
+
+/* SVG STUFF
+   ========================================
+   Stuff related to SVG.
+*/
+.arrow polygon {
+    fill: rgb(193,191,182);
+    stroke: rgb(193,191,182);
+    stroke-width: 10;
+    stroke-linejoin: round;
+}
+#feature-arrow {
+    position: absolute;
+    bottom: -7px;
+    left: calc(16.5% - 40px);
+}
+#feature-arrow polygon {
+    fill: rgb(193,191,182);
+    stroke: rgb(193,191,182);
+}
+#demo-arrow {
+    position: absolute;
+    bottom: -7px;
+    left: 18%;
+}
+#demo-arrow polygon {
+    fill: rgb(234, 75, 53);
+    stroke: rgb(234, 75, 53);
 }
 
 /* VARIABLES
