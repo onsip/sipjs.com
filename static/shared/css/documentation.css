@@ -548,7 +548,6 @@ footer {
 }
 .highlights {
 	list-style-type: none;
-	padding: 0;
 }
 .highlights li {
 	float: left;
@@ -580,13 +579,12 @@ footer {
 .highlight-icon-wrapper {
 	width: 180px;
 	height: 180px;
-	margin: 0 auto;
+    margin: 0 auto 30px auto;
+    border: 0px solid #ea4b35;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
-	border: 6px solid #c0beb6;
 	background-color: #fff;
-	margin-bottom: 45px;
 	overflow: hidden;
 	-webkit-transition: all .12s ease-in-out;
 	-moz-transition: all .12s ease-in-out;
@@ -594,11 +592,11 @@ footer {
 	-o-transition: all .12s ease-in-out;
 	transition: all .12s ease-in-out;
 }
-.highlights li:hover .highlight-icon-wrapper {
-	width: 190px;
-	height: 190px;
-	margin-top: -5px;
-	margin-bottom: 40px;
+.highlights .column-box:hover .highlight-icon-wrapper {
+	width: 192px;
+	height: 192px;
+	margin-top: -6px;
+	margin-bottom: 24px;
 	border: 6px solid #ea4b35;
 }
 .highlight-icon {
@@ -637,8 +635,28 @@ footer {
 	-o-transition: opacity .12s ease-in-out;
 	transition: opacity .12s ease-in-out;
 }
-.highlights li:hover .hoverstate {
+.highlights .column-box:hover .hoverstate {
 	opacity: 1;
+}
+/*  Underline hover effect  */
+.highlights .column-box h3:after {
+	content: "";
+	display: block;
+	width: 0%;
+	height: 3px;
+	margin: 0 auto 0;
+	background-color: #ea4b35;
+	-webkit-transition: width .12s ease-in-out;
+	-moz-transition: width .12s ease-in-out;
+	-ms-transition: width .12s ease-in-out;
+	-o-transition: width .12s ease-in-out;
+	transition: width .12s ease-in-out;
+}
+.highlights .column-box:hover h3:after {
+	width: 25%;
+}
+.highlights .column-box:hover h3 {
+    color: #ea4b35;
 }
 .highlight-icon a {
 	color: #3f4445;

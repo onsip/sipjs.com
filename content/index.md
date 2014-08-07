@@ -126,12 +126,22 @@ function call(vid) {
 </div>
 
 <div class="full-width-divider light-gray-bg">
-  <div class="two-column-boxes wrapper align-center">
+  <div class="two-column-boxes wrapper highlights align-center">
     <div class="column-box">
+      <div class="highlight-icon-wrapper">
+        <div class="highlight-icon icon-books" onclick="window.location='/guides/'">
+          <div class="hoverstate">
+            <a href="/guides/">Guides</a>
+          </div>
+        </div>
+      </div>
       <h3>Learn</h3>
       <p>New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
     </div>
     <div class="column-box">
+      <div class="highlight-icon-wrapper">
+        <img src="/shared/img/icon-people.png" alt="connect with the SIP.js community" />
+      </div>
       <h3>Connect</h3>
       <p>Get answers, stay up to date, and become part of the SIP.js community.</p>
     </div>
