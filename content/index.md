@@ -88,7 +88,8 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
       <a class="button" href="/">See Full Demo Code</a>
     </div>
     <div class="column-box">
-      <pre style="height:100%">
+<div markdown="1">
+~~~ javascript
 var session,
 ua = window.ua,
 target = window.target;
@@ -110,7 +111,8 @@ function call(vid) {
       }
     });
 }
-      </pre>
+~~~
+</div>
     </div>
     <div class="clearfix"></div>
   </div>
