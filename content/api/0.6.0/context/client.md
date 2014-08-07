@@ -37,7 +37,7 @@ target | `String|SIP.URI` | The destination URI for the request to send to.
 
 ### `request`
 
-[`SIP.OutgoingRequest`](/api/0.6.0/outgoingRequest/) - The request sent or to be sent.
+[`SIP.OutgoingRequest`](/api/0.6.0/sipMessage/) - The request sent or to be sent.
 
 ### `localIdentity`
 
