@@ -611,14 +611,8 @@ footer {
 .icon-chat {
 	background: url(../img/icon-chat.png) no-repeat center center;
 }
-.highlights li:hover .icon-arrow {
-	/*background: url(../img/icon-arrow-hover.png) no-repeat center center;*/
-}
-.highlights li:hover .icon-books {
-	/*background: url(../img/icon-books-hover.png) no-repeat center center;*/
-}
-.highlights li:hover .icon-chat {
-	/*background: url(../img/icon-chat-hover.png) no-repeat center center;*/
+.icon-people {
+    background: url(../img/icon-people.png) no-repeat center center;
 }
 .highlight-icon .hoverstate {
 	width: 100%;

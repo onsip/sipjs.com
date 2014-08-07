@@ -140,7 +140,11 @@ function call(vid) {
     </div>
     <div class="column-box">
       <div class="highlight-icon-wrapper">
-        <img src="/shared/img/icon-people.png" alt="connect with the SIP.js community" />
+        <div class="highlight-icon icon-people" onclick="window.location='https://groups.google.com/forum/#!forum/sip_js'">
+          <div class="hoverstate">
+            <a href="https://groups.google.com/forum/#!forum/sip_js">Support</a>
+          </div>
+        </div>
       </div>
       <h3>Connect</h3>
       <p>Get answers, stay up to date, and become part of the SIP.js community.</p>
