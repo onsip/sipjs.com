@@ -560,6 +560,7 @@ footer {
 
 .highlights {
 	list-style-type: none;
+    margin: 0;
 }
 .highlights li {
 	float: left;
