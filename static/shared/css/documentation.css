@@ -204,7 +204,7 @@ a > code:hover {
     margin: 10px;
     padding: 15px 40px;
     color: white;
-    background-color: rgb(234, 75, 53);
+    background-color: rgb(103, 101, 94);
     border-radius: 0.25em;
 }
 button {
@@ -541,7 +541,7 @@ footer {
 .column-box {
     float:left;
     width: 50%;
-    padding: 0 2.5%;
+    padding: 0 5%;
     background-clip: content-box;
 }
 .highlights {
@@ -691,10 +691,43 @@ footer {
     font-weight: 400;
     color: #53595b;
 }
-.demo-view {
+#content-video-audio .demo-view, #content-message .demo-view {
     width: 100%;
     height: 300px;
+}
+#content-video-audio .demo-view {
     background-color: rgb(65,71,73);
+}
+#content-message .demo-view {
+    background-color: rgb(240,239,234);
+}
+#content-data-channel .demo-view {
+    width: 100%;
+    height: 200px;
+    background-color: rgb(240,239,234);
+
+}
+.demo-view .message-display {
+    background-color: rgb(255,255,255);
+    height: 100%;
+    width: 100%;
+}
+.demo-view .message-input {
+    background-color: rgb(255,255,255);
+}
+#content-message .message-display {
+    background-color: rgb(255,255,255);
+    background-clip: content-box;
+    height: 75%;
+    padding-bottom: 1.25em;
+    width: 100%;
+}
+#content-message .message-input {
+    background-color: rgb(255,255,255);
+    background-clip: content-box;
+    height: 25%;
+    padding-top: 0.25em;
+    width: 100%;
 }
 
 
@@ -817,6 +850,5 @@ footer {
     color: #ffffff;
 }
 .orange-bg .button {
-    background-color: rgb(103, 101, 94);
     margin-left: 0;
 }

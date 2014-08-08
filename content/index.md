@@ -70,9 +70,91 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
   </div>
   <div id="content-message">
     <h2>Real-Time Messaging with a Dozen Lines of Code</h2>
+    <h4 class="intro">Check it out. Instant message between Alice and Bob.</h4>
+    <div class="two-column-boxes wrapper">
+      <div class="column-box">
+        <div class="demo-window">
+          <div class="demo-view">
+            <div class="message-display">
+              Bob: No messages yet
+            </div>
+            <div class="message-input">
+              Enter your message to Bob here!
+            </div>
+          </div>
+          <div class="left">
+            <h4>Alice's View</h4>
+            <h5>Demo user one</h5>
+          </div>
+          <button class="right" type="button">send message</button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="column-box">
+        <div class="demo-window">
+          <div class="demo-view">
+            <div class="message-display">
+              Alice: No messages yet
+            </div>
+            <div class="message-input">
+              Enter your message to Alice here!
+            </div>
+          </div>
+          <div class="left">
+            <h4>Bob's View</h4>
+            <h5>Demo user two</h5>
+          </div>
+          <button class="right" type="button">send message</button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
   </div>
   <div id="content-data-channel">
     <h2>Send Real-Time Data In A Flash</h2>
+    <h4 class="intro">Go ahead. Upload a file as Alice and Download it as Bob.</h4>
+    <div class="two-column-boxes wrapper">
+      <div class="column-box">
+        <div class="demo-window">
+          <div class="demo-view">
+            <div class="message-display">
+              Alice: data sent example_file_name.jpg
+              Bob: data received example_file_name.jpg
+            </div>
+          </div>
+          <button class="left dark-gray-bg" type="button">choose a file to send</button>
+          <p class="right">example_file_name.jpg</p>
+          <div class="clearfix"></div>
+          <div class="left">
+            <h4>Alice's View</h4>
+            <h5>Demo user one</h5>
+          </div>
+          <button class="right" type="button">share</button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="column-box">
+        <div class="demo-window">
+          <div class="demo-view">
+            <div class="message-display">
+              Bob: data sent example_file_name.jpg
+              Alice: data received example_file_name.jpg
+            </div>
+          </div>
+          <button class="left dark-gray-bg" type="button">choose a file to send</button>
+          <p class="right">example_file_name.jpg</p>
+          <div class="clearfix"></div>
+          <div class="left">
+            <h4>Bob's View</h4>
+            <h5>Demo user two</h5>
+          </div>
+          <button class="right" type="button">share</button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
   </div>
     <svg class="arrow" id="demo-arrow" width="80" height="45">
       <polygon points="40,5 75,40 5,40" />
@@ -124,7 +206,7 @@ function call(vid) {
   <h2 class="orange-fg">Don't Want to Bother with the Back End?</h2>
   <p class="multicolumn">
     If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
-  <a class="button left" href="/">Sign up for a free OnSIP sandbox account</a>
+  <a class="button orange-bg left" href="/">Sign up for a free OnSIP sandbox account</a>
   </p>
   <div class="clearfix"></div>
 </div>
