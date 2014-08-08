@@ -351,7 +351,6 @@ th {
 		========================================  */
 #main {
 	padding-bottom: 60px;
-	border-bottom: 1px solid #a8a8a8;
 }
 #main > h1:first-child {
 	height: 120px;
@@ -481,18 +480,34 @@ th {
 /*  FOOTER
 		========================================  */
 footer {
-	padding: 40px 0 100px;
+    padding: 30px 0 20px 0;
 	font-size: .9em;
 }
 
+#onsip-stamp {
+	margin: 0 0 -36px 0; /*  center & bring nav lists up  */
+    text-align:center;
+}
+
+#made-by-prefix {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 0.75em;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+    color: #cccac3;
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 2.4em;
+}
+
 #onsip {
-	display: block;
+	display: inline-block;
 	width: 151px;
 	height: 49px;
 	overflow: hidden;
-	margin: 0 auto -36px; /*  center & bring nav lists up  */
+	/* margin: 0 auto -36px; /\*  center & bring nav lists up  *\/ */
 	background-image: url(../img/onsip-logo-2.png);
-	background-position: top center;
+	background-position: middle center;
 }
 
 #onsip:hover {

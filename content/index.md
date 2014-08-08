@@ -10,7 +10,6 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
 	  <h4 class="intro">A simple yet powerful JS library that takes care of WebRTC and SIP signaling for you</h4>
 	</div>
     <ul class="highlights">
-      <!-- TODO allow for highlighting of a list item. -->
       <li id="feature-video-audio">
         <img class="icon-unselected"
              src="/shared/img/video-audio.png" alt="video + audio" />
