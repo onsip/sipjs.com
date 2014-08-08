@@ -1,4 +1,3 @@
-
 /*  BASE STYLES
 		========================================  */
 /*  Remove margin & padding on all elements
@@ -17,10 +16,22 @@ body {
 	font-weight: 300;
 	color: #3f4446;
 }
+
+/* This bit is so we can have a margin around all of the elements where the
+ * elements backgrounds extend across the whole page.
+ */
 .wrapper {
-	width: 940px;
-	margin-left: auto;
-	margin-right: auto;
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.wrapper-bg-extend {
+    width: 100%;
+ }
+.wrapper-bg-extend>* {
+    width: 100%;
+    padding-left: calc(50% - 470px);
+    padding-right: calc(50% - 470px);
 }
 /*  BASIC TYPOGRAPHY
 		========================================  */
@@ -494,7 +505,7 @@ footer {
 /* padding-top should be related to .feature h2 font size */
 .full-width-divider h2 {
     /* color: #53595b; */
-    font-size: 2.5em;
+    font-size: 2.25em;
     font-weight: 400;
     padding-top: 1em;
     padding-bottom:0.1em;
@@ -503,23 +514,18 @@ footer {
 }
 .full-width-divider ul {
     margin-top: 4%;
+    margin-left: 0;
 }
 .home-feature {
+    width: 80%;
 	padding: 50px 0 10px 0;
-}
-.feature {
-}
-.home-feature pre {
-	width: 535px;
-	height: 255px;
-	margin: 0;
-	float: right;
-	font-size: 1em;
+    margin-left: auto;
+    margin-right: auto;
 }
 .feature h1 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
     color: #ea4b35;
-    font-size: 2.5em;
+    font-size: 2.25em;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.5em;
@@ -533,17 +539,25 @@ footer {
 #feature-demo {
     position: relative;
 }
+
 .two-column-boxes {
     width: 100%;
-    padding: 2.5% 0;
     margin: auto;
+   padding: 2.5% 0;
 }
 .column-box {
     float:left;
     width: 50%;
-    padding: 0 5%;
     background-clip: content-box;
+    padding: 0 5% 0 0;
 }
+/* This does the padding correctly, where we don't pad the left of the first box
+ * and the right of the last box.
+ */
+.column-box~.column-box {
+    padding: 0 0 0 5%;
+}
+
 .highlights {
 	list-style-type: none;
 }
