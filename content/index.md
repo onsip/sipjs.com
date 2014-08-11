@@ -246,7 +246,7 @@ function call(vid) {
         <h3>Built An App Using SIP.js?</h3>
       </div>
       <div class="column-box">
-        <a class="button orange-bg" href="/">We want to hear about it!</a>
+        <button id="success-opener" class="orange-bg">We want to hear about it!</button>
       </div>
       <div class="clearfix"></div>
     </div>

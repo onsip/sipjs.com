@@ -217,6 +217,12 @@ a > code:hover {
     color: white;
     background-color: rgb(103, 101, 94);
     border-radius: 0.25em;
+
+	-webkit-transition: color .12s ease-in-out;
+	-moz-transition: color .12s ease-in-out;
+	-ms-transition: color .12s ease-in-out;
+	-o-transition: color .12s ease-in-out;
+	transition: color .12s ease-in-out;
 }
 .button:hover {
     background-color: rgb(88, 86, 79);
@@ -228,6 +234,9 @@ a.button.orange-bg:hover {
      * so the button darkens on hover (1st line). */
 	background-color: #c63a27;
     /* background-color: rgb(254,95,73); */
+}
+.dark-gray-bg .button {
+    width: 90%;
 }
 button {
     display: inline-block;
@@ -251,6 +260,10 @@ button:hover {
      * so the button darkens on hover (1st line). */
 	background-color: #c63a27;
     /* background-color: rgb(254,95,73); */
+}
+#success-opener {
+    font-size: 100%;
+    width: 90%;
 }
 .hover-arrow {
     font-size: 1.25em;
@@ -904,9 +917,6 @@ footer {
 }
 .dark-gray-bg h3 {
     color: white;
-}
-.dark-gray-bg .button {
-    width: 90%;
 }
 .dark-gray-fg {
     color: rgb(65,71,73);
