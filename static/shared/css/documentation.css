@@ -185,11 +185,11 @@ li ul {
 a {
 	text-decoration: none;
 	color: #ea4b35;
-	-webkit-transition: color .12s ease-in-out;
-	-moz-transition: color .12s ease-in-out;
-	-ms-transition: color .12s ease-in-out;
-	-o-transition: color .12s ease-in-out;
-	transition: color .12s ease-in-out;
+	-webkit-transition: color .12s ease-in-out background-color .12s ease-in-out;
+	-moz-transition: color .12s ease-in-out background-color .12s ease-in-out;
+	-ms-transition: color .12s ease-in-out background-color .12s ease-in-out;
+	-o-transition: color .12s ease-in-out background-color .12s ease-in-out;
+	transition: color .12s ease-in-out background-color .12s ease-in-out;
 }
 a:hover {
 	color: #c63a27;
@@ -218,6 +218,17 @@ a > code:hover {
     background-color: rgb(103, 101, 94);
     border-radius: 0.25em;
 }
+.button:hover {
+    background-color: rgb(88, 86, 79);
+}
+a.button.orange-bg:hover {
+    color: white;
+    /* I sort of feel like the botton should lighten up on hover (2nd line), but
+     * that is inconsistent with the behavior for text links,
+     * so the button darkens on hover (1st line). */
+	background-color: #c63a27;
+    /* background-color: rgb(254,95,73); */
+}
 button {
     display: inline-block;
     width: auto;
@@ -227,6 +238,33 @@ button {
     background-color: rgb(234, 75, 53);
     border-radius: 0.25em;
     border: none;
+
+	-webkit-transition: color .12s ease-in-out;
+	-moz-transition: color .12s ease-in-out;
+	-ms-transition: color .12s ease-in-out;
+	-o-transition: color .12s ease-in-out;
+	transition: color .12s ease-in-out;
+}
+button:hover {
+    /* I sort of feel like the botton should lighten up on hover (2nd line), but
+     * that is inconsistent with the behavior for text links,
+     * so the button darkens on hover (1st line). */
+	background-color: #c63a27;
+    /* background-color: rgb(254,95,73); */
+}
+.hover-arrow {
+    font-size: 1.25em;
+    font-weight: bold;
+    visibility: hidden;
+
+	-webkit-transition: color .12s ease-in-out;
+	-moz-transition: color .12s ease-in-out;
+	-ms-transition: color .12s ease-in-out;
+	-o-transition: color .12s ease-in-out;
+	transition: color .12s ease-in-out;
+}
+.button:hover>.hover-arrow {
+    visibility: visible;
 }
 p .button {
     margin-left: 0;
@@ -760,6 +798,11 @@ footer {
     width: 100%;
 }
 
+#git-mit-images img {
+    width: 266px;
+    height: 118px;
+}
+
 
 /*  HIDE .DEV
 		========================================  */
@@ -863,7 +906,6 @@ footer {
     color: white;
 }
 .dark-gray-bg .button {
-    background-color: rgb(234, 75, 53);
     width: 90%;
 }
 .dark-gray-fg {

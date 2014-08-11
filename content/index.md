@@ -170,7 +170,7 @@ popup: true
           The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
         </p>
 
-        <a class="button" href="/">See Full Demo Code</a>
+        <a class="button" href="/">See Full Demo Code <span class="hover-arrow">⟩</span></a>
       </div>
       <div class="column-box">
 <div markdown="1">
@@ -207,7 +207,7 @@ function call(vid) {
     <h2 class="orange-fg">Don't Want to Bother with the Back End?</h2>
     <p class="multicolumn">
       If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
-      <a class="button orange-bg left" href="/">Sign up for a free OnSIP sandbox account</a>
+      <a class="button orange-bg left" href="https://signup.onsip.com/network">Sign up for a free OnSIP sandbox account</a>
     </p>
     <div class="clearfix"></div>
   </div>
@@ -246,7 +246,7 @@ function call(vid) {
         <h3>Built An App Using SIP.js?</h3>
       </div>
       <div class="column-box">
-        <a class="button" href="/">We want to hear about it!</a>
+        <a class="button orange-bg" href="/">We want to hear about it!</a>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -267,7 +267,7 @@ function call(vid) {
     </ul>
   </div>
   <div class="full-width-divider light-gray-bg">
-    <div class="two-column-boxes align-center">
+    <div class="two-column-boxes align-center" id="git-mit-images">
       <div class="column-box">
         <img src="/shared/img/github.png" alt="github: social coding" />
       </div>
