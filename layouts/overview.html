@@ -2,9 +2,16 @@
 
 <body class="overview">
 	<%= render 'header' %>
-	
+
 	<%= yield %>
-		
+
 	<%= render 'footer' %>
+
+    <%=
+       if @item[:popup] then
+         render 'success-popup'
+       else
+       end
+    %>
 </body>
 </html>

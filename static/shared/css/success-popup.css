@@ -1,0 +1,72 @@
+#success-story {
+    width: 580px;
+    padding: 10px 0 4px 0;
+    border: solid rgb(240,240,240) 2px;
+    overflow: auto;
+    position: relative;
+
+    /* TODO We need to figure out how to handle submissions from a static
+     * web site */
+    display: none;
+}
+#close-popup {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: rgb(230,229,224);
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    /* width: 40px; */
+    /* height: 40px; */
+    /* border-radius: 5px; */
+}
+
+#success-story form {
+    width: 96%;
+    margin: 0 auto;
+}
+#success-story form>* {
+    width: 46%;
+    margin: 2%;
+}
+#success-story form>input,
+#success-story form>textarea {
+    padding: 0.5em;
+    background-color: rgb(240,239,234);
+    border: none;
+}
+#success-story form>button {
+    width: auto;
+    padding: 10px 15px;
+}
+#success-app-desc {
+    float: left;
+    resize: none;
+}
+
+#success-story h2,
+#success-story h4 {
+    text-align: center;
+}
+#success-story h2 {
+    margin-bottom: 0.5em;
+}
+#success-story h4 {
+    margin-top: 1em;
+}
+
+/* Changing placeholder font style */
+#success-story form>*::-webkit-input-placeholder {
+    color: #000;
+}
+#success-story form>*:-moz-placeholder {
+    color: #000;
+}
+#success-story form>*::-moz-placeholder {
+    color: #000;
+}
+#success-story form>*:-ms-input-placeholder {
+    color: #000;
+}

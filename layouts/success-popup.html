@@ -1,0 +1,15 @@
+<div id="success-story">
+  <div id="close-popup">X</div>
+  <h2 class="orange-fg">Tell us about your app</h1>
+  <h4>We'd like to share your story on our blog</h4>
+
+  <form name="success_story">
+    <!-- These items must be on the same line because otherwise we have a space
+         in between the two inline elements and then these won't align correctly
+         with elements wrapped around the floated textarea. -->
+    <input type="text" name="name" placeholder="full name"/><input type="text" name="email" placeholder="company email address"/>
+    <textarea id="success-app-desc" name="app_description" rows="10" cols="30" placeholder="describe your app"></textarea>
+    <input type="tel" name="telephone" placeholder="phone number (optional)"/>
+    <button id="success-submit" type="submit">share</button>
+  </form>
+</div>

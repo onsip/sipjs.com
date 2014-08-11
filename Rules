@@ -117,4 +117,12 @@ route '*' do
   end
 end
 
+compile '/partials/*/' do
+end
+# Do not route partials, since we plug them into other sources that
+# will do the routing.
+route '/partials/*/' do
+  nil
+end
+
 layout '*', :erb
