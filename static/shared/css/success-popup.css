@@ -1,17 +1,17 @@
+.popup {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    z-index: 21;
+    display: none;
+}
 #success-story {
     width: 580px;
     padding: 10px 0 4px 0;
     border: solid rgb(240,240,240) 2px;
     background-color: white;
     overflow: auto;
-    position: fixed;
-    top: 25%;
-    left: 50%;
     margin-left: -290px;
-
-    /* TODO We need to figure out how to handle submissions from a static
-     * web site */
-    display: none;
 }
 #close-popup {
     position: absolute;
@@ -77,6 +77,18 @@
     color: #888;
 }
 
+
+/* Background dimmer overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+}
 
 /* Hidden iframe to receive the POST action */
 #post-receiver {
