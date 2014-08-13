@@ -1,3 +1,4 @@
+<!-- We use this file only for the home page -->
 <%= render 'head' %>
 
 <body class="overview">
@@ -7,11 +8,9 @@
 
 	<%= render 'footer' %>
 
-    <%=
-       if @item[:popup] then
-         render 'success-popup'
-       else
-       end
-    %>
+    <%= render 'success-popup' %>
+    <script src="/download/sip-0.6.2.js" type="text/javascript"></script>
+    <script src="./feature_selector.js" type="text/javascript"></script>
+    <script src="./sipjs_demos.js" type="text/javascript"></script>
 </body>
 </html>

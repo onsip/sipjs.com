@@ -46,23 +46,27 @@ popup: true
       <div class="two-column-boxes">
         <div class="column-box">
           <div class="demo-window">
-            <div class="demo-view"></div>
+            <div class="demo-view">
+              <video id="video-of-bob" muted="muted"></video>
+            </div>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
             </div>
-            <button class="right" type="button">video</button>
+            <button id="alice-video-button" class="right" type="button">video</button>
             <div class="clearfix"></div>
           </div>
         </div>
         <div class="column-box">
           <div class="demo-window">
-            <div class="demo-view"></div>
+            <div class="demo-view">
+              <video id="video-of-alice" muted="muted"></video>
+            </div>
             <div class="left">
               <h4>Bob's View</h4>
               <h5>Demo user two</h5>
             </div>
-            <button class="right" type="button">video</button>
+            <button id="bob-video-button" class="right" type="button">video</button>
             <div class="clearfix"></div>
           </div>
         </div>
@@ -173,8 +177,60 @@ popup: true
         <a class="button" href="/">See Full Demo Code <span class="hover-arrow">⟩</span></a>
       </div>
       <div class="column-box">
-<div markdown="1">
+<div id="code-video-audio" markdown="1">
 ~~~~ javascript
+var session,
+ua = window.ua,
+target = window.target;
+
+function call(vid) {
+  session = ua.invite(
+    target,
+    {
+      media: {
+        constraints: {
+          audio: true,
+          video: vid
+        },
+        render: {
+          remote: {
+            video: elements.videoStream
+          }
+        }
+      }
+    });
+}
+~~~~
+</div>
+<div id="code-message" markdown="1">
+~~~~ javascript
+CODE MESSAGE
+var session,
+ua = window.ua,
+target = window.target;
+
+function call(vid) {
+  session = ua.invite(
+    target,
+    {
+      media: {
+        constraints: {
+          audio: true,
+          video: vid
+        },
+        render: {
+          remote: {
+            video: elements.videoStream
+          }
+        }
+      }
+    });
+}
+~~~~
+</div>
+<div id="code-data-channel" markdown="1">
+~~~~ javascript
+CODE DATA CHANNEL
 var session,
 ua = window.ua,
 target = window.target;

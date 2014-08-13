@@ -43,18 +43,26 @@ $.extend($.easing,
 
 // Calls this when the DOM is done loading
 $(function () {
-    // Make sure that the union of keys for feature_ids and content_ids equals
-    // the intersection of the keys.
+    /* Make sure that the union of keys for the dictionaries defined below are
+     * equal to their intersections.
+     */
+    // The feature buttons that the user can click on
     var feature_ids = {'video_audio':  'feature-video-audio',
                        'message':      'feature-message',
                        'data_channel': 'feature-data-channel'};
+    // The content for the demos for each feature.
     var content_ids = {'video_audio':  'content-video-audio',
                        'message':      'content-message',
                        'data_channel': 'content-data-channel'};
+    // The code for each feature code example
+    var code_ids    = {'video_audio':  'code-video-audio',
+                       'message':      'code-message',
+                       'data_channel': 'code-data-channel'};
     // Prepend all with id hashtag
     for (var key in feature_ids) {
         feature_ids[key] = '#' + feature_ids[key];
         content_ids[key] = '#' + content_ids[key];
+        code_ids[key]    = '#' + code_ids[key];
     }
     var arrow_id = '#feature-arrow';
     var arrow_elem = $(arrow_id);
@@ -72,12 +80,14 @@ $(function () {
             selected_elem.children('.icon-selected').show();
             selected_elem.children('.icon-unselected').hide();
             $(content_ids[key]).show();
+            $(code_ids[key]).show();
             for (var otherkey in feature_ids) {
                 if (otherkey !== key) {
                     var other_elem = $(feature_ids[otherkey]);
                     other_elem.children('.icon-selected').hide();
                     other_elem.children('.icon-unselected').show();
                     $(content_ids[otherkey]).hide();
+                    $(code_ids[otherkey]).hide();
                 }
             }
             // Move the arrow to under the proper feature box
@@ -92,10 +102,6 @@ $(function () {
 
     for (var key in feature_ids) {
         $(feature_ids[key]).click(bind_key_fn(key));
-
-        console.log($(feature_ids[key]).position());
-        console.log($(feature_ids[key]).outerWidth());
-        console.log('');
     }
 
     $(feature_ids['video_audio']).click();

@@ -779,6 +779,10 @@ footer {
 #content-video-audio .demo-view {
     background-color: rgb(65,71,73);
 }
+.demo-view video {
+    width: 100%;
+    opacity: 1;
+}
 #content-message .demo-view {
     background-color: rgb(240,239,234);
 }
