@@ -79,6 +79,7 @@ $(function () {
             var selected_elem = $(this);
             selected_elem.children('.icon-selected').show();
             selected_elem.children('.icon-unselected').hide();
+            selected_elem.children('h4').css('color', 'rgb(234, 75, 53)');
             $(content_ids[key]).show();
             $(code_ids[key]).show();
             for (var otherkey in feature_ids) {
@@ -86,6 +87,7 @@ $(function () {
                     var other_elem = $(feature_ids[otherkey]);
                     other_elem.children('.icon-selected').hide();
                     other_elem.children('.icon-unselected').show();
+                    other_elem.children('h4').css('color', '#8a7c7a');
                     $(content_ids[otherkey]).hide();
                     $(code_ids[otherkey]).hide();
                 }

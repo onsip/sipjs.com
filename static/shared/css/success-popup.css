@@ -15,9 +15,9 @@
 }
 #close-popup {
     position: absolute;
-    top: 2%;
+    top: 1%;
     right: 2%;
-    padding: 2%;
+    padding: 1%;
     font-family: 'Helvetica', 'Arial', sans-serif;
     color: rgb(230,229,224);
     font-size: 1.5em;

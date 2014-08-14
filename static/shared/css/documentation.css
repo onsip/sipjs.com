@@ -241,6 +241,7 @@ a.button.orange-bg:hover {
 button {
     display: inline-block;
     width: auto;
+    font-size: 100%;
     margin: 10px;
     padding: 15px 40px;
     color: white;
@@ -262,8 +263,19 @@ button:hover {
     /* background-color: rgb(254,95,73); */
 }
 #success-opener {
-    font-size: 100%;
     width: 90%;
+}
+#code-button-text {
+    position: relative;
+    left: 0;
+    -webkit-transition: left .25s ease-in-out;
+	-moz-transition: left .25s ease-in-out;
+	-ms-transition: left .25s ease-in-out;
+	-o-transition: left .25s ease-in-out;
+	transition: left .25s ease-in-out;
+}
+.button:hover > #code-button-text {
+    left: -0.5em;
 }
 .hover-arrow {
     font-size: 1.25em;
@@ -582,6 +594,9 @@ footer {
     margin-top: 4%;
     margin-left: 0;
 }
+.full-width-divider > p {
+    margin-bottom: 2em;
+}
 .home-feature {
     width: 80%;
 	padding: 50px 0 10px 0;
@@ -638,7 +653,8 @@ footer {
     border: 30px solid rgba(0, 0, 0, 0.0);
 }
 .highlights img {
-    height: 74px;
+    /* height: 74px; */
+    height: 50px;
 }
 .highlights li:hover {
     background-color: rgb(245,244,239);
@@ -648,6 +664,9 @@ footer {
 	line-height: 1;
 	color: #ea4b35;
 	text-transform: uppercase;
+}
+.highlights h4 {
+    margin: 0.5em 0 .75em 0;
 }
 .highlights p.subpara {
 	font-size: 17px;
@@ -699,7 +718,7 @@ footer {
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
-	padding-top: 45px;
+    padding-top: 46%;
 	opacity: 0;
 	background-color: rgba(255,255,255,0.84);
 	-webkit-transition: opacity .12s ease-in-out;
@@ -755,6 +774,7 @@ footer {
     padding-bottom: 3em;
 }
 .demo-window {
+    position: relative;
     background-color: white;
     padding: 4%;
     background-color: rgb(240,239,234);
@@ -774,7 +794,7 @@ footer {
 }
 #content-video-audio .demo-view, #content-message .demo-view {
     width: 100%;
-    height: 300px;
+    height: 293px;
 }
 #content-video-audio .demo-view {
     background-color: rgb(65,71,73);
@@ -800,6 +820,18 @@ footer {
 .demo-view .message-input {
     background-color: rgb(255,255,255);
 }
+.file-send-button {
+    padding: 15px;
+}
+.file-send-button+p {
+    position: relative;
+    display: inline-block;
+    right: 0;
+    bottom: 0;
+}
+.file-send-button.dark-gray-bg:hover {
+    background-color: rgb(85,91,93);
+}
 #content-message .message-display {
     background-color: rgb(255,255,255);
     background-clip: content-box;
@@ -816,8 +848,7 @@ footer {
 }
 
 #git-mit-images img {
-    width: 266px;
-    height: 118px;
+    height: 82px;
 }
 
 
@@ -848,6 +879,7 @@ footer {
    ========================================
    Stuff related to SVG.
 */
+
 .arrow polygon {
     fill: rgb(193,191,182);
     stroke: rgb(193,191,182);
@@ -857,7 +889,7 @@ footer {
 #feature-arrow {
     position: absolute;
     bottom: -7px;
-    left: calc(16.5% - 40px);
+    left: calc(16.5% - 30px);
 }
 #feature-arrow polygon {
     fill: rgb(193,191,182);
@@ -866,7 +898,7 @@ footer {
 #demo-arrow {
     position: absolute;
     bottom: -7px;
-    left: 18%;
+    left: 20.5%;
 }
 #demo-arrow polygon {
     fill: rgb(234, 75, 53);

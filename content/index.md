@@ -16,25 +16,25 @@ popup: true
              src="/shared/img/video-audio.png" alt="video + audio" />
         <img class="icon-selected"
              src="/shared/img/video-audio-highlight.png" alt="video + audio highlight" />
-        <h3>video + audio</h3>
+        <h4>video + audio</h4>
       </li>
       <li id="feature-message">
         <img class="icon-unselected"
              src="/shared/img/message.png" alt="message" />
         <img class="icon-selected"
              src="/shared/img/message-highlight.png" alt="message highlight" />
-        <h3>message</h3>
+        <h4>message</h4>
       </li>
       <li id="feature-data-channel">
         <img class="icon-unselected"
              src="/shared/img/data-channel.png" alt="message" />
         <img class="icon-selected"
              src="/shared/img/data-channel-highlight.png" alt="message highlight" />
-        <h3>data channel</h3>
+        <h4>data channel</h4>
       </li>
     </ul>
     <!-- This draws an arrow that we use to indicate the highlighted feature -->
-    <svg class="arrow" id="feature-arrow" width="80" height="45">
+    <svg class="arrow" id="feature-arrow" width="60" height="34" viewBox="0 0 80 45">
       <polygon points="40,5 75,40 5,40" />
     </svg>
   </article>
@@ -128,9 +128,8 @@ popup: true
                 Bob: data received example_file_name.jpg
               </div>
             </div>
-            <button class="left dark-gray-bg" type="button">choose a file to send</button>
-            <p class="right">example_file_name.jpg</p>
-            <div class="clearfix"></div>
+            <button class="file-send-button dark-gray-bg" type="button">choose a file to send</button>
+            <p>example_file_name.jpg</p>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
@@ -147,8 +146,8 @@ popup: true
                 Alice: data received example_file_name.jpg
               </div>
             </div>
-            <button class="left dark-gray-bg" type="button">choose a file to send</button>
-            <p class="right">example_file_name.jpg</p>
+            <button class="file-send-button dark-gray-bg" type="button">choose a file to send</button>
+            <p>example_file_name.jpg</p>
             <div class="clearfix"></div>
             <div class="left">
               <h4>Bob's View</h4>
@@ -161,7 +160,7 @@ popup: true
         <div class="clearfix"></div>
       </div>
     </div>
-    <svg class="arrow" id="demo-arrow" width="80" height="45">
+    <svg class="arrow" id="demo-arrow" width="60" height="34" viewBox="0 0 80 45">
       <polygon points="40,5 75,40 5,40" />
     </svg>
   </div>
@@ -174,7 +173,10 @@ popup: true
           The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
         </p>
 
-        <a class="button" href="/">See Full Demo Code <span class="hover-arrow">⟩</span></a>
+        <a class="button" href="/">
+          <span id="code-button-text">See Full Demo Code</span>
+          <span class="hover-arrow">⟩</span>
+        </a>
       </div>
       <div class="column-box">
 <div id="code-video-audio" markdown="1">
