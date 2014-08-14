@@ -116,32 +116,43 @@ function setupButton(buttonName, userAgent, target, remoteRender)  {
     userAgent.on('invite', function (incomingSession) {
         session = incomingSession;
         var options = mediaOptions(false, true, remoteRender, null);
-        session.accept(options);
         button.firstChild.nodeValue = 'hang up';
+        remoteRender.style.visibility = 'visible';
         onCall = true;
+        session.accept(options);
         session.on('bye', function () {
             button.firstChild.nodeValue = 'video';
+            remoteRender.style.visibility = 'hidden';
             onCall = false;
+            session = null;
         });
     });
     // The button either makes a call, creating a session and binding a listener
     // for the "bye" request, or it hangs up a current call.
     button.addEventListener('click', function () {
+        // Was on a call, so the button press means we are hanging up
         if (onCall) {
-            button.firstChild.nodeValue = 'hang up';
+            button.firstChild.nodeValue = 'video';
+            remoteRender.style.visibility = 'hidden';
+            onCall = false;
             session.bye();
             session = null;
         }
+        // Was not on a call, so the button press means we are ringing someone
         else {
-            button.firstChild.nodeValue = 'video';
+            button.firstChild.nodeValue = 'hang up';
+            remoteRender.style.visibility = 'visible';
+            onCall = true;
             session = makeCall(userAgent, target,
                                false, true,
                                remoteRender, null);
             session.on('bye', function () {
                 button.firstChild.nodeValue = 'video';
+                remoteRender.style.visibility = 'hidden';
+                onCall = false;
+                session = null;
             });
         }
-        onCall = !onCall;
     });
 }
 
