@@ -211,7 +211,6 @@ Name | Type | Description
 -----|------|--------------
 `method`|`String`|The SIP request method to send, e.g. `'INVITE'` or `'OPTIONS'`
 `target`|`String|`[`SIP.URI`](/api/0.6.0/uri/)|Destination address. `String` representing a destination username or complete SIP URI, or a [`SIP.URI`](/api/0.6.0/uri/) instance
-`body`|`String`|Message content. `String` representing the body of the message
 `options`|`Object`|Optional `Object` with extra parameters (see below)
 `options.body`|`String`|Optional `String` to be included as the body of the request
 `options.extraHeaders`|`Array` of `Strings`|Optional `Array` of `Strings` with extra SIP headers for the request
