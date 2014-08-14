@@ -1,5 +1,5 @@
 ---
-title: Send Dtmf | SIP.js
+title: Send DTMF | SIP.js
 description: How to create a dial pad in your WebRTC app and send DTMF tones with SIP.js
 ---
 
@@ -9,7 +9,7 @@ description: How to create a dial pad in your WebRTC app and send DTMF tones wit
 
 Let's write code that calls an attendant menu and sends DTMF to make menu choices. We'll
 resue the code from the [making a call guide](/guides/make-call) to setup the call. If you haven't read it, you
-may want to do so first for an explanation of core API concepts 
+may want to do so first for an explanation of core API concepts
 
 
 ### Create The Dial Pad
@@ -50,12 +50,11 @@ document.getElementById('0').addEventListener("click", function() { session.dtmf
 ### Putting It Together
 
 Click the result tab of the fiddle to start a call to the attendant menu.  The menu is not video enabled,
-so you'll only see local video.  The destination address (`userAgent.invite('sip:welcome@junctionnetworks.com' ... `) in the 
-fiddle can be changed to call any SIP endpoint. 
+so you'll only see local video.  The destination address (`userAgent.invite('sip:welcome@junctionnetworks.com' ... `) in the
+fiddle can be changed to call any SIP endpoint.
 To further explore SIP.js, try using the `session.on('dtmf', ...)` event to play a tone sound when DTMF is sent.
 
 <iframe
   style="width: 100%; height: 600px"
   src="http://jsfiddle.net/NBUS3/embedded/js,html,css,result/">
 </iframe>
-
