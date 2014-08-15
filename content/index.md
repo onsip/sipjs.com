@@ -119,37 +119,43 @@ popup: true
         <div class="column-box">
           <div class="demo-window">
             <div class="demo-view">
-              <div class="message-display">
-                Alice: data sent example_file_name.jpg
-                Bob: data received example_file_name.jpg
+              <div id="alice-data-display" class="message-display">
+                <p class="message"><span class="message-from">Alice:</span> <span class="message-body placeholder">No data sent yet</span></p>
+                <p class="message"><span class="message-from">Bob:</span> <span class="message-body placeholder">No data received yet</span></p>
               </div>
             </div>
-            <button class="file-send-button dark-gray-bg" type="button">choose a file to send</button>
-            <p>example_file_name.jpg</p>
+            <span class="file-chooser-hack">
+              <button id="alice-file-choose-button" class="file-choose-button dark-gray-bg" type="button">choose a file to send</button>
+              <input id="alice-file-choose-input" type="file" name="file" class="file-choose-button" />
+            </span>
+            <span id="alice-filename" class="message-body">example_file_name.jpg</span>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
             </div>
-            <button class="right" type="button">share</button>
+            <button id="alice-data-share-button" class="right" type="button">share</button>
             <div class="clearfix"></div>
           </div>
         </div>
         <div class="column-box">
           <div class="demo-window">
             <div class="demo-view">
-              <div class="message-display">
-                Bob: data sent example_file_name.jpg
-                Alice: data received example_file_name.jpg
+              <div id="bob-data-display" class="message-display">
+                <p class="message"><span class="message-from">Bob:</span> <span class="message-body placeholder">No data sent yet</span></p>
+                <p class="message"><span class="message-from">Alice:</span> <span class="message-body placeholder">No data received yet</span></p>
               </div>
             </div>
-            <button class="file-send-button dark-gray-bg" type="button">choose a file to send</button>
-            <p>example_file_name.jpg</p>
+            <span class="file-chooser-hack">
+              <button id="bob-file-choose-button" class="file-choose-button dark-gray-bg" type="button">choose a file to send</button>
+              <input id="bob-file-choose-input" type="file" name="file" class="file-choose-button" />
+            </span>
+            <span id="bob-filename" class="message-body">example_file_name.jpg</span>
             <div class="clearfix"></div>
             <div class="left">
               <h4>Bob's View</h4>
               <h5>Demo user two</h5>
             </div>
-            <button class="right" type="button">share</button>
+            <button id="bob-data-share-button" class="right" type="button">share</button>
             <div class="clearfix"></div>
           </div>
         </div>

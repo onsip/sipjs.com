@@ -828,7 +828,7 @@ footer {
     font-weight: 700;
 }
 .message-body {
-    color:
+    color: #7a7872;
 }
 .demo-view .message-display {
     background-color: rgb(255,255,255);
@@ -846,7 +846,7 @@ footer {
     -moz-box-shadow: none;
     box-shadow: none;
 }
-.file-send-button {
+.file-choose-button {
     padding: 15px;
 }
 .file-send-button+p {
@@ -855,7 +855,13 @@ footer {
     right: 0;
     bottom: 0;
 }
-.file-send-button.dark-gray-bg:hover {
+.file-choose-button.dark-gray-bg:hover {
+    background-color: rgb(85,91,93);
+}
+button.file-choose-button.dark-gray-bg:hover {
+    background-color: rgb(85,91,93);
+}
+.file-chooser-hack:hover > button.file-choose-button.dark-gray-bg {
     background-color: rgb(85,91,93);
 }
 #content-message .message-display {
@@ -868,6 +874,19 @@ footer {
 
 #git-mit-images img {
     height: 82px;
+}
+
+.file-chooser-hack {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: auto;
+}
+.file-chooser-hack > input.file-choose-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }
 
 
