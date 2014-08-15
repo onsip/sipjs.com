@@ -19,12 +19,14 @@ var token = randomString(32, ['0123456789',
                               'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].join(''));
 
 var domain = 'sipjs.onsip.com';
-var aliceURI      = 'alice.' + window.token + '@' + domain;
+// var aliceURI      = 'alice.' + window.token + '@' + domain;
+var aliceURI      = 'alice' + '@' + domain;
 var aliceName     = 'Alice';
 var videoOfAlice  = document.getElementById('video-of-alice');
 var aliceButton   = document.getElementById('alice-video-button');
 
-var bobURI        = 'bob.' + window.token + '@' + domain;
+// var bobURI        = 'bob.' + window.token + '@' + domain;
+var bobURI        = 'bob' + '@' + domain;
 var bobName       = 'Bob';
 var videoOfBob    = document.getElementById('video-of-bob');
 var bobButton     = document.getElementById('bob-video-button');
@@ -66,10 +68,7 @@ function mediaOptions(audio, video, remoteRender, localRender) {
 function createUA(callerURI, displayName) {
     var configuration = {
         traceSip: true,
-        wsServers: null,
         uri: callerURI,
-        authorizationUser: null,
-        password: null,
         displayName: displayName
     };
     var userAgent = new SIP.UA(configuration);
@@ -93,20 +92,20 @@ function makeCall(userAgent, target, audio, video, remoteRender, localRender) {
     return session;
 }
 
-// Function: setupButton
+// Function: setUpVideoInterface
 //   Sets up the button for a user to manage calling and hanging up
 //
 // Arguments:
-//   buttonName: the id of the button to set up
+//   buttonId: the id of the button to set up
 //   userAgent: the user agent the button is associated with
 //   target: the target URI that the button calls and hangs up on
 //   remoteRender: the video tag to render the callee's remote video in. Can be null
-function setupButton(buttonName, userAgent, target, remoteRender)  {
+function setUpVideoInterface(buttonId, userAgent, target, remoteRender)  {
     // true if the button should initiate a call,
     // false if the button should end a call
     var onCall = false;
     var session;
-    var button = document.getElementById(buttonName);
+    var button = document.getElementById(buttonId);
 
     // Handling invitations to calls.
     // We automatically accept invitations and toggle the button state based on
@@ -114,16 +113,16 @@ function setupButton(buttonName, userAgent, target, remoteRender)  {
     // Also, for each new call session, we need to add an event handler to set
     // the correct button state when we receive a "bye" request.
     userAgent.on('invite', function (incomingSession) {
+        onCall = true;
         session = incomingSession;
         var options = mediaOptions(false, true, remoteRender, null);
         button.firstChild.nodeValue = 'hang up';
         remoteRender.style.visibility = 'visible';
-        onCall = true;
         session.accept(options);
         session.on('bye', function () {
+            onCall = false;
             button.firstChild.nodeValue = 'video';
             remoteRender.style.visibility = 'hidden';
-            onCall = false;
             session = null;
         });
     });
@@ -132,28 +131,90 @@ function setupButton(buttonName, userAgent, target, remoteRender)  {
     button.addEventListener('click', function () {
         // Was on a call, so the button press means we are hanging up
         if (onCall) {
+            onCall = false;
             button.firstChild.nodeValue = 'video';
             remoteRender.style.visibility = 'hidden';
-            onCall = false;
             session.bye();
             session = null;
         }
         // Was not on a call, so the button press means we are ringing someone
         else {
+            onCall = true;
             button.firstChild.nodeValue = 'hang up';
             remoteRender.style.visibility = 'visible';
-            onCall = true;
             session = makeCall(userAgent, target,
                                false, true,
                                remoteRender, null);
             session.on('bye', function () {
+                onCall = false;
                 button.firstChild.nodeValue = 'video';
                 remoteRender.style.visibility = 'hidden';
-                onCall = false;
                 session = null;
             });
         }
     });
+}
+
+function setUpMessageInterface(userAgent, target,
+                               messageRenderId, messageInputId, buttonId) {
+    var messageRender = document.getElementById(messageRenderId);
+    var messageInput = document.getElementById(messageInputId);
+    var button = document.getElementById(buttonId);
+
+    function sendMessage() {
+        var msg = messageInput.value;
+        // Only send a message if the message is non-empty
+        if (msg !== '') {
+            messageInput.value = '';
+            userAgent.message(target, msg);
+        }
+    }
+
+    var noMessages = true;
+
+    // Receive a message and put it in the message display div
+    userAgent.on('message', function (msg) {
+        // If we have not received any messages yet, remove the placeholder
+        // text.
+        if (noMessages) {
+            noMessages = false;
+            if (messageRender.childElementCount > 0)
+                messageRender.removeChild(messageRender.children[0]);
+        }
+        var msgTag = createMsgTag(msg.remoteIdentity.displayName, msg.body);
+        messageRender.appendChild(msgTag);
+    });
+    // Cut the content from the input textarea and send it
+    button.addEventListener('click', function () {
+        sendMessage();
+    });
+    // Register pressing of the "enter" key while in textarea to send a message.
+    // If user presses shift while entering, then add a newline instead.
+    messageInput.onkeydown = (function(e) {
+        if(e.keyCode == 13 && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+}
+
+// Function: createMsgTag
+//   creates the HTML tag and its children for a given message.
+function createMsgTag(from, msgBody) {
+    var msgTag = document.createElement('p');
+    msgTag.className = 'message';
+    // Create the "from" section
+    var fromTag = document.createElement('span');
+    fromTag.className = 'message-from';
+    fromTag.appendChild(document.createTextNode(from + ':'));
+    // Create the message body
+    var msgBodyTag = document.createElement('span');
+    msgBodyTag.className = 'message-body';
+    msgBodyTag.appendChild(document.createTextNode(' ' + msgBody));
+    // Put everything in the message tag
+    msgTag.appendChild(fromTag);
+    msgTag.appendChild(msgBodyTag);
+    return msgTag;
 }
 
 
@@ -161,12 +222,20 @@ function setupButton(buttonName, userAgent, target, remoteRender)  {
 // and then the audio would just echo.
 var aliceUA = createUA(aliceURI, aliceName, false, true, videoOfBob, null);
 var bobUA   = createUA(bobURI, bobName, false, true, videoOfAlice, null);
-setupButton('alice-video-button', aliceUA, bobURI, videoOfBob);
-setupButton('bob-video-button', bobUA, aliceURI, videoOfAlice);
-
 // Unregister the user agents and terminate all active sessions when the window
 // closes or when we navigate away from the page
 window.onunload = function () {
     aliceUA.stop();
     bobUA.stop();
 }
+
+setUpVideoInterface('alice-video-button', aliceUA, bobURI, videoOfBob);
+setUpVideoInterface('bob-video-button', bobUA, aliceURI, videoOfAlice);
+setUpMessageInterface(aliceUA, bobURI,
+                   'alice-message-display',
+                   'alice-message-input',
+                   'alice-message-button');
+setUpMessageInterface(bobUA, aliceURI,
+                   'bob-message-display',
+                   'bob-message-input',
+                   'bob-message-button');

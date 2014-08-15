@@ -80,36 +80,32 @@ popup: true
         <div class="column-box">
           <div class="demo-window">
             <div class="demo-view">
-              <div class="message-display">
-                Bob: No messages yet
+              <div id="alice-message-display" class="message-display">
+                <p class="message"><span class="message-from">Bob:</span> <span class="message-body placeholder">No messages yet</span></p>
               </div>
-              <div class="message-input">
-                Enter your message to Bob here!
-              </div>
+              <textarea id="alice-message-input" class="message-input" placeholder="Enter your message to Bob here!"></textarea>
             </div>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
             </div>
-            <button class="right" type="button">send message</button>
+            <button id="alice-message-button" class="right" type="button">send message</button>
             <div class="clearfix"></div>
           </div>
         </div>
         <div class="column-box">
           <div class="demo-window">
             <div class="demo-view">
-              <div class="message-display">
-                Alice: No messages yet
+              <div id="bob-message-display" class="message-display">
+                <p class="message"><span class="message-from">Alice:</span> <span class="message-body placeholder">No messages yet</span></p>
               </div>
-              <div class="message-input">
-                Enter your message to Alice here!
-              </div>
+              <textarea id="bob-message-input" class="message-input" placeholder="Enter your message to Alice here!"></textarea>
             </div>
             <div class="left">
               <h4>Bob's View</h4>
               <h5>Demo user two</h5>
             </div>
-            <button class="right" type="button">send message</button>
+            <button id="bob-message-button" class="right" type="button">send message</button>
             <div class="clearfix"></div>
           </div>
         </div>
