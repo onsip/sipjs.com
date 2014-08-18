@@ -118,6 +118,10 @@ pre {
 	color: #3f4446;
 	overflow: auto;
 }
+.index-demo-code pre {
+    height: 35em;
+    padding: 0.5em;
+}
 
 table.CodeRay {
   margin: 1.618em 0;

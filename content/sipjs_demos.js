@@ -22,15 +22,13 @@ var token = randomString(32, ['0123456789',
 
 var domain = 'sipjs.onsip.com';
 // var aliceURI      = 'alice.' + window.token + '@' + domain;
-var aliceURI      = 'alice' + '@' + domain;
+var aliceURI      = 'alice@' + domain;
 var aliceName     = 'Alice';
-var videoOfAlice  = document.getElementById('video-of-alice');
 var aliceButton   = document.getElementById('alice-video-button');
 
 // var bobURI        = 'bob.' + window.token + '@' + domain;
-var bobURI        = 'bob' + '@' + domain;
+var bobURI        = 'bob@' + domain;
 var bobName       = 'Bob';
-var videoOfBob    = document.getElementById('video-of-bob');
 var bobButton     = document.getElementById('bob-video-button');
 
 // Function: mediaOptions
@@ -101,13 +99,15 @@ function makeCall(userAgent, target, audio, video, remoteRender, localRender) {
 // Arguments:
 //   userAgent: the user agent the button is associated with
 //   target: the target URI that the button calls and hangs up on
-//   remoteRender: the video tag to render the callee's remote video in. Can be null
+//   remoteRenderId: the video tag to render the callee's remote video in.
+//                   Can be null
 //   buttonId: the id of the button to set up
-function setUpVideoInterface(userAgent, target, remoteRender, buttonId) {
+function setUpVideoInterface(userAgent, target, remoteRenderId, buttonId) {
     // true if the button should initiate a call,
     // false if the button should end a call
     var onCall = false;
     var session;
+    var remoteRender = document.getElementById(remoteRenderId);
     var button = document.getElementById(buttonId);
 
     // Handling invitations to calls.
@@ -440,27 +440,32 @@ function setUpDataInterface(userAgent, target,
     });
 }
 
-// Similar to the createMsgTag, but we add in an extra section with a link to
-// the file sent or received.
-// To download files, they must be anchors to the file reference.
-// Typically, you will create your dataURI by calling URL.createObjectURL,
-// which creates a unique URI (for some reason it's still called a URL).
+// Function: createDataMsgTag
+//   Similar to the createMsgTag, but we add in an extra section with a link to
+//   the file sent or received.
+//   To download files, they must be anchors to the file reference.
+//   Typically, you will create your dataURI by calling URL.createObjectURL,
+//   which creates a unique URI (for some reason it's still called a URL).
+//
+// Arguments:
+//   from: the display name of who the message came from
+//   msgBody: the actual body content of the message
+//   filename: the name of the file we are sending
+//   dataURI: the data URI for the file being sent
 function createDataMsgTag(from, msgBody, filename, dataURI) {
-    var msgTag = createMsgTag(from, msgBody);
+    var msgTag = createMsgTag(from, msgBody + ' ');
     var fileLinkTag = document.createElement('a');
     fileLinkTag.className = 'message-link';
     fileLinkTag.setAttribute('href', dataURI);
     // Set the filename of the Blob and indicate that it should download when we
     // click on it, not open up somewhere else.
     fileLinkTag.setAttribute('download', filename);
-    fileLinkTag.appendChild(document.createTextNode(' ' + filename));
+    fileLinkTag.appendChild(document.createTextNode(filename));
     msgTag.appendChild(fileLinkTag);
     return msgTag;
 }
 
 
-// We disable audio because you're going to call yourself in the demo,
-// and then the audio would just echo.
 var aliceUA = createUA(aliceURI, aliceName);
 var bobUA   = createUA(bobURI, bobName);
 /*
@@ -479,8 +484,8 @@ window.onunload = function () {
     bobDataUA.stop();
 }
 
-setUpVideoInterface(aliceUA, bobURI, videoOfBob, 'alice-video-button');
-setUpVideoInterface(bobUA, aliceURI, videoOfAlice, 'bob-video-button');
+setUpVideoInterface(aliceUA, bobURI, 'video-of-bob', 'alice-video-button');
+setUpVideoInterface(bobUA, aliceURI, 'video-of-alice', 'bob-video-button');
 setUpMessageInterface(aliceUA, bobURI,
                       'alice-message-display',
                       'alice-message-input',
