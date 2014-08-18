@@ -213,6 +213,18 @@ a > code:hover {
 	color: #c63a27;
 	border-color: #c63a27;
 }
+
+a.message-link {
+    color: #cccac3;
+    text-decoration: none;
+}
+a.message-link:hover {
+    text-decoration: underline;
+}
+
+/* BUTTONS AND OTHER STUFF
+ * ========================================
+ */
 .button {
     display: inline-block;
     width: auto;

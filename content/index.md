@@ -120,8 +120,7 @@ popup: true
           <div class="demo-window">
             <div class="demo-view">
               <div id="alice-data-display" class="message-display">
-                <p class="message"><span class="message-from">Alice:</span> <span class="message-body placeholder">No data sent yet</span></p>
-                <p class="message"><span class="message-from">Bob:</span> <span class="message-body placeholder">No data received yet</span></p>
+                <p class="message"><span class="message-body placeholder">No messages yet</span></p>
               </div>
             </div>
             <span class="file-chooser-hack">
@@ -141,8 +140,7 @@ popup: true
           <div class="demo-window">
             <div class="demo-view">
               <div id="bob-data-display" class="message-display">
-                <p class="message"><span class="message-from">Bob:</span> <span class="message-body placeholder">No data sent yet</span></p>
-                <p class="message"><span class="message-from">Alice:</span> <span class="message-body placeholder">No data received yet</span></p>
+                <p class="message"><span class="message-body placeholder">No messages yet</span></p>
               </div>
             </div>
             <span class="file-chooser-hack">

@@ -274,6 +274,8 @@ function setupDataInterface(userAgent, target,
     var receivedFileData;
     var receivedFile;
 
+    var noMessages = true;
+
     userAgent.on('invite', function (session) {
         session.mediaHandler.on('dataChannel', function (dataChannel) {
             dataChannel.onmessage = function (event) {
@@ -281,8 +283,16 @@ function setupDataInterface(userAgent, target,
                     receivedFile = new Blob([receivedFileData],
                                             {type: receivedFileMetadata.type});
                     var fileUrl = URL.createObjectURL(receivedFile);
-                    var msgTag = createMsgTag(session.remoteIdentity.displayName,
-                                              'data received ' + receivedFileMetadata.name);
+                    var msgTag = createDataMsgTag(
+                        session.remoteIdentity.displayName,
+                        'data received',
+                        receivedFileMetadata.name,
+                        fileUrl
+                    );
+                    if (noMessages) {
+                        dataRender.removeChild(dataRender.children[0]);
+                        noMessages = false;
+                    }
                     dataRender.appendChild(msgTag);
                     session.bye();
                 } else if (typeof(event.data) === 'string') {
@@ -336,28 +346,29 @@ function setupDataInterface(userAgent, target,
             // Handling the bye response, which means that we successfully
             // sent the file.
             session.on('bye', function (req) {
-                var msgTag = createMsgTag(userAgent.configuration.displayName,
-                                          'data sent ' + file.name);
+                var msgTag = createDataMsgTag(
+                    userAgent.configuration.displayName,
+                    'data sent',
+                    file.name,
+                    URL.createObjectURL(file)
+                );
+                if (noMessages) {
+                    dataRender.removeChild(dataRender.children[0]);
+                }
                 dataRender.appendChild(msgTag);
             });
         }
     });
 }
 
-function createDataMsgTag(from, dataBlob) {
-    var msgTag = document.createElement('p');
-    msgTag.className = 'message';
-    // Create the "from" section
-    var fromTag = document.createElement('span');
-    fromTag.className = 'message-from';
-    fromTag.appendChild(document.createTextNode(from + ':'));
-    // Create the message body
-    var msgBodyTag = document.createElement('span');
-    msgBodyTag.className = 'message-body';
-    msgBodyTag.appendChild(document.createTextNode(' ' + msgBody));
-    // Put everything in the message tag
-    msgTag.appendChild(fromTag);
-    msgTag.appendChild(msgBodyTag);
+function createDataMsgTag(from, msgBody, filename, dataURI) {
+    var msgTag = createMsgTag(from, msgBody);
+    var fileLinkTag = document.createElement('a');
+    fileLinkTag.className = 'message-link';
+    fileLinkTag.setAttribute('href', dataURI);
+    fileLinkTag.setAttribute('download', filename);
+    fileLinkTag.appendChild(document.createTextNode(' ' + filename));
+    msgTag.appendChild(fileLinkTag);
     return msgTag;
 }
 
