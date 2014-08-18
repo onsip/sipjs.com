@@ -3,11 +3,13 @@
 // Even though both "Alice" and "Bob" are running on the same computer,
 // this demo behaves as if the dialog was an SIP call over a network.
 
+var URL = window.URL || window.webkitURL;
+
 // This demo uses unauthorized users on the "sipjs.onsip.com" demo domain.
 // To allow multiple users to run the demo without playing a game of
 // chatroulette, we give both callers in the demo a random token and then only
 // make calls between users with these token suffixes.
-// So, you still might run into a user besides yourself,
+// So, you still might run into a user besides yourself.
 function randomString(length, chars) {
     var result = '';
     for (var i = length; i > 0; --i)
@@ -60,7 +62,8 @@ function mediaOptions(audio, video, remoteRender, localRender) {
 
 // Function: createUA
 //   creates a user agent with the given arguments plugged into the UA
-//   configuration and the options for handling an INVITE request.
+//   configuration. This is a standard user agent for WebRTC calls.
+//   For a user agent for data transfer, see createDataUA
 //
 // Arguments:
 //   callerURI: the URI of the caller, aka, the URI that belongs to this user.
@@ -218,24 +221,186 @@ function createMsgTag(from, msgBody) {
 }
 
 
+function createDataUA(callerURI, displayName) {
+    var dataURI = 'data.' + callerURI;
+    var configuration = {
+        traceSip: true,
+        uri: dataURI,
+        displayName: displayName,
+        mediaHandlerFactory: function mediaHandlerFactory(session, options) {
+
+            /* Like a default mediaHandler, but no streams to manage */
+            var self = new SIP.WebRTC.MediaHandler(session, {
+                mediaStreamManager: {
+                    acquire: function (onSuccess) {
+                        // Must be async for on('dataChannel') callback to have a chance
+                        setTimeout(onSuccess.bind(null, {}), 0);
+                    },
+                    release: function (onSuccess) {
+                        setTimeout(onSuccess, 0);
+                    }
+                }
+            });
+
+            // No stream to add. Assume success.
+            self.addStream = function addStream(stream, success, failure) {
+                success();
+            };
+
+            return self;
+        }
+    };
+
+    return dataUA = new SIP.UA(configuration);
+}
+
+function setupDataInterface(userAgent, target,
+                            dataRenderId,
+                            fileButtonId,
+                            fileInputId,
+                            filenameDisplayId,
+                            dataShareButtonId) {
+    // Target has a 'data.' prefix
+    var dataTarget = 'data.' + target;
+    var dataRender = document.getElementById(dataRenderId);
+    var fileButton = document.getElementById(fileButtonId);
+    var fileInput = document.getElementById(fileInputId);
+    var filenameDisplay = document.getElementById(filenameDisplayId);
+    var dataShareButton = document.getElementById(dataShareButtonId);
+    var session;
+    var file = null;
+    var loadedFile = null;
+    var receivedFileMetadata;
+    var receivedFileData;
+    var receivedFile;
+
+    userAgent.on('invite', function (session) {
+        session.mediaHandler.on('dataChannel', function (dataChannel) {
+            dataChannel.onmessage = function (event) {
+                if (typeof(event.data) === 'string' && event.data === '\n') {
+                    receivedFile = new Blob([receivedFileData],
+                                            {type: receivedFileMetadata.type});
+                    var fileUrl = URL.createObjectURL(receivedFile);
+                    var msgTag = createMsgTag(session.remoteIdentity.displayName,
+                                              'data received ' + receivedFileMetadata.name);
+                    dataRender.appendChild(msgTag);
+                    session.bye();
+                } else if (typeof(event.data) === 'string') {
+                    receivedFileMetadata = JSON.parse(event.data);
+                } else {
+                    receivedFileData = event.data;
+                }
+            };
+        });
+        session.accept();
+    });
+
+    fileInput.addEventListener('change', function (event) {
+        file = event.target.files[0];
+        var filename = file.name;
+        filenameDisplay.childNodes[0].nodeValue = filename;
+
+        var reader = new FileReader();
+        reader.onload = (function (e) {
+            loadedFile = e.target.result;
+        });
+        reader.readAsArrayBuffer(file);
+    });
+
+    dataShareButton.addEventListener('click', function () {
+        var options = {
+            media: {
+                constraints: {
+                    audio: false,
+                    video: false
+                },
+                dataChannel: true
+            }
+        };
+        if (loadedFile !== null) {
+            session = userAgent.invite('sip:' + dataTarget, options);
+
+            session.mediaHandler.on('dataChannel', function (dataChannel) {
+                dataChannel.onopen = (function () {
+                    // Send JSON data about file
+                    dataChannel.send(JSON.stringify({
+                        name: file.name,
+                        type: file.type
+                    }));
+                    dataChannel.send(loadedFile);
+                    // Send empty newline to end transmission
+                    dataChannel.send('\n');
+                });
+            });
+
+            // Handling the bye response, which means that we successfully
+            // sent the file.
+            session.on('bye', function (req) {
+                var msgTag = createMsgTag(userAgent.configuration.displayName,
+                                          'data sent ' + file.name);
+                dataRender.appendChild(msgTag);
+            });
+        }
+    });
+}
+
+function createDataMsgTag(from, dataBlob) {
+    var msgTag = document.createElement('p');
+    msgTag.className = 'message';
+    // Create the "from" section
+    var fromTag = document.createElement('span');
+    fromTag.className = 'message-from';
+    fromTag.appendChild(document.createTextNode(from + ':'));
+    // Create the message body
+    var msgBodyTag = document.createElement('span');
+    msgBodyTag.className = 'message-body';
+    msgBodyTag.appendChild(document.createTextNode(' ' + msgBody));
+    // Put everything in the message tag
+    msgTag.appendChild(fromTag);
+    msgTag.appendChild(msgBodyTag);
+    return msgTag;
+}
+
+
 // We disable audio because you're going to call yourself in the demo,
 // and then the audio would just echo.
-var aliceUA = createUA(aliceURI, aliceName, false, true, videoOfBob, null);
-var bobUA   = createUA(bobURI, bobName, false, true, videoOfAlice, null);
+var aliceUA = createUA(aliceURI, aliceName);
+var bobUA   = createUA(bobURI, bobName);
+/*
+ * Custom media handler factories don't have great compatibility with
+ * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
+ */
+SIP.WebRTC.isSupported();
+var aliceDataUA = createDataUA(aliceURI, aliceName);
+var bobDataUA = createDataUA(bobURI, bobName);
 // Unregister the user agents and terminate all active sessions when the window
 // closes or when we navigate away from the page
 window.onunload = function () {
     aliceUA.stop();
     bobUA.stop();
+    aliceDataUA.stop();
+    bobDataUA.stop();
 }
 
 setUpVideoInterface('alice-video-button', aliceUA, bobURI, videoOfBob);
 setUpVideoInterface('bob-video-button', bobUA, aliceURI, videoOfAlice);
 setUpMessageInterface(aliceUA, bobURI,
-                   'alice-message-display',
-                   'alice-message-input',
-                   'alice-message-button');
+                      'alice-message-display',
+                      'alice-message-input',
+                      'alice-message-button');
 setUpMessageInterface(bobUA, aliceURI,
-                   'bob-message-display',
-                   'bob-message-input',
-                   'bob-message-button');
+                      'bob-message-display',
+                      'bob-message-input',
+                      'bob-message-button');
+setupDataInterface(aliceDataUA, bobURI,
+                   'alice-data-display',
+                   'alice-file-choose-button',
+                   'alice-file-choose-input',
+                   'alice-filename',
+                   'alice-data-share-button');
+setupDataInterface(bobDataUA, aliceURI,
+                   'bob-data-display',
+                   'bob-file-choose-button',
+                   'bob-file-choose-input',
+                   'bob-filename',
+                   'bob-data-share-button');
