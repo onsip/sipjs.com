@@ -120,14 +120,14 @@ popup: true
           <div class="demo-window">
             <div class="demo-view">
               <div id="alice-data-display" class="message-display">
-                <p class="message"><span class="message-body placeholder">No messages yet</span></p>
+                <p class="message"><span class="message-body placeholder">No files yet sent or received</span></p>
               </div>
             </div>
             <span class="file-chooser-hack">
               <button id="alice-file-choose-button" class="file-choose-button dark-gray-bg" type="button">choose a file to send</button>
               <input id="alice-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
-            <span id="alice-filename" class="message-body">example_file_name.jpg</span>
+            <span id="alice-filename" class="message-body">no file selected</span>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
@@ -140,14 +140,14 @@ popup: true
           <div class="demo-window">
             <div class="demo-view">
               <div id="bob-data-display" class="message-display">
-                <p class="message"><span class="message-body placeholder">No messages yet</span></p>
+                <p class="message"><span class="message-body placeholder">No files yet sent or received</span></p>
               </div>
             </div>
             <span class="file-chooser-hack">
               <button id="bob-file-choose-button" class="file-choose-button dark-gray-bg" type="button">choose a file to send</button>
               <input id="bob-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
-            <span id="bob-filename" class="message-body">example_file_name.jpg</span>
+            <span id="bob-filename" class="message-body">no file selected</span>
             <div class="clearfix"></div>
             <div class="left">
               <h4>Bob's View</h4>

@@ -99,11 +99,11 @@ function makeCall(userAgent, target, audio, video, remoteRender, localRender) {
 //   Sets up the button for a user to manage calling and hanging up
 //
 // Arguments:
-//   buttonId: the id of the button to set up
 //   userAgent: the user agent the button is associated with
 //   target: the target URI that the button calls and hangs up on
 //   remoteRender: the video tag to render the callee's remote video in. Can be null
-function setUpVideoInterface(buttonId, userAgent, target, remoteRender)  {
+//   buttonId: the id of the button to set up
+function setUpVideoInterface(userAgent, target, remoteRender, buttonId) {
     // true if the button should initiate a call,
     // false if the button should end a call
     var onCall = false;
@@ -158,6 +158,16 @@ function setUpVideoInterface(buttonId, userAgent, target, remoteRender)  {
     });
 }
 
+// Function: setUpMessageInterface
+//   Sets up the chat interface for text messaging
+//
+// Arguments:
+//   userAgent: the local user agent that sends and receives messages
+//   target: the target URI that our local user agent communicates with
+//   messageRenderId: the ID of where we display sent and received chat messages
+//   messageInputId: the ID for the text area that the local user agent types
+//                   his or her messages into
+//   buttonId: the ID of the button that actually sends the given input message
 function setUpMessageInterface(userAgent, target,
                                messageRenderId, messageInputId, buttonId) {
     var messageRender = document.getElementById(messageRenderId);
@@ -173,6 +183,9 @@ function setUpMessageInterface(userAgent, target,
         }
     }
 
+    // We have placeholder text in the message render box. It should be deleted
+    // after we have sent or received our first message. This keeps track of
+    // that.
     var noMessages = true;
 
     // Receive a message and put it in the message display div
@@ -203,6 +216,10 @@ function setUpMessageInterface(userAgent, target,
 
 // Function: createMsgTag
 //   creates the HTML tag and its children for a given message.
+//
+// Arguments:
+//   from: the display name of who the message came from
+//   msgBody: the actual body content of the message
 function createMsgTag(from, msgBody) {
     var msgTag = document.createElement('p');
     msgTag.className = 'message';
@@ -221,6 +238,14 @@ function createMsgTag(from, msgBody) {
 }
 
 
+// Function: createDataUA
+//   Creates a user agent with the given parameters. This user agent is only for
+//   sending data, so it has a special media handler factory for the
+//   RTCDataChannel.
+//
+// Arguments:
+//   callerURI: the URI of the caller, aka, the URI that belongs to this user.
+//   displayName: what name we should display the user as
 function createDataUA(callerURI, displayName) {
     var dataURI = 'data.' + callerURI;
     var configuration = {
@@ -254,31 +279,75 @@ function createDataUA(callerURI, displayName) {
     return dataUA = new SIP.UA(configuration);
 }
 
-function setupDataInterface(userAgent, target,
+// Function: setUpDataInterface
+//   Sets up the file transfer interface for the WebRTC data channel.
+//
+// Arguments:
+//   userAgent: the local user agent that sends and receives data files
+//   target: the target URI that the local user agent sends data to and
+//           receives data from
+//   dataRenderId: the display box where we render communications about sent and
+//                 received data
+//   fileInputId: the ID of the file input tag where the user selects the file
+//                to send.
+//   filenameDisplayId: the name of the ID that displays the currently chosen
+//                      filename
+//   dataShareButtonId: the ID of the button that sends the chosen file to the
+//                      target URI
+function setUpDataInterface(userAgent, target,
                             dataRenderId,
-                            fileButtonId,
                             fileInputId,
                             filenameDisplayId,
                             dataShareButtonId) {
     // Target has a 'data.' prefix
     var dataTarget = 'data.' + target;
     var dataRender = document.getElementById(dataRenderId);
-    var fileButton = document.getElementById(fileButtonId);
     var fileInput = document.getElementById(fileInputId);
     var filenameDisplay = document.getElementById(filenameDisplayId);
     var dataShareButton = document.getElementById(dataShareButtonId);
+
+    // The open data transfer session
     var session;
+    // The File object for the chosen local file
     var file = null;
+    // An ArrayBuffer of the loaded local File that has actually been loaded
+    // into memory
     var loadedFile = null;
+    // Metadata for the received file. The metadata has "name" and "type"
     var receivedFileMetadata;
+    // The actual received file data
     var receivedFileData;
+    // The Blob object that combines the received file data and file type.
+    // We cannot construct File objects, so we must make a Blob, which does not
+    // have a file name.
     var receivedFile;
 
+    // We have placeholder text in the message render box. It should be deleted
+    // after we have sent or received our first message. This keeps track of
+    // that.
     var noMessages = true;
 
+    // When we receive an invite, we must set up our media handler to read in
+    // data from over the RTCDataChannel.
+    // Each data transmission consists of three parts:
+    //   1) a JSON text object with the fields:
+    //          "name" --> file name
+    //          "type" --> file type
+    //   2) an ArrayBuffer of binary content, which is the actual file.
+    //   3) a terminating single newline character
+    // The only order restriction on the transmission is that parts 1 and 2 come
+    // before the terminating part 3.
+    //
+    // This then makes a link to the file and puts the file received notice and
+    // link into the message display box.
+    // After a terminating newline, the session is closed. So, each session has
+    // only one file transfer.
     userAgent.on('invite', function (session) {
         session.mediaHandler.on('dataChannel', function (dataChannel) {
             dataChannel.onmessage = function (event) {
+                // The terminating empty newline.
+                // Here we construct our Blob object and create a download URL
+                // and plug it into the message render box.
                 if (typeof(event.data) === 'string' && event.data === '\n') {
                     receivedFile = new Blob([receivedFileData],
                                             {type: receivedFileMetadata.type});
@@ -295,8 +364,10 @@ function setupDataInterface(userAgent, target,
                     }
                     dataRender.appendChild(msgTag);
                     session.bye();
+                // The file metadata
                 } else if (typeof(event.data) === 'string') {
                     receivedFileMetadata = JSON.parse(event.data);
+                // The actual file content
                 } else {
                     receivedFileData = event.data;
                 }
@@ -305,6 +376,8 @@ function setupDataInterface(userAgent, target,
         session.accept();
     });
 
+    // This fires every time we choose a new file.
+    // We display what file we have selected and load it into an ArrayBuffer.
     fileInput.addEventListener('change', function (event) {
         file = event.target.files[0];
         var filename = file.name;
@@ -317,7 +390,11 @@ function setupDataInterface(userAgent, target,
         reader.readAsArrayBuffer(file);
     });
 
+    // This shares the loaded file.
+    // We invite the target and then send the data to them and wait for a "BYE"
+    // response to signal that they got the file.
     dataShareButton.addEventListener('click', function () {
+        // No video or audio, only data
         var options = {
             media: {
                 constraints: {
@@ -327,6 +404,7 @@ function setupDataInterface(userAgent, target,
                 dataChannel: true
             }
         };
+        // Make sure we don't try to send nothing
         if (loadedFile !== null) {
             session = userAgent.invite('sip:' + dataTarget, options);
 
@@ -343,7 +421,7 @@ function setupDataInterface(userAgent, target,
                 });
             });
 
-            // Handling the bye response, which means that we successfully
+            // Handling the BYE response, which means that we successfully
             // sent the file.
             session.on('bye', function (req) {
                 var msgTag = createDataMsgTag(
@@ -354,6 +432,7 @@ function setupDataInterface(userAgent, target,
                 );
                 if (noMessages) {
                     dataRender.removeChild(dataRender.children[0]);
+                    noMessages = false;
                 }
                 dataRender.appendChild(msgTag);
             });
@@ -361,11 +440,18 @@ function setupDataInterface(userAgent, target,
     });
 }
 
+// Similar to the createMsgTag, but we add in an extra section with a link to
+// the file sent or received.
+// To download files, they must be anchors to the file reference.
+// Typically, you will create your dataURI by calling URL.createObjectURL,
+// which creates a unique URI (for some reason it's still called a URL).
 function createDataMsgTag(from, msgBody, filename, dataURI) {
     var msgTag = createMsgTag(from, msgBody);
     var fileLinkTag = document.createElement('a');
     fileLinkTag.className = 'message-link';
     fileLinkTag.setAttribute('href', dataURI);
+    // Set the filename of the Blob and indicate that it should download when we
+    // click on it, not open up somewhere else.
     fileLinkTag.setAttribute('download', filename);
     fileLinkTag.appendChild(document.createTextNode(' ' + filename));
     msgTag.appendChild(fileLinkTag);
@@ -393,8 +479,8 @@ window.onunload = function () {
     bobDataUA.stop();
 }
 
-setUpVideoInterface('alice-video-button', aliceUA, bobURI, videoOfBob);
-setUpVideoInterface('bob-video-button', bobUA, aliceURI, videoOfAlice);
+setUpVideoInterface(aliceUA, bobURI, videoOfBob, 'alice-video-button');
+setUpVideoInterface(bobUA, aliceURI, videoOfAlice, 'bob-video-button');
 setUpMessageInterface(aliceUA, bobURI,
                       'alice-message-display',
                       'alice-message-input',
@@ -403,15 +489,13 @@ setUpMessageInterface(bobUA, aliceURI,
                       'bob-message-display',
                       'bob-message-input',
                       'bob-message-button');
-setupDataInterface(aliceDataUA, bobURI,
+setUpDataInterface(aliceDataUA, bobURI,
                    'alice-data-display',
-                   'alice-file-choose-button',
                    'alice-file-choose-input',
                    'alice-filename',
                    'alice-data-share-button');
-setupDataInterface(bobDataUA, aliceURI,
+setUpDataInterface(bobDataUA, aliceURI,
                    'bob-data-display',
-                   'bob-file-choose-button',
                    'bob-file-choose-input',
                    'bob-filename',
                    'bob-data-share-button');
