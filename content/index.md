@@ -508,15 +508,19 @@ function setUpDataInterface(userAgent, target,
     // This fires every time we choose a new file.
     // We display what file we have selected and load it into an ArrayBuffer.
     fileInput.addEventListener('change', function (event) {
-        file = event.target.files[0];
-        var filename = file.name;
-        filenameDisplay.childNodes[0].nodeValue = filename;
+        var tmpFile = event.target.files[0];
+        if (tmpFile !== undefined && tmpFile !== file) {
+            file = tmpFile;
 
-        var reader = new FileReader();
-        reader.onload = (function (e) {
-            loadedFile = e.target.result;
-        });
-        reader.readAsArrayBuffer(file);
+            var filename = file.name;
+            filenameDisplay.childNodes[0].nodeValue = filename;
+
+            var reader = new FileReader();
+            reader.onload = (function (e) {
+                loadedFile = e.target.result;
+            });
+            reader.readAsArrayBuffer(file);
+        }
     });
 
     // This shares the loaded file.
@@ -610,7 +614,7 @@ setUpDataInterface(aliceDataUA, bobURI,
                    'alice-data-display',
                    'alice-file-choose-input',
                    'alice-filename',
-                   'alice-data-share-button')
+                   'alice-data-share-button');
 ~~~~
 </div>
       </div>
