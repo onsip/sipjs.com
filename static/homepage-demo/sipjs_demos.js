@@ -5,7 +5,7 @@
 
 var URL = window.URL || window.webkitURL;
 
-// This demo uses unauthorized users on the "sipjs.onsip.com" demo domain.
+// This demo uses unauthenticated users on the "sipjs.onsip.com" demo domain.
 // To allow multiple users to run the demo without playing a game of
 // chatroulette, we give both callers in the demo a random token and then only
 // make calls between users with these token suffixes.
