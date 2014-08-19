@@ -178,7 +178,7 @@ li ul {
     column-gap: 6em;
     -webkit-column-gap: 6em;
     -moz-column-gap: 6em;
-    /* This is an annoying hack to get bullet points to appear again */
+    /* This is a hack to get bullet points to appear again */
     list-style-position: inside;
 }
 .multicolumn li {
@@ -320,6 +320,7 @@ p .button {
 /*  Horizontal nav styles  */
 .horizontal li {
 	float: left;
+    margin-bottom: 0;
 }
 .left .horizontal li {
 	margin-right: 1.618em;
@@ -374,12 +375,15 @@ th {
 	margin: 30px 0;
 }
 #mainNav {
-	float: right;
 	height: 120px;
 	line-height: 120px;
 }
+#mainNav > #logo-link {
+    float: left;
+}
 #mainNav ul {
-	margin: 0;
+	margin: 0.8em 0 0 0;
+    float: right;
 }
 #mainNav li {
 	margin-left: 2em;
@@ -399,8 +403,12 @@ th {
 	-o-transition: width .12s ease-in-out;
 	transition: width .12s ease-in-out;
 }
-#mainNav a:hover:after {
+#mainNav > ul a:hover:after {
 	width: 100%;
+}
+
+#mainNav > #mobile-nav {
+    display: none;
 }
 
 /*  SECTION HEADER & SUB NAVIGATION
@@ -649,7 +657,7 @@ footer {
    padding: 2.5% 0;
 }
 .column-box {
-    float:left;
+    float: left;
     width: 50%;
     background-clip: content-box;
     padding: 0 5% 0 0;
@@ -890,6 +898,9 @@ button.file-choose-button.dark-gray-bg:hover {
     width: 100%;
 }
 
+#git-mit-images {
+    padding: 3em 0;
+}
 #git-mit-images img {
     height: 82px;
 }
