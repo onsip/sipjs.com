@@ -23,8 +23,8 @@
 
     }
     .wrapper-bg-extend > * {
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 6%;
+        padding-right: 6%;
     }
 
     /* .wrapper { */
@@ -90,7 +90,6 @@
     #logo {
         height: 8.4vw;
         width: 30vw;
-        margin: 15%;
     }
     #mainNav {
         line-height: 100%;
@@ -162,5 +161,11 @@
         /* background: rgb(193,190,181); */
         border: 0;
         height: 2px;
+    }
+
+
+    /* Feature selector and highlights stuff */
+    .highlights li {
+        padding: 7% 7% 5% 7%;
     }
 }
