@@ -30,7 +30,6 @@
     /* .wrapper { */
     header, footer {
         width: 100%;
-        padding-left: 4%;
     }
     footer {
         padding-right: 4%;
@@ -91,7 +90,7 @@
     #logo {
         height: 8.4vw;
         width: 30vw;
-        margin: 15% 0;
+        margin: 15%;
     }
     #mainNav {
         line-height: 100%;
@@ -142,7 +141,8 @@
         height: 19vw;
         padding: 1.4em 6vw 0 6vw;
         margin-left: 0;
-        border-left: 3px solid rgb(193,190,181);
+        /* border-left: 3px solid rgb(193,190,181); */
+        border-left: 2px solid rgb(213,210,201);
 
         transition: height 0.5s ease-in-out 0;
 	    -webkit-transition: height 0.5s ease-in-out 0;
@@ -152,5 +152,15 @@
     }
     #mobile-nav > li:hover {
         color: #ea4b35;
+    }
+    #expand-divider {
+        display: block;
+        clear: both;
+        /* width: 90%; */
+        /* margin: 0 auto; */
+        background: rgb(213,210,201);
+        /* background: rgb(193,190,181); */
+        border: 0;
+        height: 2px;
     }
 }
