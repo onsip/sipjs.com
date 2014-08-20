@@ -1,5 +1,8 @@
 (function () {
 
+/* For desktop layout */
+var headerDesktopHeight = '120px';
+
 var headerShrunkHeight = '19vw';
 var headerExpandHeight = '38vw';
 var shrunkNavBottom = '0';
@@ -34,12 +37,22 @@ $('#mobile-menu').click(function (e) {
 
 document.addEventListener('click', function (event) {
     // Tests if we clicked outside of the menu button
-    if ($(event.target).closest('#siteHeader').length === 0) {
+    if ($('#mobile-nav').css('display') !== 'none'
+        && $(event.target).closest('#mobile-menu').length === 0) {
         menuOpen = false;
         $('#siteHeader').css('height', headerShrunkHeight);
         $('#full-nav').css('opacity', '0');
         $('#full-nav').css('bottom', shrunkNavBottom);
         setTimeout(hideFunc, hideDelay);
+    }
+});
+
+
+$(window).resize(function (event) {
+    console.log(event);
+    if (window.innerWidth > 700) {
+        $('#siteHeader').removeAttr('style');
+        $('#full-nav').removeAttr('style');
     }
 });
 
