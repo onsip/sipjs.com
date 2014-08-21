@@ -96,10 +96,6 @@
     #git-mit-images > .column-box {
         float: left;
         width: 50%;
-        /* padding: 0 5% 0 0; */
-    }
-    #git-mit-images > .column-box ~ .column-box {
-        /* padding: 0 0 0 5%; */
     }
     #git-mit-images > .column-box + .clearfix {
         display: block;
@@ -140,8 +136,6 @@
     #full-nav {
         position: absolute;
         bottom: 0;
-        /* bottom: 20%; */
-        /* bottom: 3em; */
         /* a specific percentage because it was too difficult to center an
          * absolutely positioned element where we did not know the width of
          * the element */
@@ -164,10 +158,8 @@
     }
     #mainNav > #mobile-nav {
         display: inline-block;
-        /* position: static; */
         float: right;
         font-family: 'Varela Round', sans-serif;
-        /* font-size: 2.5em; */
         font-size: 6vw;
         margin-top: 0;
     }
@@ -178,7 +170,6 @@
         height: 19vw;
         padding: 1.4em 6vw 0 6vw;
         margin-left: 0;
-        /* border-left: 3px solid rgb(193,190,181); */
         border-left: 2px solid rgb(213,210,201);
 
         transition: height 0.5s ease-in-out 0;
@@ -193,10 +184,7 @@
     #expand-divider {
         display: block;
         clear: both;
-        /* width: 90%; */
-        /* margin: 0 auto; */
         background: rgb(213,210,201);
-        /* background: rgb(193,190,181); */
         border: 0;
         height: 2px;
     }

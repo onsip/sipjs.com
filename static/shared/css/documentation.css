@@ -121,10 +121,6 @@ pre {
     width: 50%;
     float: left;
 }
-/* #code-intro > h3 { */
-/*     margin: 0; */
-/*     padding: 1.618em 0 0.8em 0; */
-/* } */
 .index-demo-code pre {
     width: 50%;
     float: right;
@@ -290,7 +286,6 @@ button:hover {
      * that is inconsistent with the behavior for text links,
      * so the button darkens on hover (1st line). */
 	background-color: #c63a27;
-    /* background-color: rgb(254,95,73); */
 }
 #success-opener {
     width: 90%;
@@ -606,7 +601,6 @@ footer {
 	width: 151px;
 	height: 49px;
 	overflow: hidden;
-	/* margin: 0 auto -36px; /\*  center & bring nav lists up  *\/ */
 	background-image: url(../img/onsip-logo-2.png);
 	background-position: middle center;
 }
@@ -624,11 +618,8 @@ footer {
 }
 /* padding-top should be related to .feature h2 font size */
 .full-width-divider h2 {
-    /* color: #53595b; */
     font-size: 2.25em;
     font-weight: 400;
-    /* padding-top: 1em; */
-    /* padding-bottom:0.1em; */
     margin-bottom:0;
     text-align:center;
 }
@@ -636,9 +627,6 @@ footer {
     margin-top: 4%;
     margin-left: 0;
 }
-/* .full-width-divider > p { */
-/*     margin-bottom: 2em; */
-/* } */
 .home-feature {
     width: 80%;
 	padding: 50px 0 10px 0;
@@ -695,7 +683,6 @@ footer {
 	padding: 30px 30px 10px 30px;
 }
 .highlights img {
-    /* height: 74px; */
     height: 50px;
 }
 .highlights li:hover {
