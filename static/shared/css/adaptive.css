@@ -105,8 +105,15 @@
         display: block;
     }
 
+    /* Feature selector and highlights stuff */
+    .highlights li {
+        padding: 7% 7% 5% 7%;
+    }
 
-    /* Header navigation */
+
+    /* Header navigation
+     * ======================
+     */
     header,
     #siteHeader{
         position: relative;
@@ -195,8 +202,32 @@
     }
 
 
-    /* Feature selector and highlights stuff */
-    .highlights li {
-        padding: 7% 7% 5% 7%;
+    /* Footer navigation
+     * ======================
+     */
+    #onsip-stamp {
+	    margin: 0 0 2em 0; /*  center & bring nav lists up  */
+    }
+    /* Ignore the float instructions in the classes from the desktop layout.
+     * Maybe we should remove those classes and keep our styling to other
+     * selectors? */
+    footer nav {
+        clear: both;
+    }
+    footer nav.right {
+        float: none;
+    }
+    footer nav.left {
+        float: none;
+    }
+    footer nav .horizontal li {
+        float: none;
+        display: inline;
+        margin-left: 0.809em;
+        margin-right: 0.809em;
+    }
+    footer nav ul {
+        text-align: center;
+        margin: 1em 0;
     }
 }
