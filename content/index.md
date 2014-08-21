@@ -172,6 +172,7 @@ popup: true
       The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
       </p>
     </div>
+<div class="code-wrapper">
 <div class="index-demo-code" id="code-video-audio" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -285,6 +286,8 @@ var aliceUA = createUA(aliceURI, aliceName);
 setUpVideoInterface(aliceUA, bobURI, 'video-of-bob', 'alice-video-button');
 ~~~~
 </div>
+</div>
+<div class="code-wrapper">
 <div class="index-demo-code" id="code-message" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -368,6 +371,8 @@ setUpMessageInterface(aliceUA, bobURI,
                       'alice-message-button');
 ~~~~
 </div>
+</div>
+<div class="code-wrapper">
 <div class="index-demo-code" id="code-data-channel" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -610,6 +615,8 @@ setUpDataInterface(aliceDataUA, bobURI,
                    'alice-data-share-button');
 ~~~~
 </div>
+</div>
+
   <a class="button" href="/">
       <span id="code-button-text">See Full Demo Code</span>
       <span class="hover-arrow">⟩</span>

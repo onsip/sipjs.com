@@ -86,10 +86,13 @@
     .index-demo-code {
         text-align: left;
     }
-    .index-demo-code pre {
+    .code-wrapper {
         width: 100%;
+        padding: 0;
+    }
+    .index-demo-code pre {
         float: none;
-        margin: 3.5em 0 1.5em 0;
+        margin: 1.5em 0;
     }
 
     /* But a few things should actually still remain multi-column */
