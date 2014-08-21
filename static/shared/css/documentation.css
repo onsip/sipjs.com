@@ -12,8 +12,8 @@
 }
 body {
 	font-family: 'Nunito', sans-serif;
-	font-size: 16px;
-	font-weight: 300;
+	font-size: 18px;
+	font-weight: 400;
 	color: #3f4446;
 }
 
@@ -36,7 +36,7 @@ body {
 /*  BASIC TYPOGRAPHY
 		========================================  */
 h1, h2, h3, h4 {
-	font-family: 'Varela Round', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 	font-weight: normal;
 	color: #8a7c7a;
 }
@@ -51,7 +51,8 @@ h2 {
 	margin-bottom: .8em;
 }
 h3 {
-	font-size: 24px;
+	font-size: 1.75em;
+    font-weight: 700;
     margin: 0.8em 0 0.8em 0;
 }
 h4 {
@@ -60,7 +61,7 @@ h4 {
 }
 p {
 	margin-bottom: 1em;
-	line-height: 23px;
+	line-height: 1.45em;
 	letter-spacing: .02em;
 }
 h2 + p {
@@ -160,6 +161,7 @@ td.line-numbers {
 /*  Top level lists  */
 ol, ul {
 	margin: 0 0 2em 1.2em;
+    line-height: 2em;
 }
 ol {
 	list-style-type: decimal;
@@ -241,6 +243,9 @@ a.message-link:hover {
 /* BUTTONS AND OTHER STUFF
  * ========================================
  */
+button, .button {
+    font-weight: 700;
+}
 .button {
     display: inline-block;
     width: auto;
@@ -296,7 +301,7 @@ button:hover {
 #success-opener {
     width: 90%;
 }
-#code-button-text {
+.text-hover-left {
     position: relative;
     left: 0;
     -webkit-transition: left .25s ease-in-out;
@@ -305,7 +310,7 @@ button:hover {
 	-o-transition: left .25s ease-in-out;
 	transition: left .25s ease-in-out;
 }
-.button:hover > #code-button-text {
+.button:hover > .text-hover-left {
     left: -0.5em;
 }
 .hover-arrow {
@@ -346,7 +351,7 @@ nav ul, nav ol {
 
 /*  Nav link colors are different than inline links */
 nav a, header a {
-	font-family: 'Varela Round', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 	color: #3f4446;
 }
 nav a:hover, header a:hover {
@@ -366,7 +371,7 @@ th, td {
 	text-align: left;
 }
 th {
-	font-family: 'Varela Round', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 	letter-spacing: .0618em;
 	background-color: #f3f2ee;
 }
@@ -385,12 +390,12 @@ th {
 }
 #mainNav {
 	height: 120px;
-	line-height: 120px;
 }
 #mainNav > #logo-link {
     float: left;
 }
 #mainNav ul {
+	line-height: 120px;
 	margin: 0.8em 0 0 0;
     float: right;
 }
@@ -594,10 +599,12 @@ footer {
 #made-by-prefix {
     display: inline-block;
     vertical-align: top;
-    margin-right: 0.75em;
+    margin-left: 1em;
+    margin-top: -0.3em;
+    margin-right: 0.45em;
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
     color: #cccac3;
-    font-size: 0.8em;
+    font-size: 1.4em;
     font-weight: 400;
     line-height: 2.4em;
 }
@@ -707,7 +714,7 @@ footer {
 	font-size: 17px;
 	line-height: 20px;
 	color: #3f4445;
-	font-family: 'Varela Round', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 }
 .highlight-icon-wrapper {
 	width: 180px;
@@ -766,7 +773,17 @@ footer {
 	opacity: 1;
 }
 /*  Underline hover effect  */
-.highlights .column-box h3:after {
+.highlights .column-box h3 {
+    font-size: 28px;
+    font-weight: 700;
+}
+.highlights .column-box:hover h3 {
+    color: #ea4b35;
+}
+.highlights .column-box h3 > span {
+    display: inline-block;
+}
+.highlights .column-box h3 > span:after {
 	content: "";
 	display: block;
 	width: 0%;
@@ -779,18 +796,15 @@ footer {
 	-o-transition: width .12s ease-in-out;
 	transition: width .12s ease-in-out;
 }
-.highlights .column-box:hover h3:after {
-	width: 25%;
-}
-.highlights .column-box:hover h3 {
-    color: #ea4b35;
+.highlights .column-box:hover h3 > span:after {
+	width: 100%;
 }
 .highlight-icon a {
 	color: #3f4445;
 	text-transform: uppercase;
 	font-size: 18px;
 	line-height: 1;
-	font-family: 'Varela Round', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 }
 .highlight-icon a:hover {
 	color: #ea4b35;

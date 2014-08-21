@@ -4,9 +4,10 @@
 var headerDesktopHeight = '120px';
 
 var headerShrunkHeight = '19vw';
-var headerExpandHeight = '38vw';
+var headerExpandHeight = '48vw';
 var shrunkNavBottom = '0';
 var expandNavBottom = '7.5%';
+expandNavBottom = '8vw';
 var menuOpen = false;
 var showDelay = 150;
 var hideDelay = 400;
@@ -25,12 +26,14 @@ $('#mobile-menu').click(function (e) {
         $('#siteHeader').css('height', headerExpandHeight);
         $('#full-nav').css('opacity', '1');
         $('#full-nav').css('bottom', expandNavBottom);
+        $('#expand-divider').css('visibility', 'visible');
         setTimeout(showFunc, showDelay);
     } else {
         menuOpen = false;
         $('#siteHeader').css('height', headerShrunkHeight);
         $('#full-nav').css('opacity', '0');
         $('#full-nav').css('bottom', shrunkNavBottom);
+        $('#expand-divider').css('visibility', 'hidden');
         setTimeout(hideFunc, hideDelay);
     }
 });
@@ -43,6 +46,7 @@ document.addEventListener('click', function (event) {
         $('#siteHeader').css('height', headerShrunkHeight);
         $('#full-nav').css('opacity', '0');
         $('#full-nav').css('bottom', shrunkNavBottom);
+        $('#expand-divider').css('visibility', 'hidden');
         setTimeout(hideFunc, hideDelay);
     }
 });

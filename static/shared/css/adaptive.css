@@ -23,7 +23,45 @@
     .mobile-hide {
         display: none;
     }
+    #git-mit-images img {
+        max-width: 100%;
+    }
 
+    /* Headers and other text
+     * ========================================
+     */
+    h1 {
+        line-height: 1.5em;
+    }
+    h1, h2, h3 {
+        font-size: 8vw;
+        font-weight: 300;
+    }
+    .feature h1 {
+        font-size: 7.25vw;
+        font-weight: 700;
+    }
+    .full-width-divider h2 {
+        font-size: 8vw;
+        font-weight: 400;
+    }
+    h3 {
+        margin: 0.5em 0;
+    }
+    h4.intro {
+        font-size: 5vw;
+        font-weight: 300;
+        margin-bottom: 1.5em;
+    }
+    p {
+        font-size: 5vw;
+        font-weight: 300;
+        margin-bottom: 1.5em;
+    }
+
+    /* General margins and widths
+     * ========================================
+     */
     /* Removing explicit and calculated static widths */
     body,
     header .wrapper,
@@ -37,7 +75,6 @@
         padding-right: 6%;
     }
 
-    /* .wrapper { */
     header, footer {
         width: 100%;
     }
@@ -45,7 +82,21 @@
         padding-right: 4%;
     }
 
-    /* Things that we hide on mobile */
+
+    /* Feature selector changes
+     * ========================================
+     */
+    #feature-selector {
+        padding-bottom: 0;
+    }
+    .home-feature {
+        width: 100%;
+    }
+
+
+    /* Things that we hide on mobile
+     * ========================================
+     */
     .highlights h4,
     #feature-demo,
     #feature-arrow
@@ -53,7 +104,9 @@
         display: none;
     }
 
-    /* Changing things to single column. */
+    /* Changing things to single column
+     * ========================================
+     */
     .column-box {
         float: none;
         width: 100%;
@@ -78,6 +131,9 @@
     }
     .full-width-divider p {
         text-align: left;
+    }
+    .full-width-divider .align-center p {
+        text-align: center;
     }
     #code-intro {
         width: 100%;
@@ -107,11 +163,15 @@
     /* Feature selector and highlights stuff */
     .highlights li {
         padding: 7% 7% 5% 7%;
+        background-color: rgb(245,244,239);
+    }
+    .highlights li:hover {
+        background-color: rgb(245,244,239);
     }
 
 
     /* Header navigation
-     * ======================
+     * ========================================
      */
     header,
     #siteHeader{
@@ -145,6 +205,7 @@
         left: 8%;
         width: 80%;
         line-height: 1.5em;
+        line-height: 2em;
         visibility: hidden;
         opacity: 0;
 
@@ -155,6 +216,8 @@
 	    -o-transition: opacity 0.35s ease-in-out 0, bottom 0.5s ease-in-out 0;
     }
     #mainNav > ul {
+        line-height: 1.5em;
+        line-height: 2em;
     }
     #mainNav #api-nav {
         display: none;
@@ -162,8 +225,10 @@
     #mainNav > #mobile-nav {
         display: inline-block;
         float: right;
-        font-family: 'Varela Round', sans-serif;
-        font-size: 6vw;
+        font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+        font-size: 4vw;
+        font-weight: 700;
+        line-height: 19vw;
         margin-top: 0;
     }
     #mainNav > #mobile-nav a:after {
@@ -171,7 +236,7 @@
     }
     #mobile-nav > li {
         height: 19vw;
-        padding: 1.4em 6vw 0 6vw;
+        padding: 0 6vw 0 6vw;
         margin-left: 0;
         border-left: 2px solid rgb(213,210,201);
 
@@ -194,8 +259,11 @@
 
 
     /* Footer navigation
-     * ======================
+     * ========================================
      */
+    #made-by-prefix {
+        margin-left: 0.1em;
+    }
     #onsip-stamp {
 	    margin: 0 0 2em 0; /*  center & bring nav lists up  */
     }
@@ -214,11 +282,25 @@
     footer nav .horizontal li {
         float: none;
         display: inline;
-        margin-left: 0.809em;
-        margin-right: 0.809em;
+    }
+    footer .left .horizontal li {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0.809em;
+        padding-right: 0.809em;
+    }
+    footer .right .horizontal li {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0.809em;
+        padding-right: 0.809em;
     }
     footer nav ul {
         text-align: center;
         margin: 1em 0;
+    }
+    /* Adding dividing vertical lines between elements */
+    footer li + li {
+        border-left: 1px solid black;
     }
 }

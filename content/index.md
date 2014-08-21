@@ -617,10 +617,14 @@ setUpDataInterface(aliceDataUA, bobURI,
 </div>
 </div>
 
-  <a class="button" href="/">
-      <span id="code-button-text">See Full Demo Code</span>
-      <span class="hover-arrow">⟩</span>
-    </a>
+  <a class="mobile-hide button" href="/">
+    <span class="text-hover-left">See Full Demo Code</span>
+    <span class="hover-arrow">⟩</span>
+  </a>
+  <a class="desktop-hide button" href="/api/0.6.0/">
+    <span class="text-hover-left">Check out the full API</span>
+    <span class="hover-arrow">⟩</span>
+  </a>
     <div class="clearfix"></div>
   </div>
 
@@ -644,7 +648,7 @@ setUpDataInterface(aliceDataUA, bobURI,
             </div>
           </div>
         </div>
-        <h3>Learn</h3>
+        <h3><span>Learn</span></h3>
         <p>New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
       </div>
       <div class="column-box">
@@ -655,7 +659,7 @@ setUpDataInterface(aliceDataUA, bobURI,
             </div>
           </div>
         </div>
-        <h3>Connect</h3>
+        <h3><span>Connect</span></h3>
         <p>Get answers, stay up to date, and become part of the SIP.js community.</p>
       </div>
       <div class="clearfix"></div>
