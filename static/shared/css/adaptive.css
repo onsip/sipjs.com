@@ -181,13 +181,8 @@
     header,
     #siteHeader{
         position: relative;
-        height: 19vw;
-
-        transition: height 0.5s ease-in-out 0;
-	    -webkit-transition: height 0.5s ease-in-out 0;
-	    -moz-transition: height 0.5s ease-in-out 0;
-	    -ms-transition: height 0.5s ease-in-out 0;
-	    -o-transition: height 0.5s ease-in-out 0;
+        min-height: 19vw;
+        height: auto;
     }
     #logo {
         height: 8.4vw;
@@ -201,31 +196,44 @@
     #mainNav a:after {
         margin: 0 auto 0 auto;
     }
-    #full-nav {
+    #drawer-nav {
+        position: relative;
+        visibility: hidden;
+        clear: both;
+        overflow: hidden;
+        height: 0;
+        line-height: 2em;
+        background-color: rgb(193,191,182);
+        background-color: rgb(213,210,201);
+
+        transition: height 0.5s ease-in-out 0;
+	    -webkit-transition: height 0.5s ease-in-out 0;
+	    -moz-transition: height 0.5s ease-in-out 0;
+	    -ms-transition: height 0.5s ease-in-out 0;
+	    -o-transition: height 0.5s ease-in-out 0;
+    }
+    #drawer-nav ul {
+        margin: 0.8em 0 0 0;
+        float: right;
+    }
+    #drawer-nav li {
+        margin-left: 2em;
+    }
+    #drawer-list {
         position: absolute;
         bottom: 0;
         /* a specific percentage because it was too difficult to center an
          * absolutely positioned element where we did not know the width of
          * the element */
         left: 8%;
+        bottom: 7.5%;
         width: 80%;
         line-height: 1.5em;
         line-height: 2em;
-        visibility: hidden;
-        opacity: 0;
-
-        transition: opacity 0.35s ease-in-out 0, bottom 0.5s ease-in-out 0;
-	    -webkit-transition: opacity 0.35s ease-in-out 0, bottom 0.5s ease-in-out 0;
-	    -moz-transition: opacity 0.35s ease-in-out 0, bottom 0.5s ease-in-out 0;
-	    -ms-transition: opacity 0.35s ease-in-out 0, bottom 0.5s ease-in-out 0;
-	    -o-transition: opacity 0.35s ease-in-out 0, bottom 0.5s ease-in-out 0;
     }
     #mainNav > ul {
         line-height: 1.5em;
         line-height: 2em;
-    }
-    #mainNav #api-nav {
-        display: none;
     }
     #mainNav > #mobile-nav {
         display: inline-block;
@@ -244,12 +252,6 @@
         padding: 0 6vw 0 6vw;
         margin-left: 0;
         border-left: 2px solid rgb(213,210,201);
-
-        transition: height 0.5s ease-in-out 0;
-	    -webkit-transition: height 0.5s ease-in-out 0;
-	    -moz-transition: height 0.5s ease-in-out 0;
-	    -ms-transition: height 0.5s ease-in-out 0;
-	    -o-transition: height 0.5s ease-in-out 0;
     }
     #mobile-nav > li:hover {
         color: #ea4b35;
