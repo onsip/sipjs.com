@@ -13,7 +13,17 @@
 /*     max-width: 100%; */
 /* } */
 
+@media all and (min-width: 700px) {
+    .desktop-hide {
+        display: none;
+    }
+}
+
 @media all and (max-width: 700px) {
+    .mobile-hide {
+        display: none;
+    }
+
     /* Removing explicit and calculated static widths */
     body,
     header .wrapper,
@@ -59,6 +69,27 @@
         column-count: 1;
         -moz-column-count: 1;
         -webkit-column-count: 1;
+    }
+    .full-width-divider {
+        text-align: center;
+    }
+    .full-width-divider ul {
+        text-align: left;
+    }
+    .full-width-divider p {
+        text-align: left;
+    }
+    #code-intro {
+        width: 100%;
+        float: none;
+    }
+    .index-demo-code {
+        text-align: left;
+    }
+    .index-demo-code pre {
+        width: 100%;
+        float: none;
+        margin: 3.5em 0 1.5em 0;
     }
 
     /* But a few things should actually still remain multi-column */

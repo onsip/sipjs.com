@@ -30,8 +30,8 @@ body {
  }
 .wrapper-bg-extend>* {
     width: 100%;
-    padding-left: calc(50% - 450px);
-    padding-right: calc(50% - 450px);
+    padding-left: calc(50% - 460px);
+    padding-right: calc(50% - 460px);
 }
 /*  BASIC TYPOGRAPHY
 		========================================  */
@@ -52,9 +52,6 @@ h2 {
 }
 h3 {
 	font-size: 24px;
-	margin: 1.618em 0 0.8em 0;
-}
-.full-width-divider h3 {
     margin: 0.8em 0 0.8em 0;
 }
 h4 {
@@ -66,7 +63,7 @@ p {
 	line-height: 23px;
 	letter-spacing: .02em;
 }
-h2+p {
+h2 + p {
     margin-top: 1.5em;
 }
 h4.intro {
@@ -120,8 +117,19 @@ pre {
 	color: #3f4446;
 	overflow: auto;
 }
+#code-intro {
+    width: 50%;
+    float: left;
+}
+/* #code-intro > h3 { */
+/*     margin: 0; */
+/*     padding: 1.618em 0 0.8em 0; */
+/* } */
 .index-demo-code pre {
-    height: 35em;
+    width: 50%;
+    float: right;
+    height: 25em;
+    margin: 3.5em 0;
     padding: 0.5em;
 }
 
@@ -610,13 +618,17 @@ footer {
 /* Homepage
    ========================================
 */
+.full-width-divider {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
 /* padding-top should be related to .feature h2 font size */
 .full-width-divider h2 {
     /* color: #53595b; */
     font-size: 2.25em;
     font-weight: 400;
-    padding-top: 1em;
-    padding-bottom:0.1em;
+    /* padding-top: 1em; */
+    /* padding-bottom:0.1em; */
     margin-bottom:0;
     text-align:center;
 }
@@ -624,9 +636,9 @@ footer {
     margin-top: 4%;
     margin-left: 0;
 }
-.full-width-divider > p {
-    margin-bottom: 2em;
-}
+/* .full-width-divider > p { */
+/*     margin-bottom: 2em; */
+/* } */
 .home-feature {
     width: 80%;
 	padding: 50px 0 10px 0;
@@ -646,6 +658,7 @@ footer {
 }
 #feature-selector {
     position: relative;
+    padding-bottom: 3em;
 }
 #feature-demo {
     position: relative;

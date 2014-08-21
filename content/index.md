@@ -166,19 +166,12 @@ popup: true
   </div>
 
   <div class="full-width-divider orange-bg">
-    <div class="two-column-boxes align-left">
-      <div class="column-box">
-        <h3>See How It's Done</h3>
-        <p>
-          The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
-        </p>
-
-        <a class="button" href="/">
-          <span id="code-button-text">See Full Demo Code</span>
-          <span class="hover-arrow">⟩</span>
-        </a>
-      </div>
-      <div class="column-box">
+    <div id="code-intro" class="left">
+      <h3>See How It's Done</h3>
+      <p class="left">
+      The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
+      </p>
+    </div>
 <div class="index-demo-code" id="code-video-audio" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -617,18 +610,21 @@ setUpDataInterface(aliceDataUA, bobURI,
                    'alice-data-share-button');
 ~~~~
 </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
+  <a class="button" href="/">
+      <span id="code-button-text">See Full Demo Code</span>
+      <span class="hover-arrow">⟩</span>
+    </a>
+    <div class="clearfix"></div>
   </div>
 
   <div class="full-width-divider">
     <h2 class="orange-fg">Don't Want to Bother with the Back End?</h2>
     <p class="multicolumn">
       If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
-      <a class="button orange-bg left" href="https://signup.onsip.com/network">Sign up for a free OnSIP sandbox account</a>
+      <a class="mobile-hide button orange-bg left" href="https://signup.onsip.com/network">Sign up for a free OnSIP sandbox account</a>
     </p>
     <div class="clearfix"></div>
+    <a class="desktop-hide button orange-bg" href="https://signup.onsip.com/network">Sign up for a free OnSIP sandbox account</a>
   </div>
 
   <div class="full-width-divider light-gray-bg">
