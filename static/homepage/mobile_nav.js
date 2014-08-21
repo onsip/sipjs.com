@@ -49,7 +49,6 @@ document.addEventListener('click', function (event) {
 
 
 $(window).resize(function (event) {
-    console.log(event);
     if (window.innerWidth > 700) {
         $('#siteHeader').removeAttr('style');
         $('#full-nav').removeAttr('style');
