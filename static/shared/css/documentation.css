@@ -659,7 +659,8 @@ footer {
 }
 #feature-selector {
     position: relative;
-    padding-bottom: 3em;
+    padding-bottom: 2em;
+    padding-top: 0;
 }
 #feature-demo {
     position: relative;

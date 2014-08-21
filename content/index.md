@@ -5,11 +5,13 @@ description: Add SIP signaling to your WebRTC app with this simple, open source 
 popup: true
 ---
 <div class="wrapper-bg-extend">
-  <article class="group home-feature" id="feature-selector">
+  <article class="group home-feature">
 	<div class="feature">
 	  <h1>WebRTC Made Easy for Javascript Developers</h1>
 	  <h4 class="intro">A simple yet powerful JS library that takes care of WebRTC and SIP signaling for you</h4>
 	</div>
+  </article>
+  <div class="full-width-divider group home-feature" id="feature-selector">
     <ul class="highlights">
       <li id="feature-video-audio">
         <img class="icon-unselected"
@@ -37,7 +39,7 @@ popup: true
     <svg class="arrow" id="feature-arrow" width="60" height="34" viewBox="0 0 80 45">
       <polygon points="40,5 75,40 5,40" />
     </svg>
-  </article>
+  </div>
 
   <div class="full-width-divider mid-gray-bg feature" id="feature-demo">
     <div id="content-video-audio">
