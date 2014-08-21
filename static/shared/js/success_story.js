@@ -23,7 +23,7 @@ function setSuccessPopupDisplay(dispStyle, event) {
             event.popupOpening = true;
         }
     }
-    document.getElementById('success-story')
+    document.getElementById('success-story').parentNode
         .style.setProperty('display', dispStyle);
 }
 

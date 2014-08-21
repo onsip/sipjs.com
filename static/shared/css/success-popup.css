@@ -1,17 +1,27 @@
 .popup {
+    /* fixed position a zero-height full width container */
     position: fixed;
-    top: 25%;
-    left: 50%;
+    top: 25%; /* or whatever position is desired */
+    left: 0;
+    right: 0;
+    /* center all inline content */
+    text-align: center;
     z-index: 21;
     display: none;
 }
+.popup > div {
+    /* make the block inline */
+    position: relative;
+    display: inline-block;
+    /* reset container's center alignment */
+    text-align: left;
+}
 #success-story {
-    width: 580px;
+    width: 90%;
     padding: 10px 0 4px 0;
     border: solid rgb(240,240,240) 2px;
     background-color: white;
     overflow: auto;
-    margin-left: -290px;
 }
 #close-popup {
     position: absolute;
@@ -93,4 +103,20 @@
 /* Hidden iframe to receive the POST action */
 #post-receiver {
     display: none;
+}
+
+
+@media all and (max-width: 700px) {
+    #success-story form > * {
+        display: block;
+        width: 96%;
+        margin: 2%;
+    }
+    #success-story form > button {
+        width: 96%;
+        margin: 2%;
+    }
+    #success-app-desc {
+        float: none;
+    }
 }
