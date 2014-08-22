@@ -17,7 +17,7 @@
     text-align: left;
 }
 #success-story {
-    width: 90%;
+    width: 560px;
     padding: 10px 0 4px 0;
     border: solid rgb(240,240,240) 2px;
     background-color: white;
@@ -113,6 +113,11 @@
 @media all and (max-width: 700px) {
     .popup {
         top: 2.5%;
+    }
+    #success-story {
+        width: 90%;
+        max-height: 97.5vh;
+        overflow: auto;
     }
     #success-story form > * {
         display: block;
