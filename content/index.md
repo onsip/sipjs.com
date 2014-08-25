@@ -126,7 +126,7 @@ popup: true
               </div>
             </div>
             <span class="file-chooser-hack">
-              <button id="alice-file-choose-button" class="file-choose-button dark-gray-bg" type="button">choose a file to send</button>
+              <button id="alice-file-choose-button" class="file-choose-button" type="button">choose a file to send</button>
               <input id="alice-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
             <span id="alice-filename" class="message-body">no file selected</span>
@@ -146,7 +146,7 @@ popup: true
               </div>
             </div>
             <span class="file-chooser-hack">
-              <button id="bob-file-choose-button" class="file-choose-button dark-gray-bg" type="button">choose a file to send</button>
+              <button id="bob-file-choose-button" class="file-choose-button" type="button">choose a file to send</button>
               <input id="bob-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
             <span id="bob-filename" class="message-body">no file selected</span>
@@ -634,7 +634,11 @@ setUpDataInterface(aliceDataUA, bobURI,
     <h2 class="orange-fg">Don't Want to Bother with the Back End?</h2>
     <p class="multicolumn">
       If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
-      <a class="mobile-hide button orange-bg left" href="https://signup.onsip.com/network">Sign up for a free OnSIP sandbox account</a>
+      <a id="signup-button" class="mobile-hide button orange-bg left"
+         href="https://signup.onsip.com/network">
+        <span class="text-hover-left">Sign up for a free OnSIP sandbox account</span>
+        <span class="hover-arrow">⟩</span>
+      </a>
     </p>
     <div class="clearfix"></div>
     <a class="desktop-hide button orange-bg" href="https://signup.onsip.com/network">Sign up for a free OnSIP sandbox account</a>
@@ -673,7 +677,7 @@ setUpDataInterface(aliceDataUA, bobURI,
       <div class="column-box">
         <h3>Built An App Using SIP.js?</h3>
       </div>
-      <div class="column-box">
+      <div class="column-box" id="success-column-box">
         <button id="success-opener" class="orange-bg">We want to hear about it!</button>
       </div>
       <div class="clearfix"></div>

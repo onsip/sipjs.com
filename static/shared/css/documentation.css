@@ -63,6 +63,7 @@ p {
 	margin-bottom: 1em;
 	line-height: 1.45em;
 	letter-spacing: .02em;
+    font-weight: 300;
 }
 h2 + p {
     margin-top: 1.5em;
@@ -72,7 +73,7 @@ h4.intro {
 	letter-spacing: .02em;
     margin-top: 0;
 	margin-bottom: 0;
-	font-size: 1.2em;
+	font-size: 1.1em;
     font-weight: 400;
 	line-height: 1.4em;
     color: #404547;
@@ -121,12 +122,12 @@ pre {
 #code-intro {
     width: 50%;
     float: left;
-    padding: 0 5% 0 0;
+    padding: 0 3% 0 0;
 }
 
 .code-wrapper {
     width: 50%;
-    padding: 0 0 0 5%;
+    padding: 0 0 0 3%;
     float: right;
 }
 .index-demo-code pre {
@@ -187,9 +188,9 @@ li ul {
     column-count: 2;
     -moz-column-count: 2;
     -webkit-column-count: 2;
-    column-gap: 6em;
-    -webkit-column-gap: 6em;
-    -moz-column-gap: 6em;
+    column-gap: 3em;
+    -webkit-column-gap: 3em;
+    -moz-column-gap: 3em;
     /* This is a hack to get bullet points to appear again */
     list-style-position: inside;
 }
@@ -298,8 +299,12 @@ button:hover {
      * so the button darkens on hover (1st line). */
 	background-color: #c63a27;
 }
+#success-column-box {
+    padding-left: 2%;
+}
 #success-opener {
-    width: 90%;
+    width: 96.5%;
+    margin-top: 1em;
 }
 .text-hover-left {
     position: relative;
@@ -329,6 +334,15 @@ button:hover {
 }
 p .button {
     margin-left: 0;
+}
+#signup-button {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95em;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: 700;
+    margin-top: 1.1em;
 }
 
 /*  Horizontal nav styles  */
@@ -641,21 +655,19 @@ footer {
     margin-left: 0;
 }
 .home-feature {
-    width: 80%;
-	padding: 50px 0 10px 0;
-    margin-left: auto;
-    margin-right: auto;
+	padding-top: 3em;
 }
 .feature h1 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
     color: #ea4b35;
-    font-size: 2.25em;
-    font-weight: 700;
+    font-size: 2em;
+    font-weight: 900;
     text-align: center;
     margin-bottom: 0.5em;
 }
 .feature h2 {
     color: white;
+    font-size: 1.9em;
 }
 #feature-selector {
     position: relative;
@@ -675,13 +687,13 @@ footer {
     float: left;
     width: 50%;
     background-clip: content-box;
-    padding: 0 5% 0 0;
+    padding: 0 3% 0 0;
 }
 /* This does the padding correctly, where we don't pad the left of the first box
  * and the right of the last box.
  */
 .column-box~.column-box {
-    padding: 0 0 0 5%;
+    padding: 0 0 0 3%;
 }
 
 .highlights {
@@ -713,6 +725,7 @@ footer {
 }
 .highlights p.subpara {
 	font-size: 17px;
+    font-weight: 700;
 	line-height: 20px;
 	color: #3f4445;
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
@@ -831,14 +844,14 @@ footer {
 }
 .demo-window h4 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 400;
     color: #ea4b35;
-    margin: 6% 0 0 0;
+    margin: 1.05em 0 0 0;
 }
 .demo-window h5 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
-    font-size: 0.75em;
+    font-size: 0.7em;
     font-weight: 400;
     color: #53595b;
 }
@@ -893,22 +906,23 @@ footer {
     box-shadow: none;
 }
 .file-choose-button {
+    background-color: rgb(122,120,114);
+    font-weight: 400;
+    margin-left: 0;
     padding: 15px;
+}
+.file-chooser-hack:hover > button.file-choose-button {
+    background-color: rgb(85,91,93);
+}
+.file-chooser-hack + .message-body {
+    font-size: 0.8em;
+    font-weight: 300;
 }
 .file-send-button+p {
     position: relative;
     display: inline-block;
     right: 0;
     bottom: 0;
-}
-.file-choose-button.dark-gray-bg:hover {
-    background-color: rgb(85,91,93);
-}
-button.file-choose-button.dark-gray-bg:hover {
-    background-color: rgb(85,91,93);
-}
-.file-chooser-hack:hover > button.file-choose-button.dark-gray-bg {
-    background-color: rgb(85,91,93);
 }
 #content-message .message-display {
     background-color: rgb(255,255,255);
