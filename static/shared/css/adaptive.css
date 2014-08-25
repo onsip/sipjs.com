@@ -179,8 +179,7 @@
      * ========================================
      */
     header,
-    #siteHeader{
-        position: relative;
+    #siteHeader {
         min-height: 19vw;
         height: auto;
     }
@@ -197,37 +196,30 @@
         margin: 0 auto 0 auto;
     }
     #drawer-nav {
-        position: relative;
-        visibility: hidden;
+        /* visibility: hidden; */
         clear: both;
         overflow: hidden;
-        height: 0;
+        max-height: 0;
+        height: auto;
         line-height: 2em;
         background-color: rgb(193,191,182);
         background-color: rgb(213,210,201);
 
-        transition: height 0.5s ease-in-out 0;
-	    -webkit-transition: height 0.5s ease-in-out 0;
-	    -moz-transition: height 0.5s ease-in-out 0;
-	    -ms-transition: height 0.5s ease-in-out 0;
-	    -o-transition: height 0.5s ease-in-out 0;
+        transition: max-height 0.4s ease-in-out 0;
+	    -webkit-transition: max-height 0.4s ease-in-out 0;
+	    -moz-transition: max-height 0.4s ease-in-out 0;
+	    -ms-transition: max-height 0.4s ease-in-out 0;
+	    -o-transition: max-height 0.4s ease-in-out 0;
     }
     #drawer-nav ul {
-        margin: 0.8em 0 0 0;
+        margin: 0.8em 0 0.8em 0;
         float: right;
     }
     #drawer-nav li {
-        margin-left: 2em;
+        margin: 0 1em;
     }
     #drawer-list {
-        position: absolute;
-        bottom: 0;
-        /* a specific percentage because it was too difficult to center an
-         * absolutely positioned element where we did not know the width of
-         * the element */
-        left: 8%;
-        bottom: 7.5%;
-        width: 80%;
+        width: 100%;
         line-height: 1.5em;
         line-height: 2em;
     }

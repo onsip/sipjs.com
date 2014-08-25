@@ -1,7 +1,7 @@
 (function () {
 
 var drawerShrunkHeight = '0';
-var drawerExpandHeight = '20vw';
+var drawerExpandHeight = '8em';
 var menuOpen = false;
 var showDelay = 150;
 var hideDelay = 400;
@@ -12,17 +12,15 @@ var hideFunc = (function () {
 var showFunc = (function () {
     if (menuOpen)
         $('#drawer-nav').css('visibility', 'visible');
-})
+});
 
 $('#mobile-menu').click(function (e) {
     if (!menuOpen) {
         menuOpen = true;
-        $('#drawer-nav').css('height', drawerExpandHeight);
-        setTimeout(showFunc, showDelay);
+        $('#drawer-nav').css('max-height', drawerExpandHeight);
     } else {
         menuOpen = false;
-        $('#drawer-nav').css('height', drawerShrunkHeight);
-        setTimeout(hideFunc, hideDelay);
+        $('#drawer-nav').css('max-height', drawerShrunkHeight);
     }
 });
 
@@ -32,8 +30,7 @@ document.addEventListener('click', function (event) {
         && $(event.target).closest('#mobile-menu').length === 0
         && $(event.target).closest('#drawer-nav').length === 0) {
         menuOpen = false;
-        $('#drawer-nav').css('height', drawerShrunkHeight);
-        setTimeout(hideFunc, hideDelay);
+        $('#drawer-nav').css('max-height', drawerShrunkHeight);
     }
 });
 
