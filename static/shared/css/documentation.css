@@ -671,14 +671,15 @@ footer {
     font-size: 1.9em;
 }
 #feature-selector {
-    position: relative;
     padding-bottom: 2em;
     padding-top: 0;
 }
-#feature-demo {
+#feature-selector > div {
     position: relative;
 }
-
+#feature-demo .column-box {
+    position: relative;
+}
 .two-column-boxes {
     width: 100%;
     margin: auto;
@@ -990,19 +991,19 @@ footer {
 }
 #feature-arrow {
     position: absolute;
-    bottom: -7px;
+    bottom: -190px;
     left: calc(16.5% - 30px);
 }
 #feature-arrow polygon {
     fill: rgb(193,191,182);
     stroke: rgb(193,191,182);
 }
-#demo-arrow {
+.demo-arrow {
     position: absolute;
-    bottom: -7px;
+    bottom: -82px;
     left: 20.5%;
 }
-#demo-arrow polygon {
+.demo-arrow polygon {
     fill: rgb(234, 75, 53);
     stroke: rgb(234, 75, 53);
 }

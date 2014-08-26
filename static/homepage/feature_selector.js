@@ -43,29 +43,50 @@ $.extend($.easing,
 
 // Calls this when the DOM is done loading
 $(function () {
-    /* Make sure that the union of keys for the dictionaries defined below are
-     * equal to their intersections.
-     */
-    // The feature buttons that the user can click on
-    var feature_ids = {'video_audio':  'feature-video-audio',
-                       'message':      'feature-message',
-                       'data_channel': 'feature-data-channel'};
-    // The content for the demos for each feature.
-    var content_ids = {'video_audio':  'content-video-audio',
-                       'message':      'content-message',
-                       'data_channel': 'content-data-channel'};
-    // The code for each feature code example
-    var code_ids    = {'video_audio':  'code-video-audio',
-                       'message':      'code-message',
-                       'data_channel': 'code-data-channel'};
+    // subkeys:
+    //   feature_id: the feature button that the user can click on
+    //   content_id: the content for the demo for that feature
+    //   code_id: the code for the feature code example
+    var elem_ids = {
+        'video_audio': {
+            'feature_id' : 'feature-video-audio',
+            'content_id' : 'content-video-audio',
+            'code_id'    : 'code-video-audio'
+        },
+        'message': {
+            'feature_id' : 'feature-message',
+            'content_id' : 'content-message',
+            'code_id'    : 'code-message'
+        },
+        'data_channel': {
+            'feature_id' : 'feature-data-channel',
+            'content_id' : 'content-data-channel',
+            'code_id'    : 'code-data-channel'
+        }
+    }
+
     // Prepend all with id hashtag
-    for (var key in feature_ids) {
-        feature_ids[key] = '#' + feature_ids[key];
-        content_ids[key] = '#' + content_ids[key];
-        code_ids[key]    = '#' + code_ids[key];
+    for (var key in elem_ids) {
+        elem_ids[key].feature_id = '#' + elem_ids[key].feature_id;
+        elem_ids[key].content_id = '#' + elem_ids[key].content_id;
+        elem_ids[key].code_id    = '#' + elem_ids[key].code_id;
     }
     var arrow_id = '#feature-arrow';
     var arrow_elem = $(arrow_id);
+    var selected_elem = $(elem_ids.video_audio.feature_id);
+
+    function positionArrow(arrow_elem, selected_elem) {
+        // Move the arrow to under the proper feature box, but only if it is has
+        // a visible display property. We need to do this because otherwise the
+        // arrow can get its position set on mobile and then display improperly
+        // when the window expands to desktop.
+        arrow_elem.animate({left: selected_elem.position().left
+                            + selected_elem.outerWidth()/2
+                            - arrow_elem.outerWidth()/2},
+                           { duration: 300,
+                             easing: 'easeOutSine',
+                           });
+    }
 
     // So that the proper key is accessible in the click function for each
     // click object.
@@ -76,35 +97,41 @@ $(function () {
             // the selected version and unhide the unselected version.
             // We also must show the correct contents in the viewport below the
             // icons.
-            var selected_elem = $(this);
+            selected_elem = $(this);
             selected_elem.children('.icon-selected').show();
             selected_elem.children('.icon-unselected').hide();
             selected_elem.children('h4').css('color', 'rgb(234, 75, 53)');
-            $(content_ids[key]).show();
-            $(code_ids[key]).show();
-            for (var otherkey in feature_ids) {
+            $(elem_ids[key].content_id).show();
+            $(elem_ids[key].code_id).show();
+            for (var otherkey in elem_ids) {
                 if (otherkey !== key) {
-                    var other_elem = $(feature_ids[otherkey]);
+                    var other_elem = $(elem_ids[otherkey].feature_id);
                     other_elem.children('.icon-selected').hide();
                     other_elem.children('.icon-unselected').show();
                     other_elem.children('h4').css('color', '#8a7c7a');
-                    $(content_ids[otherkey]).hide();
-                    $(code_ids[otherkey]).hide();
+                    $(elem_ids[otherkey].content_id).hide();
+                    $(elem_ids[otherkey].code_id).hide();
                 }
             }
-            // Move the arrow to under the proper feature box
-            arrow_elem.animate({left: selected_elem.position().left
-                                + selected_elem.outerWidth()/2
-                                - arrow_elem.outerWidth()/2},
-                               { duration: 300,
-                                 easing: 'easeOutSine',
-                               });
+            positionArrow(arrow_elem, selected_elem);
         }
     }
 
-    for (var key in feature_ids) {
-        $(feature_ids[key]).click(bind_key_fn(key));
+    for (var key in elem_ids) {
+        $(elem_ids[key].feature_id).click(bind_key_fn(key));
     }
 
-    $(feature_ids['video_audio']).click();
+    $(elem_ids.video_audio.feature_id).click();
+
+    var mobileView = ($(window).width() <= 700);
+    $(window).resize(function (event) {
+        if ($(window).width() > 700) {
+            if (mobileView) {
+                positionArrow(arrow_elem, selected_elem);
+            }
+            mobileView = false;
+        } else {
+            mobileView = true;
+        }
+    });
 });

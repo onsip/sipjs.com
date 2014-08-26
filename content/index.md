@@ -12,33 +12,36 @@ popup: true
 	</div>
   </article>
   <div class="full-width-divider group home-feature" id="feature-selector">
-    <ul class="highlights">
-      <li id="feature-video-audio">
-        <img class="icon-unselected"
-             src="/shared/img/video-audio.png" alt="video + audio" />
-        <img class="icon-selected"
-             src="/shared/img/video-audio-highlight.png" alt="video + audio highlight" />
-        <h4>video + audio</h4>
-      </li>
-      <li id="feature-message">
-        <img class="icon-unselected"
-             src="/shared/img/message.png" alt="message" />
-        <img class="icon-selected"
-             src="/shared/img/message-highlight.png" alt="message highlight" />
-        <h4>message</h4>
-      </li>
-      <li id="feature-data-channel">
-        <img class="icon-unselected"
-             src="/shared/img/data-channel.png" alt="message" />
-        <img class="icon-selected"
-             src="/shared/img/data-channel-highlight.png" alt="message highlight" />
-        <h4>data channel</h4>
-      </li>
-    </ul>
-    <!-- This draws an arrow that we use to indicate the highlighted feature -->
-    <svg class="arrow" id="feature-arrow" width="60" height="34" viewBox="0 0 80 45">
-      <polygon points="40,5 75,40 5,40" />
-    </svg>
+    <div>
+      <ul class="highlights">
+        <li id="feature-video-audio">
+          <img class="icon-unselected"
+               src="/shared/img/video-audio.png" alt="video + audio" />
+          <img class="icon-selected"
+               src="/shared/img/video-audio-highlight.png" alt="video + audio highlight" />
+          <h4>video + audio</h4>
+        </li>
+        <li id="feature-message">
+          <img class="icon-unselected"
+               src="/shared/img/message.png" alt="message" />
+          <img class="icon-selected"
+               src="/shared/img/message-highlight.png" alt="message highlight" />
+          <h4>message</h4>
+        </li>
+        <li id="feature-data-channel">
+          <img class="icon-unselected"
+               src="/shared/img/data-channel.png" alt="message" />
+          <img class="icon-selected"
+               src="/shared/img/data-channel-highlight.png" alt="message highlight" />
+          <h4>data channel</h4>
+        </li>
+      </ul>
+      <!-- This draws an arrow that we use to indicate the highlighted feature -->
+      <svg class="arrow mobile-hide" id="feature-arrow"
+           width="60" height="34" viewBox="0 0 80 45">
+        <polygon points="40,5 75,40 5,40" />
+      </svg>
+    </div>
   </div>
 
   <div class="full-width-divider mid-gray-bg feature" id="feature-demo">
@@ -58,6 +61,10 @@ popup: true
             <button id="alice-video-button" class="right" type="button">video</button>
             <div class="clearfix"></div>
           </div>
+          <svg class="arrow mobile-hide demo-arrow"
+               width="60" height="34" viewBox="0 0 80 45">
+            <polygon points="40,5 75,40 5,40" />
+          </svg>
         </div>
         <div class="column-box">
           <div class="demo-window">
@@ -94,6 +101,10 @@ popup: true
             <button id="alice-message-button" class="right" type="button">send message</button>
             <div class="clearfix"></div>
           </div>
+          <svg class="arrow mobile-hide demo-arrow"
+               width="60" height="34" viewBox="0 0 80 45">
+            <polygon points="40,5 75,40 5,40" />
+          </svg>
         </div>
         <div class="column-box">
           <div class="demo-window">
@@ -136,6 +147,10 @@ popup: true
             </div>
             <button id="alice-data-share-button" class="right" type="button">share</button>
             <div class="clearfix"></div>
+            <svg class="arrow mobile-hide demo-arrow"
+                 width="60" height="34" viewBox="0 0 80 45">
+              <polygon points="40,5 75,40 5,40" />
+            </svg>
           </div>
         </div>
         <div class="column-box">
@@ -162,9 +177,6 @@ popup: true
         <div class="clearfix"></div>
       </div>
     </div>
-    <svg class="arrow" id="demo-arrow" width="60" height="34" viewBox="0 0 80 45">
-      <polygon points="40,5 75,40 5,40" />
-    </svg>
   </div>
 
   <div class="full-width-divider orange-bg">
