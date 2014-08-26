@@ -76,10 +76,6 @@ $(function () {
     var selected_elem = $(elem_ids.video_audio.feature_id);
 
     function positionArrow(arrow_elem, selected_elem) {
-        // Move the arrow to under the proper feature box, but only if it is has
-        // a visible display property. We need to do this because otherwise the
-        // arrow can get its position set on mobile and then display improperly
-        // when the window expands to desktop.
         arrow_elem.animate({left: selected_elem.position().left
                             + selected_elem.outerWidth()/2
                             - arrow_elem.outerWidth()/2},
@@ -123,6 +119,10 @@ $(function () {
 
     $(elem_ids.video_audio.feature_id).click();
 
+
+    // We need to notice when we change from mobile to desktop layouts, and
+    // then properly position the arrow for desktop. If we just go with the
+    // positioning from mobile, the arrow will not be aligned correctly.
     var mobileView = ($(window).width() <= 700);
     $(window).resize(function (event) {
         if ($(window).width() > 700) {

@@ -5,6 +5,12 @@
 
 var URL = window.URL || window.webkitURL;
 
+function getCookie(key) {
+    var re = new RegExp('(?:(?:^|.*;\s*) ?' + key + '\s*\=\s*([^;]*).*$)|^.*$');
+    return document.cookie.replace(re, "$1");
+
+}
+
 // This demo uses unauthenticated users on the "sipjs.onsip.com" demo domain.
 // To allow multiple users to run the demo without playing a game of
 // chatroulette, we give both callers in the demo a random token and then only
@@ -16,18 +22,26 @@ function randomString(length, chars) {
         result += chars[Math.round(Math.random() * (chars.length - 1))];
     return result;
 }
-var token = randomString(32, ['0123456789',
+// Each session gets a token that expires 1 day later. This is so we minimize
+// the number of users we register for the SIP domain, because SIP hosts
+// generally have limits on the number of registered users you may have in total
+// or over a period of time.
+var token = getCookie('onsipToken');
+if (token === '') {
+    token = randomString(32, ['0123456789',
                               'abcdefghijklmnopqrstuvwxyz',
                               'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].join(''));
-
+    var d = new Date();
+    d.setTime(d.getTime() + 1000*60*60*24); // expires in 1 day
+    document.cookie = ('onsipToken=' + token + ';'
+                       + 'expires=' + d.toUTCString() + ';');
+}
 var domain = 'sipjs.onsip.com';
-// var aliceURI      = 'alice.' + window.token + '@' + domain;
-var aliceURI      = 'alice@' + domain;
+var aliceURI      = 'alice.' + window.token + '@' + domain;
 var aliceName     = 'Alice';
 var aliceButton   = document.getElementById('alice-video-button');
 
-// var bobURI        = 'bob.' + window.token + '@' + domain;
-var bobURI        = 'bob@' + domain;
+var bobURI        = 'bob.' + window.token + '@' + domain;
 var bobName       = 'Bob';
 var bobButton     = document.getElementById('bob-video-button');
 
