@@ -251,7 +251,8 @@ button, .button {
     display: inline-block;
     width: auto;
     margin: 10px;
-    padding: 15px 40px;
+    padding: 1em 40px;
+    padding: 1em 10%;
     color: white;
     background-color: rgb(103, 101, 94);
     border-radius: 0.25em;

@@ -23,8 +23,11 @@
     .mobile-hide {
         display: none;
     }
-    #git-mit-images img {
+    #git-mit-images img,
+    .highlights img {
         max-width: 100%;
+        width: auto;
+        height: 70px;
     }
 
     /* Headers and other text
@@ -148,6 +151,7 @@
     .code-wrapper {
         width: 100%;
         padding: 0;
+        float: none;
     }
     .index-demo-code pre {
         float: none;
@@ -155,6 +159,10 @@
     }
 
     /* But a few things should actually still remain multi-column */
+    #git-mit-images {
+        padding: 0;
+    }
+
     #git-mit-images > .column-box {
         float: left;
         width: 50%;
@@ -165,13 +173,14 @@
 
     /* Feature selector and highlights stuff */
     .highlights li {
-        padding: 7% 1vw;
+        padding: 7% 0;
     }
     .highlights li:hover {
         background-color: rgb(245,244,239);
     }
     .highlights img {
-        height: 74px;
+        max-height: 60px;
+        height: auto;
     }
 
 
