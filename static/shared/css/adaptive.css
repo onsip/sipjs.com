@@ -137,6 +137,7 @@
     }
     .full-width-divider p {
         text-align: left;
+        float: none;
     }
     .full-width-divider .align-center p {
         text-align: center;
@@ -215,17 +216,17 @@
     #drawer-nav {
         clear: both;
         overflow: hidden;
-        max-height: 0;
+        max-height: 0px;
         height: auto;
         line-height: 2em;
         background-color: rgb(193,191,182);
         background-color: rgb(213,210,201);
 
-        transition: max-height 0.4s ease-in-out 0;
-	    -webkit-transition: max-height 0.4s ease-in-out 0;
-	    -moz-transition: max-height 0.4s ease-in-out 0;
-	    -ms-transition: max-height 0.4s ease-in-out 0;
-	    -o-transition: max-height 0.4s ease-in-out 0;
+        transition: max-height 0.4s ease-in-out;
+	    -webkit-transition: max-height 0.4s ease-in-out;
+	    -moz-transition: max-height 0.4s ease-in-out;
+	    -ms-transition: max-height 0.4s ease-in-out;
+	    -o-transition: max-height 0.4s ease-in-out;
     }
     #drawer-nav ul {
         margin: 0.8em 0 0.8em 0;

@@ -76,9 +76,13 @@ $(function () {
     var selected_elem = $(elem_ids.video_audio.feature_id);
 
     function positionArrow(arrow_elem, selected_elem) {
+        // Firefox returns NaN for the JQuery width() or outerWidth() function
+        // calls, so we need to do this instead.
+        var svgWidth = arrow_elem[0].width.baseVal.value;
+
         arrow_elem.animate({left: selected_elem.position().left
                             + selected_elem.outerWidth()/2
-                            - arrow_elem.outerWidth()/2},
+                            - svgWidth/2},
                            { duration: 300,
                              easing: 'easeOutSine',
                            });
