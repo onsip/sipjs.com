@@ -45,6 +45,7 @@ popup: true
   </div>
 
   <div class="full-width-divider mid-gray-bg feature" id="feature-demo">
+    <div id="demo-error"><h1>JAVASCRIPT IS DISABLED</h1></div>
     <div id="content-video-audio">
       <h2>In-browser Video Chat is Now a Breeze</h2>
       <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>

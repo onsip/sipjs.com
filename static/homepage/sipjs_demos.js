@@ -484,41 +484,63 @@ function createDataMsgTag(from, msgBody, filename, dataURI) {
 }
 
 
-var aliceUA = createUA(aliceURI, aliceName);
-var bobUA   = createUA(bobURI, bobName);
-/*
- * Custom media handler factories don't have great compatibility with
- * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
- */
-SIP.WebRTC.isSupported();
-var aliceDataUA = createDataUA(aliceURI, aliceName);
-var bobDataUA = createDataUA(bobURI, bobName);
-// Unregister the user agents and terminate all active sessions when the window
-// closes or when we navigate away from the page
-window.onunload = function () {
-    aliceUA.stop();
-    bobUA.stop();
-    aliceDataUA.stop();
-    bobDataUA.stop();
-}
+if (SIP.WebRTC.isSupported()) {
+    // Javascript is not disabled and WebRTC works, so hide the
+    // "demo-error" div.
+    var demoErrorDiv = document.getElementById('demo-error');
+    demoErrorDiv.style.display = 'none';
 
-setUpVideoInterface(aliceUA, bobURI, 'video-of-bob', 'alice-video-button');
-setUpVideoInterface(bobUA, aliceURI, 'video-of-alice', 'bob-video-button');
-setUpMessageInterface(aliceUA, bobURI,
-                      'alice-message-display',
-                      'alice-message-input',
-                      'alice-message-button');
-setUpMessageInterface(bobUA, aliceURI,
-                      'bob-message-display',
-                      'bob-message-input',
-                      'bob-message-button');
-setUpDataInterface(aliceDataUA, bobURI,
-                   'alice-data-display',
-                   'alice-file-choose-input',
-                   'alice-filename',
-                   'alice-data-share-button');
-setUpDataInterface(bobDataUA, aliceURI,
-                   'bob-data-display',
-                   'bob-file-choose-input',
-                   'bob-filename',
-                   'bob-data-share-button');
+    // Now we do SIP.js stuff
+    var aliceUA = createUA(aliceURI, aliceName);
+    var bobUA   = createUA(bobURI, bobName);
+    /*
+     * Custom media handler factories don't have great compatibility with
+     * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
+     */
+    var aliceDataUA = createDataUA(aliceURI, aliceName);
+    var bobDataUA = createDataUA(bobURI, bobName);
+    // Unregister the user agents and terminate all active sessions when the
+    // window closes or when we navigate away from the page
+    window.onunload = function () {
+        aliceUA.stop();
+        bobUA.stop();
+        aliceDataUA.stop();
+        bobDataUA.stop();
+    }
+
+    setUpVideoInterface(aliceUA, bobURI, 'video-of-bob', 'alice-video-button');
+    setUpVideoInterface(bobUA, aliceURI, 'video-of-alice', 'bob-video-button');
+    setUpMessageInterface(aliceUA, bobURI,
+                          'alice-message-display',
+                          'alice-message-input',
+                          'alice-message-button');
+    setUpMessageInterface(bobUA, aliceURI,
+                          'bob-message-display',
+                          'bob-message-input',
+                          'bob-message-button');
+    setUpDataInterface(aliceDataUA, bobURI,
+                       'alice-data-display',
+                       'alice-file-choose-input',
+                       'alice-filename',
+                       'alice-data-share-button');
+    setUpDataInterface(bobDataUA, aliceURI,
+                       'bob-data-display',
+                       'bob-file-choose-input',
+                       'bob-filename',
+                       'bob-data-share-button');
+}
+else {
+    // Show an error div that WebRTC does not work and thus the demo is disabled
+    var demoErrorDiv = document.getElementById('demo-error');
+    var children = demoErrorDiv.children;
+    for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+        // Change the first header to display WebRTC error
+        if (child.nodeName.toLowerCase() === 'h1') {
+            var newH1 = document.createElement('h1');
+            newH1.appendChild(document.createTextNode('WEBRTC IS NOT SUPPORTED'));
+            demoErrorDiv.replaceChild(newH1, child);
+            break;
+        }
+    }
+}

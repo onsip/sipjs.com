@@ -11,10 +11,10 @@
 	box-sizing: border-box;
 }
 body {
-	font-family: 'Nunito', sans-serif;
+    font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
-	color: #3f4446;
+    color: #404547;
 }
 
 /* This bit is so we can have a margin around all of the elements where the
@@ -188,6 +188,7 @@ li ul {
     column-count: 2;
     -moz-column-count: 2;
     -webkit-column-count: 2;
+    column-fill: balance;
     column-gap: 3em;
     -webkit-column-gap: 3em;
     -moz-column-gap: 3em;
@@ -339,9 +340,9 @@ p .button {
 #signup-button {
     margin-left: auto;
     margin-right: auto;
-    font-size: 0.95em;
-    padding-left: 30px;
-    padding-right: 30px;
+    font-size: 0.9em;
+    padding-left: 20px;
+    padding-right: 20px;
     font-weight: 700;
     margin-top: 1.1em;
 }
@@ -413,6 +414,9 @@ th {
 	line-height: 120px;
 	margin: 0.8em 0 0 0;
     float: right;
+}
+#mainNav #full-nav {
+    margin-right: 1em;
 }
 #mainNav li {
 	margin-left: 2em;
@@ -837,6 +841,16 @@ footer {
 
 #feature-demo {
     padding-bottom: 3em;
+    position: relative;
+}
+#demo-error {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(100,100,100,0.8);
 }
 .demo-window {
     position: relative;
