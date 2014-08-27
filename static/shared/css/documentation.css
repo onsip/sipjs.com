@@ -1022,13 +1022,36 @@ footer {
     stroke: rgb(234, 75, 53);
 }
 
+
+/* LAYOUT FORMATTING TEMPLATE STYLING
+   ========================================
+   Classes that are supposed to be drop-ins for formatting groups of elements.
+   Does some slightly more complicated layout stuff.
+ */
+.dead-center-content {
+    height: auto;
+    width: auto;
+    position: relative;
+    text-align: center;
+    top: calc(50% - 0.5em);
+}
+
+.dead-center-container {
+    display: inline-block;
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+
 /* VARIABLES
    ========================================
    Classes that are really simple and are basically just used as variables to
    mix in with other classes.
    These go at the bottom so they override other styles with same level of
    specificity.
-*/
+ */
 .left {
 	float: left;
 }

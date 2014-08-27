@@ -192,27 +192,27 @@
         width: 100%;
         height: auto;
     }
-    #logo {
-        height: auto;
-        width: 100%;
-        margin: 0;
-        max-width: 214px;
-    }
     #mainNav {
         line-height: 100%;
         height: 100%;
-        /* TODO what does this do? */
-        float: none;
+        position: relative;
     }
     #mainNav > #logo-link {
         width: 50%;
         padding: 5%;
+        float: none;
+        display: inline-block;
+    }
+    #logo {
+        height: auto;
+        width: 100%;
+        max-width: 214px;
+        margin: 0;
     }
     #mainNav a:after {
         margin: 0 auto 0 auto;
     }
     #drawer-nav {
-        /* visibility: hidden; */
         clear: both;
         overflow: hidden;
         max-height: 0;
@@ -244,21 +244,23 @@
         line-height: 2em;
     }
     #mainNav > #mobile-nav {
+        position: absolute;
         display: inline-block;
-        float: right;
-        font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+        right: 0;
+        float: none;
         width: 50%;
-        font-weight: 700;
+        height: 100%;
         margin-top: 0;
+        font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
+        font-weight: 700;
     }
     #mainNav > #mobile-nav a:after {
         display: none;
     }
     #mobile-nav > li {
-        height: auto;
         padding: 0 6vw 0 6vw;
         padding: 0 10%;
-        margin-left: 0;
+        margin: 0 auto;
         border-left: 2px solid rgb(213,210,201);
         float: right;
     }
