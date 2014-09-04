@@ -1,4 +1,9 @@
-.popup {
+/* Note that on mobile, we don't use an actual popup because of scrolling
+ * issues. Instead, it redirects to a new page. We use the class popdown for
+ * special styling where the popup form should instead just be normally flowing
+ * page content. */
+
+.popup-container {
     /* fixed position a zero-height full width container */
     position: fixed;
     top: 25%; /* or whatever position is desired */
@@ -9,7 +14,7 @@
     z-index: 21;
     display: none;
 }
-.popup > div {
+.popup-container > .popup {
     /* make the block inline */
     position: relative;
     display: inline-block;
@@ -22,6 +27,11 @@
     border: solid rgb(240,240,240) 2px;
     background-color: white;
     overflow: auto;
+}
+#success-story.popdown {
+    border: 0;
+    margin: 0 auto;
+    padding-top: 2.5em;
 }
 #close-popup {
     position: absolute;
@@ -109,6 +119,10 @@
     display: none;
 }
 
+#email {
+    float: right;
+}
+
 
 @media all and (max-width: 700px) {
     .popup {
@@ -116,8 +130,6 @@
     }
     #success-story {
         width: 90%;
-        max-height: 97.5vh;
-        overflow: auto;
     }
     #success-story form > * {
         display: block;
@@ -129,6 +141,9 @@
         margin: 2%;
     }
     #success-app-desc {
+        float: none;
+    }
+    #email {
         float: none;
     }
 }

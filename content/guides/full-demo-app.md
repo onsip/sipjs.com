@@ -11,7 +11,7 @@ how a simple app might support these features. This is the same demo that
 appears on the homepage, minus all of the extra CSS styling. Both endpoint
 users, Bob and Alice, are on the same machine, but you can easily set up Alice
 and Bob on different machines by splitting up the HTML and only instantiating
-one user's User Agent object and application interfaces.
+one user's UserAgent object and application interfaces per host.
 
 <iframe
     style="width: 100%; height: 800px;"

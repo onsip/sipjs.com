@@ -308,6 +308,13 @@ button:hover {
     width: 96.5%;
     margin-top: 1em;
 }
+#success-column-newpage {
+    padding-left: 2%;
+}
+#success-newpage {
+    width: 96.5%;
+    margin-top: 1em;
+}
 .text-hover-left {
     position: relative;
     left: 0;
@@ -717,6 +724,7 @@ footer {
 .highlights img {
     height: 50px;
 }
+
 .highlights li:hover {
     background-color: rgb(245,244,239);
 }
@@ -848,9 +856,15 @@ footer {
     z-index: 1;
     width: 100%;
     height: 100%;
+    padding-top: 20%;
     top: 0;
     left: 0;
-    background-color: rgba(100,100,100,0.8);
+    background-color: rgba(94,98,98,0.8);
+    text-align: center;
+    color: white;
+}
+#demo-error h1 {
+    color: white;
 }
 .demo-window {
     position: relative;
@@ -1009,8 +1023,13 @@ footer {
     left: calc(16.5% - 30px);
 }
 #feature-arrow polygon {
+    /* These colors are for when Javascript and WebRTC are enabled */
     fill: rgb(193,191,182);
     stroke: rgb(193,191,182);
+
+    /* These colors are for when Javascript or WebRTC are disabled */
+    fill: rgb(114,117,115);
+    stroke: rgb(114,117,115);
 }
 .demo-arrow {
     position: absolute;
@@ -1109,4 +1128,23 @@ footer {
 }
 .orange-bg .button {
     margin-left: 0;
+}
+
+
+/* This sets visibility defaults for if Javascript is disabled */
+.highlights img.icon-unselected {
+    display: inline;
+}
+.highlights img.icon-selected {
+    display: none;
+}
+#feature-video-audio img.icon-unselected {
+    display: none;
+}
+#feature-video-audio img.icon-selected {
+    display: inline;
+}
+#content-message, #content-data-channel,
+#code-message, #code-data-channel {
+    display: none;
 }

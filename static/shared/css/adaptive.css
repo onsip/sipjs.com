@@ -216,17 +216,10 @@
     #drawer-nav {
         clear: both;
         overflow: hidden;
-        max-height: 0px;
         height: auto;
         line-height: 2em;
         background-color: rgb(193,191,182);
         background-color: rgb(213,210,201);
-
-        transition: max-height 0.4s ease-in-out;
-	    -webkit-transition: max-height 0.4s ease-in-out;
-	    -moz-transition: max-height 0.4s ease-in-out;
-	    -ms-transition: max-height 0.4s ease-in-out;
-	    -o-transition: max-height 0.4s ease-in-out;
     }
     #drawer-nav ul {
         margin: 0.8em 0 0.8em 0;
@@ -247,6 +240,7 @@
     #mainNav > #mobile-nav {
         position: absolute;
         display: inline-block;
+        top: 0;
         right: 0;
         float: none;
         width: 50%;
@@ -321,5 +315,12 @@
     /* Adding dividing vertical lines between elements */
     footer li + li {
         border-left: 1px solid black;
+    }
+}
+
+/* This sets visibility defaults for if Javascript is disabled */
+@media all and (max-width: 700px) {
+    #drawer-nav {
+        max-height: 8em;
     }
 }

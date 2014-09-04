@@ -489,6 +489,14 @@ if (SIP.WebRTC.isSupported()) {
     // "demo-error" div.
     var demoErrorDiv = document.getElementById('demo-error');
     demoErrorDiv.style.display = 'none';
+    var featureArrow = document.getElementById('feature-arrow');
+    for (var i=0; i < featureArrow.children.length; i++) {
+        var child = featureArrow.children[i];
+        if (child.tagName === 'polygon') {
+            child.style.fill = 'rgb(193,191,182)';
+            child.style.stroke = 'rgb(193,191,182)';
+        }
+    }
 
     // Now we do SIP.js stuff
     var aliceUA = createUA(aliceURI, aliceName);
@@ -528,19 +536,4 @@ if (SIP.WebRTC.isSupported()) {
                        'bob-file-choose-input',
                        'bob-filename',
                        'bob-data-share-button');
-}
-else {
-    // Show an error div that WebRTC does not work and thus the demo is disabled
-    var demoErrorDiv = document.getElementById('demo-error');
-    var children = demoErrorDiv.children;
-    for (var i = 0; i < children.length; i++) {
-        var child = children[i];
-        // Change the first header to display WebRTC error
-        if (child.nodeName.toLowerCase() === 'h1') {
-            var newH1 = document.createElement('h1');
-            newH1.appendChild(document.createTextNode('WEBRTC IS NOT SUPPORTED'));
-            demoErrorDiv.replaceChild(newH1, child);
-            break;
-        }
-    }
 }

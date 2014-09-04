@@ -1,19 +1,29 @@
-<!-- This is the actual popup -->
-<div class="popup-container mobile-hide">
-  <div id="success-story" class="popup">
-    <div id="close-popup">x</div>
+---
+title: Your Success Story | SIP.js
+description: Tell us about your app you made using SIP.js
+layout: overview
+popup: true
+---
+<div>
+  <div id="success-story" class="popdown">
     <h2 class="orange-fg">Tell us about your app</h2>
     <h4>We'd like to share your story on our blog</h4>
 
     <form name="success_story" id="success-story-form"
           action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-          target="post-receiver" method="POST">
+          method="POST">
       <!-- These must be no whitespace between inputs, because otherwise we have
            a space in between the two inline elements and then these won't align
            correctly with elements wrapped around the floated textarea. -->
-      <input type="text" id="full_name" name="full_name"
+      <input type="hidden" id="full_name" name="full_name"
              placeholder="full name"
-             maxlength="120" required="required"
+             maxlength="120"
+    /><input type="text" id="first_name" name="first_name"
+             placeholder="first name"
+             maxlength="40" required="required"
+    /><input type="text" id="last_name" name="last_name"
+             placeholder="last name"
+             maxlength="80" required="required"
     /><input type="email" id="email" name="email"
              placeholder="company email address"
              maxlength="255" required="required" />
@@ -21,10 +31,8 @@
                 required="required"
                 placeholder="describe your app"></textarea>
       <input type="tel" name="phone" placeholder="phone number (optional)"
-             maxlength="15" />
+             maxlength="15"/>
       <button id="success-submit" type="submit">share</button>
-      <input type="hidden" id="first_name" name="first_name"/>
-      <input type="hidden" id="last_name" name="last_name"/>
       <input type="hidden" name="lead_source" value="sipjscom"/>
       <input type="hidden" name="Lead_Type__c" value="Customer Info"/>
       <input type="hidden" name="encoding" value="UTF-8"/>
@@ -33,17 +41,6 @@
       <div class="clearfix"></div>
     </form>
   </div>
-</div>
-
-
-<!-- This iframe is so we can POST the results of the above form submission to
-     a server that can handle it. The frame is hidden. -->
-<iframe name="post-receiver" id="post-receiver" src="">
-</iframe>
-
-<!-- This is a overlay dimmer that goes in the background when the popup
-     appears -->
-<div class="overlay">
 </div>
 
 <script src="/shared/js/success_story.js" type="text/javascript"></script>

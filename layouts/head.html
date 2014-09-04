@@ -15,7 +15,7 @@
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
   <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
     <%=
-       if @item.identifier == '/' then
+       if (@item.identifier == '/') or (@item.identifier == '/success-story/') then
            '<link href="/shared/css/adaptive.css" media="screen" rel="stylesheet" type="text/css" />'
        else
        end

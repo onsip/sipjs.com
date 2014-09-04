@@ -45,7 +45,14 @@ popup: true
   </div>
 
   <div class="full-width-divider mid-gray-bg feature" id="feature-demo">
-    <div id="demo-error"><h1>JAVASCRIPT IS DISABLED</h1></div>
+    <div id="demo-error">
+      <h1>Oops!</h1>
+      <h2>Looks like your browser can't run this demo.</h2>
+      <p>
+        To get the full experience, download the latest version of
+        <em>Chrome</em> or <em>Firefox</em>
+      </p>
+    </div>
     <div id="content-video-audio">
       <h2>In-browser Video Chat is Now a Breeze</h2>
       <h4 class="intro">Here's a demo. Start a video chat between Alice and Bob.</h4>
@@ -632,7 +639,7 @@ setUpDataInterface(aliceDataUA, bobURI,
 </div>
 </div>
 
-  <a class="mobile-hide button" href="/">
+  <a class="mobile-hide button" href="/guides/full-demo-app/">
     <span class="text-hover-left">See Full Demo Code</span>&nbsp;<span class="hover-arrow">⟩</span>
   </a>
   <a class="desktop-hide button" href="/api/0.6.0/">
@@ -690,8 +697,12 @@ setUpDataInterface(aliceDataUA, bobURI,
       <div class="column-box">
         <h3>Built An App Using SIP.js?</h3>
       </div>
-      <div class="column-box" id="success-column-box">
+      <div class="column-box mobile-hide" id="success-column-box">
         <button id="success-opener" class="orange-bg">We want to hear about it!</button>
+      </div>
+      <div class="column-box desktop-hide" id="success-column-newpage">
+        <a id="success-newpage" class="button orange-bg"
+           href="/success-story/">We want to hear about it!</a>
       </div>
       <div class="clearfix"></div>
     </div>
