@@ -47,14 +47,17 @@
         line-height: 1.5em;
     }
     h1, h2, h3 {
+        font-size: 2.2em;
         font-size: 8vw;
         font-weight: 300;
     }
     .feature h1 {
+        font-size: 2em;
         font-size: 7.25vw;
         font-weight: 700;
     }
     .full-width-divider h2 {
+        font-size: 2.2em;
         font-size: 8vw;
         font-weight: 400;
     }
@@ -62,11 +65,13 @@
         margin: 0.5em 0;
     }
     h4.intro {
+        font-size: 1.38em;
         font-size: 5vw;
         font-weight: 300;
         margin-bottom: 1.5em;
     }
     p {
+        font-size: 1.38em;
         font-size: 5vw;
         font-weight: 300;
         margin-bottom: 1.5em;
@@ -91,10 +96,9 @@
     header, footer {
         width: 100%;
     }
-    footer {
-        padding-right: 4%;
+    footer > .wrapper {
+        padding: 0;
     }
-
 
     /* Feature selector changes
      * ========================================
@@ -264,7 +268,8 @@
         display: none;
     }
     #mobile-nav > li {
-        padding: 0 6vw 0 6vw;
+        padding: 0 1.65em;
+        padding: 0 6vw;
         padding: 0 10%;
         margin: 0 auto;
         border-left: 2px solid rgb(213,210,201);
@@ -299,13 +304,14 @@
         margin-left: 0.1em;
     }
     #onsip-stamp {
-	    margin: 0 0 2em 0; /*  center & bring nav lists up  */
+	    margin: 0 0.5em 2em 0; /*  center & bring nav lists up  */
     }
     /* Ignore the float instructions in the classes from the desktop layout.
      * Maybe we should remove those classes and keep our styling to other
      * selectors? */
     footer nav {
         clear: both;
+        font-size: 0.9em;
     }
     footer nav.right {
         float: none;
