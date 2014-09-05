@@ -33,7 +33,7 @@
     margin: 0 auto;
     padding-top: 2.5em;
 }
-#close-popup {
+.close-popup {
     position: absolute;
     top: 1%;
     right: 2%;
@@ -45,7 +45,7 @@
     text-align: center;
     cursor: pointer;
 }
-#close-popup:hover {
+.close-popup:hover {
    color: rgb(190,189,184);
 }
 
@@ -121,6 +121,14 @@
 
 #email {
     float: right;
+}
+
+#thank-you-popup {
+    width: 560px;
+    padding: 10px 0 4px 0;
+    border: solid rgb(240,240,240) 2px;
+    background-color: white;
+    overflow: auto;
 }
 
 

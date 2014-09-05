@@ -13,9 +13,19 @@
 /*     max-width: 100%; */
 /* } */
 
+.no-js-hide {
+    display: none;
+}
+.no-js-block {
+    display: block;
+}
+
 @media all and (min-width: 700px) {
     .desktop-hide {
         display: none;
+    }
+    .desktop-hide.no-js-block {
+        display: block;
     }
 }
 
@@ -157,6 +167,7 @@
     .index-demo-code pre {
         float: none;
         margin: 1.5em 0;
+        height: auto;
     }
 
     /* But a few things should actually still remain multi-column */
@@ -274,6 +285,16 @@
     /* Footer navigation
      * ========================================
      */
+    /* reseting styles that put footer at bottom for short desktop pages */
+    body {
+        position: static;
+    }
+    #body {
+        margin-bottom: 0;
+    }
+    footer {
+        position: static;
+    }
     #made-by-prefix {
         margin-left: 0.1em;
     }

@@ -138,4 +138,10 @@ $(function () {
             mobileView = true;
         }
     });
+
+
+    // Show the right form popup button if we have JS enabled
+    // $('#success-column-box').css('display', 'block');
+    // $('#success-column-newpage').css('display', 'none');
+
 });

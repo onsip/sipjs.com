@@ -11,6 +11,9 @@
 	box-sizing: border-box;
 }
 body {
+    position: relative;
+    min-height: 100%;
+    height: auto;
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
@@ -315,6 +318,9 @@ button:hover {
     width: 96.5%;
     margin-top: 1em;
 }
+#thank-you-heading {
+    padding-top: 2em;
+}
 .text-hover-left {
     position: relative;
     left: 0;
@@ -611,10 +617,23 @@ th {
 }
 
 /*  FOOTER
-		========================================  */
+    ========================================  */
+/* When we absolutely position the footer, we need to prevent overlap from
+ * the body. */
+#body {
+    padding-bottom: 101px;
+}
 footer {
     padding: 30px 0 20px 0;
 	font-size: .9em;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+footer > .wrapper {
+    padding: 0 1em;
 }
 
 #onsip-stamp {

@@ -190,11 +190,14 @@ popup: true
   <div class="full-width-divider orange-bg">
     <div id="code-intro" class="left">
       <h3>See How It's Done</h3>
-      <p class="left">
+      <p class="left mobile-hide">
       The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
       </p>
+      <p class="desktop-hide">
+        SIP.js makes it easy to utilize WebRTC's APIs and set up SIP communication sessions. In no time at all, you can have two separate users talking to one another. To learn more about the SIP.js API, click the button below.
+      </p>
     </div>
-<div class="code-wrapper">
+<div class="code-wrapper mobile-hide">
 <div class="index-demo-code" id="code-video-audio" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -309,7 +312,7 @@ setUpVideoInterface(aliceUA, bobURI, 'video-of-bob', 'alice-video-button');
 ~~~~
 </div>
 </div>
-<div class="code-wrapper">
+<div class="code-wrapper mobile-hide">
 <div class="index-demo-code" id="code-message" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -394,7 +397,7 @@ setUpMessageInterface(aliceUA, bobURI,
 ~~~~
 </div>
 </div>
-<div class="code-wrapper">
+<div class="code-wrapper mobile-hide">
 <div class="index-demo-code" id="code-data-channel" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
@@ -638,6 +641,22 @@ setUpDataInterface(aliceDataUA, bobURI,
 ~~~~
 </div>
 </div>
+<div class="code-wrapper desktop-hide">
+<div class="index-demo-code" markdown="1">
+~~~~ javascript
+var ua = new SIP.UA();
+ua.message(
+  'will@example.onsip.com',
+  'Hello, world!'
+);
+
+var session = ua.invite('will@example.onsip.com');
+session.on('accepted', function () {
+  this.bye();
+});
+~~~~
+</div>
+</div>
 
   <a class="mobile-hide button" href="/guides/full-demo-app/">
     <span class="text-hover-left">See Full Demo Code</span>&nbsp;<span class="hover-arrow">⟩</span>
@@ -697,10 +716,10 @@ setUpDataInterface(aliceDataUA, bobURI,
       <div class="column-box">
         <h3>Built An App Using SIP.js?</h3>
       </div>
-      <div class="column-box mobile-hide" id="success-column-box">
+      <div class="column-box mobile-hide no-js-hide" id="success-column-box">
         <button id="success-opener" class="orange-bg">We want to hear about it!</button>
       </div>
-      <div class="column-box desktop-hide" id="success-column-newpage">
+      <div class="column-box desktop-hide no-js-block" id="success-column-newpage">
         <a id="success-newpage" class="button orange-bg"
            href="/success-story/">We want to hear about it!</a>
       </div>
