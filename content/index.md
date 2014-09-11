@@ -149,6 +149,7 @@ popup: true
               <input id="alice-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
             <span id="alice-filename" class="message-body">no file selected</span>
+            <div id="alice-file-error-msg" class="file-error-msg"></div>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
@@ -173,6 +174,7 @@ popup: true
               <input id="bob-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
             <span id="bob-filename" class="message-body">no file selected</span>
+            <div id="bob-file-error-msg" class="file-error-msg"></div>
             <div class="clearfix"></div>
             <div class="left">
               <h4>Bob's View</h4>
@@ -450,13 +452,18 @@ function setUpDataInterface(userAgent, target,
                             dataRenderId,
                             fileInputId,
                             filenameDisplayId,
-                            dataShareButtonId) {
+                            dataShareButtonId,
+                            errorMsgContainerId) {
     // Target has a 'data.' prefix
     var dataTarget = 'data.' + target;
     var dataRender = document.getElementById(dataRenderId);
     var fileInput = document.getElementById(fileInputId);
     var filenameDisplay = document.getElementById(filenameDisplayId);
     var dataShareButton = document.getElementById(dataShareButtonId);
+    var errorMsgContainer = document.getElementById(errorMsgContainerId);
+    if (errorMsgContainer.childNodes.length === 0) {
+        errorMsgContainer.appendChild(document.createTextNode(''));
+    }
 
     // The open data transfer session
     var session;
@@ -469,6 +476,8 @@ function setUpDataInterface(userAgent, target,
     var receivedFileMetadata;
     // The actual received file data
     var receivedFileData;
+    // We do not support file chunking, so we can only send small files.
+    var maxChunkSize = 16000; // 16 KB
     // The Blob object that combines the received file data and file type.
     // We cannot construct File objects, so we must make a Blob, which does not
     // have a file name.
@@ -533,16 +542,36 @@ function setUpDataInterface(userAgent, target,
     fileInput.addEventListener('change', function (event) {
         var tmpFile = event.target.files[0];
         if (tmpFile !== undefined && tmpFile !== file) {
+            // Reset the loadedFile variable, since we are supposed to load in a
+            // new file but have not done so yet.
+            // This value might not be set if the file is too large. This is
+            // intended. We later prevent ourselves from sending a null file.
+            loadedFile = null;
             file = tmpFile;
 
             var filename = file.name;
             filenameDisplay.childNodes[0].nodeValue = filename;
 
-            var reader = new FileReader();
-            reader.onload = (function (e) {
-                loadedFile = e.target.result;
-            });
-            reader.readAsArrayBuffer(file);
+            // File is small enough to send, so we load it.
+            if (file.size <= maxChunkSize) {
+                // Clear the error message
+                errorMsgContainer.childNodes[0].nodeValue = '';
+                // errorMsgContainer.nodeValue = '';
+                var reader = new FileReader();
+                reader.onload = (function (e) {
+                    loadedFile = e.target.result;
+                });
+                reader.readAsArrayBuffer(file);
+            }
+            // The file is too large to send. We still display its name, but we
+            // do not set the loadedFile variable, which will prevent us from
+            // sending it.
+            else {
+                // DBM: foobar
+                var errorStr = 'File too large to send (chunking not supported)';
+                errorMsgContainer.childNodes[0].nodeValue = errorStr;
+                // errorMsgContainer.nodeValue = errorStr;
+            }
         }
     });
 
@@ -596,6 +625,7 @@ function setUpDataInterface(userAgent, target,
     });
 }
 
+
 // Creates the HTML tag and its children for a given message.
 function createMsgTag(from, msgBody) {
     var msgTag = document.createElement('p');
@@ -637,7 +667,8 @@ setUpDataInterface(aliceDataUA, bobURI,
                    'alice-data-display',
                    'alice-file-choose-input',
                    'alice-filename',
-                   'alice-data-share-button');
+                   'alice-data-share-button',
+                   'alice-file-error-msg');
 ~~~~
 </div>
 </div>
