@@ -481,7 +481,7 @@ th {
 /*  MAIN COLUMNS LAYOUT
 		========================================  */
 #main {
-	padding-bottom: 60px;
+	padding-bottom: 120px;
 }
 #main > h1:first-child {
 	height: 120px;
@@ -493,6 +493,7 @@ th {
 #content {
 	float: left;
 	width: 600px;
+	padding-bottom: 120px;
 }
 #sideNav {
 	float: right;
