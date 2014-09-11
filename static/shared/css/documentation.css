@@ -324,14 +324,6 @@ button:hover {
 .text-hover-left {
     position: relative;
     left: 0;
-    -webkit-transition: left .25s ease-in-out;
-	-moz-transition: left .25s ease-in-out;
-	-ms-transition: left .25s ease-in-out;
-	-o-transition: left .25s ease-in-out;
-	transition: left .25s ease-in-out;
-}
-.button:hover > .text-hover-left {
-    left: -0.5em;
 }
 .hover-arrow {
     font-size: 1.25em;

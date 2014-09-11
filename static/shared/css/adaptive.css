@@ -20,6 +20,7 @@
     display: block;
 }
 
+/* Desktop */
 @media all and (min-width: 700px) {
     .desktop-hide {
         display: none;
@@ -27,8 +28,19 @@
     .desktop-hide.no-js-block {
         display: block;
     }
+    .text-hover-left {
+        -webkit-transition: left .25s ease-in-out;
+	    -moz-transition: left .25s ease-in-out;
+	    -ms-transition: left .25s ease-in-out;
+	    -o-transition: left .25s ease-in-out;
+	    transition: left .25s ease-in-out;
+    }
+    .button:hover > .text-hover-left {
+        left: -0.5em;
+    }
 }
 
+/* Mobile */
 @media all and (max-width: 700px) {
     .mobile-hide {
         display: none;
@@ -342,6 +354,14 @@
     /* Adding dividing vertical lines between elements */
     footer li + li {
         border-left: 1px solid black;
+    }
+
+
+    /* MIX-IN TWEAKS
+     * ========================================
+     */
+    .hover-arrow {
+        display: none;
     }
 }
 
