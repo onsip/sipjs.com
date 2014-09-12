@@ -429,7 +429,7 @@ function setUpDataInterface(userAgent, target,
             // sending it.
             else {
                 // DBM: foobar
-                var errorStr = 'File too large to send (chunking not supported)';
+                var errorStr = 'File too large to send using demo (chunking not supported)';
                 errorMsgContainer.childNodes[0].nodeValue = errorStr;
                 // errorMsgContainer.nodeValue = errorStr;
             }
