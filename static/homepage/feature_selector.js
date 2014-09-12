@@ -63,10 +63,11 @@ $(function () {
             'content_id' : 'content-data-channel',
             'code_id'    : 'code-data-channel'
         }
-    }
+    };
 
+    var key;
     // Prepend all with id hashtag
-    for (var key in elem_ids) {
+    for (key in elem_ids) {
         elem_ids[key].feature_id = '#' + elem_ids[key].feature_id;
         elem_ids[key].content_id = '#' + elem_ids[key].content_id;
         elem_ids[key].code_id    = '#' + elem_ids[key].code_id;
@@ -114,10 +115,10 @@ $(function () {
                 }
             }
             positionArrow(arrow_elem, selected_elem);
-        }
+        };
     }
 
-    for (var key in elem_ids) {
+    for (key in elem_ids) {
         $(elem_ids[key].feature_id).click(bind_key_fn(key));
     }
 

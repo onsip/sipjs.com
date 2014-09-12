@@ -149,7 +149,8 @@ popup: true
               <input id="alice-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
             <span id="alice-filename" class="message-body">no file selected</span>
-            <div id="alice-file-error-msg" class="file-error-msg"></div>
+            <div class="message-body file-info-msg">Max file size is 16KB</div>
+            <div id="alice-file-error-msg" class="file-info-msg error-msg"></div>
             <div class="left">
               <h4>Alice's View</h4>
               <h5>Demo user one</h5>
@@ -174,7 +175,8 @@ popup: true
               <input id="bob-file-choose-input" type="file" name="file" class="file-choose-button" />
             </span>
             <span id="bob-filename" class="message-body">no file selected</span>
-            <div id="bob-file-error-msg" class="file-error-msg"></div>
+            <div class="message-body file-info-msg">Max file size is 16KB</div>
+            <div id="bob-file-error-msg" class="file-info-msg error-msg"></div>
             <div class="clearfix"></div>
             <div class="left">
               <h4>Bob's View</h4>

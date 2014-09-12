@@ -39,11 +39,9 @@ if (token === '') {
 var domain = 'sipjs.onsip.com';
 var aliceURI      = 'alice.' + window.token + '@' + domain;
 var aliceName     = 'Alice';
-var aliceButton   = document.getElementById('alice-video-button');
 
 var bobURI        = 'bob.' + window.token + '@' + domain;
 var bobName       = 'Bob';
-var bobButton     = document.getElementById('bob-video-button');
 
 // Function: mediaOptions
 //   A shortcut function to construct the media options for an SIP session.
@@ -266,8 +264,11 @@ function createDataUA(callerURI, displayName) {
         traceSip: true,
         uri: dataURI,
         displayName: displayName,
+        /*
+         * Custom media handler factories don't have great compatibility with
+         * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
+         */
         mediaHandlerFactory: function mediaHandlerFactory(session, options) {
-
             /* Like a default mediaHandler, but no streams to manage */
             var self = new SIP.WebRTC.MediaHandler(session, {
                 mediaStreamManager: {
@@ -290,7 +291,7 @@ function createDataUA(callerURI, displayName) {
         }
     };
 
-    return dataUA = new SIP.UA(configuration);
+    return new SIP.UA(configuration);
 }
 
 // Function: setUpDataInterface
@@ -417,7 +418,6 @@ function setUpDataInterface(userAgent, target,
             if (file.size <= maxChunkSize) {
                 // Clear the error message
                 errorMsgContainer.childNodes[0].nodeValue = '';
-                // errorMsgContainer.nodeValue = '';
                 var reader = new FileReader();
                 reader.onload = (function (e) {
                     loadedFile = e.target.result;
@@ -428,10 +428,8 @@ function setUpDataInterface(userAgent, target,
             // do not set the loadedFile variable, which will prevent us from
             // sending it.
             else {
-                // DBM: foobar
                 var errorStr = 'File too large to send using demo (chunking not supported)';
                 errorMsgContainer.childNodes[0].nodeValue = errorStr;
-                // errorMsgContainer.nodeValue = errorStr;
             }
         }
     });
@@ -529,10 +527,6 @@ if (SIP.WebRTC.isSupported()) {
     // Now we do SIP.js stuff
     var aliceUA = createUA(aliceURI, aliceName);
     var bobUA   = createUA(bobURI, bobName);
-    /*
-     * Custom media handler factories don't have great compatibility with
-     * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
-     */
     var aliceDataUA = createDataUA(aliceURI, aliceName);
     var bobDataUA = createDataUA(bobURI, bobName);
     // Unregister the user agents and terminate all active sessions when the
@@ -542,7 +536,7 @@ if (SIP.WebRTC.isSupported()) {
         bobUA.stop();
         aliceDataUA.stop();
         bobDataUA.stop();
-    }
+    };
 
     setUpVideoInterface(aliceUA, bobURI, 'video-of-bob', 'alice-video-button');
     setUpVideoInterface(bobUA, aliceURI, 'video-of-alice', 'bob-video-button');

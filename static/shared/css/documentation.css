@@ -976,8 +976,10 @@ footer > .wrapper {
     right: 0;
     bottom: 0;
 }
-.file-error-msg {
+.file-info-msg {
     font-size: 0.75em;
+}
+.error-msg {
     color: rgb(235,28,20);
 }
 #content-message .message-display {
