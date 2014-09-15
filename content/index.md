@@ -7,7 +7,7 @@ popup: true
 <div class="wrapper-bg-extend">
   <article class="group home-feature">
 	<div class="feature">
-	  <h1>WebRTC Made Easy for Javascript Developers</h1>
+	  <h1>WebRTC Made Easy for JavaScript Developers</h1>
 	  <h4 class="intro">A simple yet powerful JS library that takes care of WebRTC and SIP signaling for you</h4>
 	</div>
   </article>
