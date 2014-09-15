@@ -207,11 +207,9 @@ popup: true
 var domain = 'sipjs.onsip.com';
 var aliceURI      = 'alice' + '@' + domain;
 var aliceName     = 'Alice';
-var aliceButton   = document.getElementById('alice-video-button');
 
 var bobURI        = 'bob' + '@' + domain;
 var bobName       = 'Bob';
-var bobButton     = document.getElementById('bob-video-button');
 
 // A shortcut function to construct the media options for an SIP session.
 function mediaOptions(audio, video, remoteRender, localRender) {
@@ -241,17 +239,14 @@ function makeCall(userAgent, target, audio, video, remoteRender, localRender) {
     return session;
 }
 
-// Sets up the button for a user to manage calling and hanging up
 function setUpVideoInterface(userAgent, target, remoteRenderId) {
-    // true if the button should initiate a call,
-    // false if the button should end a call
     var onCall = false;
     var session;
     var remoteRender = document.getElementById(remoteRenderId);
 
     // Handling invitations to calls.
     // Also, for each new call session, we need to add an event handler to set
-    // the correct button state when we receive a "bye" request.
+    // the correct state when we receive a "bye" request.
     userAgent.on('invite', function (incomingSession) {
         onCall = true;
         session = incomingSession;
@@ -292,11 +287,9 @@ setUpVideoInterface(aliceUA, bobURI, 'video-of-bob');
 var domain = 'sipjs.onsip.com';
 var aliceURI      = 'alice' + '@' + domain;
 var aliceName     = 'Alice';
-var aliceButton   = document.getElementById('alice-video-button');
 
 var bobURI        = 'bob' + '@' + domain;
 var bobName       = 'Bob';
-var bobButton     = document.getElementById('bob-video-button');
 
 // Sets up the chat interface for text messaging
 function setUpMessageInterface(userAgent) {
@@ -322,11 +315,9 @@ aliceUA.message(bobURI, 'Check out this palindrome: "Now sir, a war is never eve
 var domain        = 'sipjs.onsip.com';
 var aliceURI      = 'alice' + '@' + domain;
 var aliceName     = 'Alice';
-var aliceButton   = document.getElementById('alice-video-button');
 
 var bobURI        = 'bob' + '@' + domain;
 var bobName       = 'Bob';
-var bobButton     = document.getElementById('bob-video-button');
 
 // Creates a user agent with the given parameters. This user agent is only for
 // sending data, so it has a special media handler factory for the
@@ -338,6 +329,12 @@ function createDataUA(callerURI, displayName) {
         uri: dataURI,
         displayName: displayName,
         mediaHandlerFactory: function mediaHandlerFactory(session, options) {
+            // Call this so that we define
+            // - WebRTC.MediaStream
+            // - WebRTC.getUserMedia
+            // - WebRTC.RTCPeerConnection
+            // - WebRTC.RTCSessionDescription.
+            SIP.WebRTC.isSupported();
             /* Like a default mediaHandler, but no streams to manage */
             var self = new SIP.WebRTC.MediaHandler(session, {
                 mediaStreamManager: {
@@ -407,7 +404,7 @@ function setUpDataInterface(userAgent, target) {
 }
 
 var aliceDataUA = createDataUA(aliceURI, aliceName);
-setUpDataInterface(aliceDataUA, bobURI);
+setUpDataInterface(aliceDataUA, 'data.' + bobURI);
 ~~~~
 </div>
 </div>

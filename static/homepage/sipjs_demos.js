@@ -269,6 +269,12 @@ function createDataUA(callerURI, displayName) {
          * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
          */
         mediaHandlerFactory: function mediaHandlerFactory(session, options) {
+            // Call this so that we define
+            // - WebRTC.MediaStream
+            // - WebRTC.getUserMedia
+            // - WebRTC.RTCPeerConnection
+            // - WebRTC.RTCSessionDescription.
+            SIP.WebRTC.isSupported();
             /* Like a default mediaHandler, but no streams to manage */
             var self = new SIP.WebRTC.MediaHandler(session, {
                 mediaStreamManager: {
