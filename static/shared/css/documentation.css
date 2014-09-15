@@ -1060,9 +1060,10 @@ footer > .wrapper {
     stroke: rgb(114,117,115);
 }
 .demo-arrow {
+    box-sizing: content-box;
     position: absolute;
-    bottom: -82px;
-    left: 20.5%;
+    bottom: -5px;
+    padding-left: calc(50% - 420px);
 }
 .demo-arrow polygon {
     fill: rgb(234, 75, 53);

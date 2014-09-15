@@ -69,10 +69,6 @@ popup: true
             <button id="alice-video-button" class="right" type="button">video</button>
             <div class="clearfix"></div>
           </div>
-          <svg class="arrow mobile-hide demo-arrow"
-               width="60" height="34" viewBox="0 0 80 45">
-            <polygon points="40,5 75,40 5,40" />
-          </svg>
         </div>
         <div class="column-box">
           <div class="demo-window">
@@ -89,6 +85,10 @@ popup: true
         </div>
         <div class="clearfix"></div>
       </div>
+      <svg class="arrow mobile-hide demo-arrow"
+           width="60" height="34" viewBox="0 0 80 45">
+        <polygon points="40,5 75,40 5,40" />
+      </svg>
     </div>
     <div id="content-message">
       <h2>Real-Time Messaging with a Dozen Lines of Code</h2>
@@ -109,10 +109,6 @@ popup: true
             <button id="alice-message-button" class="right" type="button">send message</button>
             <div class="clearfix"></div>
           </div>
-          <svg class="arrow mobile-hide demo-arrow"
-               width="60" height="34" viewBox="0 0 80 45">
-            <polygon points="40,5 75,40 5,40" />
-          </svg>
         </div>
         <div class="column-box">
           <div class="demo-window">
@@ -132,6 +128,10 @@ popup: true
         </div>
         <div class="clearfix"></div>
       </div>
+      <svg class="arrow mobile-hide demo-arrow"
+           width="60" height="34" viewBox="0 0 80 45">
+        <polygon points="40,5 75,40 5,40" />
+      </svg>
     </div>
     <div id="content-data-channel">
       <h2>Send Real-Time Data In A Flash</h2>
@@ -157,10 +157,6 @@ popup: true
             </div>
             <button id="alice-data-share-button" class="right" type="button">share</button>
             <div class="clearfix"></div>
-            <svg class="arrow mobile-hide demo-arrow"
-                 width="60" height="34" viewBox="0 0 80 45">
-              <polygon points="40,5 75,40 5,40" />
-            </svg>
           </div>
         </div>
         <div class="column-box">
@@ -188,6 +184,10 @@ popup: true
         </div>
         <div class="clearfix"></div>
       </div>
+      <svg class="arrow mobile-hide demo-arrow"
+           width="60" height="34" viewBox="0 0 80 45">
+        <polygon points="40,5 75,40 5,40" />
+      </svg>
     </div>
   </div>
 
