@@ -296,7 +296,7 @@ Fired when an incoming INVITE request is received.
 
 Name | Types | Description
 -----|-------|-------------
-`session`|[`SIP.Session`](/api/0.6.0/message/), [`SIP.ServerContext`](/api/0.6.0/context/server/)| The inbound session the user agent was invited to. This argument also implements the shared [`SIP.ServerContext`](/api/0.6.0/context/server/) behavior for inbound requests
+`session`|[`SIP.Session`](/api/0.6.0/session/), [`SIP.ServerContext`](/api/0.6.0/context/server/)| The inbound session the user agent was invited to. This argument also implements the shared [`SIP.ServerContext`](/api/0.6.0/context/server/) behavior for inbound requests
 
 ### `message`
 
