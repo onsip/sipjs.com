@@ -5,7 +5,7 @@ description: Easily install & configure the OnSIP Network to work with SIP.js
 
 # Configure the OnSIP Network
 
-SIP.js works with the [OnSIP Network](https://signup.onsip.com/sipjs) without any modification.
+SIP.js works with the [OnSIP Network](https://www.onsip.com/webrtc-sip-network) without any modification.
 
 ## System Setup
 
@@ -13,7 +13,7 @@ No system setup is required.
 
 ## Sign up for the OnSIP Network
 
-The OnSIP Network is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](http://www.onsip.com/webrtc-sip-network).
+The OnSIP Network is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](https://signup.onsip.com/sipjs).
 
 ## Configure SIP.js
 
