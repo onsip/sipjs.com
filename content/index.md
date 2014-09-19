@@ -703,13 +703,13 @@ session.on('accepted', function () {
     <p class="multicolumn">
       If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP Network - no system setup, modifications, maintenance, or upfront capital required.
       <a id="signup-button" class="mobile-hide button orange-bg left"
-         href="https://signup.onsip.com/network">
+         href="https://signup.onsip.com/sipjs">
         <span class="text-hover-left">Sign up for a free OnSIP sandbox account</span>&nbsp;<span class="hover-arrow">⟩</span>
       </a>
     </p>
     <div class="clearfix"></div>
     <a class="desktop-hide button orange-bg"
-       href="https://signup.onsip.com/network">
+       href="https://signup.onsip.com/sipjs">
         <span class="text-hover-left">Sign up for a free OnSIP sandbox account</span>&nbsp;<span class="hover-arrow">⟩</span>
     </a>
   </div>
