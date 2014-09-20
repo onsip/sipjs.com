@@ -17,7 +17,7 @@ SIP.js web apps can be ported to Android using [Crosswalk](https://crosswalk-pro
 
 * Clone the [sipjs-examples repository](https://github.com/onsip/sipjs-examples): `git clone https://github.com/onsip/sipjs-examples`
 
-* Add an [icon.png](https://raw.githubusercontent.com/onsip/sipjs-examples/crosswalk/demo-phone/icon.png) and a [manifest.json](https://raw.githubusercontent.com/onsip/sipjs-examples/crosswalk/demo-phone/manifest.json) to the demo-phone directory of the checked-out repository. This tells Crosswalk how the app should appear on the phone and which page to load when it opens. More detail can be found in [the Crosswalk docs](https://crosswalk-project.org/#wiki/Crosswalk-manifest):
+* Add an [icon.png](https://raw.githubusercontent.com/onsip/sipjs-examples/crosswalk/demo-phone/icon.png) and a [manifest.json](https://raw.githubusercontent.com/onsip/sipjs-examples/crosswalk/demo-phone/manifest.json) to the demo-phone directory of the checked-out repository. This tells Crosswalk how the app should appear on the phone and which page to load when it opens. More detail can be found in [the Crosswalk docs](https://crosswalk-project.org/#documentation/manifest):
 
 ~~~ bash
 cd sipjs-examples/demo-phone
