@@ -36,11 +36,11 @@ Use the `session.refer(target)` method to make a blind transfer between the curr
 ~~~
 
 ## Handling a Blind Transfer
-When receiving a refer, you need to handle the request and attach the new media stream to the video element.  This is done by catching the `referred` event and passing it to a function using `session.on('referred', onReferred)`.  This function gets passed in the referred request as well as the new session.  Then we must display the new session using the `attachMediaStream()` function like in previous examples.
+When receiving a refer, you need to handle the request and attach the new media stream to the video element.  This is done by catching the `refer` event and calling the followRefer function with a callback using `session.on('refer', session.followRefer(onReferred))`.  This function gets passed in the refer request as well as the new session.  Then we must display the new session using the `attachMediaStream()` function like in previous examples.
 
 ~~~ javascript
   //calls the onReferred function when the referred event happens
-  session.on('referred', onReferred);
+  session.on('refer', session.followRefer(onReferred));
 
   function onReferred(request, newSession)
   {
