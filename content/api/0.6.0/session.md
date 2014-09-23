@@ -312,7 +312,7 @@ Every event handler is executed with a [SIP.Event](/api/0.6.0/eventEmitter/) ins
 
 ### `progress`
 
-Fired each time a provisional (100-199) response is received.
+Fired each time a response with a status code of 101 through 199 is received.
 
 #### `on('progress', function (response) {})`
 
