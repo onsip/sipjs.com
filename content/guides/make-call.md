@@ -8,49 +8,68 @@ description: How to enable your WebRTC application to make voice and video calls
 * TOC
 {:toc}
 
-Let's walk through core API concepts as we tackle some everyday use cases.
+### HTML
 
-
-### Setup and Video Elements
-
-First we must create the files index.html, main.js, and style.css in the same folder.  In the index.html file we need to include the [SIP.js library](/download/), as well as the main.js file.  
+Create an HTML file. In the file include the [SIP.js library](/download/), as well as any other javascript that will be used.  
 
 A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC. 
 
 Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display the video of the person being called.  There is also a `localVideo` `<video>` element, to display the video stream that is being sent to the person being called.  The local video stream should always be muted to prevent feedback.
 
-In the style.css file we will put a border around the `<video>` elements, to visualize them better.
+~~~html
+<html>
+  <head>
+    <link rel="stylesheet" href="my-styles.css">
+  </head>
+  <body>
+    <video id="remoteVideo"></video>
+    <video id="localVideo" muted="muted"></video>
 
-<iframe
-  style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/OnSIP/BLBKL/embedded/html,js,css,result/">
-</iframe>
+    <script src="sip-0.6.2-min.js"></script> 
+    <script src="my-javascript.js"></script> 
+  </body>
+</html>
+~~~
 
-### Making the Call
+### Javascript
 
-These `<video>` elements are not useful if we aren't calling anyone, so let's make a call.
+#### Creating a User Agent
 
-#### Creating the User Agent
+In order to make calls and send messages, create a SIP user agent.  Calling the `SIP.UA()` method, with no parameters, creates an anonymous user agent.
 
-In order to make calls and send messages, create a SIP user agent.  Calling `SIP.UA()` method, with no parameters, creates an anonymous user agent.
+~~~javascript
+var userAgent = new SIP.UA();
+~~~
 
-<iframe
-  style="width: 100%; height: 300px"
-  src="http://jsfiddle.net/OnSIP/R4FHe/embedded/js,html,css,result/">
-</iframe>
-
-
-#### Sending the Invite
+#### Sending an Invite
 
 
-After the user agent has connected to the SIP server, we can send an invite to make a call and thereby create a SIP session.
+After the user agent has connected to the SIP server, an invite can be sent to make a call and thereby create a SIP session.
 
-To send an invite first create a javascript object, which contains the `media` variable that specifies:
+To send an invite you will need the target user's SIP address and some options to define the session. 
 
-1. The session's media constraints (whether it contains audio, video, or both)
-2. The `<video>` elements that will display the local and remote videos.
+Create an options object to define your session.
 
-Then call the `.invite()` method with the target address and the `options` object containing media information.
+~~~javascript
+var options = {
+        media: {
+            constraints: {
+                audio: true,
+                video: true
+            },
+            render: {
+                remote: {
+                    video: document.getElementById('remoteVideo')
+                },
+                local: {
+                    video: document.getElementById('localVideo')
+                }
+            }
+        }
+    };
+~~~
+
+Then call the `.invite()` method with the target SIP address and the `options` object containing session information.
 
 After invite is called, the browser will ask for permission to access the camera and microphone.  Permission must be allowed to make the call.  The person being called has the choice of accepting or rejecting the call.  
 
