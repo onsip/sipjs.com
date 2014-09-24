@@ -27,7 +27,11 @@ This [configuration object](/api/0.6.0/ua_configuration_parameters/) needs a `ur
 
 If you are authenticating a user agent using OnSIP, follow [these instructions](http://developer.onsip.com/guides/platform/sip-ua-authentication/).
 
-<iframe
-  style="width: 100%; height: 250px"
-  src="http://jsfiddle.net/OnSIP/ycv2n/embedded/js,result/">
-</iframe>
+~~~javascript
+var userAgent = new SIP.UA({
+  uri: 'bob@example.onsip.com',
+  wsServers: ['wss://sip-ws.example.com'],
+  authorizationUser: '',
+  password: ''
+});
+~~~
