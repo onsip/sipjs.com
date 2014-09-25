@@ -1,6 +1,9 @@
-sipjs.com
+Did you mean https://github.com/onsip/SIP.js ?
 ===================
 
-SIP.Js developer documentation http://sipjs.com
+sipjs.com
+-------------------
+
+SIP.js developer documentation http://sipjs.com
 
 If you are looking for the SIP.js github page, you can find it at https://github.com/onsip/sip.js
