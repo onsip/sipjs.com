@@ -168,8 +168,8 @@
             // Must be async for on('dataChannel') callback to have a chance
             setTimeout(onSuccess.bind(null, {}), 0);
           },
-          release: function (onSuccess) {
-            setTimeout(onSuccess, 0);
+          release: function (stream) {
+            // no-op
           }
         }
       });
