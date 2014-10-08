@@ -191,7 +191,7 @@ popup: true
 
   <div class="full-width-divider orange-bg">
     <div id="code-intro" class="left">
-      <h3>See How It's Done</h3>
+      <h3 class="homepage">See How It's Done</h3>
       <p class="left mobile-hide">
       The code displayed on the right is what powers the selected demo from Alice’s end, although Bob’s code would be very similar. SIP.js allows you to utilize WebRTC’s APIs using just JavaScript. To check out the full code for all three demos, click the button below.
       </p>
@@ -724,7 +724,7 @@ session.on('accepted', function () {
             </div>
           </div>
         </div>
-        <h3><span>Learn</span></h3>
+        <h3 class="homepage"><span>Learn</span></h3>
         <p>New to SIP.js? Our guides and docs will have you up and running in a snap.</p>
       </div>
       <div class="column-box">
@@ -735,7 +735,7 @@ session.on('accepted', function () {
             </div>
           </div>
         </div>
-        <h3><span>Connect</span></h3>
+        <h3 class="homepage"><span>Connect</span></h3>
         <p>Get answers, stay up to date, and become part of the SIP.js community.</p>
       </div>
       <div class="clearfix"></div>
@@ -745,7 +745,7 @@ session.on('accepted', function () {
   <div class="full-width-divider dark-gray-bg">
     <div class="two-column-boxes align-center">
       <div class="column-box">
-        <h3>Built An App Using SIP.js?</h3>
+        <h3 class="homepage">Built An App Using SIP.js?</h3>
       </div>
       <div class="column-box mobile-hide no-js-hide" id="success-column-box">
         <button id="success-opener" class="orange-bg">We want to hear about it!</button>

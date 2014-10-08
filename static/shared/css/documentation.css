@@ -15,8 +15,8 @@ body {
     min-height: 100%;
     height: auto;
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
-	font-size: 18px;
-	font-weight: 400;
+  	font-size: 18px;
+  	font-weight: 400;
     color: #404547;
 }
 
@@ -40,32 +40,31 @@ body {
 		========================================  */
 h1, h2, h3, h4 {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
-	font-weight: normal;
-	color: #8a7c7a;
+	  font-weight: normal;
+	  color: #8a7c7a;
 }
 h1 {
-	font-size: 38px;
-	line-height: 48px;
+	  font-size: 38px;
+	  line-height: 48px;
     margin-bottom: 1em;
 }
 h2 {
-	font-size: 28px;
-	letter-spacing: .05em;
-	margin-bottom: .8em;
+  	font-size: 28px;
+  	letter-spacing: .05em;
+  	margin-bottom: .8em;
 }
 h3 {
-	font-size: 1.75em;
-    font-weight: 700;
+    font-size: 24px;
     margin: 0.8em 0 0.8em 0;
 }
 h4 {
-	font-size: 18px;
-	margin: 1.618em 0 1em;
+	  font-size: 18px;
+	  margin: 1.618em 0 1em;
 }
 p {
-	margin-bottom: 1em;
-	line-height: 1.45em;
-	letter-spacing: .02em;
+	  margin-bottom: 1em;
+  	line-height: 1.45em;
+  	letter-spacing: .02em;
     font-weight: 300;
 }
 h2 + p {
@@ -73,12 +72,12 @@ h2 + p {
 }
 h4.intro {
     font-family: 'ProximaNovaSoft', 'Varela Round', sans-serif;
-	letter-spacing: .02em;
+  	letter-spacing: .02em;
     margin-top: 0;
-	margin-bottom: 0;
-	font-size: 1.1em;
+  	margin-bottom: 0;
+  	font-size: 1.1em;
     font-weight: 400;
-	line-height: 1.4em;
+  	line-height: 1.4em;
     color: #404547;
     text-align: center;
 }
@@ -91,12 +90,12 @@ h4.intro {
     ========================================  */
 /*  Type & color for all code  */
 code, pre {
-	font-family: 'Consolas', 'Courier New', 'Courier', monospace;
-	color: #212526;
+  	font-family: 'Consolas', 'Courier New', 'Courier', monospace;
+  	color: #212526;
 }
 
 code {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 /*  Inline code gets a box around it
@@ -1162,4 +1161,10 @@ footer > .wrapper {
 #content-message, #content-data-channel,
 #code-message, #code-data-channel {
     display: none;
+}
+
+h3.homepage {
+    font-size: 1.75em;
+    font-weight: 700;
+    margin: 0.8em 0 0.8em 0;
 }
