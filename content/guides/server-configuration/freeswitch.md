@@ -59,6 +59,16 @@ Start by editing the internal SIP profile `sip_profiles/internal.xml`. Uncomment
 <param name="ws-binding"  value=":5066"/>
 ~~~
 
+If you'd like to enable video as well as audio, adjust FreeSWITCH's codec preferences to include VP8.
+
+~~~ xml
+<!--vars.xml-->
+...
+<X-PRE-PROCESS cmd="set" data="global_codec_prefs=PCMU,PCMA,VP8">
+<X-PRE-PROCESS cmd="set" data="outbound_codec_prefs=PCMU,PCMA,VP8">
+...
+~~~
+
 Start FreeSWITCH: `/usr/local/freeswitch/bin/freeswitch`.
 
 ## Configure SIP.js
@@ -69,14 +79,14 @@ SIP.js works with FreeSWITCH without any special configuration parameters. The f
 var config = {
   // Replace this IP address with your FreeSWITCH IP address
   uri: '1000@127.0.0.1',
-  
+
   // Replace this IP address with your FreeSWITCH IP address
   // and replace the port with your FreeSWITCH port
   ws_servers: 'ws://127.0.0.1:5066',
-  
+
   // FreeSWITCH Default Username
   authorizationUser: '1000',
-  
+
   // FreeSWITCH Default Password
   password: '1234'
 };
