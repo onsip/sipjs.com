@@ -67,11 +67,11 @@ myUA.on('invite', function (session) {
 
 ### `localIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#localIdentity).
+[`SIP.NameAddrHeader`](/api/0.6.0/nameAddrHeader/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#localIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#localIdentity).
 
 ### `remoteIdentity`
 
-`SIP.NameAddrHeader` - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#remoteIdentity).
+[`SIP.NameAddrHeader`](/api/0.6.0/nameAddrHeader/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#remoteIdentity) or [`SIP.ServerContext`](/api/0.6.0/context/server/#remoteIdentity).
 
 ### `data`
 
