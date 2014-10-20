@@ -13,7 +13,7 @@ var elements = {
 };
 
 var config = {
-  userAgentString: 'SIP.js/0.5.0-devel BB',
+  userAgentString: 'SIP.js/0.6.3-devel BB',
   traceSip: true,
   register: false
 };
@@ -90,9 +90,11 @@ function inviteSubmit(e) {
 
   // Send invite
   var session = ua.invite(uri, {
-    mediaConstraints: {
-      audio: true,
-      video: video
+    media: {
+      constraints: {
+        audio: true,
+        video: video
+      }
     }
   });
 
@@ -148,25 +150,25 @@ function createNewSessionUI(uri, session, message) {
 
   // DOM event listeners
   sessionUI.green.addEventListener('click', function () {
+    var video = elements.uaVideo.checked;
+    var options = {
+      media: {
+        constraints: {
+          audio: true,
+          video: video
+        }
+      }
+    };
+
     var session = sessionUI.session;
     if (!session) {
       /* TODO - Invite new session */
       /* Don't forget to enable buttons */
-      session = sessionUI.session = ua.invite(uri, {
-        mediaConstraints: {
-          audio: true,
-          video: elements.uaVideo.checked
-        }
-      });
+      session = sessionUI.session = ua.invite(uri, options);
 
       setUpListeners(session);
     } else if (session.accept && !session.startTime) { // Incoming, not connected
-      session.accept({
-        mediaConstraints: {
-          audio: true,
-          video: elements.uaVideo.checked
-        }
-      });
+      session.accept(options);
     }
   }, false);
 
@@ -265,13 +267,16 @@ function createNewSessionUI(uri, session, message) {
       delete sessionUI.session;
     });
 
-    session.on('refer', function (target) {
+    session.on('refer', function handleRefer (request) {
+      var target = request.parseHeader('refer-to').uri;
       session.bye();
 
       createNewSessionUI(target, ua.invite(target, {
-        mediaConstraints: {
-          audio: true,
-          video: elements.uaVideo.checked
+        media: {
+          constraints: {
+            audio: true,
+            video: elements.uaVideo.checked
+          }
         }
       }));
     });
