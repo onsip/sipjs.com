@@ -25,7 +25,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.6.2-min.js"></script> 
+    <script src="sip-0.6.3-min.js"></script>
     <script src="my-javascript.js"></script> 
   </body>
 </html>
