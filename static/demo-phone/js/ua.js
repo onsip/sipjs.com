@@ -140,6 +140,11 @@ function createNewSessionUI(uri, session, message) {
   sessionUI.messages       = node.querySelector('.messages');
   sessionUI.messageForm    = node.querySelector('.message-form');
   sessionUI.messageInput   = node.querySelector('.message-form input[type="text"]');
+  sessionUI.renderHint     = {
+    remote: {
+      video: sessionUI.video
+    }
+  };
 
   sessionUIs[uri] = sessionUI;
 
@@ -233,18 +238,11 @@ function createNewSessionUI(uri, session, message) {
       sessionUI.dtmfInput.disabled = false;
       sessionUI.video.className = 'on';
 
-      var element = sessionUI.video;
-      var stream = this.mediaHandler.getRemoteStreams()[0];
+      session.mediaHandler.render(sessionUI.renderHint);
+    });
 
-      if (typeof element.srcObject !== 'undefined') {
-        element.srcObject = stream;
-      } else if (typeof element.mozSrcObject !== 'undefined') {
-        element.mozSrcObject = stream;
-      } else if (typeof element.src !== 'undefined') {
-        element.src = URL.createObjectURL(stream);
-      } else {
-        console.log('Error attaching stream to element.');
-      }
+    session.mediaHandler.on('addStream', function () {
+      session.mediaHandler.render(sessionUI.renderHint);
     });
 
     session.on('bye', function () {
