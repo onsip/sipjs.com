@@ -153,7 +153,8 @@ var config = {
   password: 'password',
   
   // HackIpInContact for Asterisk
-  hackIpInContact: true
+  hackIpInContact: true,
+  
 };
 
 var ua = new SIP.UA(config);
@@ -164,6 +165,8 @@ ua.invite('1061',{
   video: false
 });
 ~~~
+
+* Update 10/24/2014 - If you are still having trouble with Asterisk and are using a WebSocket Secure (WSS), you can try using the `hackWssInTransport: true` parameter in your UA's configuration. This is new as of [commit 32bffbe](https://github.com/onsip/SIP.js/commit/32bffbea37d91d185851c46e930be8f663e52d13) on the [SIP.js Master branch](https://github.com/onsip/SIP.js).
 
 ## Troubleshooting
 
