@@ -3,6 +3,11 @@ title: Asterisk Installation & Configuration | SIP.js
 description: Easily install & configure Asterisk to work with SIP.js
 ---
 
+<section class="callout">
+<h3>Tired of fighting with configs?</h3>
+<p>Try <a href="/">SIP.js</a> and <a href="http://www.onsip.com/webrtc-sip-network/">OnSIP Network</a> &mdash; a perfect pairing for WebRTC!</p>
+</section>
+
 # Configure Asterisk
 
 SIP.js has been tested with [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
@@ -38,7 +43,7 @@ Using YUM, all dependencies can be installed with:
 
 First try installing libsrtp from the repo.
 
-`yum install libsrtp-devel` 
+`yum install libsrtp-devel`
 
 If libsrtp is not available in the repo install it from source.
 

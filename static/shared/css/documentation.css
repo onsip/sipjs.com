@@ -507,6 +507,18 @@ th {
 	clear: both;
 }
 
+
+/*  CALLOUTS
+		========================================  */
+.callout {
+    padding: 0.5em;
+    background-color: rgb(193,191,182);
+    border: 2px solid rgb(65,71,73);
+    border-radius: 3px;
+    margin: 0 0 1em 0;
+    text-align: center;
+}
+
 /*  SIDE NAVIGATION
 		========================================  */
 #sideNav ul {
