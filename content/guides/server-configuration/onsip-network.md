@@ -20,7 +20,8 @@ The OnSIP Network is a hosted SIP signaling platform. Sign up for free via [the 
 If no Web Socket server is specified, SIP.js attempts to connect to the OnSIP Network. Creating and registering user agents with the OnSIP Network is as simple as specifying a SIP address to use:
 
 ~~~javascript
-// Replace 'any_username' with any username and 'your_subdomain' with your OnSIP Network subdomain
+// Replace 'any_username' with any username and 'your_subdomain'
+// with your OnSIP Network subdomain.
 var ua = new SIP.UA('any_username@your_subdomain.onsip.com');
 ~~~
 
