@@ -295,7 +295,7 @@ var bobName       = 'Bob';
 function setUpMessageInterface(userAgent) {
     // Receive a message and put it in the message display div
     userAgent.on('message', function (msg) {
-        alert(msg);
+        alert(msg.body);
     });
 }
 
@@ -404,7 +404,7 @@ function setUpDataInterface(userAgent, target) {
 }
 
 var aliceDataUA = createDataUA(aliceURI, aliceName);
-setUpDataInterface(aliceDataUA, 'data.' + bobURI);
+setUpDataInterface(aliceDataUA, bobURI);
 ~~~~
 </div>
 </div>
