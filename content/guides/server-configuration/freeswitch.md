@@ -5,14 +5,14 @@ description: Easily install & configure FreeSWITCH to work with SIP.js
 
 # Configure FreeSWITCH
 
-SIP.js has been tested with [FreeSWITCH 1.5.11](https://confluence.freeswitch.org/display/FREESWITCH/Linux+Quick+Install+Guide#LinuxQuickInstallGuide-Download) without any modification to the source code of SIP.js or FreeSWITCH. Later versions of FreeSWITCH will require similar configuration.
+SIP.js has been tested with [FreeSWITCH 1.5.14](https://freeswitch.org/confluence/display/FREESWITCH/CentOS+6) without any modification to the source code of SIP.js or FreeSWITCH. Later versions of FreeSWITCH will require similar configuration.
 
 ## System Setup
 
 FreeSWITCH and SIP.js were tested using the following setup:
 
-* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
-* [FreeSWITCH 1.5.11](https://confluence.freeswitch.org/display/FREESWITCH/Linux+Quick+Install+Guide#LinuxQuickInstallGuide-Download)
+* [CentOS 6.6 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/)
+* [FreeSWITCH 1.5.14](https://freeswitch.org/confluence/display/FREESWITCH/CentOS+6)
 * A public IP address to avoid NAT scenarios on the server side.
 
 ## Required Packages
@@ -36,12 +36,12 @@ Using YUM, all dependencies can be installed with:
 
 ## Install FreeSWITCH
 
-FreeSWITCH recommends using the latest version of FreeSWITCH from the [FreeSWITCH git repo](http://git.freeswitch.org/git/freeswitch/). This example uses FreeSWITCH tag v1.5.11.
+FreeSWITCH recommends using the latest version of FreeSWITCH from the [FreeSWITCH git repo](https://freeswitch.org/stash/projects/FS/repos/freeswitch/browse). This example uses FreeSWITCH tag v1.5.14.
 
 * `cd /usr/local/src/`
-* `git clone git://git.freeswitch.org/freeswitch.git`
+* `git clone https://freeswitch.org/stash/scm/fs/freeswitch.git`
 * `cd /usr/local/src/freeswitch`
-* `git checkout v1.5.11`
+* `git checkout v1.5.14`
 * `./bootstrap.sh`
 * `./configure`
 * `make` (This may take a few minutes.)
