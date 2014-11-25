@@ -96,4 +96,12 @@ var ua = new SIP.UA(config);
 
 ## Troubleshooting
 
+It is known that SIP.js and FreeSWITCH might not interop well if you have the following option enabled on FreeSWITCH:
+
+~~~ xml
+<variable name="sip-force-contact" value="NDLB-connectile-dysfunction"/>
+~~~
+
+Firefox 34+ requires [SIP.js 0.6.4 or later](/download/) to interop with FreeSWITCH or Asterisk.
+
 FreeSWITCH has a wiki article on [WebRTC support](https://wiki.freeswitch.org/wiki/Webrtc).

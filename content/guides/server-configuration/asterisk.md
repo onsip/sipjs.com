@@ -175,6 +175,8 @@ ua.invite('1061',{
 
 ## Troubleshooting
 
+Firefox 34+ requires [SIP.js 0.6.4 or later](/download/) to interop with FreeSWITCH or Asterisk.
+
 This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk.
 
 [Asterisk Secure Calling Guide](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial) can help you setup dtls certificates.
