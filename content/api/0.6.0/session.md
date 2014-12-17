@@ -406,7 +406,9 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`callback`|`function`|Callback function to be called after the refer is followed.
+`callback`|`function(request, newSession)`|Callback function to be called after the refer is followed.
+`request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP REFER request.
+`newSession`|[`SIP.Session`](.)|The Session created by following the REFER
 
 ### `dtmf`
 
