@@ -63,7 +63,7 @@ myUA.on('invite', function (session) {
 
 ### `request`
 
-[`SIP.IncomingRequest`](/api/0.6.0/message/) or [`SIP.OutgoingRequest`](/api/0.6.0/message/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#request) or [`SIP.ServerContext`](/api/0.6.0/context/server/#request).
+[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/) or [`SIP.OutgoingRequest`](/api/0.6.0/sipMessage/) - Inherited from [`SIP.ClientContext`](/api/0.6.0/context/client/#request) or [`SIP.ServerContext`](/api/0.6.0/context/server/#request).
 
 ### `localIdentity`
 
@@ -318,7 +318,7 @@ Fired each time a provisional (100-199) response is received.
 
 Name | Type | Description
 -----|------|------------
-`response`|[`SIP.IncomingMessage`](/api/0.6.0/message)|The received response
+`response`|[`SIP.IncomingResponse`](/api/0.6.0/sipMessage)|The received response
 
 ### `accepted`
 
@@ -332,7 +332,7 @@ Name | Type | Description
 -----|------|------------
 `data` | `Object` | A wrapper object containing the event data
 `data.code` | `Number` | The status code of the received response, between 200 and 299.
-`data.response` | [`SIP.IncomingMessage`](/api/0.6.0/message) | The received response
+`data.response` | [`SIP.IncomingResponse`](/api/0.6.0/sipMessage) | The received response
 
 Inbound sessions do not currently provide any parameters when emitting the `accepted` event. [Track this bug on GitHub.](https://github.com/onsip/SIP.js/issues/15)
 
@@ -344,7 +344,7 @@ Fired each time an unsuccessful final (300-699) response is received. *Note: Thi
 
 Name | Type | Description
 -----|------|------------
-`response` | [`SIP.IncomingMessage`](/api/0.6.0/message/) | The received response
+`response` | [`SIP.IncomingResponse`](/api/0.6.0/sipMessage/) | The received response
 `cause` | `String` | The reason phrase associated with the SIP response code.
 
 ### `failed`
@@ -355,7 +355,7 @@ Fired when the request fails, whether due to an unsuccessful final response or d
 
 Name | Type | Description
 -----|------|------------
-`response` | [`SIP.IncomingMessage`](/api/0.6.0/incomingMessage/) | The received response. On a failure not due to a SIP message, this will be null.
+`response` | [`SIP.IncomingResponse`](/api/0.6.0/sipMessage/) | The received response. On a failure not due to a SIP message, this will be null.
 `cause` | `String` | The reason phrase associated with the SIP response code, or one of [Failure and End Causes](/api/0.6.0/causes).
 
 
@@ -377,7 +377,7 @@ Fired when an established call ends.
 
 Name | Type | Description 
 -----|------|--------------
-`message`|`Object`|[`SIP.IncomingResponse`](/api/0.6.0/message/) instance of the received SIP 1XX response.
+`message`|`Object`|[`SIP.IncomingResponse`](/api/0.6.0/sipMessage/) instance of the received SIP 1XX response.
 `cause`||One value of [Failure and End Causes](/api/0.6.0/causes)
 
 -->
@@ -400,7 +400,7 @@ the refer, use the `session.followRefer(callback)` function.
 
 Name | Type | Description
 -----|------|--------------
-`request`|[`SIP.IncomingMessage`](/api/0.6.0/message/)|Instance of the received SIP REFER request.
+`request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP REFER request.
 
 #### `on('refer', session.followRefer(callback)`
 
@@ -416,7 +416,7 @@ Fired for an incoming or outgoing DTMF.
 
 Name | Type | Description 
 -----|------|--------------
-`request`|[`SIP.IncomingMessage`](/api/0.6.0/message/)|Instance of the received SIP INFO request.
+`request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP INFO request.
 `dtmf`|`SIP.Session.DTMF`|DTMF instance.
 
 ### `muted`
@@ -471,4 +471,4 @@ Fired when a BYE is sent.
 
 Name | Type | Description 
 -----|------|--------------
-`request`|[`SIP.IncomingMessage`](/api/0.6.0/message/)|Instance of the received SIP BYE request.
+`request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP BYE request.
