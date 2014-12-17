@@ -402,7 +402,7 @@ Name | Type | Description
 -----|------|--------------
 `request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP REFER request.
 
-#### `on('refer', session.followRefer(callback)`
+#### `on('refer', session.followRefer(callback))`
 
 Name | Type | Description
 -----|------|--------------
