@@ -42,7 +42,7 @@ The HTML and Javascript required to use the plugin is very similar to regular SI
 
 ~~~ javascript
 // Use plugin version of SIP.js
-var SIP = cordova.require("com.onsip.cordova.Sip.js");
+var SIP = cordova.require("com.onsip.cordova.Sipjs");
 
 // Use plugin version of MediaHandler
 var PhoneRTCMediaHandler = cordova.require("com.onsip.cordova.SipjsMediaHandler")(SIP);
