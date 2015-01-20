@@ -1,30 +1,30 @@
 ---
-title: Install & Configure The OnSIP Network | SIP.js
-description: Easily install & configure the OnSIP Network to work with SIP.js
+title: Configure SIP.js with OnSIP | SIP.js
+description: Easily install & configure SIP.js for use with OnSIP
 ---
 
-# Configure the OnSIP Network
+# Configure SIP.js with OnSIP
 
-SIP.js works with the [OnSIP Network](https://www.onsip.com/webrtc-sip-network) without any modification.
+SIP.js works with [OnSIP](http://developer.onsip.com) without any modification.
 
 ## System Setup
 
 No system setup is required.
 
-## Sign up for the OnSIP Network
+## Sign up for OnSIP
 
-The OnSIP Network is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](https://signup.onsip.com/sipjs).
+OnSIP is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](https://signup.onsip.com/sipjs).
 
 ## Configure SIP.js
 
-If no Web Socket server is specified, SIP.js attempts to connect to the OnSIP Network. Creating and registering user agents with the OnSIP Network is as simple as specifying a SIP address to use:
+If no Web Socket server is specified, SIP.js attempts to connect to OnSIP. Creating and registering user agents with OnSIP is as simple as specifying a SIP address to use:
 
 ~~~javascript
 // Replace 'any_username' with any username and 'your_subdomain'
-// with your OnSIP Network subdomain.
+// with your OnSIP subdomain.
 var ua = new SIP.UA('any_username@your_subdomain.onsip.com');
 ~~~
 
 ## Troubleshooting
 
-Please see the [OnSIP Network Developer Documentation](http://developer.onsip.com/).
+Please see the [OnSIP Developer Documentation](http://developer.onsip.com/).

@@ -5,7 +5,7 @@ description: Easily install & configure Asterisk to work with SIP.js
 
 <section class="callout">
 <h3>Tired of fighting with configs?</h3>
-<p>Try <a href="/">SIP.js</a> and <a href="http://www.onsip.com/webrtc-sip-network/">OnSIP Network</a> &mdash; a perfect pairing for WebRTC!</p>
+<p>Try <a href="/">SIP.js</a> and <a href="http://developer.onsip.com/">OnSIP</a> &mdash; a perfect pairing for WebRTC!</p>
 </section>
 
 # Configure Asterisk

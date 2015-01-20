@@ -25,8 +25,6 @@ To create an authenticated user agent, pass a configuration object to the `SIP.U
 
 This [configuration object](/api/0.6.0/ua_configuration_parameters/) needs a `uri`.  This will have a username and a domain.  It will look something like `examplename@test.onsip.com` The `authorizationUser` and `password` are used to authenticate with your SIP provider.  
 
-If you are authenticating a user agent using OnSIP, follow [these instructions](http://developer.onsip.com/guides/platform/sip-ua-authentication/).
-
 ~~~javascript
 var userAgent = new SIP.UA({
   uri: 'bob@example.onsip.com',
