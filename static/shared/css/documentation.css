@@ -144,6 +144,8 @@ table.CodeRay {
   border: 1px solid #cecece;
   background: #f4f6f7;
   overflow: auto;
+  table-layout: fixed;
+  width: 100%;
 }
 
 td.code, td.line-numbers {
@@ -153,10 +155,12 @@ td.code, td.line-numbers {
 
 td.code {
   padding-left: 0;
+  width: 89%;
 }
 
 td.line-numbers {
-  padding-right: 1em;;
+  padding-right: 1em;
+  width: 11%;
 }
 
 /* LISTS
