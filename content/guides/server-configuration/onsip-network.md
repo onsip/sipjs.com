@@ -13,7 +13,7 @@ No system setup is required.
 
 ## Sign up for OnSIP
 
-OnSIP is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](https://signup.onsip.com/network).
+OnSIP is a hosted SIP signaling platform. Sign up for free via [the OnSIP web site](https://signup.onsip.com/sipjs).
 
 ## Configure SIP.js
 
