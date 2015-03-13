@@ -367,20 +367,19 @@ Fired when [ICE](http://www.html5rocks.com/en/tutorials/webrtc/infrastructure/#a
 
 *There are no documented arguments for this event*
 
-<!--
-
 ### `terminated`
 
 Fired when an established call ends.
 
+Please note:  The `terminated` event in 0.6.x versions does not always behave as you would expect.  Instead, to reliably determine the end of a call, it is recommended that you provide listeners for both the `failed` (for when a Session fails before being accepted) and `bye` (for when an accepted Session is terminated) events.  This is a known issue and is resolved properly on the `master` branch, to be released in 0.7.0.
+
 #### `on('terminated', function(message, cause) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
-`message`|`Object`|[`SIP.IncomingResponse`](/api/0.6.0/sipMessage/) instance of the received SIP 1XX response.
-`cause`||One value of [Failure and End Causes](/api/0.6.0/causes)
+`message`|`Object`|[`SIP.IncomingResponse`](/api/0.6.0/sipMessage/) instance of the received SIP response that caused the termination, if there was one.
+`cause`||One value of [Failure and End Causes](/api/0.6.0/causes), if there was one.
 
--->
 
 ### `cancel`
 
