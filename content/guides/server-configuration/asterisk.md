@@ -166,8 +166,12 @@ var ua = new SIP.UA(config);
 
 // Invite with audio only
 ua.invite('1061',{
-  audio: true,
-  video: false
+  media: {
+    constraints: {
+      audio: true,
+      video: false
+    }
+  }
 });
 ~~~
 

@@ -200,6 +200,19 @@ Types | Description
 ------|-------------
 [`SIP.Session`](/api/0.6.0/session/), [`SIP.ClientContext`](/api/0.6.0/context/client/)| The session the target is invited to.  The new Session object implements the shared ClientContext interface for outbound requests. The Session is in a provisional or early state until accepted by the remote target.  Please refer to the Session documentation for more information.
 
+#### Example
+
+~~~ javascript
+var session = myUA.invite('bob@example.com', {
+    media: {
+        constraints: {
+            audio: true,
+            video: false
+        }
+    }
+});
+~~~
+
 
 ### `request(method, target[, options])`
 
