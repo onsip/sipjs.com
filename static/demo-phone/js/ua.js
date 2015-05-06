@@ -85,7 +85,7 @@ function inviteSubmit(e) {
   var video = elements.uaVideo.checked;
   var uri = elements.uaURI.value;
   elements.uaURI.value = '';
-  
+
   if (!uri) return;
 
   // Send invite

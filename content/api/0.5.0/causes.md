@@ -23,7 +23,7 @@ session.on('failed', function (request) {
 
 # Common Causes
 
-Constant | Value | Description 
+Constant | Value | Description
 -----|------|-------------
 `INVALID_TARGET` | 'Invalid target' | The specified target can not be parsed as a valid [`SIP.URI`](/api/0.5.0/uri/).
 `CONNECTION_ERROR` | 'Connection Error' | WebSocket connection error occurred.
@@ -34,7 +34,7 @@ Constant | Value | Description
 # SIP Error Causes
 Some SIP response status codes are grouped into the following causes:
 
-Constant | Value | SIP Status Codes 
+Constant | Value | SIP Status Codes
 -----|------|-------------
 `BUSY` | 'Busy' | 486,600
 `REJECTED` | 'Rejected' | 403,603
@@ -49,7 +49,7 @@ Constant | Value | SIP Status Codes
 # Session Causes
 The following causes apply to audio/video sessions:
 
-Constant | Value | Description 
+Constant | Value | Description
 -----|------|-------------
 `BYE` | 'Terminated' | Session terminated normally by local or remote peer.
 `CANCELED` | 'Canceled' | Session canceled by local or remote peer.

@@ -70,7 +70,7 @@ If libsrtp is not available in the repo install it from source.
 
 1. `mkdir /etc/asterisk/keys`
 2. Enter the Asterisk scripts directory: `cd /usr/local/src/asterisk*/contrib/scripts`.
-3. Create the DTLS certificates (replace pbx.mycompany.com with your ip address or dns name, replace My Super Company with your company name): `./ast_tls_cert -C pbx.mycompany.com -O "My Super Company" -d /etc/asterisk/keys`. 
+3. Create the DTLS certificates (replace pbx.mycompany.com with your ip address or dns name, replace My Super Company with your company name): `./ast_tls_cert -C pbx.mycompany.com -O "My Super Company" -d /etc/asterisk/keys`.
 
 ## Configure Asterisk For WebRTC
 
@@ -156,10 +156,10 @@ var config = {
 
   // Replace this with the password from your sip.conf file
   password: 'password',
-  
+
   // HackIpInContact for Asterisk
   hackIpInContact: true,
-  
+
 };
 
 var ua = new SIP.UA(config);

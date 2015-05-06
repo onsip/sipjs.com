@@ -67,13 +67,13 @@ Ensure your device is plugged into your computer and provisioned for development
 
 The architecture needs to be set to armv7. This is because the WebRTC libraries that are included are precompiled for this architecture. Trying to compile the libraries with other architectures will cause a linker error and your project will not compile.
 Open the platforms folder then the ios folder. In the ios folder you will see an xcodeproj. Open the xcodeproj with XCode.
-In XCode navigate to the build settings for `CordovaLib.xcodeproj`. 
+In XCode navigate to the build settings for `CordovaLib.xcodeproj`.
 
 Set `Build Active Architecture Only` to `No`
 
 Set `Valid Architectures` to `armv7`
 
-Navigate to the build settings for `HelloCordova.xcodeproj`. 
+Navigate to the build settings for `HelloCordova.xcodeproj`.
 
 Set `Build Active Architecture Only` to `No`
 

@@ -64,7 +64,7 @@ Name | Type | Description
 
 Type    | Description
 --------|----------------
-`String | undefined`| Returns the specified header, undefined if header doesn't exist 
+`String | undefined`| Returns the specified header, undefined if header doesn't exist
 
 ### `getHeaders(name)`
 
@@ -89,7 +89,7 @@ Verify the existence of the given header name
 
 #### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `name`|`String`|The name of the SIP header to verify
 

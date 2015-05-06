@@ -58,7 +58,7 @@ authorizationUser: "alice123"
 ~~~
 
 ## autostart
-If set to true, the user agent calls the `.start()` method upon being created.  
+If set to true, the user agent calls the `.start()` method upon being created.
 
 ~~~ javascript
 autostart: true
@@ -128,11 +128,11 @@ User defined `Function` which will be called everytime a log is generated, accor
 The function is called with the following semantics:
 
 ~~~javascript
-/* 
-  level: String representing the level of the log message 
+/*
+  level: String representing the level of the log message
 ('debug', 'log', 'warn', 'error')
 
-  category: String representing the SIPjs instance class firing 
+  category: String representing the SIPjs instance class firing
 the log. ie: 'sipjs.ua'
 
   label: String indicating the 'identifier' of the class instance

@@ -415,7 +415,7 @@ Fired for an incoming or outgoing DTMF.
 
 #### `.on('dtmf', function(request, dtmf) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP INFO request.
 `dtmf`|`SIP.Session.DTMF`|DTMF instance.
@@ -470,6 +470,6 @@ Fired when a BYE is sent.
 
 #### `on('bye', function(request) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `request`|[`SIP.IncomingRequest`](/api/0.6.0/sipMessage/)|Instance of the received SIP BYE request.

@@ -10,9 +10,9 @@ description: How to enable your WebRTC application to make voice and video calls
 
 ### HTML
 
-Create an HTML file. In the file include the [SIP.js library](/download/), as well as any other javascript that will be used.  
+Create an HTML file. In the file include the [SIP.js library](/download/), as well as any other javascript that will be used.
 
-A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC. 
+A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC.
 
 Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display the video of the person being called.  There is also a `localVideo` `<video>` element, to display the video stream that is being sent to the person being called.  The local video stream should always be muted to prevent feedback.
 
@@ -26,7 +26,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="localVideo" muted="muted"></video>
 
     <script src="sip-0.6.3-min.js"></script>
-    <script src="my-javascript.js"></script> 
+    <script src="my-javascript.js"></script>
   </body>
 </html>
 ~~~
@@ -46,7 +46,7 @@ var userAgent = new SIP.UA();
 
 After the user agent has connected to the SIP server, an invite can be sent to make a call and thereby create a SIP session.
 
-To send an invite you will need the target user's SIP address and some options to define the session. 
+To send an invite you will need the target user's SIP address and some options to define the session.
 
 Create an options object to define your session.
 
@@ -71,7 +71,7 @@ var options = {
 
 Then call the `.invite()` method with the target SIP address and the `options` object containing session information.
 
-After invite is called, the browser will ask for permission to access the camera and microphone.  Permission must be allowed to make the call.  The person being called has the choice of accepting or rejecting the call.  
+After invite is called, the browser will ask for permission to access the camera and microphone.  Permission must be allowed to make the call.  The person being called has the choice of accepting or rejecting the call.
 
 An `endCall` button is added to terminate the session using the `.bye()` method.
 

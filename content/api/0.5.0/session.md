@@ -360,7 +360,7 @@ Fired when an established call ends.
 
 #### `on('terminated', function(message, cause) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `message`|`Object`|[`SIP.IncomingResponse`](/api/0.5.0/incomingResponse/) instance of the received SIP 1XX response.
 `cause`||One value of [Failure and End Causes](/api/0.5.0/causes)
@@ -411,7 +411,7 @@ Fired for an incoming or outgoing DTMF.
 
 #### `.on('dtmf', function(dtmf, request) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `dtmf`|`Object`|`SIP.Session.DTMF` instance.
 `request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP INFO request.
@@ -442,6 +442,6 @@ Fired when a BYE is sent.
 
 #### `on('bye', function(request) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `request`|`Object`|[`SIP.IncomingMessage`](/api/0.5.0/incomingMessage/) instance of the received SIP BYE request.

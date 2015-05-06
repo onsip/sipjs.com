@@ -23,7 +23,7 @@ As before, we will create a user agent using `SIP.UA()` and create a call using 
 ~~~
 
 ## Making a Blind Transfer
-SIP.js supports making blind transfers only.  A blind transfer occurs when A causes B to create a session with C.  
+SIP.js supports making blind transfers only.  A blind transfer occurs when A causes B to create a session with C.
 
 Use the `session.refer(target)` method to make a blind transfer between the current user agent on the `session` call and the user agent at the `target` address.
 

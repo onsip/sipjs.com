@@ -1,6 +1,6 @@
 ---
 title: SIP.ServerContext | SIP.js
-description: In SIP.js, a SIP.ServerContext encapsulates the behavior required to receive and send replies to a request. 
+description: In SIP.js, a SIP.ServerContext encapsulates the behavior required to receive and send replies to a request.
 ---
 # SIP.ServerContext
 

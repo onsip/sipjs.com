@@ -90,6 +90,6 @@ Name | Type | Description
 
 Type | Description
 -|-
-`Boolean|Object` | `true` if the header was parsed successfully. Otherwise, an object literal containing an `error` message property. 
+`Boolean|Object` | `true` if the header was parsed successfully. Otherwise, an object literal containing an `error` message property.
 
 </div>

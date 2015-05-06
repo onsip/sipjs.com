@@ -1,6 +1,6 @@
 ---
 title: SIP User Agent with WebRTC | SIP.js
-description: A SIP user agent (or UA) sends and receives SIP requests. Here is how to construct a UA and connect to the configured WebSocket server with SIP.js. 
+description: A SIP user agent (or UA) sends and receives SIP requests. Here is how to construct a UA and connect to the configured WebSocket server with SIP.js.
 ---
 
 # SIP.UA
@@ -71,7 +71,7 @@ Unregisters the UA.
 
 #### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.all`|`Boolean`|Optional `Boolean` for unregistering all bindings of the same SIP user. Default value is `false`
@@ -122,7 +122,7 @@ Sends an instant message making use of SIP MESSAGE request.
 
 #### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination of the message. `String` representing a destination username or a complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance
 `body`|`String`|Message content. `String` representing the body of the message
@@ -206,7 +206,7 @@ Send a SIP message.
 
 #### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `method`|`String`|The SIP request method to send, e.g. `'INVITE'` or `'OPTIONS'`
 `target`|`String|`[`SIP.URI`](/api/0.5.0/uri/)|Destination address. `String` representing a destination username or complete SIP URI, or a [`SIP.URI`](/api/0.5.0/uri/) instance
@@ -270,7 +270,7 @@ Fired for an unregistration. This event is fired in the following scenarios:
 
 #### `on('unregistered', function (cause) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `cause`||`null` for positive response to un-REGISTER SIP request. If a reregistration fails, this is one value of [Failure and End Causes](/api/0.5.0/causes)
 
@@ -281,7 +281,7 @@ Fired for a registration failure.
 
 #### `on('registrationFailed', function (cause) {})`
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `cause`||One value of [Failure and End Causes](/api/0.5.0/causes)
 
@@ -294,7 +294,7 @@ Fired when an incoming INVITE request is received.
 
 *The argument passed to this event implements multiple interfaces.*
 
-Name | Types | Description 
+Name | Types | Description
 -----|-------|-------------
 `session`|[`SIP.Session`](/api/0.5.0/message/), [`SIP.ServerContext`](/api/0.5.0/context/server/)| The inbound session the user agent was invited to. This argument also implements the shared [`SIP.ServerContext`](/api/0.5.0/context/server/) behavior for inbound requests
 
@@ -306,12 +306,12 @@ Fired when an incoming MESSAGE request is received.
 
 *The argument passed to this event implements multiple interfaces.*
 
-Name | Types | Description 
+Name | Types | Description
 -----|-------|-------------
 `message`|[`SIP.Message`](/api/0.5.0/message/), [`SIP.ServerContext`](/api/0.5.0/context/server/)| The inbound message received. This argument also implements the shared [`SIP.ServerContext`](/api/0.5.0/context/server/) behavior for inbound requests
 
 ### Example
- 
+
 ~~~ javascript
 // Create a user agent named bob, connect, and register to receive invitations.
 var bob = new SIP.UA({
