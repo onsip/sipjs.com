@@ -21,7 +21,7 @@ session.on('failed', function (request) {
 });
 ~~~
 
-# Common Causes
+## Common Causes
 
 Constant | Value | Description
 -----|------|-------------
@@ -31,7 +31,7 @@ Constant | Value | Description
 `SIP_FAILURE_CODE` | 'SIP Failure Code' | A negative SIP response was received which is not part of any of the groups defined in the table below.
 
 
-# SIP Error Causes
+## SIP Error Causes
 Some SIP response status codes are grouped into the following causes:
 
 Constant | Value | SIP Status Codes
@@ -46,7 +46,7 @@ Constant | Value | SIP Status Codes
 `AUTHENTICATION_ERROR` | 'Authentication Error' | 401,407
 
 
-# Session Causes
+## Session Causes
 The following causes apply to audio/video sessions:
 
 Constant | Value | Description

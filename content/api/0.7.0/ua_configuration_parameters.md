@@ -50,6 +50,12 @@ wsServers: [
 ]
 ~~~
 
+## authenticationFactory
+Similar to `mediaHandlerFactory`, this parameter allows the application to use a custom authentication model with SIP.js.
+The factory is passed the UA and should return credentials.  Modifying this is very advanced; please refer to the source code for examples.
+
+By default, Digest Authentication is used.
+
 ## authorizationUser
 Username (`String`) to use when generating authentication credentials. If not defined the value in uri parameter is used.
 
@@ -97,6 +103,22 @@ Set Via transport parameter in outgoing SIP requests to “TCP”. Useful when t
 
 ~~~ javascript
 hackViaTcp: true
+~~~
+
+## hackWssInTransport
+Set the transport parameter to `wss` when used in SIP URIs.  This replaces `ws`, which is the default and required by RFC 7118, but some SIP servers do not like that.
+
+~~~ javascript
+hackWssInTransport: true
+~~~
+
+## iceCheckingTimeout
+When setting up a session, how long (in milliseconds) to allow the browser to collect ICE candidates before proceeding.
+Lowering this timeout will speed up signaling but potentially fail to set up connections in some network topologies.
+Default value is 5 seconds.
+
+~~~ javascript
+iceCheckingTimeout: 5000
 ~~~
 
 ## instanceId
@@ -147,7 +169,7 @@ connector(level, category, label, content);
 A function(session, options) that returns an object that acts like a SIP.MediaHandler. See SIP.WebRTC.MediaHandler.defaultFactory for an example.
 
 ## noAnswerTimeout
-Time (in seconds) (`Number`) after which an incoming call is rejected if not answered. Default value is `30`.
+Time (in seconds) (`Number`) after which an incoming call is rejected if not answered. Default value is `60`.
 
 ~~~ javascript
 noAnswerTimeout: 120
@@ -187,6 +209,16 @@ registrarServer: 'sip:registrar.mydomain.com'
 ~~~ javascript
 rel100: SIP.C.supported.REQUIRED
 ~~~
+
+## replaces
+`Constant` representing whether the UA should support the SIP Replaces header.
+If you enable support for Replaces, please be sure to listen for the [`replaced` event](../session/#replaced) event on each Session.
+Accepts `SIP.C.supported.SUPPORTED`, and `SIP.C.supported.UNSUPPORTED`. Default value is `SIP.C.supported.UNSUPPORTED`.
+
+~~~ javascript
+replaces: SIP.C.supported.SUPPORTED
+~~~
+
 
 ## stunServers
 `String` or `Array` of `Strings` indicating the STUN server(s) to use for IP address discovery. Values must include “stun:” or “stuns:” schema. Default value is [`"stun:stun.l.google.com:19302"`].

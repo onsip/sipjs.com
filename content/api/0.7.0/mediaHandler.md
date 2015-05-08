@@ -4,7 +4,15 @@ description: The WebRTC Media Handler is the default media handler for SIP.js.
 ---
 # Media Handler
 
-`MediaHandler` represents a common interface for SIP.js to interact with media streams. The default MediaHandler included with SIP.js interacts with WebRTC to provide voice, video, and data streams.
+`MediaHandler` represents a common interface for SIP.js to interact with media streams.
+The default MediaHandler included with SIP.js interacts with WebRTC to provide voice, video, and data streams.
+
+When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom MediaHandler using
+the [UA](../ua/)'s [mediaHandlerFactory](../ua_configuration_parameters/#mediahandlerfactory) configuration parameter.
+This is an advanced topic, and the source code is your friend.  Refer to the placeholder `SIP.MediaHandler` file for the required interface.  We also define
+a custom Rock-Paper-Scissors MediaHandler in our test suite.
+
+The rest of this page documents `SIP.WebRTC.MediaHandler`, the default Media Handler for WebRTC.
 
 * TOC
 {:toc}
@@ -84,23 +92,61 @@ Name | Type | Description
 -----|------|--------------
 `error`|`String`| The message returned from the getUserMedia failure.
 
+
+
+
 ### `iceGathering`
 
 Fired when the WebRTC layer has started gathering ICE candidates.
 
 #### `on('iceGathering', function () {})`
 
-### `iceComplete`
+### `iceCandidate`
 
-Fired when the WebRTC layer has completed ICE negotiation
+Fired each time the WebRTC layer finds an ICE candidate.
 
-#### `on('iceComplete', function () {})`
+#### `on('iceCandidate', function (candidate) {})`
 
-### `iceFailed`
+### `iceGatheringComplete`
 
-Fired when the WebRTC layer fails to negotiate ICE.
+Fired when the WebRTC layer has finished gathering ICE candidates.
 
-#### `on('iceFailed', function () {})`
+#### `on('iceGatheringComplete', function () {})`
+
+
+
+### `iceConnection`
+
+Fired when the ICE connection state is `new`.
+
+### `iceConnectionChecking`
+
+Fired when the ICE connection state is `checking`.
+
+### `iceConnectionConnected`
+
+Fired when the ICE connection state is `connected`.
+
+### `iceConnectionCompleted`
+
+Fired when the ICE connection state is `completed`.
+
+### `iceConnectionFailed`
+
+Fired when the ICE connection state is `failed`.
+
+### `iceConnectionDisconnected`
+
+Fired when the ICE connection state is `disconnected`.
+
+### `iceConnectionClosed`
+
+Fired when the ICE connection state is `closed`.
+
+
+
+
+
 
 ### `getDescription`
 
@@ -125,6 +171,12 @@ Name | Type | Description
 `sdpWrapper`|`Object`| The sdpWrapper used by setDescription.
 `sdpWrapper.type`|`String`| Can be either 'offer' or 'answer' depending on which type of SDP was received.
 `sdpWrapper.sdp`|`String`| The SDP that was received.
+
+
+
+
+
+
 
 ### `dataChannel`
 

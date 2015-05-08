@@ -61,6 +61,17 @@ myUA.on('invite', function (session) {
 
 `String` - The value of `method` is always `"INVITE"`. Inherited from [`SIP.ClientContext`](../context/client/#method) or [`SIP.ServerContext`](../context/server/#method).
 
+### `mediaHandler`
+
+[`SIP.WebRTC.MediaHandler`](../mediaHandler/) (default) -
+To maintain separation of signaling from media, Sessions delegate most media functionality down to a separate [MediaHandler](../mediaHandler/) object.
+The MediaHandler deals with creating local SDP descriptions, negotiating SDP, gathering ICE candidates, etc.
+
+By default, this object is configured to use WebRTC.  When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom MediaHandler using
+the [UA](../ua/)'s [mediaHandlerFactory](../ua_configuration_parameters/#mediahandlerfactory) configuration parameter.
+This is an advanced topic, and the source code is your friend.  Refer to the placeholder `SIP.MediaHandler` file for the required interface.  We also define
+a custom Rock-Paper-Scissors MediaHandler in our test suite.
+
 ### `request`
 
 [`SIP.IncomingRequest`](../sipMessage/) or [`SIP.OutgoingRequest`](../sipMessage/) - Inherited from [`SIP.ClientContext`](../context/client/#request) or [`SIP.ServerContext`](../context/server/#request).
@@ -129,11 +140,10 @@ var options = {
 call.dtmf(tones, options);
 ~~~
 
-<!--
-
 ### `terminate([options])`
 
-Terminate the current session. Depending on the state of the session, this function may send a CANCEL request, a non-2xx final response, a BYE request, or even no request.
+Terminate the current session. Depending on the state of the session, this function may send a CANCEL request, a non-2xx final response, a BYE request, or even no request at all.
+Different behavior will result in different events being emitted, but they will always result in a final `terminated` event.
 
 #### Parameters
 
@@ -156,7 +166,6 @@ Type | Description
 TypeError
 INVALID_STATE_ERROR
 
--->
 
 ### `bye([options])`
 
@@ -220,13 +229,15 @@ Type | Description
 
 ### `refer(target[, options])`
 
-Send a REFER request. A REFER occurs when persons A and B have an active call session, and A wants to transfer B to speak with C. This is called a transfer, and these transfers can be attended or blind. An attended transfer occurs when A creates a session with C before connecting B to speak with C. A blind transfer occurs when A causes B to create a session with C, so A and C have no contact.  SIP.js only supports blind transfers.
+Send a REFER request. A REFER occurs when persons A and B have an active call session, and A wants to transfer B to speak with C.
+This is called a transfer, and these transfers can be attended or blind. An attended transfer occurs when A creates a session with C
+before connecting B to speak with C. A blind transfer occurs when A causes B to create a session with C, so A and C have no contact.
 
 #### Parameters
 
 Name | Type | Description
 -----|------|--------------
-`target`|`String`|The target address to be referred to.
+`target`|`String|SIP.Session`|If a String, the target address to refer the remote party to (Blind Transfer).  If a Session object, the target session to refer the remote party to, with Replaces (Attended Transfer)
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
@@ -261,7 +272,12 @@ Name | Type | Description
 
 ### `cancel([options])`
 
-Overrides [`SIP.ClientContext.cancel`](../context/client/#canceloptions/)
+Overrides [`SIP.ClientContext.cancel`](../context/client/#canceloptions/).
+
+Note that a `cancel` request will result in the termination of the session, but not immediately.
+Instead, a CANCEL request will be sent.  Depending on the timing of the request, this usually
+triggers a rejection response (and thus `rejected`, `failed`, and `terminated` events).  If the remote
+end has already accepted the Invite, however, a BYE must be sent, resulting in `accepted`, `bye`, and `terminated` events.
 
 ## Instance Methods (Inbound/Server)
 
@@ -303,6 +319,9 @@ Overrides [`SIP.ServerContext.reject`](../context/server/#rejectoptions)
 Overrides [`SIP.ServerContext.reply`](../context/server/#replyoptions)
 
 
+
+
+
 ## Events
 
 The `SIP.Session` class defines a series of events. Each of them allows a callback function to be defined in order to let the user execute a handler for each given stimulus.
@@ -338,7 +357,7 @@ Inbound sessions do not currently provide any parameters when emitting the `acce
 
 ### `rejected`
 
-Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event.*
+Fired each time an unsuccessful final (300-699) response is received. *Note: This will also emit a `failed` event, followed by a `terminated` event.*
 
 #### `on('rejected', function (response, cause) {})`
 
@@ -349,7 +368,10 @@ Name | Type | Description
 
 ### `failed`
 
-Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.
+Fired when the request fails, whether due to an unsuccessful final response or due to timeout, transport, or other error.  This event will only be emitted
+by Sessions which have not yet been `accepted`.  After acceptance, look for a `bye` event instead, or listen for `terminated` in all cases.
+
+*Note: This will also emit a `terminated` event.*
 
 #### `on('failed', function (response, cause) {})`
 
@@ -359,19 +381,14 @@ Name | Type | Description
 `cause` | `String` | The reason phrase associated with the SIP response code, or one of [Failure and End Causes](../causes).
 
 
-### `connecting`
-
-Fired when [ICE](http://www.html5rocks.com/en/tutorials/webrtc/infrastructure/#after-signaling-using-ice-to-cope-with-nats-and-firewalls) is starting to negotiate between the peers.
-
-#### `on('connecting', function () {})`
-
-*There are no documented arguments for this event*
-
 ### `terminated`
 
-Fired when an established call ends.
+Fired when the session is destroyed, whether before or after it has been accepted.
 
-Please note:  The `terminated` event in 0.6.x versions does not always behave as you would expect.  Instead, to reliably determine the end of a call, it is recommended that you provide listeners for both the `failed` (for when a Session fails before being accepted) and `bye` (for when an accepted Session is terminated) events.  Due to a bug, you also need to listen for the `cancel` event.  This is a known issue and is resolved properly on the `master` branch, to be released in 0.7.0.
+The terminated event is a catch-all event of sorts.  Whether the Session has been explicitly rejected,
+failed due to technical issues, or ended with a BYE request, a `terminated` event will always be fired.
+
+Please note:  The `terminated` event in 0.6.x versions does not always behave as you would expect.  This was fixed in 0.7.0, so be careful when migrating. 
 
 #### `on('terminated', function(message, cause) {})`
 
@@ -383,7 +400,9 @@ Name | Type | Description
 
 ### `cancel`
 
-Fired when the session was canceled by the client.
+Fired when the session was canceled by the client.  Note that this will **not** be immediately followed by a `rejected`, `failed`, or `terminated` event.
+Depending on the timing of the cancel, it may trigger a rejection response or the session may be accepted and immediately terminated.  In those cases,
+the `rejected` and `failed` or `bye` event will be emitted as expected, and the `terminated` event will then follow.
 
 #### `on('cancel', function() {})`
 
@@ -408,6 +427,18 @@ Name | Type | Description
 `callback`|`function(request, newSession)`|Callback function to be called after the refer is followed.
 `request`|[`SIP.IncomingRequest`](../sipMessage/)|Instance of the received SIP REFER request.
 `newSession`|[`SIP.Session`](.)|The Session created by following the REFER
+
+### `replaced`
+
+Fired when an INVITE with Replaces has caused this session to end and be replaced by a new session.
+Use this event to clean up the old session and associate any UI elements seamlessly with the new session.
+This fires immediately before the session is terminated and the new session is accepted.
+
+#### `on('replaced', function (newSession) {})`
+
+Name | Type | Description
+-|-|-
+`newSession`|`SIP.Session`| The new session replacing this one.
 
 ### `dtmf`
 
@@ -464,9 +495,20 @@ Fired when a session is pre-accepted.
 
 -->
 
+<!--
+### `connecting`
+
+Fired when [ICE](http://www.html5rocks.com/en/tutorials/webrtc/infrastructure/#after-signaling-using-ice-to-cope-with-nats-and-firewalls) is starting to negotiate between the peers.
+
+#### `on('connecting', function () {})`
+
+*There are no documented arguments for this event*
+-->
+
+
 ### `bye`
 
-Fired when a BYE is sent.
+Fired when a BYE is sent or received.  *Note:  A BYE request will also cause a `terminated` event to be emitted.*
 
 #### `on('bye', function(request) {})`
 
