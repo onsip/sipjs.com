@@ -194,7 +194,7 @@ By specifying an `options` parameter, additional configuration choices can be ma
 |`options.media`                  |`Object`     | Optional `Object` with media related parameters (see below) |
 |`options.media.constraints`      |`Object`     |`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used|
 |`options.media.stream`           |`MediaStream`|`MediaStream` to transmit to the other end|
-|`options.media.render`           |`Object`     |Video or audio elements that streams should be automatically rendered in.  For example: `{ remote: { video: element, audio: element } }`
+|`options.media.render`           |`Object`     |Video or audio elements that streams should be automatically rendered in.  For example: `{ remote: element, local: otherElement }`.  *NOTE:  This is a change from version 0.6.x!*
 |`options.extraHeaders`           |`Array` of `Strings` |Optional `Array` of `Strings` with extra SIP headers for the INVITE request|
 |`options.anonymous`              |`Boolean`    |`Boolean` field indicating whether the call should be done anonymously. Default value is `false`|
 |`options.rel100`                 | `SIP.C.supported.REQUIRED`, `SIP.C.supported.SUPPORTED`, `SIP.C.supported.UNSUPPORTED` | Optionally declare support or requirement of reliable provisional responses (100rel), as defined in [RFC3262](http://tools.ietf.org/html/rfc3262). Default is Unsupported.
