@@ -307,7 +307,7 @@ Name | Type | Description
 `options.media`                  |`Object`     | Optional `Object` with media related parameters (see below) |
 `options.media.constraints`      |`Object`     |`Object` with two valid fields (`audio` and `video`) indicating whether the session is intended to use audio and/or video and the constraints to be used. If media constraints are not provided, `{audio: true, video: true}` will be used|
 `options.media.stream`           |`MediaStream`|`MediaStream` to transmit to the other end|
-`options.media.render`           |`Object`     |Video or audio elements that streams should be automatically rendered in.  For example: `{ remote: { video: element, audio: element } }`
+`options.media.render`           |`Object`     |Video or audio elements that streams should be automatically rendered in.  For example: `{ remote: element, local: otherElement }` *NOTE:  This is a change from version 0.6.x!*
 ServerContext Parameters | | See [`SIP.ServerContext.accept`](../context/server/#acceptoptions).
 
 ### `reject([options])`
