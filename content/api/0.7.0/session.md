@@ -388,7 +388,9 @@ Fired when the session is destroyed, whether before or after it has been accepte
 The terminated event is a catch-all event of sorts.  Whether the Session has been explicitly rejected,
 failed due to technical issues, or ended with a BYE request, a `terminated` event will always be fired.
 
-Please note:  The `terminated` event in 0.6.x versions does not always behave as you would expect.  This was fixed in 0.7.0, so be careful when migrating. 
+Please note:  The `terminated` event in 0.6.x versions does not always behave as you would expect.  This was fixed in 0.7.0, so be careful when migrating.
+
+Note:  In 0.7.0, the message and cause arguments are emitted as parameters on a single object.  0.7.1 and beyond will unwrap the arguments into the signature used here.
 
 #### `on('terminated', function(message, cause) {})`
 
