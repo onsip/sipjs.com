@@ -58,16 +58,14 @@ var options = {
                 video: true
             },
             render: {
-                remote: {
-                    video: document.getElementById('remoteVideo')
-                },
-                local: {
-                    video: document.getElementById('localVideo')
-                }
+                remote: document.getElementById('remoteVideo'),
+                local: document.getElementById('localVideo')
             }
         }
     };
 ~~~
+
+*Note:  The `render` option syntax has changed between [0.6.x](/api/0.6.0/) and [0.7.x](/api/0.7.0). Please refer to the documentation for the correct version.*
 
 Then call the `.invite()` method with the target SIP address and the `options` object containing session information.
 
