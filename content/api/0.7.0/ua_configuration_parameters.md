@@ -115,7 +115,7 @@ hackWssInTransport: true
 ## iceCheckingTimeout
 When setting up a session, how long (in milliseconds) to allow the browser to collect ICE candidates before proceeding.
 Lowering this timeout will speed up signaling but potentially fail to set up connections in some network topologies.
-Default value is 5 seconds.
+Default value is 5 seconds, and this can be set as low as 0.5 seconds.
 
 ~~~ javascript
 iceCheckingTimeout: 5000
