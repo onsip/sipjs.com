@@ -34,7 +34,7 @@ popup: true
              maxlength="15"/>
       <button id="success-submit" type="submit">share</button>
       <input type="hidden" name="lead_source" value="sipjscom"/>
-      <input type="hidden" name="Lead_Type__c" value="SIPjs"/>
+      <input type="hidden" name="Lead_Type__c" value="Developer"/>
       <input type="hidden" name="encoding" value="UTF-8"/>
       <input type="hidden" name="oid" value="00D3000000011or"/>
       <input type="hidden" name="retURL" value="http://sipjs.com/thank-you/"/>
