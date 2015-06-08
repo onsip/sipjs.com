@@ -25,7 +25,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.6.3-min.js"></script>
+    <script src="sip-0.7.0.min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -65,7 +65,7 @@ var options = {
     };
 ~~~
 
-*Note:  The `render` option syntax has changed between [0.6.x](/api/0.6.0/) and [0.7.x](/api/0.7.0). Please refer to the documentation for the correct version.*
+*Note:  The `render` option syntax has changed between [0.6.x](/api/0.6.0/) and [0.7.x](/api/0.7.0). The sample here uses the correct syntax.*
 
 Then call the `.invite()` method with the target SIP address and the `options` object containing session information.
 
