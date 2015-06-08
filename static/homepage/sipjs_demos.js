@@ -59,12 +59,8 @@ function mediaOptions(audio, video, remoteRender, localRender) {
                 video: video
             },
             render: {
-                remote: {
-                    video: remoteRender
-                },
-                local: {
-                    video: localRender
-                }
+                remote: remoteRender,
+                local: localRender
             }
         }
     };
@@ -278,20 +274,14 @@ function createDataUA(callerURI, displayName) {
             /* Like a default mediaHandler, but no streams to manage */
             var self = new SIP.WebRTC.MediaHandler(session, {
                 mediaStreamManager: {
-                    acquire: function (onSuccess) {
-                        // Must be async for on('dataChannel') callback to have a chance
-                        setTimeout(onSuccess.bind(null, {}), 0);
+                    acquire: function (mediaHint) {
+                        return SIP.Utils.Promise.resolve([]);
                     },
                     release: function (stream) {
                         // no-op
                     }
                 }
             });
-
-            // No stream to add. Assume success.
-            self.addStream = function addStream(stream, success, failure) {
-                success();
-            };
 
             return self;
         }
