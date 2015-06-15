@@ -5,6 +5,7 @@ description: Get started now. Download production and development versions of th
 ---
 
 ## Version 0.7.0
+{: style="color: #ea4b35; font-weight: bold; font-size: 2em; margin-top:0;" }
 
 * Development (uncompressed code, 350KB) <a href="/download/sip-0.7.0.js" download="sip-0.7.0.js">sip-0.7.0.js</a>.
 * Production (minified code, 178KB) <a href="/download/sip-0.7.0.min.js" download="sip-0.7.0.min.js">sip-0.7.0.min.js</a>.
