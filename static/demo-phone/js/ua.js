@@ -13,7 +13,7 @@ var elements = {
 };
 
 var config = {
-  userAgentString: 'SIP.js/0.6.3-devel BB',
+  userAgentString: 'SIP.js/0.7.0 BB',
   traceSip: true,
   register: false
 };
@@ -141,9 +141,7 @@ function createNewSessionUI(uri, session, message) {
   sessionUI.messageForm    = node.querySelector('.message-form');
   sessionUI.messageInput   = node.querySelector('.message-form input[type="text"]');
   sessionUI.renderHint     = {
-    remote: {
-      video: sessionUI.video
-    }
+    remote: sessionUI.video
   };
 
   sessionUIs[uri] = sessionUI;
