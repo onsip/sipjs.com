@@ -3,6 +3,11 @@ title: Android Native Apps | SIP.js
 description: Easily write SIP.js apps for the Android platform.
 ---
 
+<section class="callout">
+<h3>This guide is out of date.</h3>
+<p>As of L, Android now supports WebRTC in their standard WebView. We recommend building a hybrid HTML5 mobile app, rather than using Cordova or Crosswalk.</p>
+</section>
+
 # Android Native Apps
 
 SIP.js web apps can be ported to Android using [Crosswalk](https://crosswalk-project.org/), which provides a WebRTC-capable WebView to display the web app without the conventional browser interface surrounding it. This guide will show you how to use Crosswalk to generate an Android app for the [SIP.js Demo Phone](/demo-phone/) on Mac OS X. Linux and Windows users should be able to follow along, as well.

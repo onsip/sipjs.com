@@ -3323,6 +3323,10 @@ RegisterContext.prototype = {
     extraHeaders.push('Contact: ' + this.contact + ';expires=' + this.expires);
     extraHeaders.push('Allow: ' + SIP.Utils.getAllowedMethods(this.ua));
 
+    // Save original extraHeaders to be used in .close
+    this.closeHeaders = this.options.closeWithHeaders ?
+      (this.options.extraHeaders || []).slice() : [];
+
     this.receiveResponse = function(response) {
       var contact, expires,
         contacts = response.getHeaders('contact').length,
@@ -3384,7 +3388,7 @@ RegisterContext.prototype = {
           // For that, decrease the expires value. ie: 3 seconds
           this.registrationTimer = SIP.Timers.setTimeout(function() {
             self.registrationTimer = null;
-            self.register(this.options);
+            self.register(self.options);
           }, (expires * 1000) - 3000);
           this.registrationExpiredTimer = SIP.Timers.setTimeout(function () {
             self.logger.warn('registration expired');
@@ -3463,8 +3467,13 @@ RegisterContext.prototype = {
   },
 
   close: function() {
+    var options = {
+      all: false,
+      extraHeaders: this.closeHeaders
+    };
+
     this.registered_before = this.registered;
-    this.unregister();
+    this.unregister(options);
   },
 
   unregister: function(options) {
@@ -5263,9 +5272,7 @@ Session.prototype = {
       case SIP.C.INVITE:
         if(this.status === C.STATUS_CONFIRMED) {
           this.logger.log('re-INVITE received');
-          // Switch these two lines to try re-INVITEs:
-          //this.receiveReinvite(request);
-          request.reply(488, null, ['Warning: 399 sipjs "Cannot update media description"']);
+          this.receiveReinvite(request);
         }
         break;
       case SIP.C.INFO:
@@ -5545,10 +5552,10 @@ Session.prototype = {
     this.endTime = new Date();
 
     this.close();
-    this.emit('terminated', {
-      message: message || null,
-      cause: cause || null
-    });
+    this.emit('terminated',
+      message || null,
+      cause || null
+    );
     return this;
   },
 
@@ -8331,6 +8338,7 @@ return Transport;
 };
 
 },{}],29:[function(_dereq_,module,exports){
+(function (global){
 "use strict";
 /**
  * @augments SIP
@@ -8345,10 +8353,11 @@ module.exports = function (SIP, environment) {
 var UA,
   C = {
     // UA status codes
-    STATUS_INIT :                0,
-    STATUS_READY:                1,
-    STATUS_USER_CLOSED:          2,
-    STATUS_NOT_READY:            3,
+    STATUS_INIT:                0,
+    STATUS_STARTING:            1,
+    STATUS_READY:               2,
+    STATUS_USER_CLOSED:         3,
+    STATUS_NOT_READY:           4,
 
     // UA error codes
     CONFIGURATION_ERROR:  1,
@@ -8512,7 +8521,11 @@ UA = function(configuration) {
   }
 
   if (typeof environment.addEventListener === 'function') {
-    environment.addEventListener('unload', this.stop.bind(this));
+    // Google Chrome Packaged Apps don't allow 'unload' listeners:
+    // unload is not available in packaged apps
+    if (!(global.chrome && global.chrome.app && global.chrome.app.runtime)) {
+      environment.addEventListener('unload', this.stop.bind(this));
+    }
   }
 };
 UA.prototype = Object.create(SIP.EventEmitter.prototype);
@@ -8691,11 +8704,14 @@ UA.prototype.start = function() {
   this.logger.log('user requested startup...');
   if (this.status === C.STATUS_INIT) {
     server = this.getNextWsServer();
+    this.status = C.STATUS_STARTING;
     new SIP.Transport(this, server);
   } else if(this.status === C.STATUS_USER_CLOSED) {
     this.logger.log('resuming');
     this.status = C.STATUS_READY;
     this.transport.connect();
+  } else if (this.status === C.STATUS_STARTING) {
+    this.logger.log('UA is in STARTING status, not opening new connection');
   } else if (this.status === C.STATUS_READY) {
     this.logger.log('UA is in READY status, not resuming');
   } else {
@@ -9866,6 +9882,7 @@ UA.C = C;
 SIP.UA = UA;
 };
 
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],30:[function(_dereq_,module,exports){
 "use strict";
 /**
@@ -10718,6 +10735,12 @@ var MediaHandler = function(session, options) {
     self.emit('iceCandidate', e);
     if (e.candidate) {
       self.logger.log('ICE candidate received: '+ (e.candidate.candidate === null ? null : e.candidate.candidate.trim()));
+      if (!self.iceCheckingTimer) {
+        self.iceCheckingTimer = SIP.Timers.setTimeout(function() {
+          self.logger.log('RTCIceChecking Timeout Triggered after '+config.iceCheckingTimeout+' milliseconds');
+          self.onIceCompleted.resolve(this);
+        }.bind(this), config.iceCheckingTimeout);
+      }
     } else {
       self.onIceCompleted.resolve(this);
     }
@@ -10736,9 +10759,9 @@ var MediaHandler = function(session, options) {
   this.peerConnection.oniceconnectionstatechange = function() {  //need e for commented out case
     var stateEvent;
 
-    if (this.iceConnectionState === 'checking') {
+    if (this.iceConnectionState === 'checking' && !self.iceCheckingTimer) {
       self.iceCheckingTimer = SIP.Timers.setTimeout(function() {
-        self.logger.log('RTCIceChecking Timeout Triggered after '+config.iceCheckingTimeout+' micro seconds');
+        self.logger.log('RTCIceChecking Timeout Triggered after '+config.iceCheckingTimeout+' milliseconds');
         self.onIceCompleted.resolve(this);
       }.bind(this), config.iceCheckingTimeout);
     }
