@@ -25,7 +25,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.6.3-min.js"></script>
+    <script src="sip-0.7.0-min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -52,6 +52,5 @@ Finally, To accept a call that is being received, catch the `invite` event.  Thi
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/OnSIP/vW7Lw/embedded/js,html,css,result/">
+  src="http://jsfiddle.net/OnSIP/vW7Lw/45/embedded/js,html,css,result/">
 </iframe>
-
