@@ -478,22 +478,6 @@ session.on('accepted', function () {
     </div>
   </div>
 
-  <div class="full-width-divider dark-gray-bg">
-    <div class="two-column-boxes align-center">
-      <div class="column-box">
-        <h3 class="homepage">Built An App Using SIP.js?</h3>
-      </div>
-      <div class="column-box mobile-hide no-js-hide" id="success-column-box">
-        <button id="success-opener" class="orange-bg">We want to hear about it!</button>
-      </div>
-      <div class="column-box desktop-hide no-js-block" id="success-column-newpage">
-        <a id="success-newpage" class="button orange-bg"
-           href="/success-story/">We want to hear about it!</a>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
   <div class="full-width-divider">
     <h2>Features</h2>
 
