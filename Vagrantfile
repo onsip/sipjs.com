@@ -64,8 +64,23 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    # set -euo pipefail # http://redsymbol.net/articles/unofficial-bash-strict-mode/
+    sudo apt-get update
+
+    # install build dependencies
+    # TODO put all these in a Gemfile and install locally
+    sudo gem install nanoc -v 3.8.0
+    sudo gem install coderay
+    sudo gem install kramdown
+    yes | sudo apt-get install ruby-dev zlib1g-dev # nokogiri build deps
+    sudo gem install nokogiri
+    sudo gem install haml
+    sudo gem install builder
+    sudo gem install adsf # required for `nanoc view`
+
+    # build/serve
+    # TODO use guard-nanoc for live updates https://github.com/guard/guard-nanoc/
+    cd /vagrant && nanoc && nanoc view 2>&1 > /dev/null &
+  SHELL
 end
