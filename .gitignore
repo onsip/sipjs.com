@@ -6,3 +6,4 @@ bin
 crash.log
 *~
 .vagrant
+vendor
