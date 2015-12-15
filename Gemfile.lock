@@ -17,6 +17,7 @@ GEM
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
     rack (1.6.4)
+    rake (10.4.2)
     tilt (2.0.1)
 
 PLATFORMS
@@ -30,6 +31,7 @@ DEPENDENCIES
   kramdown
   nanoc (= 3.8.0)
   nokogiri
+  rake
 
 BUNDLED WITH
    1.11.1
