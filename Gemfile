@@ -7,4 +7,5 @@ gem 'kramdown'
 gem 'nokogiri'
 gem 'haml'
 gem 'builder'
+gem 'guard-nanoc' # for live rebuilds
 gem 'adsf' # required for `nanoc view`
