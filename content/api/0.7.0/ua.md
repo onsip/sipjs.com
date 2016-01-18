@@ -335,7 +335,7 @@ Name | Types | Description
 
 ### `message`
 
-Fired when an incoming MESSAGE request is received.
+Fired when an incoming MESSAGE request is received. Valid messages are automatically accepted by SIP.js, to confirm delivery of this message.
 
 #### `on('message', function (message) {})`
 
