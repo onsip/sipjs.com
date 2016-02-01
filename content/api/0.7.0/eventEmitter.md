@@ -33,7 +33,7 @@ The EventEmitter constructor is intended *for internal use only.*
 
 ## Instance Methods
 
-### `on(event, callback[, bindTarget])`
+### `on(event, callback)`
 
 Register a method to be called each time a particular event is emitted.
 
@@ -43,7 +43,7 @@ Name | Type | Description
 -----|------|-------------
 `event`|`String`|The event which must be emitted to trigger the callback
 `callback`|`Function`|The callback to be called when the event is emitted
-`bindTarget`|`Object`|If provided, when `callback` is called, `this` will be set to the `bindTarget`.  Otherwise, `this` will be bound to this `SIP.EventEmitter`
+`bindTarget`|`Object`|*(Removed in 0.7.0)* Please bind your target explicitly with `callback.bind(bindTarget)`
 
 #### Returns
 
@@ -52,7 +52,7 @@ Type | Description
 `SIP.EventEmitter`| This event emitter
 
 
-### `once(event, callback[, bindTarget])`
+### `once(event, callback)`
 
 Register a method to be called the next time a particular event is emitted.  The callback will only be called once, even if the event is emitted multiple times.
 
@@ -62,7 +62,7 @@ Name | Type | Description
 -----|------|-------------
 `event`|`String`|The event which must be emitted to trigger the callback
 `callback`|`Function`|The callback to be called when the event is emitted
-`bindTarget`|`Object`|If provided, when `callback` is called, `this` will be set to the `bindTarget`.  Otherwise, `this` will be bound to this `SIP.EventEmitter`
+`bindTarget`|`Object`|*(Removed in 0.7.0)* Please bind your target explicitly with `callback.bind(bindTarget)`
 
 #### Returns
 
@@ -70,12 +70,11 @@ Type | Description
 -----|-------------
 `SIP.EventEmitter`| This event emitter
 
-### `off([event[, callback[, bindTarget]]])`
+### `off([event[, callback]])`
 
 Removes callback listeners from a particular event.  The specific behavior varies depending on the number of arguments provided:
 
-* `off(event, callback, bindTarget)` will remove all listeners for that event, callback, and bindTarget.
-* `off(event, callback)` will remove all listeners for that event and callback, regardless of whether a bindTarget was provided when adding the listener.
+* `off(event, callback)` will remove all listeners for that event and callback.
 * `off(event)` will remove all listeners for that event
 * `off()` will remove all listeners for all events on the emitter.  **Warning: Using `off()` in this fashion is likely to break things!**
 
@@ -85,7 +84,7 @@ Name | Type | Description
 -|-|-
 `event`|`String`| The event for which to remove listeners.
 `callback`|`Function`| The callback to stop calling.
-`bindTarget`|`Object`| If provided, only listeners configured with this bindTarget will be removed.
+`bindTarget`|`Object`| *(Removed in 0.7.0)* If your callback was bound, you must pass the bound function into `off`.
 
 #### Returns
 
