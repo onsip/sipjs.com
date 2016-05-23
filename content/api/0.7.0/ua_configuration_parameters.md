@@ -50,6 +50,13 @@ wsServers: [
 ]
 ~~~
 
+## allowLegacyNotifications
+If set to true, the user agent will allow NOTIFYs received without subscriptions to be emitted to a `notify` event listener on the UA.  Default value is false.
+
+~~~ javascript
+allowLegacyNotifications: true
+~~~
+
 ## authenticationFactory
 Similar to `mediaHandlerFactory`, this parameter allows the application to use a custom authentication model with SIP.js.
 The factory is passed the UA and should return credentials.  Modifying this is very advanced; please refer to the source code for examples.
