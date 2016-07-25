@@ -303,10 +303,11 @@ Fired for an unregistration. This event is fired in the following scenarios:
 * As a result of an unregistration request, `UA.unregister()`.
 * When registered, a periodic re-registration fails.
 
-#### `on('unregistered', function (cause) {})`
+#### `on('unregistered', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|--------------
+`response`||The SIP message which caused this to be emitted, if one exists
 `cause`||`null` for positive response to un-REGISTER SIP request. If a reregistration fails, this is one value of [Failure and End Causes](../causes)
 
 
@@ -314,11 +315,12 @@ Name | Type | Description
 
 Fired for a registration failure.
 
-#### `on('registrationFailed', function (cause) {})`
+#### `on('registrationFailed', function (cause, response) {})`
 
 Name | Type | Description
 -----|------|--------------
 `cause`||One value of [Failure and End Causes](../causes)
+`response`||The SIP message which caused this to be emitted, if one exists
 
 
 ### `invite`
