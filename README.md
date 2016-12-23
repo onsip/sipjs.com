@@ -19,4 +19,9 @@ Development
     bundle exec nanoc # build once
     bundle exec nanoc view # serve over localhost:3000
     bundle exec guard # live rebuild
-    bundle exec rake publish # publish to sipjs.com
+    
+    Publish to Gitlab Pages:
+      git push origin master
+    
+    Publish to Github Pages (deprecated):
+      bundle exec rake publish # publish to sipjs.com
