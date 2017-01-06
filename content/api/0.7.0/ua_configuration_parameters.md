@@ -98,6 +98,24 @@ Descriptive name (`String`) to be shown to the called party when calling or send
 displayName: "Alice ¶€ĸøĸø"
 ~~~
 
+## hackCleanJitsiSdpImageattr
+Remove a=imageattr lines from the SDP produced by Jitsi calling a WebRTC endpoint with certain codecs. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
+
+Version: 0.7.6+
+
+~~~ javascript
+hackCleanJitsiSdpImageattr:true
+~~~
+
+## hackStripTcp
+Remove TCP candidates generated from the browser gathering ICE candidates. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
+
+Version 0.7.6+
+
+~~~ javascript
+hackStripTcp:true
+~~~
+
 ## hackIpInContact
 Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
 
