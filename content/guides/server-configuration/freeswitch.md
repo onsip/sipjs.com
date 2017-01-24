@@ -104,4 +104,4 @@ It is known that SIP.js and FreeSWITCH might not interop well if you have the fo
 
 Firefox 34+ requires [SIP.js 0.6.4 or later](/download/) to interop with FreeSWITCH or Asterisk.
 
-FreeSWITCH has a wiki article on [WebRTC support](https://wiki.freeswitch.org/wiki/Webrtc).
+FreeSWITCH has a confluence article on [WebRTC support](https://freeswitch.org/confluence/display/FREESWITCH/WebRTC).
