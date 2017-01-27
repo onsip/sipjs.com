@@ -244,6 +244,15 @@ Accepts `SIP.C.supported.SUPPORTED`, and `SIP.C.supported.UNSUPPORTED`. Default 
 replaces: SIP.C.supported.SUPPORTED
 ~~~
 
+## rtcpMuxPolicy
+`String` that overrides the default Multiplexing RTP (`rtp-mux`) mode used for the peer connection. Setting this to “negotiate” may allow endpoints that do not support `rtp-mux` to work with SIP.js. If not specified, the browser's default policy is used.
+
+Version: 0.7.7+
+
+~~~ javascript
+rtcpMuxPolicy: "negotiate"
+~~~
+
 
 ## stunServers
 `String` or `Array` of `Strings` indicating the STUN server(s) to use for IP address discovery. Values must include “stun:” or “stuns:” schema. Default value is [`"stun:stun.l.google.com:19302"`].

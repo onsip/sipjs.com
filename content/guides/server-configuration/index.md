@@ -11,3 +11,4 @@ This section of the documentation is intended to help you configure SIP.js to wo
 * [FreeSWITCH](./freeswitch/)
 * [Asterisk](./asterisk/)
 * [OnSIP](./onsip-network/)
+* [FreeSWITCH Legacy](./freeswitch-legacy)
