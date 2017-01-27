@@ -160,6 +160,9 @@ var config = {
   // HackIpInContact for Asterisk
   hackIpInContact: true,
 
+  // rtcpMuxPolicy for Asterisk
+  rtcpMuxPolicy: 'negotiate',
+
 };
 
 var ua = new SIP.UA(config);
@@ -178,8 +181,6 @@ ua.invite('1061',{
 * Update 10/24/2014 - If you are still having trouble with Asterisk and are using a WebSocket Secure (WSS), you can try using the `hackWssInTransport: true` parameter in your UA's configuration. This is new as of [commit 32bffbe](https://github.com/onsip/SIP.js/commit/32bffbea37d91d185851c46e930be8f663e52d13) on the [SIP.js Master branch](https://github.com/onsip/SIP.js).
 
 ## Troubleshooting
-
-Firefox 34+ requires [SIP.js 0.6.4 or later](/download/) to interop with FreeSWITCH or Asterisk.
 
 This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk.
 
