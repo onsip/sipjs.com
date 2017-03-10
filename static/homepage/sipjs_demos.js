@@ -78,7 +78,8 @@ function createUA(callerURI, displayName) {
     var configuration = {
         traceSip: true,
         uri: callerURI,
-        displayName: displayName
+        displayName: displayName,
+        userAgentString: SIP.C.USER_AGENT + " sipjs.com"
     };
     var userAgent = new SIP.UA(configuration);
     return userAgent;
@@ -260,6 +261,7 @@ function createDataUA(callerURI, displayName) {
         traceSip: true,
         uri: dataURI,
         displayName: displayName,
+        userAgentString: SIP.C.USER_AGENT + " sipjs.com",
         /*
          * Custom media handler factories don't have great compatibility with
          * our WebRTC function caching (like SIP.WebRTC.RTCPeerConnection)
