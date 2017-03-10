@@ -345,7 +345,7 @@ If this is set then the User-Agent header will have this string appended after n
 userAgentString: "myAwesomeApp"
 ~~~
 
-The User-Agent header will look like User-Agent: SIP.js/0.7.0 myAwesomeApp
+The User-Agent header will look like User-Agent: myAwesomeApp
 
 ## wsServerMaxReconnection
 
