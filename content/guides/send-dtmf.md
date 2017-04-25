@@ -56,5 +56,5 @@ To further explore SIP.js, try using the `session.on('dtmf', ...)` event to play
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/NBUS3/embedded/js,html,css,result/">
+  src="https://jsfiddle.net/NBUS3/embedded/js,html,css,result/">
 </iframe>

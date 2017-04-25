@@ -75,5 +75,5 @@ An `endCall` button is added to terminate the session using the `.bye()` method.
 
 <iframe
   style="width: 100%; height: 410px"
-  src="http://jsfiddle.net/OnSIP/W93H6/embedded/js,html,css,result/">
+  src="https://jsfiddle.net/OnSIP/W93H6/embedded/js,html,css,result/">
 </iframe>

@@ -19,7 +19,7 @@ A `<button>` element is included to determine when to send the message.
 
 <iframe
   style="width: 100%; height: 250px"
-  src="http://jsfiddle.net/5JbvL/3/embedded/html,js,result/">
+  src="https://jsfiddle.net/5JbvL/3/embedded/html,js,result/">
 </iframe>
 
 
@@ -30,7 +30,7 @@ In order to send messages, create a SIP user agent.  Calling `SIP.UA()` method, 
 
 <iframe
   style="width: 100%; height: 250px"
-  src="http://jsfiddle.net/gk3p4/5/embedded/js,html,result/">
+  src="https://jsfiddle.net/gk3p4/5/embedded/js,html,result/">
 </iframe>
 
 
@@ -46,6 +46,6 @@ Add a click event to the `<button>` element, that calls the `message()` method.
 
 <iframe
   style="width: 100%; height: 250px"
-  src="http://jsfiddle.net/8Cg6M/5/embedded/js,html,result/">
+  src="https://jsfiddle.net/8Cg6M/5/embedded/js,html,result/">
 </iframe>
 

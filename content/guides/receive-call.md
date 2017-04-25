@@ -52,5 +52,5 @@ Finally, To accept a call that is being received, catch the `invite` event.  Thi
 
 <iframe
   style="width: 100%; height: 600px"
-  src="http://jsfiddle.net/OnSIP/vW7Lw/45/embedded/js,html,css,result/">
+  src="https://jsfiddle.net/OnSIP/vW7Lw/45/embedded/js,html,css,result/">
 </iframe>
