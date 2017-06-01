@@ -315,7 +315,7 @@ Name | Type | Description
 
 Fired for a registration failure.
 
-#### `on('registrationFailed', function (cause, response) {})`
+#### `on('registrationFailed', function (response, cause) {})`
 
 Name | Type | Description
 -----|------|--------------
