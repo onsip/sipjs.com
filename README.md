@@ -11,7 +11,7 @@ If you are looking for the SIP.js github page, you can find it at https://github
 Development
 ---
 
-    git clone https://github.com/onsip/sipjs.com
+    git clone https://gitlab.com/onsip/sipjs.com
     cd sipjs.com
     gem install bundler # http://bundler.io
     bundle install --path vendor/bundle
