@@ -113,7 +113,7 @@ FreeSWITCH has a confluence article on [WebRTC support](https://freeswitch.org/c
 
 # Configure Web Socket Secure (WSS) with Letsencrypt
 
-Browsers are more forcibly requiring secure connections to enable WebRTC features. To enable WSS to work with most modern browsers you will need a real SSL certificate, whcih can be obtained from [letsencrypt](https://letsencrypt.org/) for free. This guide covers the initial acquisition of the certificate for testing. Renewing the certificate or other issues are outside the scope of this guide.
+Browsers are more forcibly requiring secure connections to enable WebRTC features. To enable WSS to work with most modern browsers you will need a real SSL certificate, which can be obtained from [letsencrypt](https://letsencrypt.org/) for free. This guide covers the initial acquisition of the certificate for testing. Renewing the certificate or other issues are outside the scope of this guide.
 
 ## Install Certbot
 
