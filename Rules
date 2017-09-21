@@ -61,6 +61,17 @@ compile '/api/0.7.0/*' do
   layout item[:layout] || '0.7.0'
 end
 
+compile '/api/0.8.0/*' do
+  filter :erb
+  filter :kramdown,
+         :toc_levels => [2,3],
+         :enable_coderay => true,
+         :coderay_line_numbers => nil
+  filter :colorize_syntax,
+         :colorizers => {:javascript => :pygmentsrb}
+  layout item[:layout] || '0.8.0'
+end
+
 compile '/api/*' do
   filter :erb
   filter :kramdown,
