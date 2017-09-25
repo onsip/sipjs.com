@@ -70,7 +70,7 @@ Gets the session description from the underlying connection for the `session` to
 Name | Type | Description
 -----|------|--------------
 `options`|`Object`| Optional
-`modifiers`|`Array` of `Promise`| Optional
+`modifiers`|`Array` of `Function` returning `Promise`| Optional
 
 #### Returns
 
@@ -88,7 +88,7 @@ Name | Type | Description
 -----|------|--------------
 `sessionDescription`|`String`| The remote description that is to be set on the underlying connection for the session.
 `options`|`Object`| Optional
-`modifiers`|`Array` of `Promise`| Optional
+`modifiers`|`Array` of `Function` returning `Promise`| Optional
 
 #### Returns
 
@@ -124,7 +124,7 @@ Name | Type | Description
 -----|------|--------------
 description|Object| [RTCSessionDescription](https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription) object containing the session to be put on hold.
 
-### Returns
+#### Returns
 
 Type     | Description
 ---------|-------------
@@ -136,7 +136,7 @@ Modifiers are used to modify the description before it is set on the connection 
 
 ### `[Modifiers]`
 
-Modifiers should always be passed in an array. The `SessionDescriptionHandler` should take the array and chain the promises together in order of them in the array. `SIP.Utils.reducePromises(array)` can do this for you.
+Modifiers should always be passed in an array. The `SessionDescriptionHandler` should take the array and chain the promises together in order of them in the array. `SIP.Utils.reducePromises(array)` can do this for you. The modifiers should be passed as a reference to a function, and each function should return a promise which is resolved with the modified SDP.
 
 #### Parameters
 
@@ -164,7 +164,47 @@ ua.invite('alice@example.onsip.com', {}, modifierArray);
 
 ~~~
 
-## Events
+## Default Options
+
+The options listed below are the options that are supported by the default WebRTC Session Description Handler. SIP.js does not internally rely on these options in any way.
+
+The options can either be passed in from the [`sessionDescriptionHandlerFactoryOptions`](/api/0.8.0/ua_configuration_parameters/#sessiondescriptionhandlerfactoryoptions) on the UA, or as `SessionDescriptionHandlerOptions` on calls to [`invite`](/api/0.8.0/ua/#invitetarget-elementoptions) or [`accept`](/api/0.8.0/session/#acceptoptions).
+
+### `constraints`
+
+Constraints to be used on calls to the WebRTC [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) function.
+Default value is audio true, and video true.
+
+~~~ javascript
+constraints: {
+  audio: true,
+  video: true
+}
+~~~
+
+### `iceCheckingTimeout`
+
+When setting up a session, how long (in milliseconds) to allow the browser to collect ICE candidates before proceeding.
+Lowering this timeout will speed up signaling but potentially fail to set up connections in some network topologies.
+Default value is 5 seconds, and this can be set as low as 0.5 seconds.
+
+~~~ javascript
+iceCheckingTimeout: 5000
+~~~
+
+### `modifiers`
+
+A set of default modifiers to use every time a description is requested or set by the Session Description Handler. These modifiers will occur before modifiers passed by a specific call to the Session Description Handler.
+
+### `rtcConfiguration`
+
+Options to be passed to the WebRTC [`PeerConnection`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection) constructor.
+
+### `RTCOfferOptions`
+
+Options to be passed to the WebRTC Peer Connection [`createOffer`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer) or [`createAnswer`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createAnswer) call.
+
+## Default Events
 
 The events listed below are what is emitted from the default WebRTC Session Description Handler. SIP.js does not internally rely on these events.
 
