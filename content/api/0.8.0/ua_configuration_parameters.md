@@ -58,7 +58,7 @@ allowLegacyNotifications: true
 ~~~
 
 ## authenticationFactory
-Similar to `mediaHandlerFactory`, this parameter allows the application to use a custom authentication model with SIP.js.
+Similar to `sessionDescriptionHandlerFactory`, this parameter allows the application to use a custom authentication model with SIP.js.
 The factory is passed the UA and should return credentials.  Modifying this is very advanced; please refer to the source code for examples.
 
 By default, Digest Authentication is used.
@@ -98,24 +98,6 @@ Descriptive name (`String`) to be shown to the called party when calling or send
 displayName: "Alice ¶€ĸøĸø"
 ~~~
 
-## hackCleanJitsiSdpImageattr
-Remove a=imageattr lines from the SDP produced by Jitsi calling a WebRTC endpoint with certain codecs. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
-
-Version: 0.7.6+
-
-~~~ javascript
-hackCleanJitsiSdpImageattr:true
-~~~
-
-## hackStripTcp
-Remove TCP candidates generated from the browser gathering ICE candidates. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
-
-Version 0.7.6+
-
-~~~ javascript
-hackStripTcp:true
-~~~
-
 ## hackIpInContact
 Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
 
@@ -135,15 +117,6 @@ Set the transport parameter to `wss` when used in SIP URIs.  This replaces `ws`,
 
 ~~~ javascript
 hackWssInTransport: true
-~~~
-
-## iceCheckingTimeout
-When setting up a session, how long (in milliseconds) to allow the browser to collect ICE candidates before proceeding.
-Lowering this timeout will speed up signaling but potentially fail to set up connections in some network topologies.
-Default value is 5 seconds, and this can be set as low as 0.5 seconds.
-
-~~~ javascript
-iceCheckingTimeout: 5000
 ~~~
 
 ## instanceId
@@ -189,9 +162,6 @@ the log. ie: 'sipjs.ua'
 */
 connector(level, category, label, content);
 ~~~
-
-## mediaHandlerFactory
-A function(session, options) that returns an object that acts like a SIP.MediaHandler. See SIP.WebRTC.MediaHandler.defaultFactory for an example.
 
 ## noAnswerTimeout
 Time (in seconds) (`Number`) after which an incoming call is rejected if not answered. Default value is `60`.
@@ -244,79 +214,21 @@ Accepts `SIP.C.supported.SUPPORTED`, and `SIP.C.supported.UNSUPPORTED`. Default 
 replaces: SIP.C.supported.SUPPORTED
 ~~~
 
-## rtcpMuxPolicy
-`String` that overrides the default Multiplexing RTP (`rtp-mux`) mode used for the peer connection. Setting this to “negotiate” may allow endpoints that do not support `rtp-mux` to work with SIP.js. If not specified, the browser's default policy is used.
+## sessionDescriptionHandlerFactory
+TODO
 
-Version: 0.7.7+
+## sessionDescriptionHandlerFactoryOptions
+Options that will be passed to the SessionDescriptionHandlerFactory.
 
-~~~ javascript
-rtcpMuxPolicy: "negotiate"
-~~~
+* `Object` providing options to the factory.
+* Look at the [`WebRTC SessionDescriptionHandler`](TODO) for a list of options the default session description handler takes.
 
-
-## stunServers
-`String` or `Array` of `Strings` indicating the STUN server(s) to use for IP address discovery. Values must include “stun:” or “stuns:” schema. Default value is [`"stun:stun.l.google.com:19302"`].
-
-~~~ javascript
-stunServers: "stun:example.org"
-~~~
-
-~~~ javascript
-stunServers: ["stun:example.org", "stuns:example.org"]
-~~~
-
-~~~ javascript
-stunServers: ["stun:example.org:8000"]
-~~~
 
 ## traceSip
 Indicate whether incoming and outgoing SIP request/responses must be logged in the browser console (`Boolean`). Default value is `false`.
 
 ~~~ javascript
 traceSip: true
-~~~
-
-## turnServers
-`Object` or `Array` of `Objects` indicating the TURN server(s) and corresponding username and password to be used for media relay. ‘url’ values can include “turn:” or “turns” schema. No TURN server is set by default.
-
-~~~ javascript
-turnServers: {
-  urls:"turn:exam.org",
-  username:"alice",
-  password:"racecar"
-}
-~~~
-
-~~~ javascript
-turnServers: {
-  urls:["turn:exam.org",
-  "turn:exam.org"],
-  username:"Al",
-  password:"yo"
-}
-~~~
-
-~~~ javascript
-turnServers: [{
-  urls:"turn:exam.org",
-  username:"alice",
-  password:"racecar"
-}]
-~~~
-
-~~~ javascript
-turnServers: [
-  {
-    urls:"turn:exam.org",
-    username:"alice",
-    password:"racecar"
-  },
-  {
-    urls:"turn:exam.org?transport=udp",
-    username:"bob",
-    password:"dog"
-  }
-]
 ~~~
 
 ## usePreloadedRoute
