@@ -3,6 +3,11 @@ title: Use Cordova with iOS and WebRTC | SIP.js
 description: Setup Cordova to create a hybrid native WebRTC app on iOS.
 ---
 
+<section class="callout">
+<h3>This guide is out of date.</h3>
+<p>We are no longer supporting this mobile guide. It is still here strictly for informational purposes. We do not expect this guide to still work.</p>
+</section>
+
 # Using Cordova with iOS and WebRTC
 
 ## Requirements

@@ -5,7 +5,7 @@ description: Easily write SIP.js apps for the Android platform.
 
 <section class="callout">
 <h3>This guide is out of date.</h3>
-<p>As of L, Android now supports WebRTC in their standard WebView. We recommend building a hybrid HTML5 mobile app, rather than using Cordova or Crosswalk.</p>
+<p>We are no longer supporting this mobile guide. It is still here strictly for informational purposes. We do not expect this guide to still work.</p>
 </section>
 
 # Android Native Apps
