@@ -323,7 +323,7 @@ Name | Types | Description
 -----|-------|-------------
 `message`|[`SIP.Message`](/api/0.6.0/message/), [`SIP.ServerContext`](/api/0.6.0/context/server/)| The inbound message received. This argument also implements the shared [`SIP.ServerContext`](/api/0.6.0/context/server/) behavior for inbound requests
 
-### Example
+#### Example
 
 ~~~ javascript
 // Create a user agent named bob, connect, and register to receive invitations.
