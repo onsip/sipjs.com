@@ -5,7 +5,7 @@ description: The Simple WebRTC layer for SIP.js
 
 # Simple
 
-`Simple` is a simplified interface to make getting up and running easier for new users. It is not intended for advanced use cases.
+Simple is a simplified interface to make getting up and running easier for new users. It is not intended for advanced use cases.
 
 * TOC
 {:toc}
