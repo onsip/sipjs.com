@@ -3,6 +3,11 @@ title: Reuse MediaStreams | SIP.js
 description: How to reuse MediaStreams between calls with SIP.js.
 ---
 
+<section class="callout">
+<h3>This guide is out of date.</h3>
+<p>The WebRTC default Session Description Handler in 0.8.0 will do this automatically. This guide is only for older versions of SIP.js.</p>
+</section>
+
 # Reuse MediaStreams
 
 In order to provide a more streamlined user experience, applications built with SIP.js may wish to minimize the number of times the user is prompted to allow access to their microphone/camera. This is especially useful when the user makes multiple calls, since only Chrome and Opera on secure (i.e. https://) pages will remember media allowances.
