@@ -28,13 +28,6 @@ popup: true
                src="/shared/img/message-highlight.png" alt="message highlight" />
           <h4>message</h4>
         </li>
-        <li id="feature-data-channel">
-          <img class="icon-unselected"
-               src="/shared/img/data-channel.png" alt="message" />
-          <img class="icon-selected"
-               src="/shared/img/data-channel-highlight.png" alt="message highlight" />
-          <h4>data channel</h4>
-        </li>
       </ul>
       <!-- This draws an arrow that we use to indicate the highlighted feature -->
       <svg class="arrow mobile-hide" id="feature-arrow"
@@ -133,64 +126,7 @@ popup: true
         <polygon points="40,5 75,40 5,40" />
       </svg>
     </div>
-    <div id="content-data-channel">
-      <h2>Send Real-Time Data In A Flash</h2>
-      <h4 class="intro">Go ahead. Upload a file as Alice and Download it as Bob.</h4>
-      <div class="two-column-boxes">
-        <div class="column-box">
-          <div class="demo-window">
-            <div class="demo-view">
-              <div id="alice-data-display" class="message-display">
-                <p class="message"><span class="message-body placeholder">No files yet sent or received</span></p>
-              </div>
-            </div>
-            <span class="file-chooser-hack">
-              <button id="alice-file-choose-button" class="file-choose-button" type="button">choose a file to send</button>
-              <input id="alice-file-choose-input" type="file" name="file" class="file-choose-button" />
-            </span>
-            <span id="alice-filename" class="message-body">no file selected</span>
-            <div class="message-body file-info-msg">Max file size is 16KB</div>
-            <div id="alice-file-error-msg" class="file-info-msg error-msg"></div>
-            <div class="left">
-              <h4>Alice's View</h4>
-              <h5>Demo user one</h5>
-            </div>
-            <button id="alice-data-share-button" class="right" type="button">share</button>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-        <div class="column-box">
-          <div class="demo-window">
-            <div class="demo-view">
-              <div id="bob-data-display" class="message-display">
-                <p class="message"><span class="message-body placeholder">No files yet sent or received</span></p>
-              </div>
-            </div>
-            <span class="file-chooser-hack">
-              <button id="bob-file-choose-button" class="file-choose-button" type="button">choose a file to send</button>
-              <input id="bob-file-choose-input" type="file" name="file" class="file-choose-button" />
-            </span>
-            <span id="bob-filename" class="message-body">no file selected</span>
-            <div class="message-body file-info-msg">Max file size is 16KB</div>
-            <div id="bob-file-error-msg" class="file-info-msg error-msg"></div>
-            <div class="clearfix"></div>
-            <div class="left">
-              <h4>Bob's View</h4>
-              <h5>Demo user two</h5>
-            </div>
-            <button id="bob-data-share-button" class="right" type="button">share</button>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <svg class="arrow mobile-hide demo-arrow"
-           width="60" height="34" viewBox="0 0 80 45">
-        <polygon points="40,5 75,40 5,40" />
-      </svg>
-    </div>
   </div>
-
   <div class="full-width-divider orange-bg">
     <div id="code-intro" class="left">
       <h3 class="homepage">See How It's Done</h3>
@@ -306,105 +242,6 @@ var aliceUA = new SIP.UA({
     });
 setUpMessageInterface(aliceUA);
 aliceUA.message(bobURI, 'Check out this palindrome: "Now sir, a war is never even. Sir, a war is won."');
-~~~~
-</div>
-</div>
-<div class="code-wrapper mobile-hide">
-<div class="index-demo-code" id="code-data-channel" markdown="1">
-~~~~ javascript
-var domain        = 'sipjs.onsip.com';
-var aliceURI      = 'alice' + '@' + domain;
-var aliceName     = 'Alice';
-
-var bobURI        = 'bob' + '@' + domain;
-var bobName       = 'Bob';
-
-// Creates a user agent with the given parameters. This user agent is only for
-// sending data, so it has a special media handler factory for the
-// RTCDataChannel.
-function createDataUA(callerURI, displayName) {
-    var dataURI = 'data.' + callerURI;
-    var configuration = {
-        traceSip: true,
-        uri: dataURI,
-        displayName: displayName,
-        mediaHandlerFactory: function mediaHandlerFactory(session, options) {
-            // Call this so that we define
-            // - WebRTC.MediaStream
-            // - WebRTC.getUserMedia
-            // - WebRTC.RTCPeerConnection
-            // - WebRTC.RTCSessionDescription.
-            SIP.WebRTC.isSupported();
-            /* Like a default mediaHandler, but no streams to manage */
-            var self = new SIP.WebRTC.MediaHandler(session, {
-                mediaStreamManager: {
-                    acquire: function (onSuccess) {
-                        // Must be async for on('dataChannel') callback to have a chance
-                        setTimeout(onSuccess.bind(null, {}), 0);
-                    },
-                    release: function (stream) {
-                        // no-op
-                    }
-                }
-            });
-
-            // No stream to add. Assume success.
-            self.addStream = function addStream(stream, success, failure) {
-                success();
-            };
-
-            return self;
-        }
-    };
-
-    return dataUA = new SIP.UA(configuration);
-}
-
-// Sets up the file transfer interface for the WebRTC data channel.
-function setUpDataInterface(userAgent, target) {
-    // Target has a 'data.' prefix
-    var dataTarget = 'data.' + target;
-    // The open data transfer session
-    var session;
-
-    userAgent.on('invite', function (session) {
-        session.mediaHandler.on('dataChannel', function (dataChannel) {
-            dataChannel.onmessage = function (event) {
-                alert(event.data);
-                session.bye();
-            };
-        });
-        session.accept();
-    });
-
-    // We invite the target and then send the data to them and wait for a "BYE"
-    // response to signal that they got the file.
-    // No video or audio, only data
-    var options = {
-        media: {
-            constraints: {
-                audio: false,
-                video: false
-            },
-            dataChannel: true
-        }
-    };
-    session = userAgent.invite('sip:' + dataTarget, options);
-    session.mediaHandler.on('dataChannel', function (dataChannel) {
-        dataChannel.onopen = (function () {
-            // Send JSON data about file
-            dataChannel.send('Sending data. This is text, but you can also send binary files!');
-        });
-    });
-
-    // Handling the BYE response, which means that they receiced the data.
-    session.on('bye', function (req) {
-        alert('They received the generic data.');
-    });
-}
-
-var aliceDataUA = createDataUA(aliceURI, aliceName);
-setUpDataInterface(aliceDataUA, bobURI);
 ~~~~
 </div>
 </div>
