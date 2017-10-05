@@ -70,7 +70,13 @@ Gets the session description from the underlying connection for the `session` to
 Name | Type | Description
 -----|------|--------------
 `options`|`Object`| Optional
-`modifiers`|`Array` of `Function` returning `Promise`| Optional
+`options.constraints`|`Object`| Optional rtcConstraints to use when getting local media. If media streams are already open and new constraints are defined, will re-acquire media.
+`options.peerConnectionOptions`|`Object`|Optional options to be passed to the PeerConnection initialization. If this is defined here, the current peer connection will be closed and a new one created with the options provided.
+`options.peerConnectionOptions.rtcConfiguration`|`Object`|Options to be passed to the constructor of the RTCPeerConnection
+`options.peerConnectionOptions.rtcConfiguration.iceServers`|`Object`|Ice Servers to be used by the Peer Connection. Default `[{urls: 'stun:stun.l.google.com:19302'}]`
+`options.peerConnectionOptions.iceCheckingTimeout`|`Integer`|Maximum number of milliseconds to wait for Ice Candidates. Default `5000`.
+`options.RTCOfferOptions`|`Object`|Options to be used on the peerConnection functions `createOffer` or `createAnswer`
+`modifiers`|`Array` of `Function` returning `Promise`| Optional modifiers that will be applied to the incoming or outgoing description.
 
 #### Returns
 
@@ -88,7 +94,14 @@ Name | Type | Description
 -----|------|--------------
 `sessionDescription`|`String`| The remote description that is to be set on the underlying connection for the session.
 `options`|`Object`| Optional
-`modifiers`|`Array` of `Function` returning `Promise`| Optional
+`options.constraints`|`Object`| Optional rtcConstraints to use when getting local media. If media streams are already open and new constraints are defined, will re-acquire media.
+`options.peerConnectionOptions`|`Object`|Optional options to be passed to the PeerConnection initialization. If this is defined here, the current peer connection will be closed and a new one created with the options provided.
+`options.peerConnectionOptions.rtcConfiguration`|`Object`|Options to be passed to the constructor of the RTCPeerConnection
+`options.peerConnectionOptions.rtcConfiguration.iceServers`|`Object`|Ice Servers to be used by the Peer Connection. Default `[{urls: 'stun:stun.l.google.com:19302'}]`
+`options.peerConnectionOptions.iceCheckingTimeout`|`Integer`|Maximum number of milliseconds to wait for Ice Candidates. Default `5000`.
+`options.RTCOfferOptions`|`Object`|Options to be used on the peerConnection functions `createOffer` or `createAnswer`
+`modifiers`|`Array` of `Function` returning `Promise`| Optional modifiers that will be applied to the incoming or outgoing description.
+
 
 #### Returns
 
