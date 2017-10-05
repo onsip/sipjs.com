@@ -1,11 +1,11 @@
 ---
 title: SIP.EventEmitter | SIP.js
-description: In SIP.js, SIP.EventEmitter provides an interface for managing event callbacks, via on() and off() methods, as well as triggering those events, via emit().
+description: In SIP.js, SIP.EventEmitter provides an interface for managing event callbacks, via on() and removeListener() methods, as well as triggering those events, via emit().
 ---
 
 # SIP.EventEmitter
 
-SIP.EventEmitter provides an interface for managing event callbacks (via `on()` and `off()` methods), as well as triggering those events (via `emit()`).
+SIP.EventEmitter provides an interface for managing event callbacks (via `on()` and `removeListener()` methods), as well as triggering those events (via `emit()`).
 
 ### Example
 
@@ -19,7 +19,7 @@ myUA.on('invite', function foo(session) {
 
 // Incoming invites will trigger foo() to be called
 
-myUA.off('invite');
+myUA.removeListener('invite', foo);
 
 // Incoming invites will not trigger foo() to be called
 ~~~
@@ -70,21 +70,37 @@ Type | Description
 -----|-------------
 `SIP.EventEmitter`| This event emitter
 
-### `off([event[, callback]])`
+### `removeListener(type, listener[, scope])`
 
 Removes callback listeners from a particular event.  The specific behavior varies depending on the number of arguments provided:
 
-* `off(event, callback)` will remove all listeners for that event and callback.
-* `off(event)` will remove all listeners for that event
-* `off()` will remove all listeners for all events on the emitter.  **Warning: Using `off()` in this fashion is likely to break things!**
+* `removeListener(type, listener)` will remove all listeners for that event and callback.
 
 #### Parameters
 
 Name | Type | Description
 -|-|-
-`event`|`String`| The event for which to remove listeners.
-`callback`|`Function`| The callback to stop calling.
-`bindTarget`|`Object`| *(Removed in 0.7.0)* If your callback was bound, you must pass the bound function into `off`.
+`type`|`String`| The event for which to remove listeners.
+`listener`|`Function`| The callback to stop calling.
+`scope`|`Object`| The scope the event must have to be removed.
+
+#### Returns
+
+Type | Description
+-----|-------------
+`SIP.EventEmitter`| This event emitter
+
+### `removeAllListeners(type)`
+
+Removes callback listeners from a particular event.  The specific behavior varies depending on the number of arguments provided:
+
+* `removeAllListeners(event)` will remove all listeners for that event
+
+#### Parameters
+
+Name | Type | Description
+-|-|-
+`type`|`String`| The event for which to remove listeners.
 
 #### Returns
 
