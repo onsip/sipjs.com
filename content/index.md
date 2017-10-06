@@ -141,79 +141,56 @@ popup: true
 <div class="index-demo-code" id="code-video-audio" markdown="1">
 ~~~~ javascript
 var domain = 'sipjs.onsip.com';
-var aliceURI      = 'alice' + '@' + domain;
+var aliceURI      = 'alice.' + window.token + '@' + domain;
 var aliceName     = 'Alice';
 
-var bobURI        = 'bob' + '@' + domain;
+var bobURI        = 'bob.' + window.token + '@' + domain;
 var bobName       = 'Bob';
 
-// A shortcut function to construct the media options for an SIP session.
-function mediaOptions(audio, video, remoteRender, localRender) {
-    return {
+// Function: createSimple
+//   creates a SIP.js Simple instance with the given arguments plugged into the
+//   configuration. This is a standard Simple instance for WebRTC calls.
+//
+// Arguments:
+//   callerURI: the URI of the caller, aka, the URI that belongs to this user.
+//   displayName: what name we should display the user as
+//   remoteVideo: the DOM element id of the video for the remote
+//   buttonId: the DOM element id of the button for that user
+function createSimple(callerURI, displayName, target, remoteVideo, buttonId) {
+    var remoteVideoElement = document.getElementById(remoteVideo);
+    var button = document.getElementById(buttonId);
+
+    var configuration = {
         media: {
-            constraints: {
-                audio: audio,
-                video: video
-            },
-            render: {
-                remote: {
-                    video: remoteRender
-                },
-                local: {
-                    video: localRender
-                }
+            remote: {
+                video: remoteVideoElement,
+                // Need audio to be not null to do audio & video instead of just video
+                audio: remoteVideoElement
             }
+        },
+        ua: {
+            traceSip: true,
+            uri: callerURI,
+            displayName: displayName,
+            userAgentString: SIP.C.USER_AGENT + " sipjs.com"
         }
     };
+    var simple = new SIP.WebRTC.Simple(configuration);
+
+    button.addEventListener('click', function() {
+        // No current call up
+        if (simple.state === SIP.WebRTC.Simple.C.STATUS_NULL ||
+            simple.state === SIP.WebRTC.Simple.C.STATUS_COMPLETED) {
+            simple.call(target);
+        } else {
+            simple.hangup();
+        }
+    });
+
+    return simple;
 }
 
-// Makes a call from a user agent to a target URI
-function makeCall(userAgent, target, audio, video, remoteRender, localRender) {
-    var options = mediaOptions(audio, video, remoteRender, localRender);
-    // makes the call
-    var session = userAgent.invite('sip:' + target, options);
-    return session;
-}
-
-function setUpVideoInterface(userAgent, target, remoteRenderId) {
-    var onCall = false;
-    var session;
-    var remoteRender = document.getElementById(remoteRenderId);
-
-    // Handling invitations to calls.
-    // Also, for each new call session, we need to add an event handler to set
-    // the correct state when we receive a "bye" request.
-    userAgent.on('invite', function (incomingSession) {
-        onCall = true;
-        session = incomingSession;
-        var options = mediaOptions(false, true, remoteRender, null);
-        remoteRender.style.visibility = 'visible';
-        session.accept(options);
-        session.on('bye', function () {
-            onCall = false;
-            remoteRender.style.visibility = 'hidden';
-            session = null;
-        });
-    });
-            onCall = true;
-    remoteRender.style.visibility = 'visible';
-    session = makeCall(userAgent, target,
-                       false, true,
-                       remoteRender, null);
-    session.on('bye', function () {
-        onCall = false;
-        remoteRender.style.visibility = 'hidden';
-        session = null;
-    });
-}
-
-
-var aliceUA = new SIP.UA({
-        traceSip: true,
-        uri: aliceURI,
-        displayName: aliceName
-    });
-setUpVideoInterface(aliceUA, bobURI, 'video-of-bob');
+var aliceSimple = createSimple(aliceURI, aliceName, bobURI, 'video-of-bob', 'alice-video-button');
 ~~~~
 </div>
 </div>
@@ -228,36 +205,18 @@ var bobURI        = 'bob' + '@' + domain;
 var bobName       = 'Bob';
 
 // Sets up the chat interface for text messaging
-function setUpMessageInterface(userAgent) {
+function setUpMessageInterface(simple) {
     // Receive a message and put it in the message display div
-    userAgent.on('message', function (msg) {
+    simple.on('message', function (msg) {
         alert(msg.body);
     });
 }
 
-var aliceUA = new SIP.UA({
-        traceSip: true,
-        uri: aliceURI,
-        displayName: aliceName
-    });
-setUpMessageInterface(aliceUA);
-aliceUA.message(bobURI, 'Check out this palindrome: "Now sir, a war is never even. Sir, a war is won."');
-~~~~
-</div>
-</div>
-<div class="code-wrapper desktop-hide">
-<div class="index-demo-code" markdown="1">
-~~~~ javascript
-var ua = new SIP.UA();
-ua.message(
-  'will@example.onsip.com',
-  'Hello, world!'
-);
 
-var session = ua.invite('will@example.onsip.com');
-session.on('accepted', function () {
-  this.bye();
-});
+var aliceSimple = createSimple(aliceURI, aliceName, bobURI, 'video-of-bob', 'alice-video-button');
+
+setUpMessageInterface(aliceSimple);
+aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never even. Sir, a war is won."');
 ~~~~
 </div>
 </div>

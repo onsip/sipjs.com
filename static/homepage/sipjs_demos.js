@@ -52,7 +52,7 @@ var bobName       = 'Bob';
 //   displayName: what name we should display the user as
 //   remoteVideo: the DOM element id of the video for the remote
 //   buttonId: the DOM element id of the button for that user
-function createSimple(callerURI, displayName, remoteVideo, buttonId) {
+function createSimple(callerURI, displayName, target, remoteVideo, buttonId) {
     var remoteVideoElement = document.getElementById(remoteVideo);
     var button = document.getElementById(buttonId);
 
@@ -199,8 +199,8 @@ if (window.RTCPeerConnection) {
     setFeatureArrowColor('rgb(193,191,182)');
 
     // Now we do SIP.js stuff
-    var aliceSimple = createSimple(aliceURI, aliceName, 'video-of-bob');
-    var bobSimple   = createSimple(bobURI, bobName, 'video-of-alice');
+    var aliceSimple = createSimple(aliceURI, aliceName, bobURI, 'video-of-bob', 'alice-video-button');
+    var bobSimple   = createSimple(bobURI, bobName, aliceURI, 'video-of-alice', 'bob-video-button');
 
     // We want to only run the demo if all users for the demo can register
     var numToRegister = 2;
@@ -234,8 +234,6 @@ if (window.RTCPeerConnection) {
 
     // Only run the demo if we could register every user agent
     function setupInterfaces() {
-        setupButton(aliceSimple, bobURI, 'video-of-bob', 'alice-video-button');
-        setupButton(bobSimple, aliceURI, 'video-of-alice', 'bob-video-button');
         setUpMessageInterface(aliceSimple, bobURI,
                               'alice-message-display',
                               'alice-message-input',
