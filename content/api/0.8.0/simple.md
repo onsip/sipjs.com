@@ -69,6 +69,16 @@ Answer an incoming call.
 simple.answer();
 ~~~
 
+### `reject()`
+
+Reject an incoming call.
+
+#### Example
+
+~~~ javascript
+simple.reject();
+~~~
+
 ### `hangup()`
 
 Hangup a call.

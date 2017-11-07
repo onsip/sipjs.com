@@ -412,6 +412,18 @@ the `rejected` and `failed` or `bye` event will be emitted as expected, and the 
 
 *There are no documented arguments for this event*
 
+### `reinvite`
+
+Fired when an invite is received on an already established session.
+
+Version 0.8.3+
+
+#### `on('reinvite', function(session) {})`
+
+Name | Type | Description
+-----|------|--------------
+`session`|`SIP.Session`| The session that received the invite.
+
 ### `refer`
 
 Fired when a REFER is received, and the user would like to handle the
