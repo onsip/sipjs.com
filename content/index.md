@@ -289,16 +289,34 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
     </ul>
   </div>
   <div class="full-width-divider light-gray-bg">
+    <h2>Trusted By</h2>
+    <div class="two-column-boxes align-center" id="git-mit-images">
+      <div class="column-box" style="width: 25%;">
+        <img src="/shared/img/onsip-gray.png" alt="Trusted by OnSIP" />
+      </div>
+      <div class="column-box" style="width: 25%;">
+        <img src="/shared/img/firertc-gray.png" alt="Trusted by FireRTC" />
+      </div>
+      <div class="column-box" style="width: 25%;">
+        <img src="/shared/img/ringcentral-gray.png" alt="Trusted by RingCentral" />
+      </div>
+      <div class="column-box" style="width: 25%;">
+        <img src="/shared/img/twilio-gray.png" alt="Trusted by Twilio" />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <!-- <div class="full-width-divider light-gray-bg">
     <div class="two-column-boxes align-center" id="git-mit-images">
       <div class="column-box">
         <img src="/shared/img/github.png" alt="github: social coding" />
       </div>
       <div class="column-box">
-        <img src="/shared/img/mit-license.png" alt="MIT open-source license" />
+        <img src="/shared/img/onsip-gray.png" alt="MIT open-source license" />
       </div>
       <div class="clearfix"></div>
     </div>
-  </div>
+  </div> -->
   <div class="full-width-divider">
     <h2>SIP Standards</h2>
     <h4 class="intro"><strong>SIP.js</strong> implements the following standard RFCs:</h4>
