@@ -312,7 +312,7 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
         <img src="/shared/img/github.png" alt="github: social coding" />
       </div>
       <div class="column-box">
-        <img src="/shared/img/onsip-gray.png" alt="MIT open-source license" />
+        <img src="/shared/img/mit-license.png" alt="MIT open-source license" />
       </div>
       <div class="clearfix"></div>
     </div>
