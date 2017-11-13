@@ -7,7 +7,7 @@ title: License
 Name: SIP.js
 
 
-Copyright (c) 2014 Junction Networks, Inc. <http://www.onsip.com>
+Copyright (c) 2017 Junction Networks, Inc. <http://www.onsip.com>
 
 ## The MIT License
 
