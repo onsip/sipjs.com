@@ -291,17 +291,24 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
   <div class="full-width-divider light-gray-bg">
     <h2>Trusted By</h2>
     <div class="two-column-boxes align-center" id="git-mit-images">
-      <div class="column-box" style="width: 25%;">
-        <img src="/shared/img/onsip-gray.png" alt="Trusted by OnSIP" />
+      <div class="column-box" style="width: 33%;">
+        <img src="/shared/logos/onsip-gray.png" alt="Trusted by OnSIP" />
       </div>
-      <div class="column-box" style="width: 25%;">
-        <img src="/shared/img/firertc-gray.png" alt="Trusted by FireRTC" />
+      <div class="column-box" style="width: 33%;">
+        <img src="/shared/logos/firertc-gray.png" alt="Trusted by FireRTC" />
       </div>
-      <div class="column-box" style="width: 25%;">
-        <img src="/shared/img/ringcentral-gray.png" alt="Trusted by RingCentral" />
+      <div class="column-box" style="width: 33%;">
+        <img src="/shared/logos/ringcentral-gray.png" alt="Trusted by RingCentral" />
       </div>
-      <div class="column-box" style="width: 25%;">
-        <img src="/shared/img/twilio-gray.png" alt="Trusted by Twilio" />
+    </div>
+  </div>
+  <div class="full-width-divider light-gray-bg">
+    <div class="two-column-boxes align-center" id="git-mit-images">
+      <div class="column-box" style="width: 50%;">
+        <img src="/shared/logos/twilio-gray.png" alt="Trusted by Twilio" />
+      </div>
+      <div class="column-box" style="width: 50%;">
+        <img src="/shared/logos/spacivox-gray.png" alt="Trusted by Spacivox" />
       </div>
       <div class="clearfix"></div>
     </div>
