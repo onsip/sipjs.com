@@ -353,3 +353,28 @@ function onMessage(message) {
   alert(message.body);
 }
 ~~~
+
+### `outOfDialogReferRequested`
+
+#### `on('outOfDialogReferRequested', function (referServerContext) {})`
+
+#### SECURITY WARNING!
+{: style="font-weight: bold; color: red;""}
+
+You must authenticate this request on your own. SIP.js does not authenticate out of dialog `REFER` requests.
+
+Name | Types | Description
+-----|-------|-------------
+`referServerContext`|[`SIP.ReferServerContext`](../refer/referServerContext)| Refer Server Context for the request.
+
+#### Example
+
+~~~ javascript
+ua.on('outOfDialogReferRequested', function(referServerContext) {
+  if (validateRequest(referServerContext)) {
+    referServerContext.accept();
+  } else {
+    referServerContext.reject();
+  }
+});
+~~~

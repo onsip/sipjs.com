@@ -57,6 +57,17 @@ If set to true, the user agent will allow NOTIFYs received without subscriptions
 allowLegacyNotifications: true
 ~~~
 
+## allowOutOfDialogRefers
+
+### SECURITY WARNING!
+{: style="font-weight: bold; color: red;""}
+
+If enabled a malicious endpoint could take control of your client. This option should only be enabled if you have a listener on [`outOfDialogReferRequested`](../ua/#outofdialogreferrequested) event. If there is no listener, the default behavior of SIP.js is to follow the `REFER`. Default value is false.
+
+~~~ javascript
+allowOutOfDialogRefers: flase
+~~~
+
 ## authenticationFactory
 Similar to `sessionDescriptionHandlerFactory`, this parameter allows the application to use a custom authentication model with SIP.js.
 The factory is passed the UA and should return credentials.  Modifying this is very advanced; please refer to the source code for examples.
