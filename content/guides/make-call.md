@@ -8,6 +8,10 @@ description: How to enable your WebRTC application to make voice and video calls
 * TOC
 {:toc}
 
+### Simple
+
+This guide uses [SIP.js Simple API](../../api/0.9.0/simple). If you are trying to do complex scenarios, please read the full API documentation.
+
 ### HTML
 
 Create an HTML file. In the file include the [SIP.js library](/download/), as well as any other javascript that will be used.
@@ -25,7 +29,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.7.1.min.js"></script>
+    <script src="sip-0.9.0.min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -33,45 +37,41 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
 
 ### Javascript
 
-#### Creating a User Agent
+#### Creating a Simple Instance
 
-In order to make calls and send messages, create a SIP user agent.  Calling the `SIP.UA()` method, with no parameters, creates an anonymous user agent.
-
-~~~javascript
-var userAgent = new SIP.UA();
-~~~
-
-#### Sending an Invite
-
-
-After the user agent has connected to the SIP server, an invite can be sent to make a call and thereby create a SIP session.
-
-To send an invite you will need the target user's SIP address and some options to define the session.
-
-Create an options object to define your session.
+In order to make calls and send messages, create a SIP Simple instance.  Calling the `SIP.WebRTC.Simple()` method, with options will create a new Simple object.
 
 ~~~javascript
 var options = {
-        media: {
-            constraints: {
-                audio: true,
-                video: true
-            },
-            render: {
-                remote: document.getElementById('remoteVideo'),
-                local: document.getElementById('localVideo')
-            }
+      media: {
+        local: {
+          video: document.getElementById('localVideo')
+        },
+        remote: {
+          video: document.getElementById('remoteVideo'),
+          // This is necessary to do an audio/video call as opposed to just a video call
+          audio: document.getElementById('remoteVideo')
         }
+      },
+      ua: {}
     };
+var simple = new SIP.WebRTC.Simple(options);
 ~~~
 
-*Note:  The `render` option syntax has changed between [0.6.x](/api/0.6.0/) and [0.7.x](/api/0.7.0). The sample here uses the correct syntax.*
+*Note:  The `media` option syntax has changed between [0.7.x](/api/0.7.0/) and [0.9.x](/api/0.9.0). The sample here uses the correct syntax.*
 
-Then call the `.invite()` method with the target SIP address and the `options` object containing session information.
+#### Starting a call
 
-After invite is called, the browser will ask for permission to access the camera and microphone.  Permission must be allowed to make the call.  The person being called has the choice of accepting or rejecting the call.
 
-An `endCall` button is added to terminate the session using the `.bye()` method.
+After the Simple interface has connected to the SIP server, a new call can be made by calling the `.call(target)` method.
+
+~~~javascript
+simple.call('bob@example.com');
+~~~
+
+After the call method is invoked, the browser will ask for permission to access the camera and microphone.  Permission must be allowed to make the call.  The person being called has the choice of accepting or rejecting the call.
+
+An `endCall` button is added to terminate the session using the `.hangup()` method.
 
 <iframe
   style="width: 100%; height: 410px"

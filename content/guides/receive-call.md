@@ -25,7 +25,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.7.0-min.js"></script>
+    <script src="sip-0.9.0-min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -35,22 +35,41 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
 
 ### Creating a User Agent
 
-In order to make calls and send messages, create a SIP user agent.  Calling the `SIP.UA()` method, with a uri a user agent. You will typically need to also provide an authorization user and password as well. Replace the information below with your own information.
+#### Creating a Simple Instance
+
+In order to make calls and send messages, create a SIP Simple instance.  Calling the `SIP.WebRTC.Simple()` method, with options will create a new Simple object.
 
 ~~~javascript
-var userAgent = new SIP.UA({
-	uri: 'test@example.com',
-	authorizationUser: 'test',
-	password: 'password'
-});
+var options = {
+      media: {
+        local: {
+          video: document.getElementById('localVideo')
+        },
+        remote: {
+          video: document.getElementById('remoteVideo'),
+          // This is necessary to do an audio/video call as opposed to just a video call
+          audio: document.getElementById('remoteVideo')
+        }
+      },
+      ua: {}
+    };
+var simple = new SIP.WebRTC.Simple(options);
 ~~~
+
+*Note:  The `media` option syntax has changed between [0.7.x](/api/0.7.0/) and [0.9.x](/api/0.9.0). The sample here uses the correct syntax.*
 
 
 ### Accept a Call
 
-Finally, To accept a call that is being received, catch the `invite` event.  This event is emitted with a session that the `.accept()` method must be called on. The accept method will take an options object that can define where to render the video streams. This is similar to the options object used to make a call.
+Finally, To accept a call that is being received, catch the `ringing` event, then call `simple.answer();`
+
+~~~javascript
+simple.on('ringing', function() {
+  simple.answer();
+})
+~~~
 
 <iframe
   style="width: 100%; height: 600px"
-  src="https://jsfiddle.net/OnSIP/vW7Lw/45/embedded/js,html,css,result/">
+  src="https://jsfiddle.net/OnSIP/vW7Lw/embedded/js,html,css,result/">
 </iframe>
