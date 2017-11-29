@@ -20,7 +20,6 @@ Typically, construction of a ReferServerContext is managed by a `SIP.Session`, t
 Name | Type | Description
 -----|------|-------------
 ua | `SIP.UA` | The user agent from which the request will be sent.
-request
 `request`|[`SIP.IncomingRequest`](../sipMessage/)|Instance of the received SIP REFER request.
 
 ## Instance Methods
