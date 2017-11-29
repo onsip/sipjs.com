@@ -9,7 +9,7 @@ description: How to enable your WebRTC application to transfer a voice or video 
 
 ## Setup
 
-First let's start with the code that we created in the [make a call](/guides/make-call/) example.  This will provide the functionality to make and display a call.
+This guide assumes that you have a SIP.UA set up and working. This guide is for the full SIP.js API and is not compatible with Simple.
 
 ## Making the Call
 As before, we will create a user agent using `SIP.UA()` and create a call using `userAgent.invite('test@example.onsip.com')`
@@ -36,20 +36,16 @@ Use the `session.refer(target)` method to make a blind transfer between the curr
 ~~~
 
 ## Handling a Blind Transfer
-When receiving a refer, you need to handle the request and attach the new media stream to the video element.  This is done by catching the `refer` event and calling the followRefer function with a callback using `session.on('refer', session.followRefer(onReferred))`.  This function gets passed in the refer request as well as the new session.  Then we must display the new session using the `attachMediaStream()` function like in previous examples.
+When receiving a refer, if you do not have a handler on the `referRequested` event, SIP.js will automatically follow the refer.
+
+If you have a handle the `referRequested` event, you can simply accept or reject the refer, by calling `.accept()` or `.reject()` on the referServerContext passed to the event handler.
 
 ~~~ javascript
-  //calls the onReferred function when the referred event happens
-  session.on('refer', session.followRefer(onReferred));
-
-  function onReferred(request, newSession)
-  {
-    //attached the received video stream to the Video Elements
-    attachMediaStream(remoteVideo, newSession.mediaHandler.getRemoteStreams()[0]);
-  }
+  session.on('referRequested', function(referServerContext) {
+    if (shouldAcceptRefer(referServerContext)) {
+      referServerContext.accept();
+    } else {
+      referServerContext.reject();
+    }
+  });
 ~~~
-
-
-
-
-
