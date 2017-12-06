@@ -7,7 +7,10 @@ description: How to renegotiation with SIP.js.
 
 As of SIP.js 0.8.0 renegotiation is supported through the [`reinvite()`](../../api/0.8.0/session/#reinvite) and [`hold()`](../../api/0.8.0/session/#hold) functions. Renegotiation allows you to do things such as add video in the middle of a call, put a call on hold, or change codecs that you are using. This guide will go over starting an audio only call and then adding video to it. This is not an extensive guide as to what can be accomplished with renegotition, but merely a starting point.
 
-* SIP.js 0.8.0 does not support re-invites without SDP.
+* SIP.js 0.9.1 adds support for receiving a re-invite without SDP
+
+As of SIP.js 0.9.1, you can now be the target of Music On Hold [RFC 7088](https://tools.ietf.org/html/rfc7088). There is still no support for sending re-invites without SDP or putting someone on Music On Hold. This will be added in a later release. SIP.js will automatically accept and process re-invites without SDP in the same manner as a re-invite with SDP.
+
 
 ## Setup
 
