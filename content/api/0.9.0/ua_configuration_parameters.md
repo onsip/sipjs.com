@@ -59,7 +59,7 @@ allowLegacyNotifications: true
 
 ## allowOutOfDialogRefers
 
-### SECURITY WARNING!
+#### SECURITY WARNING!
 {: style="font-weight: bold; color: red;""}
 
 If enabled a malicious endpoint could take control of your client. This option should only be enabled if you have a listener on [`outOfDialogReferRequested`](../ua/#outofdialogreferrequested) event. If there is no listener, the default behavior of SIP.js is to follow the `REFER`. Default value is false.
@@ -226,13 +226,21 @@ replaces: SIP.C.supported.SUPPORTED
 ~~~
 
 ## sessionDescriptionHandlerFactory
-TODO
+`function` that is a factory for generating sessionDescriptionHandlers. The factory will be passed a `session` object for the current session and the `sessionDescriptionHandlerFactoryOptions` object defined on the UA.
+
+See the [`WebRTC SessionDescriptionHandler`](../sessionDescriptionHandler) documentation for more information on how to create this factory.
+
+~~~ javascript
+sessionDescriptionHandlerFactory: function(session, options) {
+  return new SessionDescriptionHandler(session, options);
+}
+~~~
 
 ## sessionDescriptionHandlerFactoryOptions
 Options that will be passed to the SessionDescriptionHandlerFactory.
 
 * `Object` providing options to the factory.
-* Look at the [`WebRTC SessionDescriptionHandler`](TODO) for a list of options the default session description handler takes.
+* Look at the [`WebRTC SessionDescriptionHandler`](../sessionDescriptionHandler) for a list of options the default session description handler takes.
 
 
 ## traceSip
