@@ -233,7 +233,7 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
   <div class="full-width-divider">
     <h2 class="orange-fg">Don't Want to Bother with the Back End?</h2>
     <p class="multicolumn">
-      If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="http://www.freeswitch.org/">FreeSWITCH</a> or <a href="http://www.asterisk.org/">Asterisk</a>, or you can try out OnSIP - no system setup, modifications, maintenance, or upfront capital required.
+      If you’d like to identify and locate your user addresses on the Internet so they can participate in RTC sessions, you’ll need SIP servers. You can build your own using open source <a href="guides/server-configuration/freeswitch/">FreeSWITCH</a> or <a href="guides/server-configuration/asterisk/">Asterisk</a>, or you can try out OnSIP - no system setup, modifications, maintenance, or upfront capital required.
       <a id="signup-button" class="mobile-hide button orange-bg left"
          href="https://signup.onsip.com/sipjs">
         <span class="text-hover-left">Sign up for an OnSIP free trial</span>&nbsp;<span class="hover-arrow">⟩</span>
@@ -281,11 +281,11 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
       <li>Register <a href="/faq/#what-is-sip">SIP</a> User Agents using the <a href="http://tools.ietf.org/html/rfc7118">SIP over WebSocket</a> transport</li>
       <li>Create Audio and Video sessions</li>
       <li>Send <a href="/guides/send-message/">Instant Messages</a> and view Presence</li>
-      <li>Share your screen or desktop from Chrome</li>
+      <li>Share your screen or desktop</li>
       <li>Utilize advanced call features such as early media, call hold and resume, and transfers</li>
       <li>Send DTMF with SIP INFO</li>
       <li>100% open source, 100% JavaScript</li>
-      <li>Chrome, Firefox, and Opera supported</li>
+      <li>All major browsers supported</li>
     </ul>
   </div>
   <div class="full-width-divider light-gray-bg">
