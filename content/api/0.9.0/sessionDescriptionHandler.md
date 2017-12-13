@@ -8,7 +8,7 @@ description: The WebRTC Media Handler is the default media handler for SIP.js.
 The default Session Description Handler included with SIP.js interacts with WebRTC to provide voice, video, and data streams.
 
 When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom Session Description Handler using
-the [UA](../ua/)'s [sessionDescriptionHandlerFactory](../ua_configuration_parameters/#ssessionDescriptionHandlerFactory) configuration parameter.
+the [UA](../ua/)'s [sessionDescriptionHandlerFactory](../ua_configuration_parameters/#sessiondescriptionhandlerfactory) configuration parameter.
 
 A custom Session Description Handler just needs to implement a constructor and 5 methods, as outlined below. All the methods are required. It is recommended that any custom Session Description Handler also utilize modifiers, though this is not required.
 
