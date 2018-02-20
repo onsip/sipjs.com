@@ -129,16 +129,6 @@ Take a call off hold and unmute the local media.
 simple.unhold();
 ~~~
 
-### `hangup()`
-
-Hangup a call.
-
-#### Example
-
-~~~ javascript
-simple.hangup();
-~~~
-
 ### `sendDTMF(tone)`
 
 Send a DTMF event via SIP Message to the active call. Requires an active call.
