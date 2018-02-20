@@ -51,7 +51,7 @@ Start a call with the destination
 
 Name | Type | Description
 -----|------|-------------
-`destination`|`String`| The destination endpoint that wish to call
+`destination`|`String|`[`SIP.URI`](../uri/)| The destination endpoint that wish to call
 
 #### Example
 
@@ -129,16 +129,6 @@ Take a call off hold and unmute the local media.
 simple.unhold();
 ~~~
 
-### `hangup()`
-
-Hangup a call.
-
-#### Example
-
-~~~ javascript
-simple.hangup();
-~~~
-
 ### `sendDTMF(tone)`
 
 Send a DTMF event via SIP Message to the active call. Requires an active call.
@@ -163,7 +153,7 @@ Send a SIP Message to the destination. Does not require an active call.
 
 Name | Type | Description
 -----|------|-------------
-`tone`|`String`| The tone that you want to send to the active call
+`destination`|`String|`[`SIP.URI`](../uri/)| The tone that you want to send to the active call
 `message`|`String`| The message to be sent
 
 #### Example
