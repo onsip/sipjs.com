@@ -10,18 +10,16 @@ description: Easily install & configure Asterisk to work with SIP.js
 
 # Configure Asterisk
 
-SIP.js has been tested with [Asterisk 13.20.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-13.20.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 15.
+SIP.js has been tested with [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 12.
 
 ## System Setup
 
 Asterisk and SIP.js were tested using the following setup:
 
-* [CentOS 7.2 minimal (x86_64)](http://isoredirect.centos.org/centos/7/isos/x86_64/).
-* [Asterisk 13.20.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-13.20.0.tar.gz).
+* [CentOS 6.5 minimal (x86_64)](http://isoredirect.centos.org/centos/6/isos/x86_64/).
+* [Asterisk 11.11.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz).
 * OpenSSL 1.0.1e-fips 11 Feb 2013 or later.
 * A public IP address to avoid NAT scenarios on the server side.
-
-## Disable SELinux
 
 ## Required Packages
 
@@ -39,25 +37,36 @@ Install the following dependencies:
 
 Using YUM, all dependencies can be installed with:
 
-`yum install wget gcc gcc-c++ ncurses-devel libuuid-devel jansson-devel libxml2-devel sqlite-devel libsrtp-devel openssl-devel
+`yum install wget gcc gcc-c++ ncurses-devel libxml2-devel sqlite-devel libuuid-devel openssl-devel`.
+
+## Install libsrtp
+
+First try installing libsrtp from the repo.
+
+`yum install libsrtp-devel`
+
+If libsrtp is not available in the repo install it from source.
+
+1. `cd /usr/local/src/`
+2. `wget http://srtp.sourceforge.net/srtp-1.4.2.tgz`
+3. `tar zxvf srtp-1.4.2.tgz`
+4. `cd /usr/local/src/srtp`
+5. `./configure CFLAGS=-fPIC`
+6. `make && make install`
 
 ## Install Asterisk
 
 1. `cd /usr/local/src/`.
-2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13.20.0.tar.gz`.
+2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-11.11.0.tar.gz`.
 3. Extract Asterisk: `tar zxvf asterisk*`.
 4. Enter the Asterisk directory: `cd /usr/local/src/asterisk*`.
-5. Run the Asterisk configure script: `./configure --with-pjproject-bundled`.
+5. Run the Asterisk configure script: `./configure --libdir=/usr/lib64`.
 6. Run the Asterisk menuselect tool: `make menuselect`.
-7. In the menuselect, go to the resources option and ensure that res_srtp and pjproject is enabled. If there are 3 x's next to res_srtp, there is a problem with the srtp library and you must reinstall it. Save the configuration (press x).
+7. In the menuselect, go to the resources option and ensure that res_srtp is enabled. If there are 3 x's next to res_srtp, there is a problem with the srtp library and you must reinstall it. Save the configuration (press x).
 8. Compile and install Asterisk: `make && make install`.
 9. If you need the sample configs you can run `make samples` to install the sample configs. If you need to install the Asterisk startup script you can run `make config`.
 
 ## Setup DTLS Certificates
-
-A self signed SSL certificate is acceptable for development, but it will not work in a production environment. [Let's Encrypt](https://letsencrypt.org/) is a great way to get a free certificate.  
-
-### Self Signed Certificate
 
 1. `mkdir /etc/asterisk/keys`
 2. Enter the Asterisk scripts directory: `cd /usr/local/src/asterisk*/contrib/scripts`.
@@ -75,9 +84,6 @@ Start by editing `http.conf` and make sure that the following lines are uncommen
 enabled=yes
 bindaddr=127.0.0.1 ; Replace this with your IP address
 bindport=8088 ; Replace this with the port you want to listen on
-tlsendable=yes
-tlsbindaddr=127.0.0.1:8089 ; Replace this with your IP address
-tlscertfile=/etc/asterisk/keys/asterisk.pem
 ~~~
 
 Change the IP address and port to the IP address of your server and the port that you would like Asterisk to listen for web socket connections on.
@@ -101,13 +107,13 @@ avpf=yes ; Tell Asterisk to use AVPF for this peer
 icesupport=yes ; Tell Asterisk to use ICE for this peer
 context=default ; Tell Asterisk which context to use when this peer is dialing
 directmedia=no ; Asterisk will relay media for this peer
-transport=udp,ws,wss ; Asterisk will allow this peer to register on UDP or WebSockets
+transport=udp,ws ; Asterisk will allow this peer to register on UDP or WebSockets
 force_avp=yes ; Force Asterisk to use avp. Introduced in Asterisk 11.11
 dtlsenable=yes ; Tell Asterisk to enable DTLS for this peer
-dtlsverify=fingerprint ; Tell Asterisk to verify DTLS fingerprint
+dtlsverify=no ; Tell Asterisk to not verify your DTLS certs
 dtlscertfile=/etc/asterisk/keys/asterisk.pem ; Tell Asterisk where your DTLS cert file is
+dtlsprivatekey=/etc/asterisk/keys/asterisk.pem ; Tell Asterisk where your DTLS private key is
 dtlssetup=actpass ; Tell Asterisk to use actpass SDP parameter when setting up DTLS
-rtcp_mux=yes ; Tell Asterisk to do RTCP mux
 
 [1061] ; This will be the legacy SIP client
 type=friend
@@ -130,9 +136,9 @@ Restart Asterisk using `service asterisk restart` to ensure that the new setting
 
 ## Configure SIP.js
 
-If you used a self signed certificate in the earlier steps, you will need to navigate to `https://<your_ip_address>:8089/ws` and add the certificate exception.
+Asterisk does not accept Contact headers with the `.invalid` domain. When creating a UA, add the configuration parameter [hackIpInContact](http://sipjs.com/api/0.6.0/ua_configuration_parameters/#hackipincontact). If you are missing this property you will be able to make calls from WebRTC, but not receive calls through Asterisk will fail.
 
-This guide will only work with audio calls, Asterisk will reject video calls.
+Additionally this guide will only work with audio calls, Asterisk will reject video calls.
 
 The following configuration example creates a UA for the Asterisk configuration above. Replace the values with the values from your config.
 
@@ -143,20 +149,27 @@ var config = {
 
   // Replace this IP address with your Asterisk IP address,
   // and replace the port with your Asterisk port from the http.conf file
-  ws_servers: 'wss://127.0.0.1:8089/ws',
+  ws_servers: 'ws://127.0.0.1:8088/ws',
 
   // Replace this with the username from your sip.conf file
   authorizationUser: '1060',
 
   // Replace this with the password from your sip.conf file
   password: 'password',
+
+  // HackIpInContact for Asterisk
+  hackIpInContact: true,
+
+  // rtcpMuxPolicy for Asterisk
+  rtcpMuxPolicy: 'negotiate',
+
 };
 
 var ua = new SIP.UA(config);
 
 // Invite with audio only
 ua.invite('1061',{
-  sessionDescriptionHandlerOptions: {
+  media: {
     constraints: {
       audio: true,
       video: false
@@ -165,10 +178,10 @@ ua.invite('1061',{
 });
 ~~~
 
+* Update 10/24/2014 - If you are still having trouble with Asterisk and are using a WebSocket Secure (WSS), you can try using the `hackWssInTransport: true` parameter in your UA's configuration. This is new as of [commit 32bffbe](https://github.com/onsip/SIP.js/commit/32bffbea37d91d185851c46e930be8f663e52d13) on the [SIP.js Master branch](https://github.com/onsip/SIP.js).
+
 ## Troubleshooting
 
 This [forum post](http://forums.digium.com/viewtopic.php?f=1&t=90167&sid=66fdf8cc4be5d955ba584e989a23442f) on troubleshooting WebRTC issues is a great guide for trouble shooting problems with Asterisk.
 
 [Asterisk Secure Calling Guide](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial) can help you setup dtls certificates.
-
-[Asterisk WebRTC tutorial](https://wiki.asterisk.org/wiki/display/AST/WebRTC+tutorial+using+SIPML5)
