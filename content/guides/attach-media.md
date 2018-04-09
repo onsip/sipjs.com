@@ -30,7 +30,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.9.2.min.js"></script>
+    <script src="sip-0.10.0.min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -40,38 +40,33 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
 
 This guide assumes that you are already familiar with starting a session.
 
-#### Playing Local Media
-
-You can display the local video from the peer connection.
-
-~~~javascript
-var localVideo = document.getElementById('localVideo');
-
-session.on('SessionDescriptionHandler-created', function(sessionDescriptionHandler) {
-  
-});
-~~~
-
 #### Attaching Media
 
-The easiest way to attach media is to add a listener onto the Peer Connection and listen for either the `ontrack` or `onaddstream` events. To get a handle on the Peer Connection we need to first get a handle on the Session Description Handler. The Session Description Handler is created when SIP.js determines that a media description is needed for the session.
+The easiest way to attach media is to listen for the `trackAdded` event on the `session`. Then you can get a handle on your Session Description Handler, Peer Connection, and tracks. The `trackAdded` event is simply a helper, and does not pass any information.
 
 ~~~javascript
 var remoteVideo = document.getElementById('remoteVideo');
+var localVideo = document.getElementById('localVideo');
 
-session.on('SessionDescriptionHandler-created', function(sessionDescriptionHandler) {
-  var pc = sessionDescriptionHandler.peerConnection;
-  if ('ontrack' in pc) {
-    var stream = new MediaStream();
-    pc.addEventListener('track', function(e) {
-      remoteVideo.srcObject = e.streams[0];
-      remoteVideo.play();
-    });
-  } else {
-    pc.addEventListener('onaddstream', function(stream) {
-      remoteVideo.srcObject = stream;
-      remoteVideo.play();
-    });
-  }
+session.on('trackAdded', function() {
+  // We need to check the peer connection to determine which track was added
+
+  var pc = session.sessionDescriptionHandler.peerConnection;
+
+  // Gets remote tracks
+  var remoteStream = new MediaStream();
+  pc.getReceivers().forEach(function(receiver) {
+    remoteStream.addTrack(receiver.track);
+  });
+  remoteVideo.srcObject = remoteStream;
+  remoteVideo.play();
+
+  // Gets local tracks
+  var localStream = new MediaStream();
+  pc.getSenders().forEach(function(sender) {
+    localStream.addTrack(sender.track);
+  });
+  localVideo.srcObject = localStream;
+  localVideo.play();
 });
 ~~~
