@@ -117,6 +117,25 @@ Type     | Description
 ---------|-------------
 `Promise`| Promise that resolves with the modified [RTCSessionDescription](https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription), rejects if the description cannot be modified.
 
+### `sendDtmf(tones, options)`
+
+Used to send in-band DTMF via the pathway set up by the Session Description Handler.
+
+#### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`tones`|`String`| String of tones to be sent.
+`options`|`Object`| Optional `Object` with extra parameters (see below).
+`options.duration`|`Number`| Positive decimal `Number` indicating the duration of the tone expressed in milliseconds. Default value is `100`.
+`options.interToneGap`|`Number`| Positive decimal `Number` indicating the interval between multiple tones expressed in milliseconds. Default value is `70`.
+
+#### Returns
+
+Type     | Description
+---------|-------------
+`boolean`| True if DTMF was successfully sent via the Session Description Handler, false otherwise.
+
 ### `getDirection()`
 
 This accessor returns the direction of flow for the Session Description Handler. It is intended to be used as a hold indicator.

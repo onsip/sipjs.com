@@ -95,13 +95,16 @@ Name | Type | Description
 `tone`|`String` or `Number`|One or multiple valid DTMF symbols. Converts `Number` to `String` using `toString()`.
 `options`|`Object`|Optional `Object` with extra parameters (see below).
 `options.extraHeaders`|`Array`|Optional `Array` of `Strings` with extra SIP headers for each INFO request.
-`options.duration`|`Number`|Positive decimal `Number` indicating the duration of the tone expressed in milliseconds. Default value is `100`.
-`options.interToneGap`|`Number`|Positive decimal `Number` indicating the interval between two tones expressed in milliseconds. Default value is `500`.
+`options.duration`|`Number`|Positive decimal `Number` indicating the duration of the tone expressed in milliseconds. Default value is `100` for both SIP INFO and WebRTC in-band.
+`options.interToneGap`|`Number`|Positive decimal `Number` indicating the interval between multiple tones expressed in milliseconds. Default value is `500` for SIP INFO, and `70` for WebRTC in-band.
 
 #### Throws
 
 TypeError
 INVALID_STATE_ERROR
+
+TypeError
+Invalid Tones
 
 #### Returns
 

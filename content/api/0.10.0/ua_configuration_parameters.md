@@ -109,6 +109,17 @@ Descriptive name (`String`) to be shown to the called party when calling or send
 displayName: "Alice ¶€ĸøĸø"
 ~~~
 
+## dtmfType
+
+#### Beta Feature
+{: style="font-weight: bold; color: red;""}
+
+The type of DTMF that SIP.js should do, either INFO packets or in-band DTMF. In-band DTMF requires support from the Session Description Handler. Valid values are `SIP.C.dtmfType.INFO` and `SIP.C.dtmfType.RTP`. If you choose to send in-band DTMF and it fails on the Session Description Handler, then SIP.js will automatically try to send the DTMF via INFO packet. Default value is `SIP.C.dtmfType.INFO`. The default will change in a future release of SIP.js.
+
+~~~ javascript
+dtmfType: SIP.C.dtmfType.INFO
+~~~
+
 ## hackIpInContact
 Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
 
