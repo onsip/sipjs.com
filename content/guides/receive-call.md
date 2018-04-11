@@ -5,8 +5,9 @@ description: How to enable your WebRTC application to accept calls from peers an
 
 # Receive a Call
 
-* TOC
-{:toc}
+## Overview
+
+This guide uses the full [SIP.js API](../../api/0.10.0). The [SIP.js Simple API](../../api/0.10.0/simple) is intended to help get beginners up and running quickly.
 
 ### HTML
 
@@ -25,7 +26,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.9.0-min.js"></script>
+    <script src="sip-0.10.0-min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -35,41 +36,34 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
 
 ### Creating a User Agent
 
-#### Creating a Simple Instance
-
-In order to make calls and send messages, create a SIP Simple instance.  Calling the `SIP.WebRTC.Simple()` method, with options will create a new Simple object.
+In order to receive messages, create a SIP user agent. You will need a registered user agent to receive an initial request. Replace the information below with your own information.
 
 ~~~javascript
-var options = {
-      media: {
-        local: {
-          video: document.getElementById('localVideo')
-        },
-        remote: {
-          video: document.getElementById('remoteVideo'),
-          // This is necessary to do an audio/video call as opposed to just a video call
-          audio: document.getElementById('remoteVideo')
-        }
-      },
-      ua: {}
-    };
-var simple = new SIP.WebRTC.Simple(options);
+var userAgent = new SIP.UA({
+       uri: 'test@example.com',
+       authorizationUser: 'test',
+       password: 'password'
+});
 ~~~
-
-*Note:  The `media` option syntax has changed between [0.7.x](/api/0.7.0/) and [0.9.x](/api/0.9.0). The sample here uses the correct syntax.*
-
 
 ### Accept a Call
 
-Finally, To accept a call that is being received, catch the `ringing` event, then call `simple.answer();`
+Finally, To accept a call that is being received, catch the `invite` event.  This event is emitted with a session that the `.accept()` method must be called on.
 
 ~~~javascript
-simple.on('ringing', function() {
-  simple.answer();
-})
+userAgent.on('invite', function(session) {
+  session.accept();
+});
 ~~~
 
-<iframe
-  style="width: 100%; height: 600px"
-  src="https://jsfiddle.net/OnSIP/vW7Lw/embedded/js,html,css,result/">
-</iframe>
+#### Attaching Media
+
+Please see the [attach media guide](./attach-media).
+
+#### Ending a Session
+
+To end a session, simply call the [terminate method](/api/0.10.0/session/#terminateoptions) on the session to send a bye.
+
+~~~javascript
+session.terminate();
+~~~
