@@ -65,8 +65,3 @@ To end a session, simply call the [terminate method](/api/0.10.0/session/#termin
 ~~~javascript
 session.terminate();
 ~~~
-
-<iframe
-  style="width: 100%; height: 410px"
-  src="https://jsfiddle.net/OnSIP/W93H6/embedded/js,html,css,result/">
-</iframe>
