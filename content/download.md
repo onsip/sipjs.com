@@ -4,7 +4,7 @@ layout: download
 description: Get started now. Download production and development versions of the SIP.js library.
 ---
 
-## Version 0.10.2
+## Version 0.10.0
 {: style="color: #ea4b35; font-weight: bold; font-size: 2em; margin-top:0;" }
 
 * Development (uncompressed code, 376KB) <a href="/download/sip-0.10.0.js" download="sip-0.10.0.js">sip-0.10.0.js</a>.
