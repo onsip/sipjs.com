@@ -304,11 +304,14 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
   </div>
   <div class="full-width-divider light-gray-bg">
     <div class="two-column-boxes align-center" id="git-mit-images">
-      <div class="column-box" style="width: 50%;">
+      <div class="column-box" style="width: 33%;">
         <img src="/shared/logos/twilio-gray.png" alt="Trusted by Twilio" />
       </div>
-      <div class="column-box" style="width: 50%;">
+      <div class="column-box" style="width: 33%;">
         <img src="/shared/logos/spacivox-gray.png" alt="Trusted by Spacivox" />
+      </div>
+      <div class="column-box" style="width: 33%;">
+        <img src="/shared/logos/hodusoft-gray.png" alt="Trusted by Spacivox" />
       </div>
       <div class="clearfix"></div>
     </div>
