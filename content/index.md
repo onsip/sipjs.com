@@ -338,6 +338,7 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
       <li><a href="http://tools.ietf.org/html/rfc3327">[3327] SIP Extension Header Field for Registering Non-Adjacent Contacts (Path)</a></li>
       <li><a href="http://tools.ietf.org/html/rfc3428">[3428] SIP Extension for Instant Messaging</a></li>
       <li><a href="http://tools.ietf.org/html/rfc3856">[3856] A Presence Event Package for SIP</a></li>
+      <li><a href="http://tools.ietf.org/html/rfc3903">[3903] SIP Extension for Event State Publication</a></li>
       <li><a href="http://tools.ietf.org/html/rfc4235">[4235] An INVITE-Initiated Dialog Event Package for SIP</a></li>
       <li><a href="http://tools.ietf.org/html/rfc3515">[3515] SIP Refer Method</a></li>
       <li><a href="http://tools.ietf.org/html/rfc5626">[5626] Managing Client-Initiated Connections in SIP (SIP Outbound)</a></li>
