@@ -28,7 +28,9 @@ This [configuration object](/api/0.6.0/ua_configuration_parameters/) needs a `ur
 ~~~javascript
 var userAgent = new SIP.UA({
   uri: 'bob@example.onsip.com',
-  wsServers: ['wss://sip-ws.example.com'],
+  transportOptions: {
+    wsServers: ['wss://sip-ws.example.com']
+  },
   authorizationUser: '',
   password: ''
 });
