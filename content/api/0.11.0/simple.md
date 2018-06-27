@@ -12,15 +12,15 @@ Simple is a simplified interface to make getting up and running easier for new u
 
 ## Construction
 
-### `new SIP.WebRTC.Simple([configuration])`
+### `new SIP.Web.Simple([configuration])`
 
-A new Simple interface via the `SIP.WebRTC.Simple` constructor. A remote video or audio DOM element is required, as well as credentials to register SIP.js with your SIP service. Check the [Simple Configuration Parameters](../simple_configuration_parameters/) for a full list of parameters.
+A new Simple interface via the `SIP.Web.Simple` constructor. A remote video or audio DOM element is required, as well as credentials to register SIP.js with your SIP service. Check the [Simple Configuration Parameters](../simple_configuration_parameters/) for a full list of parameters.
 
 #### Example
 
 ~~~ javascript
 // Create a Simple interface with a user named bob and a remote video element in the DOM
-var simple = new SIP.WebRTC.Simple({
+var simple = new SIP.Web.Simple({
   media: {
     remote: {
       video: document.getElementById('remoteVideo'),
