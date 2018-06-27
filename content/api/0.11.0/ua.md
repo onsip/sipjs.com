@@ -22,7 +22,9 @@ A new user agent is created via the `SIP.UA` constructor.  There are no mandator
 // Create a user agent named bob, connect, and register to receive invitations.
 var bob = new SIP.UA({
   uri: 'bob@example.com',
-  wsServers: ['wss://sip-ws.example.com'],
+  transportOptions: {
+    wsServers: ['wss://sip-ws.example.com']
+  },
   register: true
 });
 ~~~
@@ -301,7 +303,9 @@ Name | Types | Description
 // Create a user agent named bob, connect, and register to receive invitations.
 var bob = new SIP.UA({
   uri: 'bob@example.com',
-  wsServers: ['wss://sip-ws.example.com'],
+  transportOptions: {
+    wsServers: ['wss://sip-ws.example.com']
+  },
   register: true
 });
 bob.start();

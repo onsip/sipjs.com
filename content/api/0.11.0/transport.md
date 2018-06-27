@@ -20,20 +20,20 @@ When constructed, the UA will assign the new Transport as its own transport prop
 
 ### `send(msg)`
 
-Send a message and automatically emits a `sentMsg` event. Implementation delegated to abstract method `sendMsgPromise`.
+Send a message and automatically emits a `messageSent` event. Implementation delegated to abstract method `sendPromise`.
 
 #### Parameters
 
 Name | Mandatory? | Type | Description
 -----|------|----|---------
 `msg`|Yes| SIP.OutgoingRequest &#124; String | A SIP Request (represented as a String or [SIP.OutgoingRequest](../sipMessage/)) to send along the WebSocket.
-`options` |No| Object | Object to pass to `sendMsgPromise()`
+`options` |No| Object | Object to pass to `sendPromise()`
 
 #### Returns
 
 `Promise`
 
-### `sendMsgPromise()`
+### `sendPromise()`
 
 *Abstract*
 Implementation of sending a message over the transport. MUST return a promise that resolves with an object with mandatory parameter `msg` and optional parameter `overrideEvent`.
@@ -52,7 +52,7 @@ Name | Mandatory? | Type | Description
 Name | Mandatory? | Type | Description
 -|-|-|-
 `msg`|Yes| String | A SIP Request (represented as a String or [SIP.OutgoingRequest](../sipMessage/)) to send along the WebSocket.
-`overrideEvent`|No|Boolean| If set to `true`, the default `sentMsg` event emitted by `send()` will not be emitted. If you override the event in this fashion, you SHOULD emit it in your implementation of `sendMsgPromise()`
+`overrideEvent`|No|Boolean| If set to `true`, the default `messageSent` event emitted by `send()` will not be emitted. If you override the event in this fashion, you SHOULD emit it in your implementation of `sendPromise()`
 
 ### `connect()`
 
@@ -127,15 +127,6 @@ Name | Type | Description
 -----|------|-------------
 `callback`| Function | A callback to be executed
 
-
-### `waitForConnected()`
-
-A promise that resolves with nothing when the transport is connected. Delegates to `afterConnected()` for resolution.
-
-#### Returns
-
-`Promise`
-
 ## Events
 
 Transport objects extend the [SIP.EventEmitter](../eventEmitter/) interface.  Each event emitted by the transport passes specific relevant arguments to its callbacks. Additional events MAY be added for child implementations.
@@ -156,11 +147,11 @@ Fired when the connection is interrupted or lost
 
 *There are no documented arguments for this event.*
 
-### `sentMsg`
+### `messageSent`
 
 Fired when a message is sent over the transport
 
-#### `on('sentMsg', function (message) {})`
+#### `on('messageSent', function (message) {})`
 
 #### Arguments
 `message` - `String` - The message that was sent

@@ -86,7 +86,7 @@ event of error.
 
 ## Instance Methods
 
-### `sendMsgPromise()`
+### `sendPromise()`
 
 *Internal* Contains message sending logic - instantiates a `WebSocket` and sets up listeners on it
 
@@ -181,10 +181,9 @@ Name | Type | Value | Description
 
 *Internal* Reconnect to the WebSocket server in the event of unexpected disconnection. This will attempt to reconnect up to [`configuration.maxReconnectionAttempts`](../ws_transport_configuration_parameters/#maxreconnectionattempts) times, with a gap of [`configuration.reconnectionTimeout`](../ws_transport_configuration_parameters/#reconnectiontimeout) seconds between each request.
 
-<!-- ### `recoverTransport()`
-{: .no_toc }
+### `resetServerErrorStatus()`
 
-*Internal* Begins the transport recovery process. Configurable with parameters [`configuration.connectionRecoveryMinInterval`](../ws_transport_configuration_parameters/#connectionrecoverymininterval) and [`configuration.connectionRecoveryMaxInterval`](../ws_transport_configuration_parameters/#connectionrecoverymaxinterval). Will attempt to recover by connecting the current server before marking it as error and trying the next server. -->
+Resets the error status of all the servers defined in the configuration. Called at the end of all reconnection logic to bring things back to a clean state.
 
 ### `getNextWsServer()`
 
