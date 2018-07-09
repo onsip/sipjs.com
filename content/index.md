@@ -175,12 +175,12 @@ function createSimple(callerURI, displayName, target, remoteVideo, buttonId) {
             userAgentString: SIP.C.USER_AGENT + " sipjs.com"
         }
     };
-    var simple = new SIP.WebRTC.Simple(configuration);
+    var simple = new SIP.Web.Simple(configuration);
 
     button.addEventListener('click', function() {
         // No current call up
-        if (simple.state === SIP.WebRTC.Simple.C.STATUS_NULL ||
-            simple.state === SIP.WebRTC.Simple.C.STATUS_COMPLETED) {
+        if (simple.state === SIP.Web.Simple.C.STATUS_NULL ||
+            simple.state === SIP.Web.Simple.C.STATUS_COMPLETED) {
             simple.call(target);
         } else {
             simple.hangup();

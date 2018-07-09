@@ -174,7 +174,7 @@ var myModifier = function(description) {
   return Promise.resolve(description);
 };
 
-var modifierArray = [myModifier, SIP.WebRTC.Modifiers.stripTelephoneEvent];
+var modifierArray = [myModifier, SIP.Web.Modifiers.stripTelephoneEvent];
 
 ua.invite('alice@example.onsip.com', {}, modifierArray);
 

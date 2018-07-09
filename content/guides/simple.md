@@ -40,7 +40,7 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
 
 ### Creating a Simple Instance
 
-In order to make calls and send messages, create a SIP Simple instance.  Calling the `SIP.WebRTC.Simple()` method, with options will create a new Simple object. Simple differs from the full SIP.js in that it will handle attaching media onto the page.
+In order to make calls and send messages, create a SIP Simple instance.  Calling the `SIP.Web.Simple()` method, with options will create a new Simple object. Simple differs from the full SIP.js in that it will handle attaching media onto the page.
 
 ~~~javascript
 var options = {
@@ -56,7 +56,7 @@ var options = {
       },
       ua: {}
     };
-var simple = new SIP.WebRTC.Simple(options);
+var simple = new SIP.Web.Simple(options);
 ~~~
 
 ### Starting a call

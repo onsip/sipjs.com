@@ -58,7 +58,7 @@ myUA.on('invite', function (session) {
 
 ### `sessionDescriptionHandler`
 
-[`SIP.WebRTC.SessionDescriptionHandler`](../sessionDescriptionHandler) (default) -
+[`SIP.Web.SessionDescriptionHandler`](../sessionDescriptionHandler) (default) -
 To maintain separation of signaling from media, Sessions delegate all media functionality down to a separate [SessionDescriptionHandler](../sessionDescriptionHandler) object. The SessionDescriptionHandler deals with all SDP descriptions, negotiating SDP, gathering ICE candidates, etc.
 
 By default, this object is configured to use WebRTC. When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom SessionDescriptionHandler using the [UA](../ua/)'s [sessionDescriptionHandlerFactory](../ua_configuration_parameters/#sessionDescriptionHandlerFactory) configuration parameter.
