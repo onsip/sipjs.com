@@ -14,12 +14,6 @@ description: A list of configuration parameters for SIP user agents in SIP.js.
 
 `String` - SIP URI associated to the User Agent. This is a SIP address given to you by your provider.  By default, URI is set to `anonymous.X@anonymous.invalid`, where X is a random token generated for each UA.
 
-## transportConstructor
-`SIP.Transport` - The constructor for an object to be used as the transport layer for the UA. For more information about creating your own transport see [`SIP.Transport`](../transport). The default is WebSocket transport, which you can read more about [here](../wstransport).
-
-## transportOptions
-`Object` - An object to be passed into the `SIP.Transport` when instantiated. See [WebSocket Transport Configuration Parameters](../ws_transport_configuration_parameters) for the full list of options for the default transport.
-
 ## allowLegacyNotifications
 If set to true, the user agent will allow NOTIFYs received without subscriptions to be emitted to a `notify` event listener on the UA.  Default value is false.
 
@@ -209,24 +203,11 @@ Options that will be passed to the SessionDescriptionHandlerFactory.
 * `Object` providing options to the factory.
 * Look at the [`WebRTC SessionDescriptionHandler`](../sessionDescriptionHandler) for a list of options the default session description handler takes.
 
+## transportConstructor
+`SIP.Transport` - The constructor for an object to be used as the transport layer for the UA. For more information about creating your own transport see [`SIP.Transport`](../transport). The default is WebSocket transport, which you can read more about [here](../wstransport).
 
-<!-- ## usePreloadedRoute
-
-If set to true every SIP initial request sent by SIP.js includes a Route header with the SIP URI associated to the WebSocket server as value. Some SIP Outbound Proxies require such a header. Valid values are `true` and `false` (`Boolean`). Default value is `false`.
-
-~~~ javascript
-wsServers: "ws://example.org/sip-ws"
-usePreloadedRoute: true
-~~~
-
-The Route header will look like Route: `<sip:example.org;lr;transport=ws>`
-
-~~~ javascript
-wsServers: "wss://example.org:8443"
-usePreloadedRoute: true
-~~~
-
-The Route header will look like Route: `<sip:example.org:8443;lr;transport=ws>` -->
+## transportOptions
+`Object` - An object to be passed into the `SIP.Transport` when instantiated. See [WebSocket Transport Configuration Parameters](../ws_transport_configuration_parameters) for the full list of options for the default transport.
 
 ## userAgentString
 
