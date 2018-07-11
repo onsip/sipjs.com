@@ -515,6 +515,22 @@ Fired when [ICE](http://www.html5rocks.com/en/tutorials/webrtc/infrastructure/#a
 *There are no documented arguments for this event*
 -->
 
+### `SessionDescriptionHandler-created`
+
+Emitted by the Session when a Session Description Handler is created. This will always fire, even when using a custom Session Description Handler.
+
+Version 0.11.2+
+
+#### `on('SessionDescriptionHandler-created', function() {})`
+
+#### Example
+
+~~~javascript
+session.on('SessionDescriptionHandler-created', function() {
+  var peerConnection = session.sessionDescriptionHandler.peerConnection;
+});
+~~~
+
 ### `directionChanged`
 
 Emitted by the Session Description Handler Observer on the Session. For the default WebRTC session description handler, this is triggered when an offer answer negotiation takes place on the Session Description Handler.
