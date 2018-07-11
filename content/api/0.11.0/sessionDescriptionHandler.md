@@ -10,7 +10,7 @@ The default Session Description Handler included with SIP.js interacts with WebR
 When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom Session Description Handler using
 the [UA](../ua/)'s [sessionDescriptionHandlerFactory](../ua_configuration_parameters/#sessiondescriptionhandlerfactory) configuration parameter.
 
-A custom Session Description Handler just needs to implement a constructor and 6 methods, as outlined below. All the methods are required. It is recommended that any custom Session Description Handler also utilize modifiers, though this is not required.
+A custom Session Description Handler just needs to implement a factory and 6 methods, as outlined below. All the methods are required. It is recommended that any custom Session Description Handler also utilize modifiers, though this is not required.
 
 ### Attaching Media
 {:.no_toc}
@@ -27,7 +27,7 @@ One of the most requested features that we are asked for, is how can I modify SD
 
 ## Construction
 
-The `Session` object will create a `SessionDescriptionHandler` using the `sessionDescriptionHandlerFactory` defined on the UA when it is needed. The session will pass itself as the first argument to the factory, an observer as the second argument, and any options that are provided to the UA, under `sessionDescriptionHandlerFactoryOptions` as the last argument.
+The `Session` object will create a `SessionDescriptionHandler` using the `sessionDescriptionHandlerFactory` defined on the UA when it is needed. The session will pass itself as the first argument to the factory and any options that are provided to the UA, under `sessionDescriptionHandlerFactoryOptions` as the second argument.
 
 ## Instance Variables
 
