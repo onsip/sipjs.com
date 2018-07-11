@@ -208,6 +208,17 @@ Default value is 5 seconds, and this can be set as low as 0.5 seconds.
 iceCheckingTimeout: 5000
 ~~~
 
+### alwaysAcquireMediaFirst
+
+Version 0.11.2+
+
+Will call GetUserMedia and add the streams to the PeerConnection before doing any other actions such as `setRemoteDescription`. This is a workaround for some unexpected behavior in Firefox 61+.
+Default value is false.
+
+~~~ javascript
+alwaysAcquireMediaFirst: true
+~~~
+
 ### `modifiers`
 
 A set of default modifiers to use every time a description is requested or set by the Session Description Handler. These modifiers will occur before modifiers passed by a specific call to the Session Description Handler.
