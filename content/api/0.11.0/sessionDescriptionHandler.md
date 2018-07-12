@@ -208,7 +208,7 @@ Default value is 5 seconds, and this can be set as low as 0.5 seconds.
 iceCheckingTimeout: 5000
 ~~~
 
-### alwaysAcquireMediaFirst
+### `alwaysAcquireMediaFirst`
 
 Version 0.11.2+
 
