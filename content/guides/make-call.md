@@ -56,7 +56,7 @@ After the invite method is invoked, the browser will ask for permission to acces
 
 #### Attaching Media
 
-Please see the [attach media guide](./attach-media).
+Please see the [attach media guide](../attach-media).
 
 #### Ending a Session
 
