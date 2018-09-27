@@ -58,7 +58,7 @@ userAgent.on('invite', function(session) {
 
 #### Attaching Media
 
-Please see the [attach media guide](./attach-media).
+Please see the [attach media guide](../attach-media).
 
 #### Ending a Session
 
