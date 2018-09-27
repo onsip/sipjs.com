@@ -6,10 +6,10 @@ description: Answers to FAQ about SIP.js API, including - What can I do with SIP
 # Frequently Asked Questions
 
 ## I would like to use SIP.js in Node.js, React Native, Nativescript, some other non web browser environment. How can I do this?
-We are a small team at OnSIP and an even smaller subset of us actively working on SIP.js. We cannot support all of these different environments so we choose to support only the latest versions of the major browsers. Chrome, Firefox, Safari, Internet Explorer Edge, and Opera. If you do get something working in a different environment we would happily take a pull request back to the library to help out the rest of the community.
+We are a small team at OnSIP and an even smaller subset of us actively working on SIP.js. We cannot support all of these different environments, so we choose to support only the latest versions of the major browsers. Chrome, Firefox, Safari, Microsoft Edge (with adapter.js), and Opera. If you do get something working in a different environment we would happily take a pull request back to the library to help out the rest of the community.
 
 ## Does SIP.js work on mobile?
-See the previous answer, but we choose to support only the latest versions of major mobile browsers. This would be Chrome on Android and iOS on Safari.
+See the previous answer, but we choose to support only the latest versions of major mobile browsers. This would be Chrome on Android and Safari on iOS.
 
 ## I am using Simple and would like to do something that is not supported. Can you add support for it?
 No. Simple is intended to help get someone up and running quickly. If you need to do something more please upgrade to the full [SIP.js API](/api/0.11.0/).
@@ -20,14 +20,14 @@ No. We cannot support SIP server configurations outside of our [guides](/guides/
 ## The default Session Description Handler does not do everything I need. Can you make it do more?
 No. We are trying to build a SIP signaling library. We do not want to be in the business of handling all the different media cases. You should build your own [Session Description Handler](/api/0.11.0/sessionDescriptionHandler/).
 
-## How can I play early media (with and invite SDP)?
+## How can I play early media (with an invite with SDP)?
 Early media can be played if you do an [invite without SDP](/api/0.11.0/ua/#invitetarget-options-modifiers). As of writing this the browsers do not currently support early media. SIP.js uses a "hack" where we set the early media as final media. Since each peer connection can only have a single offer and answer we need to create a new peer connection for each endpoint that sends us media. We cannot create multiple offers and send it to each fork, so we send no offer and force each fork to send us an offer. We can then create an individual peer connection and answer for each fork. This is fully compliant with the [SIP RFC](https://tools.ietf.org/html/rfc3261) and compatible with most major SIP implementations. This is why we cannot support early media on invites with SDP.
 
 ## My call does not fork, so can you add early media support for invite with SDP?
 No. Since we cannot support this for all users, we cannot add it to the library unless it supports all use cases.
 
 ## My SIP.js application isn’t working!  Where do I get help?
-The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js). Make sure that you include logs with [traceSip](/api/0.11.0/ws_transport_configuration_parameters/#tracesip) enabled. The Github issue tracker is reserved for bugs within the library.
+The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js). Make sure that you include logs with [traceSip](/api/0.11.0/ws_transport_configuration_parameters/#tracesip) enabled in a [gist](https://gist.github.com/). The Github issue tracker is reserved for bugs within the library.
 
 ## What can I do with SIP.js?
 You can add a signaling layer to your WebRTC app so it can create, modify, and terminate communication sessions between its peers. In other words, you can create a full SIP user agent right in a web page. With this SIP user agent, you can send and receive voice and video calls as well as SIP messages.
