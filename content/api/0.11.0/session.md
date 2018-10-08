@@ -13,7 +13,7 @@ The class SIP.Session represents a WebRTC media (audio/video) session. It can be
 
 The Session constructor is intended for internal use only. Instead, outbound Sessions are created through the [`SIP.UA.invite`](../ua/#invitetarget-options) method. Inbound Sessions are obtained via the `SIP.UA` [`invite` event](../ua/#invite) callback.
 
-### Examples
+#### Examples
 
 ~~~ javascript
 // Create a new outbound (User Agent Client) Session
