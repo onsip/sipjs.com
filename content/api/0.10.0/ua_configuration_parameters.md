@@ -65,7 +65,7 @@ allowLegacyNotifications: true
 If enabled a malicious endpoint could take control of your client. This option should only be enabled if you have a listener on [`outOfDialogReferRequested`](../ua/#outofdialogreferrequested) event. If there is no listener, the default behavior of SIP.js is to follow the `REFER`. Default value is false.
 
 ~~~ javascript
-allowOutOfDialogRefers: flase
+allowOutOfDialogRefers: false
 ~~~
 
 ## authenticationFactory
