@@ -14,24 +14,12 @@ Now we want to share SIP.js with the world. In keeping with the spirit of innova
 
 ## Authors
 
-### James Criscuolo
+### James Criscuolo [@james-criscuolo](https://github.com/james-criscuolo)
 
-* <james@onsip.com>
-* GitHub [@james-criscuolo](https://github.com/james-criscuolo)
+### Eric Green [@egreenmachine](https://github.com/egreenmachine)
 
-### Eric Green
-
-* <eric.green@onsip.com>
-* GitHub [@egreenmachine](https://github.com/egreenmachine)
+## Previous Authors
 
 ### Joseph Frazier
 
-* <1212jtraceur@gmail.com>
-* GitHub [@josephfrazier](https://github.com/josephfrazier)
-* Twitter [@josephfrazier_](https://twitter.com/josephfrazier_)
-
 ### Will Mitchell
-
-* <wakamoleguy@gmail.com>
-* GitHub [@wakamoleguy](https://github.com/wakamoleguy)
-* Twitter [@wakamoleguy](https://twitter.com/wakamoleguy)
