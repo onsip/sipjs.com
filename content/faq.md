@@ -5,6 +5,9 @@ description: Answers to FAQ about SIP.js API, including - What can I do with SIP
 
 # Frequently Asked Questions
 
+## My SIP.js application isn’t working!  Where do I get help?
+The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js). Make sure that you include logs with [traceSip](/api/0.12.0/wstransport#tracesip) enabled in a [gist](https://gist.github.com/). The Github issue tracker is reserved for bugs within the library.
+
 ## I would like to use SIP.js in Node.js, React Native, Nativescript, some other non web browser environment. How can I do this?
 We are a small team at OnSIP and an even smaller subset of us actively working on SIP.js. We cannot support all of these different environments, so we choose to support only the latest versions of the major browsers. Chrome, Firefox, Safari, Microsoft Edge (with adapter.js), and Opera. If you do get something working in a different environment we would happily take a pull request back to the library to help out the rest of the community.
 
@@ -25,9 +28,6 @@ Early media can be played if you do an [invite without SDP](/api/0.11.0/ua/#invi
 
 ## My call does not fork, so can you add early media support for invite with SDP?
 No. Since we cannot support this for all users, we cannot add it to the library unless it supports all use cases.
-
-## My SIP.js application isn’t working!  Where do I get help?
-The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js). Make sure that you include logs with [traceSip](/api/0.11.0/ws_transport_configuration_parameters/#tracesip) enabled in a [gist](https://gist.github.com/). The Github issue tracker is reserved for bugs within the library.
 
 ## What can I do with SIP.js?
 You can add a signaling layer to your WebRTC app so it can create, modify, and terminate communication sessions between its peers. In other words, you can create a full SIP user agent right in a web page. With this SIP user agent, you can send and receive voice and video calls as well as SIP messages.
