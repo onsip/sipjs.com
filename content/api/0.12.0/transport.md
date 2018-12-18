@@ -131,11 +131,27 @@ Name | Type | Description
 
 Transport objects extend the [SIP.EventEmitter](../eventEmitter/) interface.  Each event emitted by the transport passes specific relevant arguments to its callbacks. Additional events MAY be added for child implementations.
 
+### `connecting`
+
+Fired when the transport is attempting to connect.
+
+#### `on('connecting', function() {})`
+
+*There are no documented arguments for this event.*
+
 ### `connected`
 
 Fired when the connection is established.
 
 #### `on('connected', function () {})`
+
+*There are no documented arguments for this event.*
+
+### `disconnecting`
+
+Fired when the connection is attempting to disconnect.
+
+#### `on('disconnecting', function() {})`
 
 *There are no documented arguments for this event.*
 
