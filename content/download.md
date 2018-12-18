@@ -7,8 +7,8 @@ description: Get started now. Download production and development versions of th
 ## Version 0.12.0
 {: style="color: #ea4b35; font-weight: bold; font-size: 2em; margin-top:0;" }
 
-* Development (uncompressed code, 455KB) <a href="/download/sip-0.12.0.js" download="sip-0.12.0.js">sip-0.12.0.js</a>.
-* Production (minified code, 212KB) <a href="/download/sip-0.12.0.min.js" download="sip-0.12.0.min.js">sip-0.12.0.min.js</a>.
+* Development (uncompressed code, 527KB) <a href="/download/sip-0.12.0.js" download="sip-0.12.0.js">sip-0.12.0.js</a>.
+* Production (minified code, 214KB) <a href="/download/sip-0.12.0.min.js" download="sip-0.12.0.min.js">sip-0.12.0.min.js</a>.
 * Use NPM? Download this release with `npm install sip.js`.
 
 ## Version devel
