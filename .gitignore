@@ -1,9 +1,0 @@
-public
-tmp
-.DS_Store
-.bundle
-bin
-crash.log
-*~
-.vagrant
-vendor

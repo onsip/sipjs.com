@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="The WebRTC Session Description Handler is the default handler for SIP.js." />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>Session Description Handler</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.10.0/">0.10.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<h1 id="session-description-handler">Session Description Handler</h1>
+
+<p><code>SessionDescriptionHandler</code> represents a common interface for SIP.js to interact with the underlying RTP connection.
+The default Session Description Handler included with SIP.js interacts with WebRTC to provide voice, video, and data streams.</p>
+
+<p>When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom Session Description Handler using
+the <a href="../ua/">UA</a>’s <a href="../ua_configuration_parameters/#sessiondescriptionhandlerfactory">sessionDescriptionHandlerFactory</a> configuration parameter.</p>
+
+<p>A custom Session Description Handler just needs to implement a constructor and 6 methods, as outlined below. All the methods are required. It is recommended that any custom Session Description Handler also utilize modifiers, though this is not required.</p>
+
+<h3 class="no_toc" id="attaching-media">Attaching Media</h3>
+
+<p>See the <a href="../../../guides/attach-media">attaching media guide</a> for information on how to attach media to your application.</p>
+
+<h3 class="no_toc" id="modifiers">Modifiers</h3>
+
+<p>One of the most requested features that we are asked for, is how can I modify SDP before setting it on the <code>PeerConnection</code> or sending it to a peer. With the <code>MediaHandler</code> you would have to create an entire custom media handler. Now you can just pass a <a href="#modifiers"><code>modifier</code></a> function to the <code>SessionDescriptionHandler</code>.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#construction" id="markdown-toc-construction">Construction</a></li>
+  <li><a href="#instance-variables" id="markdown-toc-instance-variables">Instance Variables</a></li>
+  <li>
+<a href="#application-methods" id="markdown-toc-application-methods">Application Methods</a>    <ul>
+      <li><a href="#getdescriptionoptions-modifiers" id="markdown-toc-getdescriptionoptions-modifiers"><code>getDescription(options, modifiers)</code></a></li>
+      <li><a href="#setdescriptionsessiondescription-options-modifiers" id="markdown-toc-setdescriptionsessiondescription-options-modifiers"><code>setDescription(sessionDescription, options, modifiers)</code></a></li>
+      <li><a href="#hasdescriptioncontenttype" id="markdown-toc-hasdescriptioncontenttype"><code>hasDescription(contentType)</code></a></li>
+      <li><a href="#close" id="markdown-toc-close"><code>close()</code></a></li>
+      <li><a href="#holdmodifierdescription" id="markdown-toc-holdmodifierdescription"><code>holdModifier(description)</code></a></li>
+      <li><a href="#senddtmftones-options" id="markdown-toc-senddtmftones-options"><code>sendDtmf(tones, options)</code></a></li>
+      <li><a href="#getdirection" id="markdown-toc-getdirection"><code>getDirection()</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#modifiers-1" id="markdown-toc-modifiers-1">Modifiers</a>    <ul>
+      <li><a href="#modifiers-2" id="markdown-toc-modifiers-2"><code>[Modifiers]</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#default-options" id="markdown-toc-default-options">Default Options</a>    <ul>
+      <li><a href="#constraints" id="markdown-toc-constraints"><code>constraints</code></a></li>
+      <li><a href="#icecheckingtimeout" id="markdown-toc-icecheckingtimeout"><code>iceCheckingTimeout</code></a></li>
+      <li><a href="#modifiers-3" id="markdown-toc-modifiers-3"><code>modifiers</code></a></li>
+      <li><a href="#rtcconfiguration" id="markdown-toc-rtcconfiguration"><code>rtcConfiguration</code></a></li>
+      <li><a href="#rtcofferoptions" id="markdown-toc-rtcofferoptions"><code>RTCOfferOptions</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#default-events" id="markdown-toc-default-events">Default Events</a>    <ul>
+      <li><a href="#usermediarequest" id="markdown-toc-usermediarequest"><code>userMediaRequest</code></a></li>
+      <li><a href="#usermedia" id="markdown-toc-usermedia"><code>userMedia</code></a></li>
+      <li><a href="#usermediafailed" id="markdown-toc-usermediafailed"><code>userMediaFailed</code></a></li>
+      <li><a href="#icegathering" id="markdown-toc-icegathering"><code>iceGathering</code></a></li>
+      <li><a href="#icecandidate" id="markdown-toc-icecandidate"><code>iceCandidate</code></a></li>
+      <li><a href="#icegatheringcomplete" id="markdown-toc-icegatheringcomplete"><code>iceGatheringComplete</code></a></li>
+      <li><a href="#iceconnection" id="markdown-toc-iceconnection"><code>iceConnection</code></a></li>
+      <li><a href="#iceconnectionchecking" id="markdown-toc-iceconnectionchecking"><code>iceConnectionChecking</code></a></li>
+      <li><a href="#iceconnectionconnected" id="markdown-toc-iceconnectionconnected"><code>iceConnectionConnected</code></a></li>
+      <li><a href="#iceconnectioncompleted" id="markdown-toc-iceconnectioncompleted"><code>iceConnectionCompleted</code></a></li>
+      <li><a href="#iceconnectionfailed" id="markdown-toc-iceconnectionfailed"><code>iceConnectionFailed</code></a></li>
+      <li><a href="#iceconnectiondisconnected" id="markdown-toc-iceconnectiondisconnected"><code>iceConnectionDisconnected</code></a></li>
+      <li><a href="#iceconnectionclosed" id="markdown-toc-iceconnectionclosed"><code>iceConnectionClosed</code></a></li>
+      <li><a href="#getdescription" id="markdown-toc-getdescription"><code>getDescription</code></a></li>
+      <li><a href="#setdescription" id="markdown-toc-setdescription"><code>setDescription</code></a></li>
+      <li><a href="#addstream" id="markdown-toc-addstream"><code>addStream</code></a></li>
+      <li><a href="#addtrack" id="markdown-toc-addtrack"><code>addTrack</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="construction">Construction</h2>
+
+<p>The <code>Session</code> object will create a <code>SessionDescriptionHandler</code> using the <code>sessionDescriptionHandlerFactory</code> defined on the UA when it is needed. The session will pass itself as the first argument to the factory, an observer as the second argument, and any options that are provided to the UA, under <code>sessionDescriptionHandlerFactoryOptions</code> as the last argument.</p>
+
+<h2 id="instance-variables">Instance Variables</h2>
+
+<p>There are no public instance variables for the Session Description Handler.</p>
+
+<h2 id="application-methods">Application Methods</h2>
+
+<h3 id="getdescriptionoptions-modifiers"><code>getDescription(options, modifiers)</code></h3>
+
+<p>Gets the session description from the underlying connection for the <code>session</code> to use for the SIP session.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>options</code></td>
+      <td><code>Object</code></td>
+      <td>Optional</td>
+    </tr>
+    <tr>
+      <td><code>options.constraints</code></td>
+      <td><code>Object</code></td>
+      <td>Optional rtcConstraints to use when getting local media. If media streams are already open and new constraints are defined, will re-acquire media.</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions</code></td>
+      <td><code>Object</code></td>
+      <td>Optional options to be passed to the PeerConnection initialization. If this is defined here, the current peer connection will be closed and a new one created with the options provided.</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions.rtcConfiguration</code></td>
+      <td><code>Object</code></td>
+      <td>Options to be passed to the constructor of the RTCPeerConnection</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions.rtcConfiguration.iceServers</code></td>
+      <td><code>Object</code></td>
+      <td>Ice Servers to be used by the Peer Connection. Default <code>[{urls: 'stun:stun.l.google.com:19302'}]</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions.iceCheckingTimeout</code></td>
+      <td><code>Integer</code></td>
+      <td>Maximum number of milliseconds to wait for Ice Candidates. Default <code>5000</code>.</td>
+    </tr>
+    <tr>
+      <td><code>options.RTCOfferOptions</code></td>
+      <td><code>Object</code></td>
+      <td>Options to be used on the peerConnection functions <code>createOffer</code> or <code>createAnswer</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>modifiers</code></td>
+      <td>
+<code>Array</code> of <code>Function</code> returning <code>Promise</code>
+</td>
+      <td>Optional modifiers that will be applied to the incoming or outgoing description.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Promise</code></td>
+      <td>Promise that resolves with the local description to be used for the session.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="setdescriptionsessiondescription-options-modifiers"><code>setDescription(sessionDescription, options, modifiers)</code></h3>
+
+<p>Sets the session description from the remote peer on the <code>session</code> on the underlying connection for SIP session.</p>
+
+<h4 id="parameters-1">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sessionDescription</code></td>
+      <td><code>String</code></td>
+      <td>The remote description that is to be set on the underlying connection for the session.</td>
+    </tr>
+    <tr>
+      <td><code>options</code></td>
+      <td><code>Object</code></td>
+      <td>Optional</td>
+    </tr>
+    <tr>
+      <td><code>options.constraints</code></td>
+      <td><code>Object</code></td>
+      <td>Optional rtcConstraints to use when getting local media. If media streams are already open and new constraints are defined, will re-acquire media.</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions</code></td>
+      <td><code>Object</code></td>
+      <td>Optional options to be passed to the PeerConnection initialization. If this is defined here, the current peer connection will be closed and a new one created with the options provided.</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions.rtcConfiguration</code></td>
+      <td><code>Object</code></td>
+      <td>Options to be passed to the constructor of the RTCPeerConnection</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions.rtcConfiguration.iceServers</code></td>
+      <td><code>Object</code></td>
+      <td>Ice Servers to be used by the Peer Connection. Default <code>[{urls: 'stun:stun.l.google.com:19302'}]</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>options.peerConnectionOptions.iceCheckingTimeout</code></td>
+      <td><code>Integer</code></td>
+      <td>Maximum number of milliseconds to wait for Ice Candidates. Default <code>5000</code>.</td>
+    </tr>
+    <tr>
+      <td><code>options.RTCOfferOptions</code></td>
+      <td><code>Object</code></td>
+      <td>Options to be used on the peerConnection functions <code>createOffer</code> or <code>createAnswer</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>modifiers</code></td>
+      <td>
+<code>Array</code> of <code>Function</code> returning <code>Promise</code>
+</td>
+      <td>Optional modifiers that will be applied to the incoming or outgoing description.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-1">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Promise</code></td>
+      <td>Promise that resolves once the description is set successfully on the underlying. The promise will reject if there was an error setting the description.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="hasdescriptioncontenttype"><code>hasDescription(contentType)</code></h3>
+
+<h4 id="parameters-2">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>contentType</code></td>
+      <td><code>String</code></td>
+      <td>The type of description that was received in a SIP message.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-2">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Boolean</code></td>
+      <td>
+<code>true</code> if the handler can handle that type of description, <code>false</code> otherwise.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="close"><code>close()</code></h3>
+
+<p>Destructor for the Session Description Handler. Any cleanup of the underlying connection should go here.</p>
+
+<h3 id="holdmodifierdescription"><code>holdModifier(description)</code></h3>
+
+<p>This is a <a href="#modifiers"><code>Modifier</code></a> that is used by the session’s <code>hold</code> function. The <code>hold</code> function will automatically append this modifier to the end of the <a href="#modifiers-2">modifiers array</a>, before calling <code>sendReinvite</code>.</p>
+
+<h4 id="parameters-3">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>description</td>
+      <td>Object</td>
+      <td>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription">RTCSessionDescription</a> object containing the session to be put on hold.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-3">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Promise</code></td>
+      <td>Promise that resolves with the modified <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription">RTCSessionDescription</a>, rejects if the description cannot be modified.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="senddtmftones-options"><code>sendDtmf(tones, options)</code></h3>
+
+<p>Used to send in-band DTMF via the pathway set up by the Session Description Handler.</p>
+
+<h4 id="parameters-4">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>tones</code></td>
+      <td><code>String</code></td>
+      <td>String of tones to be sent.</td>
+    </tr>
+    <tr>
+      <td><code>options</code></td>
+      <td><code>Object</code></td>
+      <td>Optional <code>Object</code> with extra parameters (see below).</td>
+    </tr>
+    <tr>
+      <td><code>options.duration</code></td>
+      <td><code>Number</code></td>
+      <td>Positive decimal <code>Number</code> indicating the duration of the tone expressed in milliseconds. Default value is <code>100</code>.</td>
+    </tr>
+    <tr>
+      <td><code>options.interToneGap</code></td>
+      <td><code>Number</code></td>
+      <td>Positive decimal <code>Number</code> indicating the interval between multiple tones expressed in milliseconds. Default value is <code>70</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-4">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>boolean</code></td>
+      <td>True if DTMF was successfully sent via the Session Description Handler, false otherwise.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="getdirection"><code>getDirection()</code></h3>
+
+<p>This accessor returns the direction of flow for the Session Description Handler. It is intended to be used as a hold indicator.</p>
+
+<h4 id="returns-5">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>String</code></td>
+      <td>String indicating the direction of the Session Description Handler.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="modifiers-1">Modifiers</h2>
+
+<p>Modifiers are used to modify the description before it is set on the connection or sent to a remote peer via the SIP session.</p>
+
+<h3 id="modifiers-2"><code>[Modifiers]</code></h3>
+
+<p>Modifiers should always be passed in an array. The <code>SessionDescriptionHandler</code> should take the array and chain the promises together in order of them in the array. <code>SIP.Utils.reducePromises(array)</code> can do this for you. The modifiers should be passed as a reference to a function, and each function should return a promise which is resolved with the modified SDP.</p>
+
+<h4 id="parameters-5">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>description</code></td>
+      <td><code>Object</code></td>
+      <td>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription">RTCSessionDescription</a> object.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-6">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Promise</code></td>
+      <td>Promise that resolves with the modified <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription">RTCSessionDescription</a>, rejects if the description cannot be modified.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre><span style="color:#080;font-weight:bold">var</span> <span style="color:#06B;font-weight:bold">myModifier</span> = <span style="color:#080;font-weight:bold">function</span>(description) {
+  description.sdp = description.sdp.replace(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">^a=candidate:</span><span style="color:#D20">\d</span><span style="color:#808">+ </span><span style="color:#D20">\d</span><span style="color:#808">+ tcp .*?</span><span style="color:#D20">\r</span><span style="color:#D20">\n</span><span style="color:#404">/</span><span style="color:#C2C">img</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#710">"</span></span>);
+  <span style="color:#080;font-weight:bold">return</span> Promise.resolve(description);
+};
+
+<span style="color:#080;font-weight:bold">var</span> modifierArray = [myModifier, SIP.WebRTC.Modifiers.stripTelephoneEvent];
+
+ua.invite(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.onsip.com</span><span style="color:#710">'</span></span>, {}, modifierArray);
+
+</pre></div>
+</div>
+</div>
+
+<h2 id="default-options">Default Options</h2>
+
+<p>The options listed below are the options that are supported by the default WebRTC Session Description Handler. SIP.js does not internally rely on these options in any way.</p>
+
+<p>The options can either be passed in from the <a href="/api/0.8.0/ua_configuration_parameters/#sessiondescriptionhandlerfactoryoptions"><code>sessionDescriptionHandlerFactoryOptions</code></a> on the UA, or as <code>SessionDescriptionHandlerOptions</code> on calls to <a href="/api/0.8.0/ua/#invitetarget-elementoptions"><code>invite</code></a> or <a href="/api/0.8.0/session/#acceptoptions"><code>accept</code></a>.</p>
+
+<h3 id="constraints"><code>constraints</code></h3>
+
+<p>Constraints to be used on calls to the WebRTC <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia"><code>getUserMedia</code></a> function.
+Default value is audio true, and video true.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>constraints: {
+  <span style="color:#606">audio</span>: <span style="color:#069">true</span>,
+  <span style="color:#606">video</span>: <span style="color:#069">true</span>
+}
+</pre></div>
+</div>
+</div>
+
+<h3 id="icecheckingtimeout"><code>iceCheckingTimeout</code></h3>
+
+<p>When setting up a session, how long (in milliseconds) to allow the browser to collect ICE candidates before proceeding.
+Lowering this timeout will speed up signaling but potentially fail to set up connections in some network topologies.
+Default value is 5 seconds, and this can be set as low as 0.5 seconds.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>iceCheckingTimeout: <span style="color:#00D">5000</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="modifiers-3"><code>modifiers</code></h3>
+
+<p>A set of default modifiers to use every time a description is requested or set by the Session Description Handler. These modifiers will occur before modifiers passed by a specific call to the Session Description Handler.</p>
+
+<h3 id="rtcconfiguration"><code>rtcConfiguration</code></h3>
+
+<p>Options to be passed to the WebRTC <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection"><code>PeerConnection</code></a> constructor.</p>
+
+<h3 id="rtcofferoptions"><code>RTCOfferOptions</code></h3>
+
+<p>Options to be passed to the WebRTC Peer Connection <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer"><code>createOffer</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createAnswer"><code>createAnswer</code></a> call.</p>
+
+<h2 id="default-events">Default Events</h2>
+
+<p>The events listed below are what is emitted from the default WebRTC Session Description Handler. SIP.js does not internally rely on these events.</p>
+
+<h3 id="usermediarequest"><code>userMediaRequest</code></h3>
+
+<p>Fired when <code>getUserMedia()</code> has been called and the application is waiting for a response.</p>
+
+<h4 id="onusermediarequest-function-constraints-"><code>on('userMediaRequest', function (constraints) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>constraints</code></td>
+      <td><code>Object</code></td>
+      <td>The constraints that were used with getUserMedia().</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="usermedia"><code>userMedia</code></h3>
+
+<p>Fired when <code>getUserMedia()</code> returned local media.</p>
+
+<h4 id="onusermedia-function-stream-"><code>on('userMedia', function (stream) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>stream</code></td>
+      <td><code>MediaStream</code></td>
+      <td>The local media stream that was returned from getUserMedia().</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="usermediafailed"><code>userMediaFailed</code></h3>
+
+<p>Fired when <code>getUserMedia()</code> has returned unsuccessfully from getting user media. Typically this might mean that the user has denied access to local media.</p>
+
+<h4 id="onusermediafailed-function-error-"><code>on('userMediaFailed', function (error) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>error</code></td>
+      <td><code>String</code></td>
+      <td>The message returned from the getUserMedia failure.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="icegathering"><code>iceGathering</code></h3>
+
+<p>Fired when the WebRTC layer has started gathering ICE candidates.</p>
+
+<h4 id="onicegathering-function--"><code>on('iceGathering', function () {})</code></h4>
+
+<h3 id="icecandidate"><code>iceCandidate</code></h3>
+
+<p>Fired each time the WebRTC layer finds an ICE candidate.</p>
+
+<h4 id="onicecandidate-function-candidate-"><code>on('iceCandidate', function (candidate) {})</code></h4>
+
+<h3 id="icegatheringcomplete"><code>iceGatheringComplete</code></h3>
+
+<p>Fired when the WebRTC layer has finished gathering ICE candidates.</p>
+
+<h4 id="onicegatheringcomplete-function--"><code>on('iceGatheringComplete', function () {})</code></h4>
+
+<h3 id="iceconnection"><code>iceConnection</code></h3>
+
+<p>Fired when the ICE connection state is <code>new</code>.</p>
+
+<h3 id="iceconnectionchecking"><code>iceConnectionChecking</code></h3>
+
+<p>Fired when the ICE connection state is <code>checking</code>.</p>
+
+<h3 id="iceconnectionconnected"><code>iceConnectionConnected</code></h3>
+
+<p>Fired when the ICE connection state is <code>connected</code>.</p>
+
+<h3 id="iceconnectioncompleted"><code>iceConnectionCompleted</code></h3>
+
+<p>Fired when the ICE connection state is <code>completed</code>.</p>
+
+<h3 id="iceconnectionfailed"><code>iceConnectionFailed</code></h3>
+
+<p>Fired when the ICE connection state is <code>failed</code>.</p>
+
+<h3 id="iceconnectiondisconnected"><code>iceConnectionDisconnected</code></h3>
+
+<p>Fired when the ICE connection state is <code>disconnected</code>.</p>
+
+<h3 id="iceconnectionclosed"><code>iceConnectionClosed</code></h3>
+
+<p>Fired when the ICE connection state is <code>closed</code>.</p>
+
+<h3 id="getdescription"><code>getDescription</code></h3>
+
+<p>Fired when the browser completes the WebRTC getDescription function.</p>
+
+<h4 id="ongetdescription-function-sdpwrapper-"><code>on('getDescription', function (sdpWrapper) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sdpWrapper</code></td>
+      <td><code>Object</code></td>
+      <td>The sdpWrapper used by getDescription.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.type</code></td>
+      <td><code>String</code></td>
+      <td>Can be either ‘offer’ or ‘answer’ depending on which type of SDP was gotten from the browser.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.sdp</code></td>
+      <td><code>String</code></td>
+      <td>The SDP that was gotten from the browser.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="setdescription"><code>setDescription</code></h3>
+
+<p>Fired when the browser completes the WebRTC setDescription function.</p>
+
+<h4 id="onsetdescription-function-sdpwrapper-"><code>on('setDescription', function (sdpWrapper) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sdpWrapper</code></td>
+      <td><code>Object</code></td>
+      <td>The sdpWrapper used by setDescription.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.type</code></td>
+      <td><code>String</code></td>
+      <td>Can be either ‘offer’ or ‘answer’ depending on which type of SDP was received.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.sdp</code></td>
+      <td><code>String</code></td>
+      <td>The SDP that was received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="addstream"><code>addStream</code></h3>
+
+<p>Fired when a new stream is added to the PeerConnection.</p>
+
+<ul>
+  <li>Deprecated. Note: This has been deprecated in the WebRTC api for the new <code>addTrack</code> event instead. Neither api is currently fully supported in all browser enviornments.</li>
+</ul>
+
+<h4 id="onaddstream-function-stream-"><code>on('addStream', function (stream) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>stream</code></td>
+      <td><code>Object</code></td>
+      <td>The stream that was added to the PeerConnection.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="addtrack"><code>addTrack</code></h3>
+
+<p>Fired when a new track is added to the PeerConnection.</p>
+
+<h4 id="onaddtrack-function-track-"><code>on('addTrack', function (track) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>track</code></td>
+      <td><code>Object</code></td>
+      <td>The track that was added to the PeerConnection.</td>
+    </tr>
+  </tbody>
+</table>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.10.0/">Overview</a></li>
+
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/simple/">Simple</a>
+      <ul>
+        <li><a href="/api/0.10.0/simple_configuration_parameters/">Simple Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.10.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.10.0/session/">Session</a></li>
+    <li><a href="/api/0.10.0/sessionDescriptionHandler/">Session Description Handler</a></li>
+
+
+    <li class="header"><a href="/api/0.10.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.10.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.10.0/context/server/">Server Context</a></li>
+    <li><a href="/api/0.10.0/subscription/">Subscription</a></li>
+    <li><a href="/api/0.10.0/message/">Message</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/refer/">Refer</a>
+      <ul>
+        <li><a href="/api/0.10.0/refer/referClientContext/">Refer Client Context</a></li>
+        <li><a href="/api/0.10.0/refer/referServerContext/">Refer Server Context</a></li>
+      </ul>
+    </li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.10.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.10.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.10.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.10.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.10.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.10.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.10.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/transport/">SIP.Transport</a>
+      <ul>
+        <li><a href="/api/0.10.0/transport/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/transport/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.10.0/transport/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.10.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.10.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.10.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.10.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.10.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.10.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

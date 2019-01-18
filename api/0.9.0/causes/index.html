@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>Failure and End Causes | SIP.js</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.9.0/">0.9.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			
+<h1 id="failure-and-end-causes">Failure and End Causes</h1>
+<p>SIP.js provides a set of causes in order to make the user aware of why the request or session ended. These causes are defined in the <code>SIP.C.causes</code> namespace, which can be used for comparisons.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// Create a user agent named bob, connect, and register to receive invitations.</span>
+<span style="color:#080;font-weight:bold">var</span> bob = <span style="color:#080;font-weight:bold">new</span> SIP.UA({
+  <span style="color:#606">uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>,
+  <span style="color:#606">register</span>: <span style="color:#069">true</span>
+});
+
+<span style="color:#080;font-weight:bold">var</span> session =  bob.invite(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>);
+session.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">failed</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span> (request) {
+  <span style="color:#080;font-weight:bold">var</span> cause = request.cause; <span style="color:#777">//sometimes this is request.reason_phrase</span>
+  <span style="color:#080;font-weight:bold">if</span> (cause === SIP.C.causes.REJECTED) {
+    bob.message(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Please, call me later!</span><span style="color:#710">'</span></span>);
+  }
+});
+</pre></div>
+</div>
+</div>
+
+<h2 id="common-causes">Common Causes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Constant</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>INVALID_TARGET</code></td>
+      <td>‘Invalid target’</td>
+      <td>The specified target can not be parsed as a valid <a href="../uri/"><code>SIP.URI</code></a>.</td>
+    </tr>
+    <tr>
+      <td><code>CONNECTION_ERROR</code></td>
+      <td>‘Connection Error’</td>
+      <td>WebSocket connection error occurred.</td>
+    </tr>
+    <tr>
+      <td><code>REQUEST_TIMEOUT</code></td>
+      <td>‘Request Timeout’</td>
+      <td>The timeout expired for the client transaction before a response was received.</td>
+    </tr>
+    <tr>
+      <td><code>SIP_FAILURE_CODE</code></td>
+      <td>‘SIP Failure Code’</td>
+      <td>A negative SIP response was received which is not part of any of the groups defined in the table below.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="sip-error-causes">SIP Error Causes</h2>
+<p>Some SIP response status codes are grouped into the following causes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Constant</th>
+      <th>Value</th>
+      <th>SIP Status Codes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>BUSY</code></td>
+      <td>‘Busy’</td>
+      <td>486,600</td>
+    </tr>
+    <tr>
+      <td><code>REJECTED</code></td>
+      <td>‘Rejected’</td>
+      <td>403,603</td>
+    </tr>
+    <tr>
+      <td><code>REDIRECTED</code></td>
+      <td>‘Redirected’</td>
+      <td>300,301,302,305,380</td>
+    </tr>
+    <tr>
+      <td><code>UNAVAILABLE</code></td>
+      <td>‘Unavailable’</td>
+      <td>408,410,430,480</td>
+    </tr>
+    <tr>
+      <td><code>NOT_FOUND</code></td>
+      <td>‘Not Found’</td>
+      <td>404,604</td>
+    </tr>
+    <tr>
+      <td><code>ADDRESS_INCOMPLETE</code></td>
+      <td>‘Address Incomplete’</td>
+      <td>484</td>
+    </tr>
+    <tr>
+      <td><code>INCOMPATIBLE_SDP</code></td>
+      <td>‘Incompatible SDP’</td>
+      <td>488,606</td>
+    </tr>
+    <tr>
+      <td><code>AUTHENTICATION_ERROR</code></td>
+      <td>‘Authentication Error’</td>
+      <td>401,407</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="session-causes">Session Causes</h2>
+<p>The following causes apply to audio/video sessions:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Constant</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>BYE</code></td>
+      <td>‘Terminated’</td>
+      <td>Session terminated normally by local or remote peer.</td>
+    </tr>
+    <tr>
+      <td><code>CANCELED</code></td>
+      <td>‘Canceled’</td>
+      <td>Session canceled by local or remote peer.</td>
+    </tr>
+    <tr>
+      <td><code>NO_ANSWER</code></td>
+      <td>‘No Answer’</td>
+      <td>Incoming call was not answered in the time given in the configuration <code>no_answer_timeout</code> parameter.</td>
+    </tr>
+    <tr>
+      <td><code>EXPIRES</code></td>
+      <td>‘Expires’</td>
+      <td>Incoming call contains an Expires header and the local user did not answer within the time given in the header.</td>
+    </tr>
+    <tr>
+      <td><code>NO_ACK</code></td>
+      <td>‘No ACK’</td>
+      <td>An incoming INVITE was replied to with a 2XX status code, but no ACK was received.</td>
+    </tr>
+    <tr>
+      <td><code>NO_PRACK</code></td>
+      <td>‘No PRACK’</td>
+      <td>An incoming iNVITE was replied to with a reliable provisional response, but no PRACK was received.</td>
+    </tr>
+    <tr>
+      <td><code>USER_DENIED_MEDIA_ACCESS</code></td>
+      <td>‘User Denied Media Access’</td>
+      <td>Local user denied media access when prompted for audio/video devices.</td>
+    </tr>
+    <tr>
+      <td><code>WEBRTC_NOT_SUPPORTED</code></td>
+      <td>‘WebRTC not supported’</td>
+      <td>The browser or device does not support the WebRTC specification.</td>
+    </tr>
+    <tr>
+      <td><code>RTP_TIMEOUT</code></td>
+      <td>‘RTP Timeout’</td>
+      <td>There was an error involving the PeerConnection associated with the call.</td>
+    </tr>
+    <tr>
+      <td><code>BAD_MEDIA_DESCRIPTION</code></td>
+      <td>‘Bad Media Description’</td>
+      <td>Received SDP is wrong.</td>
+    </tr>
+    <tr>
+      <td><code>DIALOG_ERROR</code></td>
+      <td>‘Dialog Error’</td>
+      <td>An in-dialog request received a 408 or 481 SIP error.</td>
+    </tr>
+  </tbody>
+</table>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.9.0/">Overview</a></li>
+
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/simple/">Simple</a>
+      <ul>
+        <li><a href="/api/0.9.0/simple_configuration_parameters/">Simple Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.9.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.9.0/session/">Session</a></li>
+    <li><a href="/api/0.9.0/sessionDescriptionHandler/">Session Description Handler</a></li>
+
+
+    <li class="header"><a href="/api/0.9.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.9.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.9.0/context/server/">Server Context</a></li>
+    <li><a href="/api/0.9.0/subscription/">Subscription</a></li>
+    <li><a href="/api/0.9.0/message/">Message</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/refer/">Refer</a>
+      <ul>
+        <li><a href="/api/0.9.0/refer/referClientContext/">Refer Client Context</a></li>
+        <li><a href="/api/0.9.0/refer/referServerContext/">Refer Server Context</a></li>
+      </ul>
+    </li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.9.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.9.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.9.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.9.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.9.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.9.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.9.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.9.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.9.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/transport/">SIP.Transport</a>
+      <ul>
+        <li><a href="/api/0.9.0/transport/#construction">Construction</a></li>
+        <li><a href="/api/0.9.0/transport/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.9.0/transport/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.9.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.9.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.9.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.9.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.9.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.9.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.9.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.9.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

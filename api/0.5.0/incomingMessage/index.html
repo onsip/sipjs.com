@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="In SIP.js library for WebRTC developers, an incomingMessage is a data structure that represents an incoming SIP message and its attributes." />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>SIP.IncomingMessage | SIP.js</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.5.0/">0.5.0</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			
+<h1 id="sipincomingmessage">SIP.IncomingMessage</h1>
+
+<p>An IncomingMessage is a data structure that represents an incoming SIP message and its attributes.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#construction" id="markdown-toc-construction">Construction</a></li>
+  <li>
+<a href="#instance-attributes" id="markdown-toc-instance-attributes">Instance Attributes</a>    <ul>
+      <li><a href="#data" id="markdown-toc-data"><code>data</code></a></li>
+      <li><a href="#method" id="markdown-toc-method"><code>method</code></a></li>
+      <li><a href="#via" id="markdown-toc-via"><code>via</code></a></li>
+      <li><a href="#viabranch" id="markdown-toc-viabranch"><code>via_branch</code></a></li>
+      <li><a href="#callid" id="markdown-toc-callid"><code>call_id</code></a></li>
+      <li><a href="#cseq" id="markdown-toc-cseq"><code>cseq</code></a></li>
+      <li><a href="#from" id="markdown-toc-from"><code>from</code></a></li>
+      <li><a href="#fromtag" id="markdown-toc-fromtag"><code>from_tag</code></a></li>
+      <li><a href="#to" id="markdown-toc-to"><code>to</code></a></li>
+      <li><a href="#totag" id="markdown-toc-totag"><code>to_tag</code></a></li>
+      <li><a href="#body" id="markdown-toc-body"><code>body</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#instance-methods" id="markdown-toc-instance-methods">Instance Methods</a>    <ul>
+      <li><a href="#addheadernamevalue" id="markdown-toc-addheadernamevalue"><code>addHeader(name,value)</code></a></li>
+      <li><a href="#getheadername" id="markdown-toc-getheadername"><code>getHeader(name)</code></a></li>
+      <li><a href="#getheadersname" id="markdown-toc-getheadersname"><code>getHeaders(name)</code></a></li>
+      <li><a href="#hasheadername" id="markdown-toc-hasheadername"><code>hasHeader(name)</code></a></li>
+      <li><a href="#parseheadernameidx" id="markdown-toc-parseheadernameidx"><code>parseHeader(name[,idx])</code></a></li>
+      <li><a href="#setheadernamevalue" id="markdown-toc-setheadernamevalue"><code>setHeader(name,value)</code></a></li>
+      <li><a href="#tostring" id="markdown-toc-tostring"><code>toString()</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="construction">Construction</h2>
+
+<p>An IncomingMessage cannot be constructed on it’s own. It is intended to be extended by other classes such as <code>SIP.IncomingRequest</code> and <code>SIP.IncomingResponse</code>.</p>
+
+<h2 id="instance-attributes">Instance Attributes</h2>
+
+<h3 id="data"><code>data</code></h3>
+
+<p><code>String</code> - A string representation of the SIP message.</p>
+
+<h3 id="method"><code>method</code></h3>
+
+<p><code>String</code> - The method of the incoming SIP message.</p>
+
+<h3 id="via"><code>via</code></h3>
+
+<p><code>Object</code> - An object containing the VIA information of the SIP message.</p>
+
+<h3 id="viabranch"><code>via_branch</code></h3>
+
+<p><code>String</code> - The name of the VIA branch of the SIP message.</p>
+
+<h3 id="callid"><code>call_id</code></h3>
+
+<p><code>String</code> - The Call-ID header on the SIP message.</p>
+
+<h3 id="cseq"><code>cseq</code></h3>
+
+<p><code>Number</code> - The cseq on the SIP message.</p>
+
+<h3 id="from"><code>from</code></h3>
+
+<p><code>SIP.NameAddrHeader</code> - Instance representing the from header value of the SIP message.</p>
+
+<h3 id="fromtag"><code>from_tag</code></h3>
+
+<p><code>String</code> - The name of the from tag header on the SIP message.</p>
+
+<h3 id="to"><code>to</code></h3>
+
+<p><code>SIP.NameAddrHeader</code> - Instance representing the to header value of the SIP message.</p>
+
+<h3 id="totag"><code>to_tag</code></h3>
+
+<p><code>String</code> - The to tag header on the SIP message.</p>
+
+<h3 id="body"><code>body</code></h3>
+
+<p><code>String</code> - The body of the SIP message.</p>
+
+<h2 id="instance-methods">Instance Methods</h2>
+
+<h3 id="addheadernamevalue"><code>addHeader(name,value)</code></h3>
+
+<p>Inserts a header with the given name and value into the last position of the header array.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>String</code></td>
+      <td>The name of the SIP header to add</td>
+    </tr>
+    <tr>
+      <td><code>value</code></td>
+      <td><code>String</code></td>
+      <td>The value to place in the SIP header field</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="getheadername"><code>getHeader(name)</code></h3>
+
+<p>Gets the value of the given header name.</p>
+
+<h4 id="parameters-1">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>String</code></td>
+      <td>The name of the SIP header to get the value of</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>String | undefined</code></td>
+      <td>Returns the specified header, undefined if header doesn’t exist</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="getheadersname"><code>getHeaders(name)</code></h3>
+
+<p>Gets the header(s) of the given name.</p>
+
+<h4 id="parameters-2">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>String</code></td>
+      <td>The name of the SIP header to get</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-1">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Array</code></td>
+      <td>All of the headers of the specified name</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="hasheadername"><code>hasHeader(name)</code></h3>
+
+<p>Verify the existence of the given header name.</p>
+
+<h4 id="parameters-3">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>String</code></td>
+      <td>The name of the SIP header to verify</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-2">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>boolean</code></td>
+      <td>
+<code>true</code> if the header with the given name exists, <code>false</code> otherwise</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="parseheadernameidx"><code>parseHeader(name[,idx])</code></h3>
+
+<p>Parses the given header on the given index.</p>
+
+<h4 id="parameters-4">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>String</code></td>
+      <td>Name of the SIP header to parse</td>
+    </tr>
+    <tr>
+      <td><code>idx</code></td>
+      <td><code>Number</code></td>
+      <td>Optional <code>Number</code> header index to parse</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-3">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Object | undefined</code></td>
+      <td>The parsed header object or undefined if there is a parsing error or the header is not present.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="setheadernamevalue"><code>setHeader(name,value)</code></h3>
+
+<p>Replaces the given header name with the given value.</p>
+
+<h4 id="parameters-5">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>String</code></td>
+      <td>The name of the SIP header to replace</td>
+    </tr>
+    <tr>
+      <td><code>value</code></td>
+      <td><code>String|Array</code></td>
+      <td>The value to place in the SIP header field</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tostring"><code>toString()</code></h3>
+
+<p>Returns the data of the message.</p>
+
+<h4 id="returns-4">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>String</code></td>
+      <td>The message data</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>incomingMessage.toString();
+
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">INVITE sip:jl5as9dj@7n93g7oohn8t.invalid;transport=ws;aor=alice%40example.com SIP/2.0
+Record-Route: &lt;sip:3ad1a7b505@1.2.3.4:443;transport=wss;lr;ovid=7cb85a5c&gt;
+Record-Route: &lt;sip:1.2.3.4:5060;transport=udp;lr;ovid=7cb85a5c&gt;
+Via: SIP/2.0/WSS 1.2.3.4:443;branch=z9hG4bK9f901aba80f26a0c9ba3c655711867914bf4c53e;rport
+Max-Forwards: 65
+From: "Alice" &lt;sip:alice@example.com&gt;;tag=eceN3v52HaQtD
+To: &lt;sip:jl5as9dj@7n93g7oohn8t.invalid;transport=ws;aor=bob%40example.com&gt;
+Call-ID: fdf5e4d7-ee93-1231-1a94-52540040a380
+CSeq: 54012202 INVITE
+Contact: &lt;sip:alice@example.com:5060&gt;
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY
+Supported: timer, precondition, path, replaces
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 916
+
+v=0
+o=UserAgent 1388671790 1388671791 IN IP4 1.2.3.4
+s=UserAgent
+c=IN IP4 1.2.3.4
+t=0 0
+a=msid-semantic: WMS KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk
+m=audio 24742 RTP/SAVPF 0 101
+a=rtpmap:101 telephone-event/8000
+a=fingerprint:sha-256 24:C2:A8:62:EF:65:E5:C4:F5:77:D9:A1:7F:29:29:3D:D1:53:84:B5:0F:DB:1D:D2:F7:8E:62:7D:10:91:0A:11
+a=rtcp:24743 IN IP4 1.2.3.4
+a=ssrc:3737708532 cname:3E4TuokvePWfbo0Q
+a=ssrc:3737708532 msid:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk a0
+a=ssrc:3737708532 mslabel:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk
+a=ssrc:3737708532 label:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwka0
+a=ice-ufrag:pkurgNxQHpUhegr7
+a=ice-pwd:KmQ5A1rFGdKIsAoH
+a=candidate:8521483177 1 udp 659136 1.2.3.4 24742 typ host generation 0
+a=candidate:8521483177 2 udp 659136 1.2.3.4 24743 typ host generation 0
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:q6Nvw6KpcRJEsGYf71U9lsB0a+d6nq/ZtC068SHF
+a=ptime:20
+</span><span style="color:#710">'</span></span>
+</pre></div>
+</div>
+</div>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0">Overview</a>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/ua/">SIP.UA</a>
+      <ul>
+        <li><a href="/api/0.5.0/ua/#construction">Construction</a></li>
+        <li><a href="/api/0.5.0/ua/#instance-methods">Instance Methods</a></li>
+        <li><a href="/api/0.5.0/ua/#events">Events</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/context/">Contexts (Client/Server)</a>
+      <ul>
+        <li><a href="/api/0.5.0/context/client/">SIP.ClientContext</a></li>
+        <li><a href="/api/0.5.0/context/server/">SIP.ServerContext</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/session/">SIP.Session</a>
+      <ul>
+        <li><a href="/api/0.5.0/session/#construction">Instantiation</a></li>
+        <li><a href="/api/0.5.0/session/#instance-attributes">Instance Attributes</a></li>
+        <li><a href="/api/0.5.0/session/#instance-methods">Instance Methods</a></li>
+        <li><a href="/api/0.5.0/session/#events">Events</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/subscription/">SIP.Subscription</a>
+      <ul>
+        <li><a href="/api/0.5.0/subscription/#construction">Instantiation</a></li>
+        <li><a href="/api/0.5.0/subscription/#instance-attributes">Instance Attributes</a></li>
+        <li><a href="/api/0.5.0/subscription/#instance-methods">Instance Methods</a></li>
+        <li><a href="/api/0.5.0/subscription/#events">Events</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/message/">SIP.Message</a>
+      <ul>
+        <li><a href="/api/0.5.0/message/#construction">Instantiation</a></li>
+        <li><a href="/api/0.5.0/message/#instance-attributes">Instance Attributes</a></li>
+        <li><a href="/api/0.5.0/message/#instance-methods">Instance Methods</a></li>
+        <li><a href="/api/0.5.0/message/#events">Events</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/uri/">SIP.URI</a>
+      <ul>
+        <li><a href="/api/0.5.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.5.0/uri/#instance-methods">Instance Methods</a></li>
+        <li><a href="/api/0.5.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.5.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.5.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/incomingMessage/">SIP.IncomingMessage</a>
+      <ul>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/outgoingRequest/">SIP.OutgoingRequest</a>
+      <ul>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.5.0/ua_configuration_parameters/">UA Configuration Parameters</a>
+    </li>
+    <li class="parent">
+      <a class="parent last" href="/api/0.5.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.5.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.5.0/causes/#sip-error-causes">SIP Error Causes</a></li>
+        <li><a href="/api/0.5.0/causes/#session-causes" class="last">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

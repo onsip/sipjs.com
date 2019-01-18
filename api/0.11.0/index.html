@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="SIP.js is an open source API written in JavaScript for WebRTC developers to add the SIP signaling protocol to their applications." />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>0.11.x | SIP.js</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.11.0/">0.11.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			
+<h1 id="overview">Overview</h1>
+
+<p>SIP.js is a full-featured SIP stack written in JavaScript. With SIP.js, you can harness the power of WebRTC to build audio, video, and realtime data into your application. SIP.js is fast, lightweight, and easy to use.</p>
+
+<p>To get up and running fast, check out our <a href="/guides/">getting started guides</a>.</p>
+
+<p><a href="/api/">Looking for another version?</a></p>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.11.0/">Overview</a></li>
+
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/simple/">Simple</a>
+      <ul>
+        <li><a href="/api/0.11.0/simple_configuration_parameters/">Simple Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.11.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.11.0/session/">Session</a></li>
+    <li><a href="/api/0.11.0/sessionDescriptionHandler/">Session Description Handler</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/transport/">Transport</a>
+      <ul>
+        <li><a class="parent" href="/api/0.11.0/wstransport/">WebSocket Transport</a></li>
+        <li><a href="/api/0.11.0/ws_transport_configuration_parameters/">Configuration Parameters</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><a href="/api/0.11.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.11.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.11.0/context/server/">Server Context</a></li>
+    <li><a href="/api/0.11.0/subscription/">Subscription</a></li>
+    <li><a href="/api/0.11.0/message/">Message</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/refer/">Refer</a>
+      <ul>
+        <li><a href="/api/0.11.0/refer/referClientContext/">Refer Client Context</a></li>
+        <li><a href="/api/0.11.0/refer/referServerContext/">Refer Server Context</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/publish/">Publish</a>
+      <ul>
+        <li><a href="/api/0.11.0/publish/publishClientContext/">Publish Client Context</a></li>
+      </ul>
+    </li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.11.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.11.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.11.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.11.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.11.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.11.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.11.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.11.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.11.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.11.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.11.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.11.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.11.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.11.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.11.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.11.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.11.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

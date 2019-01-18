@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="SIP.js Transport provides a transport layer for SIP over WebSocket connections." />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>Transport | SIP.js</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.12.0/">0.12.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			
+<h1 id="websocket-transport">WebSocket Transport</h1>
+
+<p>This is the default implementation of SIP.Transport for SIP.js. It handles transmission and receipt of SIP requests and responses over a WebSocket connection. This class inherits from <a href="../transport"><code>SIP.Transport</code></a>.</p>
+
+<ul id="markdown-toc">
+  <li>
+<a href="#configuration-options" id="markdown-toc-configuration-options">Configuration Options</a>    <ul>
+      <li><a href="#wsservers" id="markdown-toc-wsservers"><code>wsServers</code></a></li>
+      <li><a href="#connectiontimeout" id="markdown-toc-connectiontimeout"><code>connectionTimeout</code></a></li>
+      <li><a href="#maxreconnectionattempts" id="markdown-toc-maxreconnectionattempts"><code>maxReconnectionAttempts</code></a></li>
+      <li><a href="#reconnectiontimeout" id="markdown-toc-reconnectiontimeout"><code>reconnectionTimeout</code></a></li>
+      <li><a href="#keepaliveinterval" id="markdown-toc-keepaliveinterval"><code>keepAliveInterval</code></a></li>
+      <li><a href="#keepalivedebounce" id="markdown-toc-keepalivedebounce"><code>keepAliveDebounce</code></a></li>
+      <li><a href="#tracesip" id="markdown-toc-tracesip"><code>traceSip</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#state-diagram" id="markdown-toc-state-diagram">State Diagram</a></li>
+  <li>
+<a href="#instance-variables" id="markdown-toc-instance-variables">Instance Variables</a>    <ul>
+      <li><a href="#logger" id="markdown-toc-logger"><code>logger</code></a></li>
+      <li><a href="#configuration" id="markdown-toc-configuration"><code>configuration</code></a></li>
+      <li><a href="#ws" id="markdown-toc-ws"><code>ws</code></a></li>
+      <li><a href="#server" id="markdown-toc-server"><code>server</code></a></li>
+      <li><a href="#connectiontimer" id="markdown-toc-connectiontimer"><code>connectionTimer</code></a></li>
+      <li><a href="#connectionpromise" id="markdown-toc-connectionpromise"><code>connectionPromise</code></a></li>
+      <li><a href="#reconnectionattempts" id="markdown-toc-reconnectionattempts"><code>reconnectionAttempts</code></a></li>
+      <li><a href="#reconnecttimer" id="markdown-toc-reconnecttimer"><code>reconnectTimer</code></a></li>
+      <li><a href="#transportrecoveryattempts" id="markdown-toc-transportrecoveryattempts"><code>transportRecoveryAttempts</code></a></li>
+      <li><a href="#transportrecoverytimer" id="markdown-toc-transportrecoverytimer"><code>transportRecoveryTimer</code></a></li>
+      <li><a href="#keepaliveinterval-1" id="markdown-toc-keepaliveinterval-1"><code>keepAliveInterval</code></a></li>
+      <li><a href="#keepalivedebouncetimeout" id="markdown-toc-keepalivedebouncetimeout"><code>keepAliveDebounceTimeout</code></a></li>
+      <li><a href="#lasttransporterror" id="markdown-toc-lasttransporterror"><code>lastTransportError</code></a></li>
+      <li><a href="#status" id="markdown-toc-status"><code>status</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#instance-methods" id="markdown-toc-instance-methods">Instance Methods</a>    <ul>
+      <li><a href="#sendpromise" id="markdown-toc-sendpromise"><code>sendPromise()</code></a></li>
+      <li><a href="#connectpromise" id="markdown-toc-connectpromise"><code>connectPromise()</code></a></li>
+      <li><a href="#disconnectionpromise" id="markdown-toc-disconnectionpromise"><code>disconnectionPromise()</code></a></li>
+      <li><a href="#reconnect" id="markdown-toc-reconnect"><code>reconnect()</code></a></li>
+      <li><a href="#resetservererrorstatus" id="markdown-toc-resetservererrorstatus"><code>resetServerErrorStatus()</code></a></li>
+      <li><a href="#getnextwsserver" id="markdown-toc-getnextwsserver"><code>getNextWsServer()</code></a></li>
+      <li><a href="#noavailableservers" id="markdown-toc-noavailableservers"><code>noAvailableServers()</code></a></li>
+      <li><a href="#sendkeepalive" id="markdown-toc-sendkeepalive"><code>sendKeepAlive()</code></a></li>
+      <li><a href="#clearkeepalivetimeout" id="markdown-toc-clearkeepalivetimeout"><code>clearKeepAliveTimeout()</code></a></li>
+      <li><a href="#startsendingkeepalives" id="markdown-toc-startsendingkeepalives"><code>startSendingKeepAlives()</code></a></li>
+      <li><a href="#stopsendingkeepalives" id="markdown-toc-stopsendingkeepalives"><code>stopSendingKeepAlives()</code></a></li>
+      <li><a href="#statusassert" id="markdown-toc-statusassert"><code>statusAssert()</code></a></li>
+      <li><a href="#statustransition" id="markdown-toc-statustransition"><code>statusTransition()</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="configuration-options">Configuration Options</h2>
+
+<p>A dictionary of options that is accepted by the WebSocket Transport. Passed to the UA as <a href="../ua_configuration_parameters#transportoptions"><code>transportOptions</code></a></p>
+
+<h3 id="wsservers"><code>wsServers</code></h3>
+
+<p>Set of WebSocket URIs to connect to. By default, the WebSocket URI is set to <code>wss://edge.sip.onsip.com</code>. If not specified, port 80 will be used for WS URIs and port 443 will be used for WSS URIs. This parameter can be expressed in multiple ways:</p>
+
+<ul>
+  <li>
+<code>String</code> to define a single WebSocket URI.</li>
+  <li>
+<code>Array</code> of <code>Strings</code> to define multiple WebSocket URIs.</li>
+  <li>
+<code>Array</code> of <code>Object</code> to define multiple WebSocket URIs with weight. URIs with higher weights are attempted before those with lower weights.</li>
+</ul>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws.example.com</span><span style="color:#710">"</span></span>
+</pre></div>
+</div>
+</div>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws.example.com:8443/sip?KEY=1234</span><span style="color:#710">"</span></span>
+</pre></div>
+</div>
+</div>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>wsServers: [
+  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-1.example.com</span><span style="color:#710">"</span></span>,
+  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-2.example.com</span><span style="color:#710">"</span></span>
+]
+</pre></div>
+</div>
+</div>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>wsServers: [
+  { <span style="color:#777">// First connection attempt</span>
+    <span style="color:#606">ws_uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-1.example.com</span><span style="color:#710">"</span></span>,
+    <span style="color:#606">weight</span>: <span style="color:#00D">10</span>
+  },
+  {
+    <span style="color:#606">ws_uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-2.example.com</span><span style="color:#710">"</span></span>,
+    <span style="color:#606">weight</span>: <span style="color:#00D">1</span>
+  }
+]
+</pre></div>
+</div>
+</div>
+
+<h3 id="connectiontimeout"><code>connectionTimeout</code></h3>
+<p>Maximum time (<code>Number</code>) in seconds for WebSocket initial connection. Default value is 5.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>connectionTimeout: <span style="color:#00D">5</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="maxreconnectionattempts"><code>maxReconnectionAttempts</code></h3>
+<p><code>Number</code> of times to attempt to reconnect to a WebSocket when the connection drops. The default value is 3.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>maxReconnectionAttempts: <span style="color:#00D">3</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="reconnectiontimeout"><code>reconnectionTimeout</code></h3>
+<p>The time (<code>Number</code>) in seconds to wait between WebSocket reconnection attempts. The default timeout is 4 seconds.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>reconnectionTimeout: <span style="color:#00D">4</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="keepaliveinterval"><code>keepAliveInterval</code></h3>
+<p>The time (<code>Number</code>) in seconds to wait in between CLRF keepAlive sequences are sent. The default is 0.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>keepAliveInterval: <span style="color:#00D">0</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="keepalivedebounce"><code>keepAliveDebounce</code></h3>
+<p>The time (<code>Number</code>) in seconds to debounce sending CLRF keepAlive sequences by. The default is 10.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>keepAliveInterval: <span style="color:#00D">10</span>
+</pre></div>
+</div>
+</div>
+
+<h3 id="tracesip"><code>traceSip</code></h3>
+<p>Indicate whether incoming and outgoing SIP request/responses must be logged in the browser console (<code>Boolean</code>). Default value is <code>false</code>.</p>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>traceSip: <span style="color:#069">true</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="state-diagram">State Diagram</h2>
+
+<p>The following diagram indicates the states and state transitions that the WebSocket transport can make.</p>
+
+<p><img src="/shared/img/transport-state-diagram.png" alt="State Diagram"></p>
+
+<h2 id="instance-variables">Instance Variables</h2>
+
+<h3 id="logger"><code>logger</code></h3>
+
+<p><code>Logger</code> - The outlet for log messages.</p>
+
+<h3 id="configuration"><code>configuration</code></h3>
+
+<p><code>Object</code> - The configuration options that have been loaded for the class</p>
+
+<h3 id="ws"><code>ws</code></h3>
+
+<p><code>WebSocket</code> - The WebSocket used for sending and receiving messages.</p>
+
+<h3 id="server"><code>server</code></h3>
+
+<p><code>Object</code> - The wsServer object the transport connects to; comes from the
+configuration.</p>
+
+<h3 id="connectiontimer"><code>connectionTimer</code></h3>
+
+<p><code>Integer</code> - Global timer ID used to track time taken for connection.</p>
+
+<h3 id="connectionpromise"><code>connectionPromise</code></h3>
+
+<p><code>Promise</code> - The promise from when <code>connect()</code> is called</p>
+
+<h3 id="reconnectionattempts"><code>reconnectionAttempts</code></h3>
+
+<p><code>Integer</code> - The number of times the Transport has attempted to reconnect in
+event of error.</p>
+
+<h3 id="reconnecttimer"><code>reconnectTimer</code></h3>
+
+<p><code>Integer</code> - Global timer ID used to track time between reconnection attempts.</p>
+
+<h3 id="transportrecoveryattempts"><code>transportRecoveryAttempts</code></h3>
+
+<p><code>Integer</code> - The number of times the Transport has attempted to recover</p>
+
+<h3 id="transportrecoverytimer"><code>transportRecoveryTimer</code></h3>
+
+<p><code>Integer</code> - Global timer ID used to track time between recovery attempts.</p>
+
+<h3 id="keepaliveinterval-1"><code>keepAliveInterval</code></h3>
+
+<p><code>Integer</code> - Global timer ID used to track time between keepAlive messages</p>
+
+<h3 id="keepalivedebouncetimeout"><code>keepAliveDebounceTimeout</code></h3>
+
+<p><code>Integer</code> - Global timer ID used to debounce keepAlive messages</p>
+
+<h3 id="lasttransporterror"><code>lastTransportError</code></h3>
+
+<p><code>Object</code> - When the WebSocket is closed, any error condition gets stored here.</p>
+
+<h3 id="status"><code>status</code></h3>
+
+<p><code>Integer</code> - Indicates the connection state of the transport. See constants for list of valid statuses.</p>
+
+<h2 id="instance-methods">Instance Methods</h2>
+
+<h3 id="sendpromise"><code>sendPromise()</code></h3>
+
+<p><em>Internal</em> Contains message sending logic - instantiates a <code>WebSocket</code> and sets up listeners on it</p>
+
+<h5 id="parameters">Parameters</h5>
+<p><code>msg</code> - <code>String</code> | <code>SIP.OutgoingRequest</code> - A SIP Request to send on the WebSocket</p>
+
+<p><code>options</code> (optional) - <code>Object</code> with parameters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>force</code></td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Whether or not to force status assertions and/or transitions</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns">Returns</h4>
+<p><code>Promise</code> - resolves with an <code>Object</code> with parameters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>msg</code></td>
+      <td>String</td>
+      <td> </td>
+      <td>The message that was just sent</td>
+    </tr>
+    <tr>
+      <td><code>overrideEvent</code></td>
+      <td>Boolean</td>
+      <td>True</td>
+      <td>Whether or not to emit the default event at resolution time. This implementation emits the event in <code>onOpen()</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="connectpromise"><code>connectPromise()</code></h3>
+
+<p><em>Internal</em></p>
+
+<p>Contains connection logic - instantiates a <code>WebSocket</code> and sets up listeners on it. Will change the Transport state from <code>CLOSED</code> to <code>CONNECTING</code>.</p>
+
+<h5 id="parameters-1">Parameters</h5>
+<p><code>options</code>(optional) - <code>Object</code> with parameters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>force</code></td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Whether or not to force status assertions and/or transitions</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-1">Returns</h4>
+<p><code>Promise</code> - resolves with an <code>Object</code> with parameters.</p>
+
+<p>Resolves when the <code>state</code> is <code>OPEN</code>. Rejects when the connection cannot be opened.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>overrideEvent</code></td>
+      <td>Boolean</td>
+      <td>True</td>
+      <td>Whether or not to emit the default event at resolution time. This implementation emits the event in <code>onOpen()</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="no_toc" id="onopen"><code>onOpen()</code></h3>
+<p><em>Internal</em> This method is called when the WebSocket is opened. Its primary purpose is to clear the reconnection attempts and propagate a <code>connected</code> event.</p>
+
+<h5 id="parameters-2">Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>resolve</code></td>
+      <td>Function</td>
+      <td>A promise resolution to call- from <code>connectPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="disconnectionpromise"><code>disconnectionPromise()</code></h3>
+
+<p><em>Internal</em></p>
+
+<p>Contains disconnection logic - closes the <code>WebSocket</code>. Will change the Transport state from <code>OPEN</code> to <code>CLOSED</code>.</p>
+
+<h5 id="parameters-3">Parameters</h5>
+<p><code>options</code>(optional) - <code>Object</code> with parameters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>force</code></td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Whether or not to force status assertions and/or transitions</td>
+    </tr>
+    <tr>
+      <td><code>code</code></td>
+      <td>No</td>
+      <td>Number</td>
+      <td>A numeric value indicating the status code explaining why the connection has been closed.</td>
+    </tr>
+    <tr>
+      <td><code>reason</code></td>
+      <td>No</td>
+      <td>String</td>
+      <td>A human-readable string explaining why the connection has been closed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-2">Returns</h4>
+<p><code>Promise</code> - resolves with an <code>Object</code> with parameters.</p>
+
+<p>Resolves when the <code>state</code> is <code>CLOSED</code>. Rejects when in the connection cannot be closed.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>overrideEvent</code></td>
+      <td>Boolean</td>
+      <td>True</td>
+      <td>Whether or not to emit the default event at resolution time. This implementation emits the event in <code>onClose()</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="no_toc" id="onclose"><code>onClose()</code></h3>
+
+<p><em>Internal</em> This method is called when the WebSocket is closed. Its primary purpose is to propagate a <code>disconnected</code> event and attempt to reconnect if necessary.</p>
+
+<h3 class="no_toc" id="onmessage"><code>onMessage()</code></h3>
+
+<p><em>Internal</em> This method is called when a message is received from the WebSocket. It parses the SIP message, runs sanity checks, and passes it to the UA (for requests) or transaction (for responses) for processing.</p>
+
+<h3 class="no_toc" id="onerror"><code>onError()</code></h3>
+
+<p><em>Internal</em> Logs an error and emits a <code>transportError</code> event. Errors typically also disconnect the WebSocket, so no extra handling is done here.</p>
+
+<h3 id="reconnect"><code>reconnect()</code></h3>
+
+<p><em>Internal</em> Reconnect to the WebSocket server in the event of unexpected disconnection. This will attempt to reconnect up to <a href="../ws_transport_configuration_parameters/#maxreconnectionattempts"><code>configuration.maxReconnectionAttempts</code></a> times, with a gap of <a href="../ws_transport_configuration_parameters/#reconnectiontimeout"><code>configuration.reconnectionTimeout</code></a> seconds between each request.</p>
+
+<h3 id="resetservererrorstatus"><code>resetServerErrorStatus()</code></h3>
+
+<p>Resets the error status of all the servers defined in the configuration. Called at the end of all reconnection logic to bring things back to a clean state.</p>
+
+<h3 id="getnextwsserver"><code>getNextWsServer()</code></h3>
+
+<p><em>Internal</em> Picks the next WebSocket server from <code>configuration.wsServers</code> and returns it. Priority is based on given weight (see <a href="../ws_transport_configuration_parameters/#wsservers"><code>configuration.wsServers</code></a>) and whether the server has been marked as error</p>
+
+<h4 id="returns-3">Returns</h4>
+<p><code>Object</code> a WsServer configuration object (not to be confused with a <code>WebSocket</code>)</p>
+
+<h3 id="noavailableservers"><code>noAvailableServers()</code></h3>
+
+<p><em>Internal</em> Checks all WebSocket servers defined in <code>configuration.wsServers</code> for their error state. Returns true if all servers have property <code>isError</code> set to <code>true</code>.</p>
+
+<h4 id="returns-4">Returns</h4>
+<p><code>Boolean</code> - <code>true</code> if there are no available servers, <code>false</code> otherwise</p>
+
+<h3 class="no_toc" id="disposews"><code>disposeWs()</code></h3>
+
+<p><em>Internal</em> Removes all event listeners and then then sets the instance property <code>this.ws</code> to null.</p>
+
+<h3 id="sendkeepalive"><code>sendKeepAlive()</code></h3>
+
+<p><em>Internal</em> Sends a double CLRF sequence on the websocket. Is debounced by <code>keepAliveTimeout</code>, which is also set in this function. Configurable by <a href="../ws_transport_configuration_parameters/#keepalivedebounce"><code>configuration.keepAliveDebounce</code></a></p>
+
+<h4 id="returns-5">Returns</h4>
+<p><code>Promise</code>, an invocation of <code>send()</code></p>
+
+<h3 id="clearkeepalivetimeout"><code>clearKeepAliveTimeout()</code></h3>
+
+<p><em>Internal</em> Clears the <code>keepAliveTimeout</code> from the global timer provider and sets the instance parameter to null</p>
+
+<h3 id="startsendingkeepalives"><code>startSendingKeepAlives()</code></h3>
+
+<p><em>Internal</em> Sets up an interval to call <code>sendKeepalive()</code> periodically. Configurable by <code>configuration.keepAliveInterval</code></p>
+
+<h3 id="stopsendingkeepalives"><code>stopSendingKeepAlives()</code></h3>
+
+<p><em>Internal</em> Clears the keepAlive interval from the global timer provider and sets the instance parameter to null. Also clears the outstanding <code>keepAliveTimeout</code></p>
+
+<h3 id="statusassert"><code>statusAssert()</code></h3>
+
+<p><em>Internal</em> Checks the current status against the given status for equality, returns true if they are and false if they are not. Can be bypassed by using the <code>force</code> parameter and will always return true, using <code>force</code> will generate warning-level log messages.</p>
+
+<h4 id="parameters-4">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>status</code></td>
+      <td>Boolean</td>
+      <td>The status to check</td>
+    </tr>
+    <tr>
+      <td><code>force</code></td>
+      <td>Boolean</td>
+      <td>Whether or not to bypass the assertion</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-6">Returns</h4>
+<p><code>Boolean</code> - <code>true</code> if the given status is equal to the current status, <code>false</code> otherwise</p>
+
+<h3 id="statustransition"><code>statusTransition()</code></h3>
+
+<p><em>Internal</em> Safely transitions the status by checking with <code>statusAssert()</code>. Can be forced using the <code>force</code> parameter. Only allows certain transitions:</p>
+
+<h4 id="parameters-5">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>status</code></td>
+      <td>Boolean</td>
+      <td>The status to transition to</td>
+    </tr>
+    <tr>
+      <td><code>force</code></td>
+      <td>Boolean</td>
+      <td>Whether or not to bypass the assertion</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="allowed-transitions">Allowed Transitions</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start Status</th>
+      <th> </th>
+      <th>Destination Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>STATUS_CONNECTING</code></td>
+      <td>=&gt;</td>
+      <td><code>STATUS_OPEN</code></td>
+    </tr>
+    <tr>
+      <td><code>STATUS_OPEN</code></td>
+      <td>=&gt;</td>
+      <td><code>STATUS_CLOSING</code></td>
+    </tr>
+    <tr>
+      <td><code>STATUS_CLOSING</code></td>
+      <td>=&gt;</td>
+      <td><code>STATUS_CLOSED</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-7">Returns</h4>
+<p><code>Boolean</code> - <code>true</code> if the transition was successful and <code>false</code> otherwise</p>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.12.0/">Overview</a></li>
+
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/simple/">Simple</a>
+      <ul>
+        <li><a href="/api/0.12.0/simple_configuration_parameters/">Simple Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.12.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.12.0/session/">Session</a></li>
+    <li><a href="/api/0.12.0/sessionDescriptionHandler/">Session Description Handler</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/transport/">Transport</a>
+      <ul>
+        <li><a class="parent" href="/api/0.12.0/wstransport/">WebSocket Transport</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><a href="/api/0.12.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.12.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.12.0/context/server/">Server Context</a></li>
+
+    <li><a href="/api/0.12.0/message/">Message</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/refer/">Refer</a>
+      <ul>
+        <li><a href="/api/0.12.0/refer/referClientContext/">Refer Client Context</a></li>
+        <li><a href="/api/0.12.0/refer/referServerContext/">Refer Server Context</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.12.0/register">Register Context</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/subscription/">Subscription</a>
+      <ul>
+        <li><a href="/api/0.12.0/subscription/publishClientContext/">Publish Client Context</a></li>
+        <li><a href="/api/0.12.0/subscription/subscription/">Subscription Client Context</a></li>
+      </ul>
+    </li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.12.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.12.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.12.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.12.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.12.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.12.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.12.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.12.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.12.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.12.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.12.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.12.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.12.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.12.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.12.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.12.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.12.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

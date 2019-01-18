@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="The Simple WebRTC layer for SIP.js" />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>Simple</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.10.0/">0.10.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			
+<h1 id="simple">Simple</h1>
+
+<p>Simple is a simplified interface to make getting up and running easier for new users. It is not intended for advanced use cases.</p>
+
+<ul id="markdown-toc">
+  <li>
+<a href="#construction" id="markdown-toc-construction">Construction</a>    <ul>
+      <li><a href="#new-sipwebrtcsimpleconfiguration" id="markdown-toc-new-sipwebrtcsimpleconfiguration"><code>new SIP.WebRTC.Simple([configuration])</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#instance-variables" id="markdown-toc-instance-variables">Instance Variables</a>    <ul>
+      <li><a href="#state" id="markdown-toc-state"><code>state</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#instance-methods" id="markdown-toc-instance-methods">Instance Methods</a>    <ul>
+      <li><a href="#calldestination" id="markdown-toc-calldestination"><code>call(destination)</code></a></li>
+      <li><a href="#answer" id="markdown-toc-answer"><code>answer()</code></a></li>
+      <li><a href="#reject" id="markdown-toc-reject"><code>reject()</code></a></li>
+      <li><a href="#hangup" id="markdown-toc-hangup"><code>hangup()</code></a></li>
+      <li><a href="#mute" id="markdown-toc-mute"><code>mute()</code></a></li>
+      <li><a href="#unmute" id="markdown-toc-unmute"><code>unmute()</code></a></li>
+      <li><a href="#hold" id="markdown-toc-hold"><code>hold()</code></a></li>
+      <li><a href="#unhold" id="markdown-toc-unhold"><code>unhold()</code></a></li>
+      <li><a href="#hangup-1" id="markdown-toc-hangup-1"><code>hangup()</code></a></li>
+      <li><a href="#senddtmftone" id="markdown-toc-senddtmftone"><code>sendDTMF(tone)</code></a></li>
+      <li><a href="#messagedestination-message" id="markdown-toc-messagedestination-message"><code>message(destination, message)</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#events" id="markdown-toc-events">Events</a>    <ul>
+      <li><a href="#registered" id="markdown-toc-registered"><code>registered</code></a></li>
+      <li><a href="#unregistered" id="markdown-toc-unregistered"><code>unregistered</code></a></li>
+      <li><a href="#new" id="markdown-toc-new"><code>new</code></a></li>
+      <li><a href="#ringing" id="markdown-toc-ringing"><code>ringing</code></a></li>
+      <li><a href="#connecting" id="markdown-toc-connecting"><code>connecting</code></a></li>
+      <li><a href="#connected" id="markdown-toc-connected"><code>connected</code></a></li>
+      <li><a href="#ended" id="markdown-toc-ended"><code>ended</code></a></li>
+      <li><a href="#hold-1" id="markdown-toc-hold-1"><code>hold</code></a></li>
+      <li><a href="#unhold-1" id="markdown-toc-unhold-1"><code>unhold</code></a></li>
+      <li><a href="#mute-1" id="markdown-toc-mute-1"><code>mute</code></a></li>
+      <li><a href="#unmute-1" id="markdown-toc-unmute-1"><code>unmute</code></a></li>
+      <li><a href="#dtmf" id="markdown-toc-dtmf"><code>dtmf</code></a></li>
+      <li><a href="#message" id="markdown-toc-message"><code>message</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#states" id="markdown-toc-states">States</a>    <ul>
+      <li><a href="#statusnull" id="markdown-toc-statusnull"><code>STATUS_NULL</code></a></li>
+      <li><a href="#statusnew" id="markdown-toc-statusnew"><code>STATUS_NEW</code></a></li>
+      <li><a href="#statusconnecting" id="markdown-toc-statusconnecting"><code>STATUS_CONNECTING</code></a></li>
+      <li><a href="#statusconnected" id="markdown-toc-statusconnected"><code>STATUS_CONNECTED</code></a></li>
+      <li><a href="#statuscompleted" id="markdown-toc-statuscompleted"><code>STATUS_COMPLETED</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="construction">Construction</h2>
+
+<h3 id="new-sipwebrtcsimpleconfiguration"><code>new SIP.WebRTC.Simple([configuration])</code></h3>
+
+<p>A new Simple interface via the <code>SIP.WebRTC.Simple</code> constructor. A remote video or audio DOM element is required, as well as credentials to register SIP.js with your SIP service. Check the <a href="../simple_configuration_parameters/">Simple Configuration Parameters</a> for a full list of parameters.</p>
+
+<h4 id="example">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// Create a Simple interface with a user named bob and a remote video element in the DOM</span>
+<span style="color:#080;font-weight:bold">var</span> simple = <span style="color:#080;font-weight:bold">new</span> SIP.WebRTC.Simple({
+  <span style="color:#606">media</span>: {
+    <span style="color:#606">remote</span>: {
+      <span style="color:#606">video</span>: document.getElementById(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">remoteVideo</span><span style="color:#710">'</span></span>),
+      <span style="color:#777">// This is necessary to do an audio/video call as opposed to just a video call</span>
+      <span style="color:#606">audio</span>: document.getElementById(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">remoteAudio</span><span style="color:#710">'</span></span>)
+    }
+  },
+  <span style="color:#606">ua</span>: {
+    <span style="color:#606">uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>,
+    <span style="color:#606">wsServers</span>: [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">wss://sip-ws.example.com</span><span style="color:#710">'</span></span>],
+  }
+});
+</pre></div>
+</div>
+</div>
+
+<h2 id="instance-variables">Instance Variables</h2>
+
+<h3 id="state"><code>state</code></h3>
+
+<p>The state that simple is in. See <a href="#states"><code>states</code></a> below for a list of states and description of each state.</p>
+
+<h2 id="instance-methods">Instance Methods</h2>
+
+<h3 id="calldestination"><code>call(destination)</code></h3>
+
+<p>Start a call with the destination</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>destination</code></td>
+      <td><code>String</code></td>
+      <td>The destination endpoint that wish to call</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example-1">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.call(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>);
+</pre></div>
+</div>
+</div>
+
+<h3 id="answer"><code>answer()</code></h3>
+
+<p>Answer an incoming call.</p>
+
+<h4 id="example-2">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.answer();
+</pre></div>
+</div>
+</div>
+
+<h3 id="reject"><code>reject()</code></h3>
+
+<p>Reject an incoming call.</p>
+
+<h4 id="example-3">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.reject();
+</pre></div>
+</div>
+</div>
+
+<h3 id="hangup"><code>hangup()</code></h3>
+
+<p>Hangup a call.</p>
+
+<h4 id="example-4">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.hangup();
+</pre></div>
+</div>
+</div>
+
+<h3 id="mute"><code>mute()</code></h3>
+
+<p>Mute the local media of a call.</p>
+
+<h4 id="example-5">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.mute();
+</pre></div>
+</div>
+</div>
+
+<h3 id="unmute"><code>unmute()</code></h3>
+
+<p>Unmute the local media of a call.</p>
+
+<h4 id="example-6">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.unmute();
+</pre></div>
+</div>
+</div>
+
+<h3 id="hold"><code>hold()</code></h3>
+
+<p>Place a call on hold and mute the local media.</p>
+
+<h4 id="example-7">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.hold();
+</pre></div>
+</div>
+</div>
+
+<h3 id="unhold"><code>unhold()</code></h3>
+
+<p>Take a call off hold and unmute the local media.</p>
+
+<h4 id="example-8">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.unhold();
+</pre></div>
+</div>
+</div>
+
+<h3 id="hangup-1"><code>hangup()</code></h3>
+
+<p>Hangup a call.</p>
+
+<h4 id="example-9">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.hangup();
+</pre></div>
+</div>
+</div>
+
+<h3 id="senddtmftone"><code>sendDTMF(tone)</code></h3>
+
+<p>Send a DTMF event via SIP Message to the active call. Requires an active call.</p>
+
+<h4 id="parameters-1">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>tone</code></td>
+      <td><code>String</code></td>
+      <td>The tone that you want to send to the active call</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example-10">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.sendDTMF(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1</span><span style="color:#710">'</span></span>);
+</pre></div>
+</div>
+</div>
+
+<h3 id="messagedestination-message"><code>message(destination, message)</code></h3>
+
+<p>Send a SIP Message to the destination. Does not require an active call.</p>
+
+<h4 id="parameters-2">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>tone</code></td>
+      <td><code>String</code></td>
+      <td>The tone that you want to send to the active call</td>
+    </tr>
+    <tr>
+      <td><code>message</code></td>
+      <td><code>String</code></td>
+      <td>The message to be sent</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example-11">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.message(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hello Bob</span><span style="color:#710">'</span></span>);
+</pre></div>
+</div>
+</div>
+
+<h2 id="events">Events</h2>
+
+<h3 id="registered"><code>registered</code></h3>
+
+<p>Fired for a successful registration.</p>
+
+<h4 id="onregistered-function-"><code>on('registered', function() {})</code></h4>
+
+<h3 id="unregistered"><code>unregistered</code></h3>
+
+<p>Fired for an unregistration. This is event is fired in the following scenarios:</p>
+
+<ul>
+  <li>As a result of an unregistration request, <code>UA.unregister()</code>.</li>
+  <li>When registered, a periodic re-registration fails.</li>
+</ul>
+
+<h4 id="onunregistered-function-"><code>on('unregistered', function() {})</code></h4>
+
+<h3 id="new"><code>new</code></h3>
+
+<p>Fired when there is a new call (incoming or outgoing), before a progress message is sent or received.</p>
+
+<h4 id="onnew-function-"><code>on('new', function() {})</code></h4>
+
+<h3 id="ringing"><code>ringing</code></h3>
+
+<p>Fired when there is an incoming call that has not yet been answered.</p>
+
+<h4 id="onringing-function-"><code>on('ringing', function() {})</code></h4>
+
+<h3 id="connecting"><code>connecting</code></h3>
+
+<p>Fired when there is a progress message sent or received by a call, and the call is not yet in a connected state.</p>
+
+<h4 id="onconnectiing-function-"><code>on('connectiing', function() {})</code></h4>
+
+<h3 id="connected"><code>connected</code></h3>
+
+<p>Fired when the call is connected.</p>
+
+<h4 id="onconnected-function-"><code>on('connected', function() {})</code></h4>
+
+<h3 id="ended"><code>ended</code></h3>
+
+<p>Fired when the call has ended.</p>
+
+<h4 id="onended-function-"><code>on('ended', function() {})</code></h4>
+
+<h3 id="hold-1"><code>hold</code></h3>
+
+<p>Fired when the call is placed on hold by either side.</p>
+
+<h4 id="onhold-function-"><code>on('hold', function() {})</code></h4>
+
+<h3 id="unhold-1"><code>unhold</code></h3>
+
+<p>Fired when the call is taken off hold by either side.</p>
+
+<h4 id="onunhold-function-"><code>on('unhold', function() {})</code></h4>
+
+<h3 id="mute-1"><code>mute</code></h3>
+
+<p>Fired when the local media is muted.</p>
+
+<h4 id="onmute-function-"><code>on('mute', function() {})</code></h4>
+
+<h3 id="unmute-1"><code>unmute</code></h3>
+
+<p>Fired when the local media is unmuted.</p>
+
+<h4 id="onunmute-function-"><code>on('unmute', function() {})</code></h4>
+
+<h3 id="dtmf"><code>dtmf</code></h3>
+
+<p>Fired for an incoming or outgoing DTMF.</p>
+
+<h4 id="ondtmf-functiontone-"><code>.on('dtmf', function(tone) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>tone</code></td>
+      <td><code>SIP.Session.DTMF</code></td>
+      <td>DTMF instance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="message"><code>message</code></h3>
+
+<p>Fired when an incoming MESSAGE request is received. Valid messages are automatically accepted by SIP.js, to confirm delivery of this message.</p>
+
+<h4 id="onmessage-function-message-"><code>on('message', function (message) {})</code></h4>
+
+<p><em>The argument passed to this event implements multiple interfaces.</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Types</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>message</code></td>
+      <td>
+<a href="../message/"><code>SIP.Message</code></a>, <a href="../context/server/"><code>SIP.ServerContext</code></a>
+</td>
+      <td>The inbound message received. This argument also implements the shared <a href="../context/server/"><code>SIP.ServerContext</code></a> behavior for inbound requests</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example-12">Example</h4>
+
+<div class="language-javascript highlighter-coderay">
+<div class="CodeRay">
+  <div class="code"><pre>simple.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">message</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span>(message) {
+  alert(message.body);
+});
+</pre></div>
+</div>
+</div>
+
+<h2 id="states">States</h2>
+
+<p>Simple has 5 states that it can be in at any given time. The states will always flow in a single direction from <code>STATUS_NEW</code> to <code>STATUS_COMPLETED</code>. For example you cannot go from <code>STATUS_CONNECTED</code> to <code>STATUS_CONNECTING</code>, but you could go directly from <code>STATUS_CONNECTING</code> to <code>STATUS_COMPLETED</code>. Once you are in <code>STATUS_COMPLETED</code> you can transition back to <code>STATUS_NEW</code>.</p>
+
+<h3 id="statusnull"><code>STATUS_NULL</code></h3>
+
+<p>A blank state for when Simple is instantiated.</p>
+
+<h3 id="statusnew"><code>STATUS_NEW</code></h3>
+
+<p>A new call has been initialized.</p>
+
+<h3 id="statusconnecting"><code>STATUS_CONNECTING</code></h3>
+
+<p>The call is setting up, but is not yet finalized.</p>
+
+<h3 id="statusconnected"><code>STATUS_CONNECTED</code></h3>
+
+<p>The call is now connected and media is flowing.</p>
+
+<h3 id="statuscompleted"><code>STATUS_COMPLETED</code></h3>
+
+<p>The call is completed.</p>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.10.0/">Overview</a></li>
+
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/simple/">Simple</a>
+      <ul>
+        <li><a href="/api/0.10.0/simple_configuration_parameters/">Simple Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.10.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.10.0/session/">Session</a></li>
+    <li><a href="/api/0.10.0/sessionDescriptionHandler/">Session Description Handler</a></li>
+
+
+    <li class="header"><a href="/api/0.10.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.10.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.10.0/context/server/">Server Context</a></li>
+    <li><a href="/api/0.10.0/subscription/">Subscription</a></li>
+    <li><a href="/api/0.10.0/message/">Message</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/refer/">Refer</a>
+      <ul>
+        <li><a href="/api/0.10.0/refer/referClientContext/">Refer Client Context</a></li>
+        <li><a href="/api/0.10.0/refer/referServerContext/">Refer Server Context</a></li>
+      </ul>
+    </li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.10.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.10.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.10.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.10.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.10.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.10.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.10.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/transport/">SIP.Transport</a>
+      <ul>
+        <li><a href="/api/0.10.0/transport/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/transport/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.10.0/transport/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.10.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.10.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.10.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.10.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.10.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.10.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.10.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.10.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

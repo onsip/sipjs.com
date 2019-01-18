@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="The WebRTC Media Handler is the default media handler for SIP.js." />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>WebRTC Media Handler</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.7.0/">0.7.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<h1 id="media-handler">Media Handler</h1>
+
+<p><code>MediaHandler</code> represents a common interface for SIP.js to interact with media streams.
+The default MediaHandler included with SIP.js interacts with WebRTC to provide voice, video, and data streams.</p>
+
+<p>When using SIP.js in Node.js, mobile apps, or other platforms, you can define a custom MediaHandler using
+the <a href="../ua/">UA</a>’s <a href="../ua_configuration_parameters/#mediahandlerfactory">mediaHandlerFactory</a> configuration parameter.
+This is an advanced topic, and the source code is your friend.  Refer to the placeholder <code>SIP.MediaHandler</code> file for the required interface.  We also define
+a custom Rock-Paper-Scissors MediaHandler in our test suite.</p>
+
+<p>The rest of this page documents <code>SIP.WebRTC.MediaHandler</code>, the default Media Handler for WebRTC.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#construction" id="markdown-toc-construction">Construction</a></li>
+  <li><a href="#instance-variables" id="markdown-toc-instance-variables">Instance Variables</a></li>
+  <li>
+<a href="#application-methods" id="markdown-toc-application-methods">Application Methods</a>    <ul>
+      <li><a href="#getlocalstreams" id="markdown-toc-getlocalstreams"><code>getLocalStreams()</code></a></li>
+      <li><a href="#getremotestreams" id="markdown-toc-getremotestreams"><code>getRemoteStreams()</code></a></li>
+      <li><a href="#renderrenderhint" id="markdown-toc-renderrenderhint"><code>render([renderHint])</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#events" id="markdown-toc-events">Events</a>    <ul>
+      <li><a href="#usermediarequest" id="markdown-toc-usermediarequest"><code>userMediaRequest</code></a></li>
+      <li><a href="#usermedia" id="markdown-toc-usermedia"><code>userMedia</code></a></li>
+      <li><a href="#usermediafailed" id="markdown-toc-usermediafailed"><code>userMediaFailed</code></a></li>
+      <li><a href="#icegathering" id="markdown-toc-icegathering"><code>iceGathering</code></a></li>
+      <li><a href="#icecandidate" id="markdown-toc-icecandidate"><code>iceCandidate</code></a></li>
+      <li><a href="#icegatheringcomplete" id="markdown-toc-icegatheringcomplete"><code>iceGatheringComplete</code></a></li>
+      <li><a href="#iceconnection" id="markdown-toc-iceconnection"><code>iceConnection</code></a></li>
+      <li><a href="#iceconnectionchecking" id="markdown-toc-iceconnectionchecking"><code>iceConnectionChecking</code></a></li>
+      <li><a href="#iceconnectionconnected" id="markdown-toc-iceconnectionconnected"><code>iceConnectionConnected</code></a></li>
+      <li><a href="#iceconnectioncompleted" id="markdown-toc-iceconnectioncompleted"><code>iceConnectionCompleted</code></a></li>
+      <li><a href="#iceconnectionfailed" id="markdown-toc-iceconnectionfailed"><code>iceConnectionFailed</code></a></li>
+      <li><a href="#iceconnectiondisconnected" id="markdown-toc-iceconnectiondisconnected"><code>iceConnectionDisconnected</code></a></li>
+      <li><a href="#iceconnectionclosed" id="markdown-toc-iceconnectionclosed"><code>iceConnectionClosed</code></a></li>
+      <li><a href="#getdescription" id="markdown-toc-getdescription"><code>getDescription</code></a></li>
+      <li><a href="#setdescription" id="markdown-toc-setdescription"><code>setDescription</code></a></li>
+      <li><a href="#datachannel" id="markdown-toc-datachannel"><code>dataChannel</code></a></li>
+      <li><a href="#addstream" id="markdown-toc-addstream"><code>addStream</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="construction">Construction</h2>
+
+<p>A WebRTC Media Handler will be automatically constructed by SIP.js.</p>
+
+<h2 id="instance-variables">Instance Variables</h2>
+
+<p>There are no public instance attributes for the MediaHandler.</p>
+
+<h2 id="application-methods">Application Methods</h2>
+
+<h3 id="getlocalstreams"><code>getLocalStreams()</code></h3>
+
+<h4 id="returns">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Array of MediaStream</code></td>
+      <td>An array containing all of the local MediaStreams.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="getremotestreams"><code>getRemoteStreams()</code></h3>
+
+<h4 id="returns-1">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Array of MediaStream</code></td>
+      <td>An array containing all of the remote MediaStreams.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="renderrenderhint"><code>render([renderHint])</code></h3>
+
+<p>Renders the media to the application.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>renderHint</code></td>
+      <td><code>Object</code></td>
+      <td>Optional object that contains local and remote properties from the application to the MediaStreamManager (see below). If no renderHint is provided the render function will look at the MediaHandler’s mediaHint.render property. If the mediaHint.render property does not exist the render function will not execute.</td>
+    </tr>
+    <tr>
+      <td><code>renderHint.local</code></td>
+      <td><code>Object</code></td>
+      <td>Optional <code>&lt;audio&gt;</code> or <code>&lt;video&gt;</code> element (or <code>Array</code> of elements) to use to render the local media. If not provided, no local media will be rendered automatically.</td>
+    </tr>
+    <tr>
+      <td><code>renderHint.remote</code></td>
+      <td><code>Object</code></td>
+      <td>Optional <code>&lt;audio&gt;</code> or <code>&lt;video&gt;</code> element (or <code>Array</code> of elements) to use to render the remote media. If not provided, no remote media will be rendered automatically.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="events">Events</h2>
+
+<h3 id="usermediarequest"><code>userMediaRequest</code></h3>
+
+<p>Fired when <code>getUserMedia()</code> has been called and the application is waiting for a response.</p>
+
+<h4 id="onusermediarequest-function-constraints-"><code>on('userMediaRequest', function (constraints) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>constraints</code></td>
+      <td><code>Object</code></td>
+      <td>The constraints that were used with getUserMedia().</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="usermedia"><code>userMedia</code></h3>
+
+<p>Fired when <code>getUserMedia()</code> returned local media.</p>
+
+<h4 id="onusermedia-function-stream-"><code>on('userMedia', function (stream) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>stream</code></td>
+      <td><code>MediaStream</code></td>
+      <td>The local media stream that was returned from getUserMedia().</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="usermediafailed"><code>userMediaFailed</code></h3>
+
+<p>Fired when <code>getUserMedia()</code> has returned unsuccessfully from getting user media. Typically this might mean that the user has denied access to local media.</p>
+
+<h4 id="onusermediafailed-function-error-"><code>on('userMediaFailed', function (error) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>error</code></td>
+      <td><code>String</code></td>
+      <td>The message returned from the getUserMedia failure.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="icegathering"><code>iceGathering</code></h3>
+
+<p>Fired when the WebRTC layer has started gathering ICE candidates.</p>
+
+<h4 id="onicegathering-function--"><code>on('iceGathering', function () {})</code></h4>
+
+<h3 id="icecandidate"><code>iceCandidate</code></h3>
+
+<p>Fired each time the WebRTC layer finds an ICE candidate.</p>
+
+<h4 id="onicecandidate-function-candidate-"><code>on('iceCandidate', function (candidate) {})</code></h4>
+
+<h3 id="icegatheringcomplete"><code>iceGatheringComplete</code></h3>
+
+<p>Fired when the WebRTC layer has finished gathering ICE candidates.</p>
+
+<h4 id="onicegatheringcomplete-function--"><code>on('iceGatheringComplete', function () {})</code></h4>
+
+<h3 id="iceconnection"><code>iceConnection</code></h3>
+
+<p>Fired when the ICE connection state is <code>new</code>.</p>
+
+<h3 id="iceconnectionchecking"><code>iceConnectionChecking</code></h3>
+
+<p>Fired when the ICE connection state is <code>checking</code>.</p>
+
+<h3 id="iceconnectionconnected"><code>iceConnectionConnected</code></h3>
+
+<p>Fired when the ICE connection state is <code>connected</code>.</p>
+
+<h3 id="iceconnectioncompleted"><code>iceConnectionCompleted</code></h3>
+
+<p>Fired when the ICE connection state is <code>completed</code>.</p>
+
+<h3 id="iceconnectionfailed"><code>iceConnectionFailed</code></h3>
+
+<p>Fired when the ICE connection state is <code>failed</code>.</p>
+
+<h3 id="iceconnectiondisconnected"><code>iceConnectionDisconnected</code></h3>
+
+<p>Fired when the ICE connection state is <code>disconnected</code>.</p>
+
+<h3 id="iceconnectionclosed"><code>iceConnectionClosed</code></h3>
+
+<p>Fired when the ICE connection state is <code>closed</code>.</p>
+
+<h3 id="getdescription"><code>getDescription</code></h3>
+
+<p>Fired when the browser completes the WebRTC getDescription function.</p>
+
+<h4 id="ongetdescription-function-sdpwrapper-"><code>on('getDescription', function (sdpWrapper) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sdpWrapper</code></td>
+      <td><code>Object</code></td>
+      <td>The sdpWrapper used by getDescription.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.type</code></td>
+      <td><code>String</code></td>
+      <td>Can be either ‘offer’ or ‘answer’ depending on which type of SDP was gotten from the browser.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.sdp</code></td>
+      <td><code>String</code></td>
+      <td>The SDP that was gotten from the browser.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="setdescription"><code>setDescription</code></h3>
+
+<p>Fired when the browser completes the WebRTC setDescription function.</p>
+
+<h4 id="onsetdescription-function-sdpwrapper-"><code>on('setDescription', function (sdpWrapper) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sdpWrapper</code></td>
+      <td><code>Object</code></td>
+      <td>The sdpWrapper used by setDescription.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.type</code></td>
+      <td><code>String</code></td>
+      <td>Can be either ‘offer’ or ‘answer’ depending on which type of SDP was received.</td>
+    </tr>
+    <tr>
+      <td><code>sdpWrapper.sdp</code></td>
+      <td><code>String</code></td>
+      <td>The SDP that was received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="datachannel"><code>dataChannel</code></h3>
+
+<p>Fired when a WebRTC data channel is setup.</p>
+
+<h4 id="ondatachannel-function-datachannel-"><code>on('dataChannel', function (dataChannel) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>dataChannel</code></td>
+      <td><code>DataChannel</code></td>
+      <td>The WebRTC data channel setup between the peers.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="addstream"><code>addStream</code></h3>
+
+<p>Fired when a new stream is added to the PeerConnection.</p>
+
+<h4 id="onaddstream-function-stream-"><code>on('addStream', function (stream) {})</code></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>stream</code></td>
+      <td><code>Object</code></td>
+      <td>The stream that was added to the PeerConnection.</td>
+    </tr>
+  </tbody>
+</table>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.7.0/">Overview</a></li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.7.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.7.0/session/">Session</a></li>
+    <li><a href="/api/0.7.0/mediaHandler/">WebRTC Media Handler</a></li>
+
+
+    <li class="header"><a href="/api/0.7.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.7.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.7.0/context/server/">Server Context</a></li>
+    <li><a href="/api/0.7.0/subscription/">Subscription</a></li>
+    <li><a href="/api/0.7.0/message/">Message</a></li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.7.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.7.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.7.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.7.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.7.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.7.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.7.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.7.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.7.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/transport/">SIP.Transport</a>
+      <ul>
+        <li><a href="/api/0.7.0/transport/#construction">Construction</a></li>
+        <li><a href="/api/0.7.0/transport/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.7.0/transport/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.7.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.7.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/eventEmitter/">SIP.EventEmitter</a>
+      <ul>
+        <li><a href="/api/0.7.0/eventEmitter/#construction">Construction</a></li>
+        <li><a href="/api/0.7.0/eventEmitter/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.7.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.7.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.7.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.7.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>
