@@ -6,7 +6,7 @@ description: Answers to FAQ about SIP.js API, including - What can I do with SIP
 # Frequently Asked Questions
 
 ## My SIP.js application isn’t working!  Where do I get help?
-The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js). Make sure that you include logs with [traceSip](/api/0.12.0/wstransport#tracesip) enabled in a [gist](https://gist.github.com/). The Github issue tracker is reserved for bugs within the library.
+The best way to get help is through our [Google Group mailing list](https://groups.google.com/forum/#!forum/sip_js). Make sure that you include logs with [traceSip](/api/0.13.0/wstransport#tracesip) enabled in a [gist](https://gist.github.com/). The Github issue tracker is reserved for bugs within the library.
 
 ## I would like to use SIP.js in Node.js, React Native, Nativescript, some other non web browser environment. How can I do this?
 We are a small team at OnSIP and an even smaller subset of us actively working on SIP.js. We cannot support all of these different environments, so we choose to support only the latest versions of the major browsers. Chrome, Firefox, Safari, Microsoft Edge (with adapter.js), and Opera. If you do get something working in a different environment we would happily take a pull request back to the library to help out the rest of the community.
