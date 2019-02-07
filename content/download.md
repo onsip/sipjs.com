@@ -4,11 +4,11 @@ layout: download
 description: Get started now. Download production and development versions of the SIP.js library.
 ---
 
-## Version 0.13.1
+## Version 0.13.2
 {: style="color: #ea4b35; font-weight: bold; font-size: 2em; margin-top:0;" }
 
-* Development (uncompressed code, 1000KB) <a href="/download/sip-0.13.1.js" download="sip-0.13.1.js">sip-0.13.1.js</a>.
-* Production (minified code, 268KB) <a href="/download/sip-0.13.1.min.js" download="sip-0.13.1.min.js">sip-0.13.1.min.js</a>.
+* Development (uncompressed code, 1000KB) <a href="/download/sip-0.13.2.js" download="sip-0.13.2.js">sip-0.13.2.js</a>.
+* Production (minified code, 268KB) <a href="/download/sip-0.13.2.min.js" download="sip-0.13.2.min.js">sip-0.13.2.min.js</a>.
 * Use NPM? Download this release with `npm install sip.js`.
 
 ## Version devel
@@ -16,6 +16,7 @@ description: Get started now. Download production and development versions of th
 For the bleeding edge, please [download and build from source](//github.com/onsip/SIP.js).
 
 ## Older Versions
+* Version 0.13.1 - <a href="/download/sip-0.13.1.js" download="sip-0.13.1.js">uncompressed</a>, <a href="/download/sip-0.13.1.min.js" download="sip-0.13.1.min.js">minified</a>, `npm install sip.js@0.13.1`.
 * Version 0.13.0 - <a href="/download/sip-0.13.0.js" download="sip-0.13.0.js">uncompressed</a>, <a href="/download/sip-0.13.0.min.js" download="sip-0.13.0.min.js">minified</a>, `npm install sip.js@0.13.0`.
 * Version 0.12.0 - <a href="/download/sip-0.12.0.js" download="sip-0.12.0.js">uncompressed</a>, <a href="/download/sip-0.12.0.min.js" download="sip-0.12.0.min.js">minified</a>, `npm install sip.js@0.12.0`.
 * Version 0.11.6 - <a href="/download/sip-0.11.6.js" download="sip-0.11.6.js">uncompressed</a>, <a href="/download/sip-0.11.6.min.js" download="sip-0.11.6.min.js">minified</a>, `npm install sip.js@0.11.6`.
