@@ -50,7 +50,7 @@ document.getElementById('0').addEventListener("click", function() { session.dtmf
 ### Putting It Together
 
 Click the result tab of the fiddle to start a call to the attendant menu.  The menu is not video enabled,
-so you'll only see local video.  The destination address (`userAgent.invite('sip:welcome@junctionnetworks.com' ... `) in the
+so you'll only see local video.  The destination address (`userAgent.invite('sip:welcome@onsip.com' ... `) in the
 fiddle can be changed to call any SIP endpoint.
 To further explore SIP.js, try using the `session.on('dtmf', ...)` event to play a tone sound when DTMF is sent.
 

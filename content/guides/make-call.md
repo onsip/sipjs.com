@@ -7,11 +7,11 @@ description: How to enable your WebRTC application to make voice and video calls
 
 ## Overview
 
-This guide uses the full [SIP.js API](../../api/0.10.0). The [SIP.js Simple API](../../api/0.10.0/simple) is intended to help get beginners up and running quickly.
+This guide uses the full [SIP.js API](../../api/0.13.0). The [SIP.js Simple API](../../api/0.13.0/simple) is intended to help get beginners up and running quickly.
 
 ### HTML
 
-Create an HTML file. In the file include the [SIP.js library](/download/), as well as any other javascript that will be used.
+Create an HTML file. You could include the [SIP.js library](/download/), as well as any other javascript that will be used. We are assuming SIP.js is imported as a node module for this demo.
 
 A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC.
 
@@ -26,7 +26,6 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.10.0.min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>
@@ -39,14 +38,20 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
 In order to send messages, create a SIP user agent.  Calling `SIP.UA()` method, with no parameters, creates an anonymous user agent.
 
 ~~~javascript
-var userAgent = new SIP.UA();
+import { UA } from "sip.js";
+/* could also be 
+var SIP = require("sip.js");
+var UA = SIP.UA;
+*/
+
+var userAgent = new UA();
 ~~~
 
 After the user agent has connected to the SIP server, an invite can be sent to make a call and thereby create a SIP session.
 
 #### Sending an Invite
 
-To send an invite you will need the target user's SIP address and any extra options to define the session. Then you can call the [invite method](/api/0.10.0/ua/#invitetraget-options-modifiers) on the user agent. The invite function returns a session object that will be used for the current session.
+To send an invite you will need the target user's SIP address and any extra options to define the session. Then you can call the [invite method](/api/0.13.0/ua/#invitetarget-options-modifiers) on the user agent. The invite function returns a session object that will be used for the current session.
 
 ~~~javascript
 var session = userAgent.invite('bob@example.com');
@@ -60,7 +65,7 @@ Please see the [attach media guide](../attach-media).
 
 #### Ending a Session
 
-To end a session, simply call the [terminate method](/api/0.10.0/session/#terminateoptions) on the session to send a bye.
+To end a session, simply call the [terminate method](/api/0.13.0/session/#terminateoptions) on the session to send a bye.
 
 ~~~javascript
 session.terminate();

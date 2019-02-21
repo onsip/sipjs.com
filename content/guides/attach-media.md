@@ -7,15 +7,15 @@ description: How to attach media from your WebRTC application with SIP.js.
 
 ## Overview
 
-This guide is intended to show how to attach media to your website using SIP.js in a web environment with the default [WebRTC Session Description Handler](/api/0.9.0/sessionDescriptionHandler/).
+This guide is intended to show how to attach media to your website using SIP.js in a web environment with the default [WebRTC Session Description Handler](/api/0.13.0/sessionDescriptionHandler/).
 
-SIP.js is not intended to handle media for you. If you are having difficulty with handling the media aspects of your application look at [SIP.js Simple](/api/0.9.0/simple/) which is intended to help you get up and running.
+SIP.js is not intended to handle media for you. If you are having difficulty with handling the media aspects of your application look at [SIP.js Simple](/api/0.13.0/simple/) which is intended to help you get up and running.
 
 If you are attempting to use SIP.js outside of a standard web browser, you will need to create your own Session Description Handler.
 
 ### HTML
 
-Create an HTML file. In the file include the [SIP.js library](/download/), as well as any other javascript that will be used.
+Create an HTML file. In the file you could include the [SIP.js library](/download/), as well as any other javascript that will be used. We'll be assuming SIP.js us imported as a node module here.
 
 A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC.
 
@@ -30,7 +30,6 @@ Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display
     <video id="remoteVideo"></video>
     <video id="localVideo" muted="muted"></video>
 
-    <script src="sip-0.10.0.min.js"></script>
     <script src="my-javascript.js"></script>
   </body>
 </html>

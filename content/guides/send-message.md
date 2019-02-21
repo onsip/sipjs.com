@@ -12,7 +12,7 @@ Let's walk through how to send a message.
 
 ### Setup
 
-We must create the files index.html and main.js in the same folder.  In the index.html file we need to include the [SIP.js library](/download/), as well as the main.js file.
+We must create the files index.html and main.js in the same folder.  In the index.html file we can include the [SIP.js library](/download/), as well as the main.js file. We are assuming SIP.js is imported as a node module for this demo.
 
 A `<button>` element is included to determine when to send the message.
 
