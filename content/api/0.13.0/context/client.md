@@ -68,14 +68,14 @@ Name | Type | Description
 `options.body`|`String`|Optional message body to send in the request
 `options.extraHeaders`|`Array` of `String`|Optional list of extra SIP headers to include with the request
 `options.params`|`Object`|Optional extra configuration parameters (see below). These parameters take priority over the SIP.UA configuration parameters.
-`options.params.route_set`|`Array` of `String`|Optional preloaded route set for the request.
-`options.params.to_display_name`|`String`|Optional display portion of SIP To: URI
-`options.params.to_uri`|`String`|Optional To: URI. By default, this is set to the target.
-`options.params.to_tag`|`String`|Optional To: tag.
-`options.params.from_display_name`|`String`|Optional display portion of SIP From: URI
-`options.params.from_uri`|`String`|Optional From: URI. By default, this is set to the UA's configured URI
-`options.params.from_tag`|`String`|Optional From: tag
-`options.params.call_id`|`String`|Optional Call-Id value. Otherwise, a new Call-Id is randomly generated.
+`options.params.routeSet`|`Array` of `String`|Optional preloaded route set for the request.
+`options.params.toDisplayName`|`String`|Optional display portion of SIP To: URI
+`options.params.toUri`|`String`|Optional To: URI. By default, this is set to the target.
+`options.params.toTag`|`String`|Optional To: tag.
+`options.params.fromDisplayName`|`String`|Optional display portion of SIP From: URI
+`options.params.fromUri`|`String`|Optional From: URI. By default, this is set to the UA's configured URI
+`options.params.fromTag`|`String`|Optional From: tag
+`options.params.callId`|`String`|Optional Call-Id value. Otherwise, a new Call-Id is randomly generated.
 `options.params.cseq`|`String`|Optional CSeq number.  Otherwise, a new random CSeq is generated
 
 #### Returns
@@ -95,8 +95,8 @@ Send a CANCEL before the original request has been accepted.
 Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
-`options.reason_phrase`|`String`|The SIP reason phrase.
+`options.statusCode`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
+`options.reasonPhrase`|`String`|The SIP reason phrase.
 
 #### Returns
 

@@ -145,8 +145,8 @@ Different behavior will result in different events being emitted, but they will 
 Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
-`options.reason_phrase`|`String`|The SIP reason phrase.
+`options.statusCode`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
+`options.reasonPhrase`|`String`|The SIP reason phrase.
 `options.body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 
@@ -171,8 +171,8 @@ Sends a BYE request on a confirmed session.
 Name | Type | Description
 -----|------|--------------
 `options`|`Object`|Optional `Object` with extra parameters (see below).
-`options.status_code`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
-`options.reason_phrase`|`String`|The SIP reason phrase.
+`options.statusCode`|`Number`|The SIP response code that will be used in the upcoming response instead of the default.
+`options.reasonPhrase`|`String`|The SIP reason phrase.
 `options.body`|`String`|represents the SIP message body (in case this parameter is set, a corresponding Content-Type header field must be set in `extraHeaders` field).
 `options.extraHeaders`|`Array` of `Strings`|Extra SIP headers for the request.
 

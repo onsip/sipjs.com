@@ -84,11 +84,11 @@ wsServers: [
 ~~~ javascript
 wsServers: [
   { // First connection attempt
-    ws_uri: "ws://sip-ws-1.example.com",
+    wsUri: "ws://sip-ws-1.example.com",
     weight: 10
   },
   {
-    ws_uri: "ws://sip-ws-2.example.com",
+    wsUri: "ws://sip-ws-2.example.com",
     weight: 1
   }
 ]
@@ -109,7 +109,7 @@ password: "1234"
 ~~~
 
 ### displayName
-Descriptive name (`String`) to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the `display_name` value between double quotes).
+Descriptive name (`String`) to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the `displayName` value between double quotes).
 
 ~~~ javascript
 displayName: "Alice ¶€ĸøĸø"

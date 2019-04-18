@@ -129,7 +129,7 @@ Name | Type | Description
 
 ## Events
 
-Transport objects extend the [SIP.EventEmitter](../eventEmitter/) interface.  Each event emitted by the transport passes specific relevant arguments to its callbacks. Additional events MAY be added for child implementations.
+Transport objects extends EventEmitter interface.  Each event emitted by the transport passes specific relevant arguments to its callbacks. Additional events MAY be added for child implementations.
 
 ### `connecting`
 

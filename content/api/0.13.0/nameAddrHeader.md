@@ -114,7 +114,7 @@ Removes all of the header parameters.
 
 ## Static Methods
 
-### `parse(name_addr_header)`
+### `parse(nameAddrHeader)`
 
 Use the SIP NameAddrHeader Grammar rule to parse a SIP.NameAddrHeader object out of a raw String.
 
@@ -122,7 +122,7 @@ Use the SIP NameAddrHeader Grammar rule to parse a SIP.NameAddrHeader object out
 
 Name | Type | Description
 -|-|-
-`name_addr_header`|`String`|The raw String to be parsed as a NameAddrHeader
+`nameAddrHeader`|`String`|The raw String to be parsed as a NameAddrHeader
 
 #### Returns
 

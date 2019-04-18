@@ -236,7 +236,7 @@ Type | Description
 
 ## Events
 
-User agent objects extend the [SIP.EventEmitter](../eventEmitter/) interface.  Each event emitted by the UA passes specific relevant arguments to its callbacks.
+User agent objects extend the EventEmitter interface.  Each event emitted by the UA passes specific relevant arguments to its callbacks.
 
 ### `registered`
 

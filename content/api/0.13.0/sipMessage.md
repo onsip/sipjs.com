@@ -40,7 +40,7 @@ This page describes data structures for SIP packets:  Incoming Messages, Incomin
 
 `SIP.NameAddrHeader` - The To header address of the SIP message.
 
-### `call_id`
+### `callId`
 
 `String` - The value of the Call-ID header field.
 
@@ -66,7 +66,7 @@ This page describes data structures for SIP packets:  Incoming Messages, Incomin
 
 `Integer` - The status code to include in a Reason header with the request.
 
-### `status_code`
+### `statusCode`
 
 *Incoming Response only*
 
@@ -78,7 +78,7 @@ This page describes data structures for SIP packets:  Incoming Messages, Incomin
 
 `String` - The reason phrase to include in a Reason header with the request.
 
-### `reason_phrase`
+### `reasonPhrase`
 
 *IncomingResponse only*
 
@@ -96,19 +96,19 @@ This page describes data structures for SIP packets:  Incoming Messages, Incomin
 
 `Object` - The value of the Via header(s) of the SIP message.
 
-### `via_branch`
+### `viaBranch`
 
 *IncomingRequest and IncomingResponse only*
 
 `String` - The value of the first Via header's branch parameter.
 
-### `from_tag`
+### `fromTag`
 
 *IncomingRequest and IncomingResponse only*
 
 `String` - The tag parameter of the From header, if present.
 
-### `to_tag`
+### `toTag`
 
 *IncomingRequest and IncomingResponse only*
 
@@ -120,7 +120,7 @@ This page describes data structures for SIP packets:  Incoming Messages, Incomin
 
 `SIP.Transport` - The transport the request was received on, for sending replies.
 
-### `server_transaction`
+### `serverTransaction`
 
 *IncomingRequest only*
 
