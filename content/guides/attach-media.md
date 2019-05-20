@@ -7,9 +7,9 @@ description: How to attach media from your WebRTC application with SIP.js.
 
 ## Overview
 
-This guide is intended to show how to attach media to your website using SIP.js in a web environment with the default [WebRTC Session Description Handler](/api/0.13.0/sessionDescriptionHandler/).
+This guide is intended to show how to attach media to your website using SIP.js in a web environment with the default [WebRTC Session Description Handler](/api/0.14.0/sessionDescriptionHandler/).
 
-SIP.js is not intended to handle media for you. If you are having difficulty with handling the media aspects of your application look at [SIP.js Simple](/api/0.13.0/simple/) which is intended to help you get up and running.
+SIP.js is not intended to handle media for you. If you are having difficulty with handling the media aspects of your application look at [SIP.js Simple](/api/0.14.0/simple/) which is intended to help you get up and running.
 
 If you are attempting to use SIP.js outside of a standard web browser, you will need to create your own Session Description Handler.
 
