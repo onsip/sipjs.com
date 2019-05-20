@@ -75,7 +75,7 @@ Start by editing `http.conf` and make sure that the following lines are uncommen
 enabled=yes
 bindaddr=127.0.0.1 ; Replace this with your IP address
 bindport=8088 ; Replace this with the port you want to listen on
-tlsendable=yes
+tlsenable=yes
 tlsbindaddr=127.0.0.1:8089 ; Replace this with your IP address
 tlscertfile=/etc/asterisk/keys/asterisk.pem
 ~~~
