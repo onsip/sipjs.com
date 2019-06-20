@@ -24,7 +24,7 @@ expires: 300
 Contact header parameters to include on Register requests.
 
 ~~~ javascript
-extraContactHeaderParams: ['foo: bar']
+extraContactHeaderParams: ['foo= bar']
 ~~~
 
 ### `instanceId`
