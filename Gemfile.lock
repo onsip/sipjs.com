@@ -31,6 +31,7 @@ GEM
     lumberjack (1.0.13)
     method_source (0.9.2)
     mini_portile2 (2.4.0)
+    multi_json (1.13.1)
     nanoc (3.8.0)
       cri (~> 2.3)
     nenv (0.3.0)
@@ -42,6 +43,8 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    pygments.rb (1.2.1)
+      multi_json (>= 1.0.0)
     rack (2.0.7)
     rake (12.3.3)
     rb-fsevent (0.10.3)
@@ -65,6 +68,7 @@ DEPENDENCIES
   kramdown
   nanoc (= 3.8.0)
   nokogiri
+  pygments.rb
   rake
 
 BUNDLED WITH
