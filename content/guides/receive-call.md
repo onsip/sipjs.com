@@ -7,7 +7,7 @@ description: How to enable your WebRTC application to accept calls from peers an
 
 ## Overview
 
-This guide uses the full [SIP.js API](../../api/0.14.0). The [SIP.js Simple API](../../api/0.14.0/simple) is intended to help get beginners up and running quickly.
+This guide uses the full [SIP.js API](../../api/0.15.0). The [SIP.js Simple API](../../api/0.15.0/simple) is intended to help get beginners up and running quickly.
 
 ### HTML
 
@@ -64,7 +64,7 @@ Please see the [attach media guide](../attach-media).
 
 #### Ending a Session
 
-To end a session, simply call the [terminate method](/api/0.14.0/session/#terminateoptions) on the session to send a bye.
+To end a session, simply call the [terminate method](/api/0.15.0/session/#terminateoptions) on the session to send a bye.
 
 ~~~javascript
 session.terminate();

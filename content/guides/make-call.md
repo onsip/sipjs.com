@@ -7,7 +7,7 @@ description: How to enable your WebRTC application to make voice and video calls
 
 ## Overview
 
-This guide uses the full [SIP.js API](../../api/0.14.0). The [SIP.js Simple API](../../api/0.14.0/simple) is intended to help get beginners up and running quickly.
+This guide uses the full [SIP.js API](../../api/0.15.0). The [SIP.js Simple API](../../api/0.15.0/simple) is intended to help get beginners up and running quickly.
 
 ### HTML
 
@@ -51,7 +51,7 @@ After the user agent has connected to the SIP server, an invite can be sent to m
 
 #### Sending an Invite
 
-To send an invite you will need the target user's SIP address and any extra options to define the session. Then you can call the [invite method](/api/0.14.0/ua/#invitetarget-options-modifiers) on the user agent. The invite function returns a session object that will be used for the current session.
+To send an invite you will need the target user's SIP address and any extra options to define the session. Then you can call the [invite method](/api/0.15.0/ua/#invitetarget-options-modifiers) on the user agent. The invite function returns a session object that will be used for the current session.
 
 ~~~javascript
 var session = userAgent.invite('bob@example.com');
@@ -65,7 +65,7 @@ Please see the [attach media guide](../attach-media).
 
 #### Ending a Session
 
-To end a session, simply call the [terminate method](/api/0.14.0/session/#terminateoptions) on the session to send a bye.
+To end a session, simply call the [terminate method](/api/0.15.0/session/#terminateoptions) on the session to send a bye.
 
 ~~~javascript
 session.terminate();
