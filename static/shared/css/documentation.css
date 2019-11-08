@@ -94,10 +94,6 @@ code, pre {
     color: #212526;
 }
 
-code {
-    white-space: nowrap;
-}
-
 /*  Inline code gets a box around it
     but not code in a table or headline  */
 p code, li code {
