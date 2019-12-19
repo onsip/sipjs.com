@@ -1,12 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    adsf (1.4.2)
+    adsf (1.4.3)
       rack (>= 1.0.0, < 3.0.0)
-    builder (3.2.3)
+    builder (3.2.4)
     coderay (1.1.2)
     cri (2.15.9)
-    ffi (1.11.1)
+    ffi (1.11.3)
     formatador (0.2.5)
     guard (2.16.1)
       formatador (>= 0.2.4)
@@ -24,7 +24,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     kramdown (2.1.0)
-    listen (3.2.0)
+    listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     lumberjack (1.0.13)
@@ -34,7 +34,7 @@ GEM
     nanoc (3.8.0)
       cri (~> 2.3)
     nenv (0.3.0)
-    nokogiri (1.10.5)
+    nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -44,14 +44,14 @@ GEM
       method_source (~> 0.9.0)
     pygments.rb (1.2.1)
       multi_json (>= 1.0.0)
-    rack (2.0.7)
-    rake (13.0.0)
+    rack (2.0.8)
+    rake (13.0.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     shellany (0.0.1)
     temple (0.8.2)
-    thor (0.20.3)
+    thor (1.0.1)
     tilt (2.0.10)
 
 PLATFORMS
