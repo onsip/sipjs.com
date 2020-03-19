@@ -12,93 +12,151 @@ SIP.js has been tested with [FreeSWITCH 1.6.14](https://freeswitch.org/confluenc
 FreeSWITCH and SIP.js were tested using the following setup:
 
 * [CentOS 7.2 minimal (x86_64)](http://isoredirect.centos.org/centos/7/isos/x86_64/)
-* [FreeSWITCH 1.6.14](https://freeswitch.org/confluence/display/FREESWITCH/CentOS+7+and+RHEL+7)
+* [FreeSWITCH 1.10.2](https://freeswitch.org/confluence/display/FREESWITCH/CentOS+7+and+RHEL+7#CentOS7andRHEL7-CentOS7andRHEL7-Stable)
 * A public IP address to avoid NAT scenarios on the server side.
 * (Optional) A DNS address for letsencrypt certificate.
 
-## Required Packages
-
-Install the following dependencies:
-
-* git
-* autoconf
-* automake
-* libtool
-* gcc-c++
-* yasm
-* libuuid-devel
-* zlib-devel
-* libjpeg-devel
-* ncurses-devel
-* openssl-devel
-* sqlite-devel
-* libcurl-devel
-* speex-devel
-* ldns-devel
-* libedit-devel
-* lua-devel
-* libsndfile-devel
-
-Using YUM, all dependencies can be installed with:
-
-~~~ bash
-yum install git autoconf automake libtool gcc-c++ yasm \
-libuuid-devel zlib-devel libjpeg-devel ncurses-devel \
-openssl-devel sqlite-devel libcurl-devel speex-devel \
-ldns-devel libedit-devel lua-devel libsndfile-devel
-~~~~
-
-Opus needs to be downloaded and installed from FreeSWITCH. The packages are linked below along with the command to download and install the packages on CentOS.
-
-* [opus](http://files.freeswitch.org/yum-1.6/7/x86_64/opus-1.1-1.el7.centos.x86_64.rpm)
-* [opus-devel](http://files.freeswitch.org/yum-1.6/7/x86_64/opus-devel-1.1-1.el7.centos.x86_64.rpm)
-
-~~~ bash
-wget http://files.freeswitch.org/yum-1.6/7/x86_64/opus-1.1-1.el7.centos.x86_64.rpm \
-http://files.freeswitch.org/yum-1.6/7/x86_64/opus-devel-1.1-1.el7.centos.x86_64.rpm \
-&& yum localinstall opus*
-~~~
-
 ## Install FreeSWITCH
 
-FreeSWITCH recommends using the latest version of FreeSWITCH from the [FreeSWITCH git repo](https://freeswitch.org/stash/projects/FS/repos/freeswitch/browse). This example uses FreeSWITCH tag v1.6.14.
+Installation insutructions are for FreeSWITCH 1.10.2 and adopted from [FreeSWITCH's CENTOS documentation](https://freeswitch.org/confluence/display/FREESWITCH/CentOS+7+and+RHEL+7#CentOS7andRHEL7-CentOS7andRHEL7-Stable).
 
-* `cd /usr/local/src/`
-* `git clone https://freeswitch.org/stash/scm/fs/freeswitch.git`
-* `cd /usr/local/src/freeswitch`
-* `git checkout v1.6.14`
-* `./bootstrap.sh`
-* `./configure`
-* `make` (This may take a few minutes.)
-* `make install`
+~~~ bash
+yum install -y https://files.freeswitch.org/repo/yum/centos-release/freeswitch-release-repo-0-1.noarch.rpm epel-release
+yum install -y freeswitch-config-vanilla freeswitch-lang-* freeswitch-sounds-*
+systemctl enable freeswitch
+systemctl start freeswitch
+~~~
+
+## Setup DTLS Certificates
+
+A self signed SSL certificate is acceptable for development and is included with FreeSWITCH, but it will not work in a production environment. [Let's Encrypt](https://letsencrypt.org/) is a great way to get a free certificate.
 
 ## Configure FreeSWITCH
 
-FreeSWITCH 1.6.14 is configured to work with SIP.js by default. The default configuration location is `/usr/local/freeswitch/conf`.
-
-Start FreeSWITCH: `/usr/local/freeswitch/bin/freeswitch`.
+FreeSWITCH 1.10.2 is configured to work with SIP.js by default. The default configuration location is `/usr/local/freeswitch/conf`. It is recommended that you use FreeSWITCH with a publicly accessible IP adress. This guide does not cover how to interop SIP.js with FreeSWITCH through a Firewall or NAT.
 
 ## Configure SIP.js
 
-SIP.js works with FreeSWITCH without any special configuration parameters. The following UA is configured to connect to a default FreeSWITCH configuration. Replace `127.0.0.1` with the IP address of your FreeSWITCH server.
+SIP.js works with FreeSWITCH without any special configuration parameters. The following Simple User is configured to connect to a default FreeSWITCH configuration. See the full [API reference](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md) for using the full API.
+
+Replace `127.0.0.1` with the IP address of your FreeSWITCH server. If you have changed the FreeSWITCH configuration you may need to update the user details below. The example provided will register to FreeSWITCH as user `1000` and will place a call to user `1001`.
+
+You may need a valid SSL Certificate for FreeSWITCH to function properly with WebRTC.
+
+~~~ html
+<audio id="remoteAudio" controls>
+  <p>Your browser doesn't support HTML5 audio.</p>
+</audio>
+~~~
 
 ~~~ javascript
-var config = {
-  // Replace this IP address with your FreeSWITCH IP address
-  uri: '1000@127.0.0.1',
+import { SimpleUser, SimpleUserOptions } from "sip.js/lib/platform/web";
 
-  // Replace this IP address with your FreeSWITCH IP address
-  // and replace the port with your FreeSWITCH ws port
-  ws_servers: 'ws://127.0.0.1:5066',
+// Helper function to get an HTML audio element
+function getAudioElement(id: string): HTMLAudioElement {
+  const el = document.getElementById(id);
+  if (!(el instanceof HTMLAudioElement)) {
+    throw new Error(`Element "${id}" not found or not an audio element.`);
+  }
+  return el;
+}
 
-  // FreeSWITCH Default Username
-  authorizationUser: '1000',
+// Helper function to wait
+async function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
-  // FreeSWITCH Default Password
-  password: '1234'
-};
+// Main function
+async function main(): Promise<void> {
 
-var ua = new SIP.UA(config);
+  // SIP over WebSocket Server URL
+  // The URL of a SIP over WebSocket server which will complete the call.
+  // FreeSwitch is an example of a server which supports SIP over WebSocket.
+  // SIP over WebSocket is an internet standard the details of which are
+  // outside the scope of this documentation, but there are many resources
+  // available. See: https://tools.ietf.org/html/rfc7118 for the specification.
+  const server = "wss://127.0.0.1:5066";
+
+  // SIP Request URI
+  // The SIP Request URI of the destination. It's "Who you wanna call?"
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const destination = "sip:1001@127.0.0.1";
+
+  // SIP Address of Record (AOR)
+  // This is the user's SIP address. It's "Where people can reach you."
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const aor = "sip:1000@127.0.0.1";
+
+  // SIP Authorization Username
+  // This is the user's authorization username used for authorizing requests.
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const authorizationUsername = '1000';
+
+  // SIP Authorization Password
+  // This is the user's authorization password used for authorizing requests.
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const authorizationPassword = '1234';
+
+  // Configuration Options
+  // These are configuration options for the `SimpleUser` instance.
+  // Here we are setting the HTML audio element we want to use to
+  // play the audio received from the remote end of the call.
+  // An audio element is needed to play the audio received from the
+  // remote end of the call. Once the call is established, a `MediaStream`
+  // is attached to the provided audio element's `src` attribute.
+  const options: SimpleUserOptions = {
+    aor,
+    media: {
+      remote: {
+        audio: getAudioElement("remoteAudio")
+      }
+    },
+    userAgentOptions: {
+      authorizationPassword,
+      authorizationUsername,
+    }
+  };
+
+  // Construct a SimpleUser instance
+  const simpleUser = new SimpleUser(server, options);
+
+  // Supply delegate to handle inbound calls (optional)
+  simpleUser.delegate = {
+    onCallReceived: async () => {
+      await simpleUser.answer();
+    }
+  };
+
+  // Connect to server
+  await simpleUser.connect();
+
+  // Register to receive inbound calls (optional)
+  await simpleUser.register();
+
+  // Place call to the destination
+  await simpleUser.call(destination);
+
+  // Wait some number of milliseconds
+  await wait(5000);
+
+  // Hangup call
+  await simpleUser.hangup();
+}
+
+// Run it
+main()
+  .then(() => console.log(`Success`))
+  .catch((error: Error) => console.error(`Failure`, error));
 ~~~
 
 ## Troubleshooting
@@ -115,55 +173,6 @@ FreeSWITCH has a confluence article on [WebRTC support](https://freeswitch.org/c
 
 Browsers are more forcibly requiring secure connections to enable WebRTC features. To enable WSS to work with most modern browsers you will need a real SSL certificate, which can be obtained from [letsencrypt](https://letsencrypt.org/) for free. This guide covers the initial acquisition of the certificate for testing. Renewing the certificate or other issues are outside the scope of this guide.
 
-## Install Certbot
-
-Cloning from source is the easiest way to get certbot running on Centos 7.
-
-* `cd /usr/local/src`
-* `git clone https://github.com/certbot/certbot.git`
-* `cd certbot`
-* `git checkout v0.10.2`
-
-## Run Certbot
-
-To run certbot replace the `example@sipjs.com` email address with your email address, and the `sipjs.com` domin with your domain name that is pointing at this server. 
-
-Letsencrypt does not issue certificates for IP addresses, but you can use [http://xip.io/](http://xip.io/) to turn your IP address into a domain address.
-
-Note: if your domain name changes you will need to obtain a new certificate.
-
-* `./certbot-auto certonly --standalone --email example@sipjs.com -d sipjs.com`
-
-## Install the Certificate into FreeSWITCH
-
-Replace `sipjs.com` with the domain name that you used to generate the certificate.
-
-* `cd /etc/letsencrypt/live/sipjs.com`
-* `echo '' >> /usr/local/freeswitch/certs/wss.pem && cat cert.pem >> /usr/local/freeswitch/certs/wss.pem && cat privkey.pem >> /usr/local/freeswitch/certs/wss.pem && cat chain.pem >> /usr/local/freeswitch/certs/wss.pem`
-* Restart FreeSWITCH
-
-## Configure SIP.js to use a Secure Connection
-
-SIP.js works with secure connections out of the box.
-
-~~~ javascript
-var config = {
-  // Replace this IP address with your FreeSWITCH IP address
-  uri: '1000@127.0.0.1',
-
-  // Replace sipjs.com with your domain name
-  // and replace the port with your FreeSWITCH wss port
-  ws_servers: 'wss://sipjs.com:7443',
-
-  // FreeSWITCH Default Username
-  authorizationUser: '1000',
-
-  // FreeSWITCH Default Password
-  password: '1234'
-};
-
-var ua = new SIP.UA(config);
-~~~
 
 ## Troubleshooting
 
