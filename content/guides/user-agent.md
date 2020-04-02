@@ -8,7 +8,7 @@ description: Create a SIP user agent using SIP.js so your WebRTC application can
 * TOC
 {:toc}
 
-Let's walk through the process of creating a SIP user agent. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md)
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md)
 
 ### Transport Options
 
