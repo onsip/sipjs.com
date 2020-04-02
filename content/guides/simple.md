@@ -3,6 +3,10 @@ title: Simple | SIP.js
 description: How to use SIP.js Simple API to make and receive a call
 ---
 
+# Disclaimer
+
+SIP.js Simple is considered deprecated and we will no longer support it. You should consider upgrading to the [Simple User](./simple-user) on the latest SIP.js Version.
+
 # SIP.js Simple Guide
 
 ## Overview
