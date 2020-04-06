@@ -5,10 +5,7 @@ description: Create a SIP user agent using SIP.js so your WebRTC application can
 
 # User Agent
 
-* TOC
-{:toc}
-
-This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md)
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md).
 
 ### Transport Options
 
@@ -49,13 +46,13 @@ const userAgentOptions: UserAgentOptions = {
 const userAgent = new UserAgent(userAgentOptions);
 ~~~
 
-After the User Agent is created it will need to Register in order to authenticate with the server and receive messages. To do this a `new Registerer(userAgent: UserAgent)` needs to be created. A `Registerer` will register and automatically handle re-registrations when required.
+After the User Agent is created it will need to Register in order to authenticate with the server and receive messages. To do this a `new Registerer(userAgent: UserAgent)` needs to be created. A [`Registerer`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.registerer.md) will register and automatically handle re-registrations when required.
 
 ~~~javascript
 const registerer = new Registerer(userAgent);
 ~~~
 
-Now that everything is created it can all be started. First the `UserAgent` must be started then the `Registerer` told to `register()`.
+Now that everything is created it can all be started. First the `UserAgent` must be started. This tells the user agent to connect to the Transport. Once the user agent is started then the `Registerer` can be told to `register()` the user agent.
 
 ~~~javascript
 userAgent.start().then(() => {
