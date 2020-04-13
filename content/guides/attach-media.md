@@ -5,67 +5,97 @@ description: How to attach media from your WebRTC application with SIP.js.
 
 # Attach Media
 
-## Overview
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md).
 
-This guide is intended to show how to attach media to your website using SIP.js in a web environment with the default [WebRTC Session Description Handler](/api/0.15.0/sessionDescriptionHandler/).
+## Prerequisites
 
-SIP.js is not intended to handle media for you. If you are having difficulty with handling the media aspects of your application look at [SIP.js Simple](/api/0.15.0/simple/) which is intended to help you get up and running.
+See the [User Agent](./user-agent) guide on how to create a user agent. This guide requires a registered user agent.
 
-If you are attempting to use SIP.js outside of a standard web browser, you will need to create your own Session Description Handler.
+See the [Make a Call]() guide on how to make a call.
 
-### HTML
+See the [Receive a Call]() guide on how to receive a call.
 
-Create an HTML file. In the file you could include the [SIP.js library](/download/), as well as any other javascript that will be used. We'll be assuming SIP.js us imported as a node module here.
+SIP.js tries to leave the majority of handling media to the user application. This guide assumes that your application is using the built in Session Description Handler in a standard Web Browser with full WebRTC support.
 
-A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC.
+## Session State Change
 
-Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display the video of the person being called.  There is also a `localVideo` `<video>` element, to display the video stream that is being sent to the person being called.  The local video stream should always be muted to prevent feedback.
-
-~~~html
-<html>
-  <head>
-    <link rel="stylesheet" href="my-styles.css">
-  </head>
-  <body>
-    <video id="remoteVideo"></video>
-    <video id="localVideo" muted="muted"></video>
-
-    <script src="my-javascript.js"></script>
-  </body>
-</html>
-~~~
-
-### Javascript
-
-This guide assumes that you are already familiar with starting a session.
-
-#### Attaching Media
-
-The easiest way to attach media is to listen for the `trackAdded` event on the `session`. Then you can get a handle on your Session Description Handler, Peer Connection, and tracks. The `trackAdded` event is simply a helper, and does not pass any information.
+When SIP.js sets up a session, the session goes through a life cycle. When the session is `Established` you may want to play media for your user. To do this you will need to get a handle on the session state. An event listener can be added to the `stateChange` event emitter. The listener can be added to an `Inviter` before calling the `invite()` function or to an `Invitation` before calling the `accept()` or `reject()` function. These functions are purposely split from the constructor to give your application appropriate time to add listeners.
 
 ~~~javascript
-var remoteVideo = document.getElementById('remoteVideo');
-var localVideo = document.getElementById('localVideo');
+const inviter = new Inviter(userAgent, target);
+inviter.statChange.addListener((state: SessionState) => {
+  console.log(`Session state changed to ${state}`);
+  switch (state) {
+    case SessionState.Initial:
+      break;
+    case SessionState.Establishing:
+      break;
+    case SessionState.Established:
+      setupRemoteMedia(inviter);
+      break;
+    case SessionState.Terminating:
+      // fall through
+    case SessionState.Terminated:
+      cleanupMedia();
+      break;
+    default:
+      throw new Error("Unknown session state.");
+});
+inviter.invite();
+~~~
 
-session.on('trackAdded', function() {
-  // We need to check the peer connection to determine which track was added
+~~~javascript
+function onInvite(invitation) {
+  invitation.stateChange.addListener((state: SessionState) => {
+    console.log(`Session state changed to ${state}`);
+    switch (state) {
+      case SessionState.Initial:
+        break;
+      case SessionState.Establishing:
+        break;
+      case SessionState.Established:
+        setupRemoteMedia(invitation);
+        break;
+      case SessionState.Terminating:
+        // fall through
+      case SessionState.Terminated:
+        cleanupMedia();
+        break;
+      default:
+        throw new Error("Unknown session state.");
+  });
+  invitation.accept();
+}
+~~~
 
-  var pc = session.sessionDescriptionHandler.peerConnection;
+## Attaching Media
 
-  // Gets remote tracks
-  var remoteStream = new MediaStream();
-  pc.getReceivers().forEach(function(receiver) {
+Once you have a handle on the session and the state you can get the Session Description Handler and then get the tracks from the Session Description Handler. There is no common interface for doing this since the Session Description Handler can be swapped out by the user's application.
+
+~~~javascript
+// Assumes you have a media element on the DOM
+var mediaElement = document.getElementById('mediaElement');
+
+const remoteStream = new MediaStream();
+function setupRemoteMedia(session: Session) {
+  session.sessionDescriptionHandler.peerConnection.getReceivers().forEach((receiver) => {
     remoteStream.addTrack(receiver.track);
   });
-  remoteVideo.srcObject = remoteStream;
-  remoteVideo.play();
+  mediaElement.srcObject = remoteStream;
+  mediaElement.play();
+}
+~~~
 
-  // Gets local tracks
-  var localStream = new MediaStream();
-  pc.getSenders().forEach(function(sender) {
-    localStream.addTrack(sender.track);
-  });
-  localVideo.srcObject = localStream;
-  localVideo.play();
-});
+## Cleaning up Media
+
+Once the call is complete you may want to clean up the media elements used by the call.
+
+~~~javascript
+// Assumes you have a media element on the DOM
+var mediaElement = document.getElementById('mediaElement');
+
+function cleanupMedia() {
+  mediaElement.srcObject = null;
+  mediaElement.pause();
+}
 ~~~
