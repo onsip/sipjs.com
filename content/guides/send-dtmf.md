@@ -5,56 +5,46 @@ description: How to create a dial pad in your WebRTC app and send DTMF tones wit
 
 # Send DTMF
 
-### Overview
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md).
 
-Let's write code that calls an attendant menu and sends DTMF to make menu choices. We'll
-resue the code from the [making a call guide](/guides/make-call) to setup the call. If you haven't read it, you
-may want to do so first for an explanation of core API concepts
+## Prerequisites
 
+See the [User Agent](./user-agent) guide on how to create a user agent. This guide requires a registered user agent.
 
-### Create The Dial Pad
+See the [Make a Call](./make-call) guide on how to make a call.
 
-Let's add a set of buttons to our html that accept DTMF input.
+See the [Receive a Call](./receive-call) guide on how to receive a call.
 
-~~~ html
- <button id="1">1</button>
- <button id="2">2</button>
- <button id="3">3</button>
- <button id="4">4</button>
- <button id="5">5</button>
- <button id="6">6</button>
- <button id="7">7</button>
- <button id="8">8</button>
- <button id="9">9</button>
- <button id="0">0</button>
+## Construct The Infoer
+
+To send a DTMF INFO packet a `new Infoer(session)` is required. This will send the INFO SIP request.
+
+~~~javascript
+const infoer = new Infoer(session);
 ~~~
 
-### Send the Dial Tone
+## DTMF INFO Body
 
-Listen for clicks on our dial pad and respond by sending DTMF to the session.
-This is done by using the `dtmf(number)` method, which can be used to send one or multiple dial tones at the same time
+A DTMF tone can be a SIP INFO packet with a specific body to be interpreted by another SIP endpoint. You will need to create the body of the packet to send. The fields needed to send a DTMF INFO are the `contentDisposition`, `contentType`, `content`.
 
-~~~ javascript
-document.getElementById('1').addEventListener("click", function() { session.dtmf(1);}, false);
-document.getElementById('2').addEventListener("click", function() { session.dtmf(2);}, false);
-document.getElementById('3').addEventListener("click", function() { session.dtmf(3);}, false);
-document.getElementById('4').addEventListener("click", function() { session.dtmf(4);}, false);
-document.getElementById('5').addEventListener("click", function() { session.dtmf(5);}, false);
-document.getElementById('6').addEventListener("click", function() { session.dtmf(6);}, false);
-document.getElementById('7').addEventListener("click", function() { session.dtmf(7);}, false);
-document.getElementById('8').addEventListener("click", function() { session.dtmf(8);}, false);
-document.getElementById('9').addEventListener("click", function() { session.dtmf(9);}, false);
-document.getElementById('0').addEventListener("click", function() { session.dtmf(0);}, false);
+The `contentDisposition` field should be set to `render`. This tells the endpoint to render the content to the user.
+
+The `contentType` field should be set to `application/dtmf-relay`. This tells the endpoint that message is a DTMF message.
+
+The `content` field needs to contain the `Signal=<DTMF_SIGNAL>` and `Duration=<DTMF_DURATION>` each on it's own line. This tells the application the signal to send and how long it was sent for.
+
+~~~javascript
+const body = {
+  contentDisposition: "render",
+  contentType: "application/dtmf-relay",
+  content: "Signal=1\r\nDuration=1000"
+};
 ~~~
 
-### Putting It Together
+## Send The Message
 
-Click the result tab of the fiddle to start a call to the attendant menu.  The menu is not video enabled,
-so you'll only see local video.  The destination address (`userAgent.invite('sip:welcome@onsip.com' ... `) in the
-fiddle can be changed to call any SIP endpoint.
-To further explore SIP.js, try using the `session.on('dtmf', ...)` event to play a tone sound when DTMF is sent.
+Once the body is constructed the message can be sent by calling the `.info(body)` function.
 
-<iframe
-  style="width: 100%; height: 600px"
-  src="https://jsfiddle.net/NBUS3/embedded/js,html,css,result/">
-</iframe>
+~~~javascript
+infoer.info(body);
+~~~
