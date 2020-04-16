@@ -1,20 +1,12 @@
 ---
-title: Video, Chat, and Data Demo | SIP.js
-description: An example demo app of video chat, text chat, and data transfer with WebRTC using SIP.js
+title: Demo App | SIP.js
+description: An example demo app of SIP.js with WebRTC
 ---
 
-# Video, Chat, and Data Demo
+# Simple User Demo
 
-SIP.js is capable of voice and audio communications, text-based messaging,
-and data transfers, among other features. Here is some demo code that shows you
-how a simple app might support these features. This is the same demo that
-appears on the homepage, minus all of the extra CSS styling. Both endpoint
-users, Bob and Alice, are on the same machine, but you can easily set up Alice
-and Bob on different machines by splitting up the HTML and only instantiating
-one user's UserAgent object and application interfaces per host.
+We have created a demo that uses the Simple User interface in our [Github repository](https://github.com/onsip/SIP.js/tree/master/demo). You can clone the repository and follow the instructions to build and run the demo.
 
-<iframe
-    style="width: 100%; height: 800px;"
-    src="https://jsfiddle.net/OnSIP/xv00uLur/embedded/js,html,css,result/"
-    allowfullscreen="allowfullscreen" frameborder="0">
-</iframe>
+# Full API Demo
+
+SIP.js maintains the `SimpleUser` interface which is a wrapper around our full API. We do not use anything outside of the API to create the `SimpleUser`. This allows you to reference the [code for `SimpleUser`](https://github.com/onsip/SIP.js/blob/master/src/platform/web/simple-user/simple-user.ts) as a reference point for the full SIP.js API.
