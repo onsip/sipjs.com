@@ -11,9 +11,9 @@ This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/maste
 
 See the [User Agent](./user-agent) guide on how to create a user agent. This guide requires a registered user agent.
 
-See the [Make a Call]() guide on how to make a call.
+See the [Make a Call](./make-call) guide on how to make a call.
 
-See the [Receive a Call]() guide on how to receive a call.
+See the [Receive a Call](./receive-call) guide on how to receive a call.
 
 SIP.js tries to leave the majority of handling media to the user application. This guide assumes that your application is using the built in Session Description Handler in a standard Web Browser with full WebRTC support.
 
