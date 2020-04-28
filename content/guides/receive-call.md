@@ -17,7 +17,7 @@ When SIP.js receives a SIP INVITE from another endpoint, it is processeed by the
 
 ~~~javascript
 function onInvite(invitation) {
-  // do something
+  // Defined In Next Steps
 }
 
 const userAgentOptions: UserAgentOptions = {

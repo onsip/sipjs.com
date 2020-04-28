@@ -74,12 +74,14 @@ Once you have a handle on the session and the state you can get the Session Desc
 
 ~~~javascript
 // Assumes you have a media element on the DOM
-var mediaElement = document.getElementById('mediaElement');
+const mediaElement = document.getElementById('mediaElement');
 
 const remoteStream = new MediaStream();
 function setupRemoteMedia(session: Session) {
   session.sessionDescriptionHandler.peerConnection.getReceivers().forEach((receiver) => {
-    remoteStream.addTrack(receiver.track);
+    if (receiver.track) {
+      remoteStream.addTrack(receiver.track);
+    }
   });
   mediaElement.srcObject = remoteStream;
   mediaElement.play();
