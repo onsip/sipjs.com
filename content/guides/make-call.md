@@ -18,7 +18,7 @@ To send an ivite to a remote SIP endpoint use an [`Inviter`](https://github.com/
 ~~~javascript
 // userAgent defined elsewhere
 userAgent.start().then(() => {
-  const target = UserAgent("sip:bob@example.com");
+  const target = UserAgent.makeURI("sip:bob@example.com");
 
   const inviter = new Inviter(userAgent, target);
   inviter.invite();
