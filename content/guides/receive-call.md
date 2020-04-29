@@ -5,67 +5,53 @@ description: How to enable your WebRTC application to accept calls from peers an
 
 # Receive a Call
 
-## Overview
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md).
 
-This guide uses the full [SIP.js API](../../api/0.15.0). The [SIP.js Simple API](../../api/0.15.0/simple) is intended to help get beginners up and running quickly.
+## Prerequisites
 
-### HTML
+See the [User Agent](./user-agent) guide on how to create a user agent. This guide requires a registered user agent.
 
-Create an HTML file. You could include the [SIP.js library](/download/), as well as any other javascript that will be used. We are assuming SIP.js is imported as a node module for this demo;
+## User Agent Delegate
 
-A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC.
-
-Within the `<body>` tags, there is a `remoteVideo` `<video>` element, to display the video of the person being called.  There is also a `localVideo` `<video>` element, to display the video stream that is being sent to the person being called.  The local video stream should always be muted to prevent feedback.
-
-~~~html
-<html>
-  <head>
-    <link rel="stylesheet" href="my-styles.css">
-  </head>
-  <body>
-    <video id="remoteVideo"></video>
-    <video id="localVideo" muted="muted"></video>
-
-    <script src="my-javascript.js"></script>
-  </body>
-</html>
-~~~
-
-### Javascript
-
-### Creating a User Agent
-
-In order to receive messages, create a SIP user agent. You will need a registered user agent to receive an initial request. Replace the information below with your own information.
+When SIP.js receives a SIP INVITE from another endpoint, it is processeed by the `UserAgent`. A `delegate` can be attached to the user agent to receive the invitation. A [`UserAgentDelegate`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.useragentdelegate.md) is used as the handle to get information out of the user agent.
 
 ~~~javascript
-/* could also be 
-var SIP = require("sip.js");
-var UA = SIP.UA;
-*/
+function onInvite(invitation) {
+  // Defined In Next Steps
+}
 
-var userAgent = new UA({
-  uri: 'test@example.com',
-  authorizationUser: 'test',
-  password: 'password'
-});
+const userAgentOptions: UserAgentOptions = {
+  authorizationPassword: 'secretPassword',
+  authorizationUsername: 'authorizationUsername',
+  delegate: {
+    onInvite
+  }
+  transportOptions,
+  uri
+};
+const userAgent = new UserAgent(userAgentOptions);
 ~~~
 
-### Accept a Call
+## onInvite()
 
-Finally, To accept a call that is being received, catch the `invite` event.  This event is emitted with a session that the `.accept()` method must be called on.
+When an INVITE is received the user agent will call the delegate's [`onInvite(invitation)`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.useragentdelegate.oninvite.md) function. An [`invitation`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.invitation.md) will be passed to the function so that the application can interact with the INVITE.
+
+### Accept
+
+To accept the INVITE use the [`accept()`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.invitation.accept.md) function on the invitation.
 
 ~~~javascript
-userAgent.on('invite', (session) => session.accept());
+function onInvite(invitation) {
+  invitation.accept();
+}
 ~~~
 
-#### Attaching Media
+### Reject
 
-Please see the [attach media guide](../attach-media).
-
-#### Ending a Session
-
-To end a session, simply call the [terminate method](/api/0.15.0/session/#terminateoptions) on the session to send a bye.
+To reject the INVITE use the [`reject()`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.invitation.reject.md) function on the invitation.
 
 ~~~javascript
-session.terminate();
+function onInvite(invitation) {
+  invitation.reject();
+}
 ~~~

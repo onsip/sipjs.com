@@ -10,14 +10,14 @@ description: Easily install & configure Asterisk to work with SIP.js
 
 # Configure Asterisk
 
-SIP.js has been tested with [Asterisk 13.20.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-13.20.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for Asterisk 15.
+SIP.js has been tested with [Asterisk 16.9.0](https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16.9.0.tar.gz) without any modification to the source code of SIP.js or Asterisk. Similar configuration should also work for other versions of Asterisk. If you have questions about WebRTC compatibility with a particular version of Asterisk, please direct those questions to appropriate Asterisk support forums.
 
 ## System Setup
 
 Asterisk and SIP.js were tested using the following setup:
 
 * [CentOS 7.2 minimal (x86_64)](http://isoredirect.centos.org/centos/7/isos/x86_64/).
-* [Asterisk 13.20.0](http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-13.20.0.tar.gz).
+[Asterisk 16.9.0](https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16.9.0.tar.gz).
 * OpenSSL 1.0.1e-fips 11 Feb 2013 or later.
 * A public IP address to avoid NAT scenarios on the server side.
 
@@ -44,10 +44,10 @@ Using YUM, all dependencies can be installed with:
 ## Install Asterisk
 
 1. `cd /usr/local/src/`.
-2. Download Asterisk with `wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13.20.0.tar.gz`.
+2. Download Asterisk with `wget https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16.9.0.tar.gz`.
 3. Extract Asterisk: `tar zxvf asterisk*`.
 4. Enter the Asterisk directory: `cd /usr/local/src/asterisk*`.
-5. Run the Asterisk configure script: `./configure --with-pjproject-bundled`.
+5. Run the Asterisk configure script: `./configure --with-jansson-bundled`.
 6. Run the Asterisk menuselect tool: `make menuselect`.
 7. In the menuselect, go to the resources option and ensure that res_srtp and pjproject is enabled. If there are 3 x's next to res_srtp, there is a problem with the srtp library and you must reinstall it. Save the configuration (press x).
 8. Compile and install Asterisk: `make && make install`.
@@ -55,7 +55,7 @@ Using YUM, all dependencies can be installed with:
 
 ## Setup DTLS Certificates
 
-A self signed SSL certificate is acceptable for development, but it will not work in a production environment. [Let's Encrypt](https://letsencrypt.org/) is a great way to get a free certificate.  
+A self signed SSL certificate is acceptable for development, but it will not work in a production environment. [Let's Encrypt](https://letsencrypt.org/) is a great way to get a free certificate.
 
 ### Self Signed Certificate
 
@@ -134,35 +134,122 @@ If you used a self signed certificate in the earlier steps, you will need to nav
 
 This guide will only work with audio calls, Asterisk will reject video calls.
 
-The following configuration example creates a UA for the Asterisk configuration above. Replace the values with the values from your config.
+The following configuration example creates a Simple User for the Asterisk configuration above. Replace the values with the values from your config.
+
+~~~ html
+<audio id="remoteAudio" controls>
+  <p>Your browser doesn't support HTML5 audio.</p>
+</audio>
+~~~
 
 ~~~ javascript
-var config = {
-  // Replace this IP address with your Asterisk IP address
-  uri: '1060@127.0.0.1',
+import { SimpleUser, SimpleUserOptions } from "sip.js/lib/platform/web";
 
-  // Replace this IP address with your Asterisk IP address,
-  // and replace the port with your Asterisk port from the http.conf file
-  ws_servers: 'wss://127.0.0.1:8089/ws',
-
-  // Replace this with the username from your sip.conf file
-  authorizationUser: '1060',
-
-  // Replace this with the password from your sip.conf file
-  password: 'password',
-};
-
-var ua = new SIP.UA(config);
-
-// Invite with audio only
-ua.invite('1061',{
-  sessionDescriptionHandlerOptions: {
-    constraints: {
-      audio: true,
-      video: false
-    }
+// Helper function to get an HTML audio element
+function getAudioElement(id: string): HTMLAudioElement {
+  const el = document.getElementById(id);
+  if (!(el instanceof HTMLAudioElement)) {
+    throw new Error(`Element "${id}" not found or not an audio element.`);
   }
-});
+  return el;
+}
+
+// Helper function to wait
+async function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+// Main function
+async function main(): Promise<void> {
+
+  // SIP over WebSocket Server URL
+  // The URL of a SIP over WebSocket server which will complete the call.
+  // FreeSwitch is an example of a server which supports SIP over WebSocket.
+  // SIP over WebSocket is an internet standard the details of which are
+  // outside the scope of this documentation, but there are many resources
+  // available. See: https://tools.ietf.org/html/rfc7118 for the specification.
+  const server = "wss://127.0.0.1:5066";
+
+  // SIP Request URI
+  // The SIP Request URI of the destination. It's "Who you wanna call?"
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const destination = "sip:1061@127.0.0.1";
+
+  // SIP Address of Record (AOR)
+  // This is the user's SIP address. It's "Where people can reach you."
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const aor = "sip:1060@127.0.0.1";
+
+  // SIP Authorization Username
+  // This is the user's authorization username used for authorizing requests.
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const authorizationUsername = '1060';
+
+  // SIP Authorization Password
+  // This is the user's authorization password used for authorizing requests.
+  // SIP is an internet standard the details of which are outside the
+  // scope of this documentation, but there are many resources available.
+  // See: https://tools.ietf.org/html/rfc3261 for the specification.
+  const authorizationPassword = '1234';
+
+  // Configuration Options
+  // These are configuration options for the `SimpleUser` instance.
+  // Here we are setting the HTML audio element we want to use to
+  // play the audio received from the remote end of the call.
+  // An audio element is needed to play the audio received from the
+  // remote end of the call. Once the call is established, a `MediaStream`
+  // is attached to the provided audio element's `src` attribute.
+  const options: SimpleUserOptions = {
+    aor,
+    media: {
+      remote: {
+        audio: getAudioElement("remoteAudio")
+      }
+    },
+    userAgentOptions: {
+      authorizationPassword,
+      authorizationUsername,
+    }
+  };
+
+  // Construct a SimpleUser instance
+  const simpleUser = new SimpleUser(server, options);
+
+  // Supply delegate to handle inbound calls (optional)
+  simpleUser.delegate = {
+    onCallReceived: async () => {
+      await simpleUser.answer();
+    }
+  };
+
+  // Connect to server
+  await simpleUser.connect();
+
+  // Register to receive inbound calls (optional)
+  await simpleUser.register();
+
+  // Place call to the destination
+  await simpleUser.call(destination);
+
+  // Wait some number of milliseconds
+  await wait(5000);
+
+  // Hangup call
+  await simpleUser.hangup();
+}
+
+// Run it
+main()
+  .then(() => console.log(`Success`))
+  .catch((error: Error) => console.error(`Failure`, error));
 ~~~
 
 ## Troubleshooting

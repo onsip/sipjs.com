@@ -140,82 +140,77 @@ popup: true
 <div class="code-wrapper mobile-hide">
 <div class="index-demo-code" id="code-video-audio" markdown="1">
 ~~~~ javascript
-var domain = 'sipjs.onsip.com';
-var aliceURI      = 'alice.' + window.token + '@' + domain;
-var aliceName     = 'Alice';
+const domain = 'sipjs.onsip.com';
+const aliceURI      = 'alice.' + window.token + '@' + domain;
+const aliceName     = 'Alice';
 
-var bobURI        = 'bob.' + window.token + '@' + domain;
-var bobName       = 'Bob';
+const bobURI        = 'bob.' + window.token + '@' + domain;
+const bobName       = 'Bob';
 
-// Function: createSimple
-//   creates a SIP.js Simple instance with the given arguments plugged into the
-//   configuration. This is a standard Simple instance for WebRTC calls.
-//
-// Arguments:
-//   callerURI: the URI of the caller, aka, the URI that belongs to this user.
-//   displayName: what name we should display the user as
-//   remoteVideo: the DOM element id of the video for the remote
-//   buttonId: the DOM element id of the button for that user
-function createSimple(callerURI, displayName, target, remoteVideo, buttonId) {
-    var remoteVideoElement = document.getElementById(remoteVideo);
-    var button = document.getElementById(buttonId);
+const remoteVideoElement = document.getElementById(remoteVideo);
+const button = document.getElementById(buttonId);
 
-    var configuration = {
-        media: {
-            remote: {
-                video: remoteVideoElement,
-                // Need audio to be not null to do audio & video instead of just video
-                audio: remoteVideoElement
-            }
+let onCall = false;
+
+const configuration = {
+    aor: aliceURI,
+    delegte: {
+        onCallCreated: () => {
+            onCall = true;
         },
-        ua: {
-            traceSip: true,
-            uri: callerURI,
-            displayName: displayName,
-            userAgentString: SIP.C.USER_AGENT + " sipjs.com"
+        onCallAnswered: () => {
+            onCall = true;
+        },
+        onCallHangup: () => {
+            onCall = false;
         }
-    };
-    var simple = new SIP.Web.Simple(configuration);
-
-    button.addEventListener('click', function() {
-        // No current call up
-        if (simple.state === SIP.Web.Simple.C.STATUS_NULL ||
-            simple.state === SIP.Web.Simple.C.STATUS_COMPLETED) {
-            simple.call(target);
-        } else {
-            simple.hangup();
+    }
+    media: {
+        remote: {
+            video: remoteVideoElement,
+            // Need audio to be not null to do audio & video instead of just video
+            audio: remoteVideoElement
         }
-    });
+    },
+    userAgentOptions: {
+        displayName
+    },
+};
+const simpleUser = new SimpleUser('wss://edge.sip.onsip.com', configuration);
+simpleUser.connect();
 
-    return simple;
-}
-
-var aliceSimple = createSimple(aliceURI, aliceName, bobURI, 'video-of-bob', 'alice-video-button');
+button.addEventListener('click', function() {
+    // No current call up
+    if (!onCall) {
+        simpleUser.call(bobURI);
+    } else {
+        simple.hangup();
+    }
+});
 ~~~~
 </div>
 </div>
 <div class="code-wrapper mobile-hide">
 <div class="index-demo-code" id="code-message" markdown="1">
 ~~~~ javascript
-var domain = 'sipjs.onsip.com';
-var aliceURI      = 'alice' + '@' + domain;
-var aliceName     = 'Alice';
+const domain = 'sipjs.onsip.com';
+const aliceURI      = 'alice' + '@' + domain;
+const aliceName     = 'Alice';
 
-var bobURI        = 'bob' + '@' + domain;
-var bobName       = 'Bob';
+const bobURI        = 'bob' + '@' + domain;
+const bobName       = 'Bob';
 
-// Sets up the chat interface for text messaging
-function setUpMessageInterface(simple) {
-    // Receive a message and put it in the message display div
-    simple.on('message', function (msg) {
-        alert(msg.body);
-    });
-}
+const configuration = {
+    aor: aliceURI,
+    delegate: {
+        onMessage: (msg) => {
+            alert(msg.body);
+        }
+    }
+};
 
+const aliceSimple = new SimpleUser('wss://edge.sip.onsip.com', configuration);
 
-var aliceSimple = createSimple(aliceURI, aliceName, bobURI, 'video-of-bob', 'alice-video-button');
-
-setUpMessageInterface(aliceSimple);
 aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never even. Sir, a war is won."');
 ~~~~
 </div>

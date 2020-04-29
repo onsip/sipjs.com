@@ -5,47 +5,41 @@ description: How to enable your WebRTC application to transfer a voice or video 
 
 # Transfer
 
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md).
 
+## Make a Blind Transfer
 
-## Setup
+In SIP to make a transfer you must send a `REFER` message to the endpoint that you have a session with. To do this in SIP.js you must call `sesion.refer(target, options)`. The target can be either a valid URI or a SIP.js session. To make a blind transfer you should provide a SIP URI. We will use the `UserAgent.makeUri()` helper to make the URI of the transfer target.
 
-This guide assumes that you have a SIP.UA set up and working. This guide is for the full SIP.js API and is not compatible with Simple.
-
-## Making the Call
-As before, we will create a user agent using `SIP.UA()` and create a call using `userAgent.invite('test@example.onsip.com')`
-
-~~~ javascript
-  // Create a user agent using the default settings of SIP.js
-  var userAgent = new UA();
-
-  // Make a call to 'test@example.onsip.com`
-  session = userAgent.invite('test@example.onsip.com');
+~~~javascript
+const target = UserAgent.makeUri('sip:bob@example.com');
+session.refer(target);
 ~~~
 
-## Making a Blind Transfer
-SIP.js supports making blind and attended transfers.  A blind transfer occurs when A causes B to create a session with C.
+## Make an Attended Transfer
 
-Use the `session.refer(target)` method to make a blind transfer between the current user agent on the `session` call and the user agent at the `target` address.
+The process to make an attended transfer is very similar to that of a Blind Transfer. Instead of providing a `URI` as the target you must provide a SIP.js `session`.
 
-~~~ javascript
-  //target address
-  var target = `test2@example.onsip.com`;
-
-  //refers the call to `test2@example.onsip.com`
-  session.refer(target);
+~~~javascript
+const replacementSession = newInviter(userAgent, UserAgent.makeURI("sip:bob@example.com"));
+session.refer(replacementSession);
 ~~~
 
-## Handling a Blind Transfer
-When receiving a refer, if you do not have a handler on the `referRequested` event, SIP.js will automatically follow the refer.
+## Handle an Incoming REFER
 
-If you have a handle the `referRequested` event, you can simply accept or reject the refer, by calling `.accept()` or `.reject()` on the referServerContext passed to the event handler.
+When an incoming `REFER` is received SIP.js by default will automatically follow it. If you would like more control over handling the incoming `REFER` you can create a callback function on the session delegate called `onRefer(referral)`. This will get called with the `referral` when a `REFER` is received by SIP.js. If a callback is provided in the delegate SIP.js will no longer automaticall follow the `REFER` and the delegate is responsible for handling the message. If the referral is accepted, you will also need to write the code to follow it. There is a helper function on the referral called `makeInviter()` that can be used to make a new `Inviter` and follow the `REFER`.
 
 ~~~ javascript
-  session.on('referRequested', function(referServerContext) {
-    if (shouldAcceptRefer(referServerContext)) {
-      referServerContext.accept();
+const delegate = {
+  onRefer: (referral) => {
+    // Determine if you should accept or reject the referral
+    if (shouldAcceptReferral(referral)) {
+      referral.accept().then(() => {
+        referral.makeInviter().invite();
+      });
     } else {
-      referServerContext.reject();
+      referral.reject();
     }
-  });
+  }
+}
 ~~~

@@ -5,47 +5,26 @@ description: How to send a SIP message from your WebRTC application with SIP.js.
 
 # Send a Message
 
-* TOC
-{:toc}
+This guide uses the full [SIP.js API](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md). The [Simple User](./simple) is intended to help get beginners up and running quickly. This guide is adopted from the [SIP.js Github API documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md).
 
-Let's walk through how to send a message.
+## Prerequisites
 
-### Setup
+See the [User Agent](./user-agent) guide on how to create a user agent. This guide requires a registered user agent.
 
-We must create the files index.html and main.js in the same folder.  In the index.html file we can include the [SIP.js library](/download/), as well as the main.js file. We are assuming SIP.js is imported as a node module for this demo.
+## Construct The Messager
 
-A `<button>` element is included to determine when to send the message.
+A [`Messager`](https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.messager.md) is required to send the message. This will send a message to a targeted URI. This will be an out of dialog sip message. Please see the [API Documentation](https://github.com/onsip/SIP.js/blob/master/docs/api.md) to determine how to send an in dialog message. The `Messager` constructor requires that the User Agent, target URI, and message content be passed into it.
 
-
-<iframe
-  style="width: 100%; height: 250px"
-  src="https://jsfiddle.net/5JbvL/3/embedded/html,js,result/">
-</iframe>
-
-
-
-### Creating the User Agent
-
-In order to send messages, create a SIP user agent.  Calling `SIP.UA()` method, with no parameters, creates an anonymous user agent.
-
-<iframe
-  style="width: 100%; height: 250px"
-  src="https://jsfiddle.net/gk3p4/5/embedded/js,html,result/">
-</iframe>
-
+~~~javascript
+const content = 'Hello World';
+const target = UserAgent.makeURI("sip:bob@example.com");
+const messager = new Messager(userAgent, target, content);
+~~~
 
 ### Sending the Message
 
+Once the messager is constructed call `messager.message()` to send the message.
 
-After the user agent has been created we can send the message.
-
-To send the message, call the `.message(target, body)` method, along with the address that the message is being sent to in the `target` argument and the message that we are sending in the `body` argument.
-
-Add a click event to the `<button>` element, that calls the `message()` method.
-
-
-<iframe
-  style="width: 100%; height: 250px"
-  src="https://jsfiddle.net/8Cg6M/5/embedded/js,html,result/">
-</iframe>
-
+~~~javascript
+messager.message();
+~~~
