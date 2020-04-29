@@ -154,7 +154,7 @@ let onCall = false;
 
 const configuration = {
     aor: aliceURI,
-    delegte: {
+    delegate: {
         onCallCreated: () => {
             onCall = true;
         },
