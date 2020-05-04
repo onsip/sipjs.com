@@ -9,5 +9,5 @@ description: The SIP.js Development Guides will show you how to add a full SIP s
 This section of the documentation is intended to get you up-and-running with
 real-world SIP.js applications. We'll cover everything you need to know.
 
-Feel free to fork, clone, and improve these guides.
+Feel free to fork, clone, and improve these guides from [Gitlab](https://gitlab.com/onsip/sipjs.com).
 
