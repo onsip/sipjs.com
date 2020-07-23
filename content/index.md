@@ -219,7 +219,7 @@ aliceSimple.message(bobURI, 'Check out this palindrome: "Now sir, a war is never
   <a class="mobile-hide button" href="/guides/full-demo-app/">
     <span class="text-hover-left">See Full Demo Code</span>&nbsp;<span class="hover-arrow">⟩</span>
   </a>
-  <a class="desktop-hide button" href="/api/0.6.0/">
+  <a class="desktop-hide button" href="https://github.com/onsip/SIP.js/blob/master/docs/README.md">
     <span class="text-hover-left">Check out the full API</span>&nbsp;<span class="hover-arrow">⟩</span>
   </a>
     <div class="clearfix"></div>
