@@ -106,6 +106,6 @@ It is known that SIP.js and FreeSWITCH might not interop well if you have the fo
 <variable name="sip-force-contact" value="NDLB-connectile-dysfunction"/>
 ~~~
 
-Firefox 34+ requires [SIP.js 0.6.4 or later](/download/) to interop with FreeSWITCH or Asterisk.
+Firefox 34+ requires [SIP.js 0.6.4 or later](https://github.com/onsip/SIP.js/releases) to interop with FreeSWITCH or Asterisk.
 
 FreeSWITCH has a confluence article on [WebRTC support](https://freeswitch.org/confluence/display/FREESWITCH/WebRTC).

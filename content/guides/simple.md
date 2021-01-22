@@ -19,7 +19,7 @@ This guide will walk you through getting up and running with SIP.js Simple. This
 
 ## HTML
 
-Create an HTML file. In the file you could include the [SIP.js library](/download/), as well as any other javascript that will be used. We will assume SIP.js is imported as a node module for this demo.
+Create an HTML file. In the file you could include the [SIP.js library](https://github.com/onsip/SIP.js/releases), as well as any other javascript that will be used. We will assume SIP.js is imported as a node module for this demo.
 
 A `<video>` element is need to display the video stream.  The `<video>` element adds a standard way for browsers to display video over the internet without additional plugins. This makes `<video>` elements perfect for WebRTC.
 
