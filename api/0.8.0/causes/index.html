@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -57,24 +57,19 @@
 <h1 id="failure-and-end-causes">Failure and End Causes</h1>
 <p>SIP.js provides a set of causes in order to make the user aware of why the request or session ended. These causes are defined in the <code>SIP.C.causes</code> namespace, which can be used for comparisons.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// Create a user agent named bob, connect, and register to receive invitations.</span>
-<span style="color:#080;font-weight:bold">var</span> bob = <span style="color:#080;font-weight:bold">new</span> SIP.UA({
-  <span style="color:#606">uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>,
-  <span style="color:#606">register</span>: <span style="color:#069">true</span>
-});
+<pre><code class="language-javascript"><span class="c1">// Create a user agent named bob, connect, and register to receive invitations.</span>
+<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">UA</span><span class="p">({</span>
+  <span class="nx">uri</span><span class="o">:</span> <span class="s1">'bob@example.com'</span><span class="p">,</span>
+  <span class="nx">register</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
 
-<span style="color:#080;font-weight:bold">var</span> session =  bob.invite(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>);
-session.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">failed</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span> (request) {
-  <span style="color:#080;font-weight:bold">var</span> cause = request.cause; <span style="color:#777">//sometimes this is request.reason_phrase</span>
-  <span style="color:#080;font-weight:bold">if</span> (cause === SIP.C.causes.REJECTED) {
-    bob.message(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Please, call me later!</span><span style="color:#710">'</span></span>);
-  }
-});
-</pre></div>
-</div>
-</div>
+<span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span>  <span class="nx">bob</span><span class="p">.</span><span class="nx">invite</span><span class="p">(</span><span class="s1">'alice@example.com'</span><span class="p">);</span>
+<span class="nx">session</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'failed'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">cause</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">cause</span><span class="p">;</span> <span class="c1">//sometimes this is request.reason_phrase</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">cause</span> <span class="o">===</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">C</span><span class="p">.</span><span class="nx">causes</span><span class="p">.</span><span class="nx">REJECTED</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bob</span><span class="p">.</span><span class="nx">message</span><span class="p">(</span><span class="s1">'alice@example.com'</span><span class="p">,</span> <span class="s1">'Please, call me later!'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre>
 
 <h2 id="common-causes">Common Causes</h2>
 

@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -137,61 +137,17 @@
 By default, Asterisk config files are located in <code>/etc/asterisk/</code>.
 Start by editing <code>http.conf</code> and make sure that the following lines are uncommented:</p>
 
-<div class="language-text highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-</pre></td>
-  <td class="code"><pre>;http.conf
+<pre><code class="language-text">;http.conf
 [general]
 enabled=yes
 bindaddr=127.0.0.1 ; Replace this with your IP address
-bindport=8088 ; Replace this with the port you want to listen on
-</pre></td>
-</tr></table>
-</div>
+bindport=8088 ; Replace this with the port you want to listen on</code></pre>
 
 <p>Change the IP address and port to the IP address of your server and the port that you would like Asterisk to listen for web socket connections on.</p>
 
 <p>Next, edit <code>sip.conf</code>. Here you will set up two peers, one for a WebRTC client and one for a non-WebRTC SIP client. The WebRTC peer requires encryption, avpf, and icesupport to be enabled. In most cases, directmedia should be disabled. Also under the WebRTC client, the transport needs to be listed as ‘ws’ to allow websocket connections. All of these config lines should be under the peer itself; setting these config lines globally might not work.</p>
 
-<div class="language-text highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-</pre></td>
-  <td class="code"><pre>;sip.conf
+<pre><code class="language-text">;sip.conf
 [general]
 realm=127.0.0.1 ; Replace this with your IP address
 udpbindaddr=127.0.0.1 ; Replace this with your IP address
@@ -220,27 +176,14 @@ type=friend
 username=1061
 host=dynamic
 secret=password
-context=default
-</pre></td>
-</tr></table>
-</div>
+context=default</code></pre>
 
 <p>Lastly, set up <code>extensions.conf</code> to allow the two peers to call each other.</p>
 
-<div class="language-text highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-</pre></td>
-  <td class="code"><pre>;extensions.conf
+<pre><code class="language-text">;extensions.conf
 [default]
 exten =&gt; 1060,1,Dial(SIP/1060) ; Dialing 1060 will call the SIP client registered to 1060
-exten =&gt; 1061,1,Dial(SIP/1061) ; Dialing 1061 will call the SIP client registered to 1061
-</pre></td>
-</tr></table>
-</div>
+exten =&gt; 1061,1,Dial(SIP/1061) ; Dialing 1061 will call the SIP client registered to 1061</code></pre>
 
 <p>Restart Asterisk using <code>service asterisk restart</code> to ensure that the new settings take effect.</p>
 
@@ -252,78 +195,39 @@ exten =&gt; 1061,1,Dial(SIP/1061) ; Dialing 1061 will call the SIP client regist
 
 <p>The following configuration example creates a UA for the Asterisk configuration above. Replace the values with the values from your config.</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-</pre></td>
-  <td class="code"><pre><span class="keyword">var</span> config = {
-  <span class="comment">// Replace this IP address with your Asterisk IP address</span>
-  <span class="key">uri</span>: <span class="string"><span class="delimiter">'</span><span class="content">1060@127.0.0.1</span><span class="delimiter">'</span></span>,
+<pre><code class="language-javascript"><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Replace this IP address with your Asterisk IP address</span>
+  <span class="nx">uri</span><span class="o">:</span> <span class="s1">'1060@127.0.0.1'</span><span class="p">,</span>
 
-  <span class="comment">// Replace this IP address with your Asterisk IP address,</span>
-  <span class="comment">// and replace the port with your Asterisk port from the http.conf file</span>
-  <span class="key">ws_servers</span>: <span class="string"><span class="delimiter">'</span><span class="content">ws://127.0.0.1:8088/ws</span><span class="delimiter">'</span></span>,
+  <span class="c1">// Replace this IP address with your Asterisk IP address,</span>
+  <span class="c1">// and replace the port with your Asterisk port from the http.conf file</span>
+  <span class="nx">ws_servers</span><span class="o">:</span> <span class="s1">'ws://127.0.0.1:8088/ws'</span><span class="p">,</span>
 
-  <span class="comment">// Replace this with the username from your sip.conf file</span>
-  <span class="key">authorizationUser</span>: <span class="string"><span class="delimiter">'</span><span class="content">1060</span><span class="delimiter">'</span></span>,
+  <span class="c1">// Replace this with the username from your sip.conf file</span>
+  <span class="nx">authorizationUser</span><span class="o">:</span> <span class="s1">'1060'</span><span class="p">,</span>
 
-  <span class="comment">// Replace this with the password from your sip.conf file</span>
-  <span class="key">password</span>: <span class="string"><span class="delimiter">'</span><span class="content">password</span><span class="delimiter">'</span></span>,
+  <span class="c1">// Replace this with the password from your sip.conf file</span>
+  <span class="nx">password</span><span class="o">:</span> <span class="s1">'password'</span><span class="p">,</span>
 
-  <span class="comment">// HackIpInContact for Asterisk</span>
-  <span class="key">hackIpInContact</span>: <span class="predefined-constant">true</span>,
+  <span class="c1">// HackIpInContact for Asterisk</span>
+  <span class="nx">hackIpInContact</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
-  <span class="comment">// rtcpMuxPolicy for Asterisk</span>
-  <span class="key">rtcpMuxPolicy</span>: <span class="string"><span class="delimiter">'</span><span class="content">negotiate</span><span class="delimiter">'</span></span>,
+  <span class="c1">// rtcpMuxPolicy for Asterisk</span>
+  <span class="nx">rtcpMuxPolicy</span><span class="o">:</span> <span class="s1">'negotiate'</span><span class="p">,</span>
 
-};
+<span class="p">};</span>
 
-<span class="keyword">var</span> ua = <span class="keyword">new</span> SIP.UA(config);
+<span class="kd">var</span> <span class="nx">ua</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">UA</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 
-<span class="comment">// Invite with audio only</span>
-ua.invite(<span class="string"><span class="delimiter">'</span><span class="content">1061</span><span class="delimiter">'</span></span>,{
-  <span class="key">media</span>: {
-    <span class="key">constraints</span>: {
-      <span class="key">audio</span>: <span class="predefined-constant">true</span>,
-      <span class="key">video</span>: <span class="predefined-constant">false</span>
-    }
-  }
-});
-</pre></td>
-</tr></table>
-</div>
+<span class="c1">// Invite with audio only</span>
+<span class="nx">ua</span><span class="p">.</span><span class="nx">invite</span><span class="p">(</span><span class="s1">'1061'</span><span class="p">,{</span>
+  <span class="nx">media</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">constraints</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">audio</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nx">video</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre>
 
 <ul>
   <li>Update 10/24/2014 - If you are still having trouble with Asterisk and are using a WebSocket Secure (WSS), you can try using the <code>hackWssInTransport: true</code> parameter in your UA’s configuration. This is new as of <a href="https://github.com/onsip/SIP.js/commit/32bffbea37d91d185851c46e930be8f663e52d13">commit 32bffbe</a> on the <a href="https://github.com/onsip/SIP.js">SIP.js Master branch</a>.</li>
@@ -348,16 +252,15 @@ ua.invite(<span class="string"><span class="delimiter">'</span><span class="cont
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

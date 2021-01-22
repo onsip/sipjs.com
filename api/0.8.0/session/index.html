@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -123,23 +123,13 @@
 
 <h3 id="examples">Examples</h3>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// Create a new outbound (User Agent Client) Session</span>
-<span style="color:#080;font-weight:bold">var</span> session = myUA.invite(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>);
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="c1">// Create a new outbound (User Agent Client) Session</span>
+<span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">myUA</span><span class="p">.</span><span class="nx">invite</span><span class="p">(</span><span class="s1">'alice@example.com'</span><span class="p">);</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// Accept an inbound (User Agent Server) Session</span>
-myUA.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">invite</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span> (session) {
-  session.accept();
-});
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="c1">// Accept an inbound (User Agent Server) Session</span>
+<span class="nx">myUA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'invite'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">session</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">session</span><span class="p">.</span><span class="nx">accept</span><span class="p">();</span>
+<span class="p">});</span></code></pre>
 
 <h2 id="instance-variables">Instance Variables</h2>
 
@@ -264,32 +254,22 @@ INVALID_STATE_ERROR</p>
 
 <h4 id="example-1">Example 1</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>call.dtmf(<span style="color:#00D">1</span>);
-call.dtmf(<span style="color:#00D">4</span>);
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">call</span><span class="p">.</span><span class="nx">dtmf</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="nx">call</span><span class="p">.</span><span class="nx">dtmf</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span></code></pre>
 
 <h4 id="example-2">Example 2</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#080;font-weight:bold">var</span> tones = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1234#</span><span style="color:#710">'</span></span>;
+<pre><code class="language-javascript"><span class="kd">var</span> <span class="nx">tones</span> <span class="o">=</span> <span class="s1">'1234#'</span><span class="p">;</span>
 
-<span style="color:#080;font-weight:bold">var</span> extraHeaders = [ <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">X-Foo: foo</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">X-Bar: bar</span><span style="color:#710">'</span></span> ];
+<span class="kd">var</span> <span class="nx">extraHeaders</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">'X-Foo: foo'</span><span class="p">,</span> <span class="s1">'X-Bar: bar'</span> <span class="p">];</span>
 
-<span style="color:#080;font-weight:bold">var</span> options = {
-  <span style="color:#606"><span style="color:#404">'</span><span>duration</span><span style="color:#404">'</span></span>: <span style="color:#00D">160</span>,
-  <span style="color:#606"><span style="color:#404">'</span><span>interToneGap</span><span style="color:#404">'</span></span>: <span style="color:#00D">1200</span>,
-  <span style="color:#606"><span style="color:#404">'</span><span>extraHeaders</span><span style="color:#404">'</span></span>: extraHeaders
-};
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'duration'</span><span class="o">:</span> <span class="mi">160</span><span class="p">,</span>
+  <span class="s1">'interToneGap'</span><span class="o">:</span> <span class="mi">1200</span><span class="p">,</span>
+  <span class="s1">'extraHeaders'</span><span class="o">:</span> <span class="nx">extraHeaders</span>
+<span class="p">};</span>
 
-call.dtmf(tones, options);
-</pre></div>
-</div>
-</div>
+<span class="nx">call</span><span class="p">.</span><span class="nx">dtmf</span><span class="p">(</span><span class="nx">tones</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span></code></pre>
 
 <h3 id="terminateoptions"><code>terminate([options])</code></h3>
 

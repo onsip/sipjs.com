@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -121,25 +121,20 @@
 
 <h3 id="example">Example</h3>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// Create a Simple interface with a user named bob and a remote video element in the DOM</span>
-<span style="color:#080;font-weight:bold">var</span> simple = <span style="color:#080;font-weight:bold">new</span> SIP.WebRTC.Simple({
-  <span style="color:#606">media</span>: {
-    <span style="color:#606">remote</span>: {
-      <span style="color:#606">video</span>: document.getElementById(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">remoteVideo</span><span style="color:#710">'</span></span>),
-      <span style="color:#777">// This is necessary to do an audio/video call as opposed to just a video call</span>
-      <span style="color:#606">audio</span>: document.getElementById(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">remoteAudio</span><span style="color:#710">'</span></span>)
-    }
-  },
-  <span style="color:#606">ua</span>: {
-    <span style="color:#606">uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>,
-    <span style="color:#606">wsServers</span>: [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">wss://sip-ws.example.com</span><span style="color:#710">'</span></span>],
-  }
-});
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="c1">// Create a Simple interface with a user named bob and a remote video element in the DOM</span>
+<span class="kd">var</span> <span class="nx">simple</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">WebRTC</span><span class="p">.</span><span class="nx">Simple</span><span class="p">({</span>
+  <span class="nx">media</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">remote</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">video</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'remoteVideo'</span><span class="p">),</span>
+      <span class="c1">// This is necessary to do an audio/video call as opposed to just a video call</span>
+      <span class="nx">audio</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'remoteAudio'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">ua</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">uri</span><span class="o">:</span> <span class="s1">'bob@example.com'</span><span class="p">,</span>
+    <span class="nx">wsServers</span><span class="o">:</span> <span class="p">[</span><span class="s1">'wss://sip-ws.example.com'</span><span class="p">],</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre>
 
 <h2 id="instance-variables">Instance Variables</h2>
 
@@ -174,12 +169,7 @@
 
 <h4 id="example-1">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.call(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>);
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'bob@example.com'</span><span class="p">);</span></code></pre>
 
 <h3 id="answer"><code>answer()</code></h3>
 
@@ -187,12 +177,7 @@
 
 <h4 id="example-2">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.answer();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">answer</span><span class="p">();</span></code></pre>
 
 <h3 id="reject"><code>reject()</code></h3>
 
@@ -200,12 +185,7 @@
 
 <h4 id="example-3">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.reject();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span></code></pre>
 
 <h3 id="hangup"><code>hangup()</code></h3>
 
@@ -213,12 +193,7 @@
 
 <h4 id="example-4">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.hangup();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">hangup</span><span class="p">();</span></code></pre>
 
 <h3 id="mute"><code>mute()</code></h3>
 
@@ -226,12 +201,7 @@
 
 <h4 id="example-5">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.mute();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">mute</span><span class="p">();</span></code></pre>
 
 <h3 id="unmute"><code>unmute()</code></h3>
 
@@ -239,12 +209,7 @@
 
 <h4 id="example-6">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.unmute();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">unmute</span><span class="p">();</span></code></pre>
 
 <h3 id="hold"><code>hold()</code></h3>
 
@@ -252,12 +217,7 @@
 
 <h4 id="example-7">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.hold();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">hold</span><span class="p">();</span></code></pre>
 
 <h3 id="unhold"><code>unhold()</code></h3>
 
@@ -265,12 +225,7 @@
 
 <h4 id="example-8">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.unhold();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">unhold</span><span class="p">();</span></code></pre>
 
 <h3 id="hangup-1"><code>hangup()</code></h3>
 
@@ -278,12 +233,7 @@
 
 <h4 id="example-9">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.hangup();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">hangup</span><span class="p">();</span></code></pre>
 
 <h3 id="senddtmftone"><code>sendDTMF(tone)</code></h3>
 
@@ -310,12 +260,7 @@
 
 <h4 id="example-10">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.sendDTMF(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1</span><span style="color:#710">'</span></span>);
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">sendDTMF</span><span class="p">(</span><span class="s1">'1'</span><span class="p">);</span></code></pre>
 
 <h3 id="messagedestination-message"><code>message(destination, message)</code></h3>
 
@@ -347,12 +292,7 @@
 
 <h4 id="example-11">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.message(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bob@example.com</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hello Bob</span><span style="color:#710">'</span></span>);
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">message</span><span class="p">(</span><span class="s1">'bob@example.com'</span><span class="p">,</span><span class="s1">'Hello Bob'</span><span class="p">);</span></code></pre>
 
 <h2 id="events">Events</h2>
 
@@ -479,14 +419,9 @@
 
 <h4 id="example-12">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>simple.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">message</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span>(message) {
-  alert(message.body);
-});
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">simple</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span></code></pre>
 
 <h2 id="states">States</h2>
 

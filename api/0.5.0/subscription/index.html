@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -99,18 +99,13 @@
 
 <h3 id="examples">Examples</h3>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">//Subscribes to the presence information of alice@example.com</span>
-<span style="color:#080;font-weight:bold">var</span> subscription = myUA.subscribe(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">presence</span><span style="color:#710">'</span></span>);
+<pre><code class="language-javascript"><span class="c1">//Subscribes to the presence information of alice@example.com</span>
+<span class="kd">var</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">myUA</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'alice@example.com'</span><span class="p">,</span> <span class="s1">'presence'</span><span class="p">);</span>
 
-<span style="color:#777">// Once subscribed, receive notifications and print out the presence information</span>
-subscription.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">notify</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span> (notification) {
-  console.log(notification.request.body);
-});
-</pre></div>
-</div>
-</div>
+<span class="c1">// Once subscribed, receive notifications and print out the presence information</span>
+<span class="nx">subscription</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'notify'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">notification</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">notification</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span></code></pre>
 
 <h2 id="instance-attributes">Instance Attributes</h2>
 

@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -75,25 +75,20 @@
 
 <h1 id="parameters">Parameters</h1>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>{
-  <span style="color:#606">media</span>: {
-    <span style="color:#606">remote</span>: {
-      <span style="color:#606">audio</span>: &lt;DOM element&gt;,
-      <span style="color:#606">video</span>: &lt;DOM element&gt;
-    },
-    <span style="color:#606">local</span>: {
-      <span style="color:#606">video</span>: &lt;DOM element&gt;
-    }
-  },
-  <span style="color:#606">ua</span>: {
-     &lt;UA Configuration Options&gt;
-  }
-}
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="nx">media</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">remote</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">audio</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">DOM</span> <span class="nx">element</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="nx">video</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">DOM</span> <span class="nx">element</span><span class="o">&gt;</span>
+    <span class="p">},</span>
+    <span class="nx">local</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">video</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">DOM</span> <span class="nx">element</span><span class="o">&gt;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">ua</span><span class="o">:</span> <span class="p">{</span>
+     <span class="o">&lt;</span><span class="nx">UA</span> <span class="nx">Configuration</span> <span class="nx">Options</span><span class="o">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
 
 <h2 id="media">media</h2>
 
@@ -140,75 +135,40 @@
 <code>Array</code> of <code>Object</code> to define multiple WebSocket URIs with weight. URIs with higher weights are attempted before those with lower weights.</li>
 </ul>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws.example.com</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="s2">"ws://sip-ws.example.com"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws.example.com:8443/sip?KEY=1234</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="s2">"ws://sip-ws.example.com:8443/sip?KEY=1234"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: [
-  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-1.example.com</span><span style="color:#710">"</span></span>,
-  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-2.example.com</span><span style="color:#710">"</span></span>
-]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="p">[</span>
+  <span class="s2">"ws://sip-ws-1.example.com"</span><span class="p">,</span>
+  <span class="s2">"ws://sip-ws-2.example.com"</span>
+<span class="p">]</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: [
-  { <span style="color:#777">// First connection attempt</span>
-    <span style="color:#606">ws_uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-1.example.com</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">weight</span>: <span style="color:#00D">10</span>
-  },
-  {
-    <span style="color:#606">ws_uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-2.example.com</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">weight</span>: <span style="color:#00D">1</span>
-  }
-]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="c1">// First connection attempt</span>
+    <span class="nx">ws_uri</span><span class="o">:</span> <span class="s2">"ws://sip-ws-1.example.com"</span><span class="p">,</span>
+    <span class="nx">weight</span><span class="o">:</span> <span class="mi">10</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">ws_uri</span><span class="o">:</span> <span class="s2">"ws://sip-ws-2.example.com"</span><span class="p">,</span>
+    <span class="nx">weight</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
 
 <h3 id="authorizationuser">authorizationUser</h3>
 <p>Username (<code>String</code>) to use when generating authentication credentials. If not defined the value in uri parameter is used.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>authorizationUser: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">alice123</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">authorizationUser</span><span class="o">:</span> <span class="s2">"alice123"</span></code></pre>
 
 <h3 id="password">password</h3>
 <p>SIP Authentication password (<code>String</code>).   Default value is <code>null</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>password: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">1234</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">password</span><span class="o">:</span> <span class="s2">"1234"</span></code></pre>
 
 <h3 id="displayname">displayName</h3>
 <p>Descriptive name (<code>String</code>) to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the <code>display_name</code> value between double quotes).</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>displayName: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Alice ¶€ĸøĸø</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">displayName</span><span class="o">:</span> <span class="s2">"Alice ¶€ĸøĸø"</span></code></pre>
 
 		</div>
 

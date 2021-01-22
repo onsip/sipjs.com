@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -280,27 +280,22 @@
 
 <h4 id="example">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>outgoingRequest.toString();
+<pre><code class="language-javascript"><span class="nx">outgoingRequest</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
 
-<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">INVITE sip:alice@example.com SIP/2.0
-Via: 
-Max-Forwards: 69
-To: &lt;sip:bob@example.com&gt;
-From: "Alice" &lt;sip:alice@example.com&gt;;tag=12g953gosn
-Call-ID: 9q3341bc39ab41k8f4vb
-CSeq: 4652 INVITE
-Contact: &lt;sip:d5e0h5v6@5jthu1mcbpau.invalid;transport=ws;ob&gt;
-Allow: ACK,CANCEL,BYE,OPTIONS,INVITE,MESSAGE
-Content-Type: application/sdp
-Supported: outbound
-User-Agent: SIPjs
-Content-Length: 0
-</span><span style="color:#710">'</span></span>
-</pre></div>
-</div>
-</div>
+<span class="s1">'INVITE sip:alice@example.com SIP/2.0</span>
+<span class="s1">Via: </span>
+<span class="s1">Max-Forwards: 69</span>
+<span class="s1">To: &lt;sip:bob@example.com&gt;</span>
+<span class="s1">From: "Alice" &lt;sip:alice@example.com&gt;;tag=12g953gosn</span>
+<span class="s1">Call-ID: 9q3341bc39ab41k8f4vb</span>
+<span class="s1">CSeq: 4652 INVITE</span>
+<span class="s1">Contact: &lt;sip:d5e0h5v6@5jthu1mcbpau.invalid;transport=ws;ob&gt;</span>
+<span class="s1">Allow: ACK,CANCEL,BYE,OPTIONS,INVITE,MESSAGE</span>
+<span class="s1">Content-Type: application/sdp</span>
+<span class="s1">Supported: outbound</span>
+<span class="s1">User-Agent: SIPjs</span>
+<span class="s1">Content-Length: 0</span>
+<span class="s1">'</span></code></pre>
 
 		</div>
 

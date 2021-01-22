@@ -37,11 +37,12 @@ if (token === '') {
                        + 'expires=' + d.toUTCString() + ';');
 }
 var domain = 'sipjs.onsip.com';
-var aliceURI      = 'alice.' + window.token + '@' + domain;
+var aliceAor      = 'sip:alice.' + window.token + '@' + domain;
 var aliceName     = 'Alice';
 
-var bobURI        = 'bob.' + window.token + '@' + domain;
+var bobAor        = 'sip:bob.' + window.token + '@' + domain;
 var bobName       = 'Bob';
+let hasCall     = false;
 
 // Function: createSimple
 //   creates a SIP.js Simple instance with the given arguments plugged into the
@@ -58,43 +59,52 @@ function createSimple(callerURI, displayName, target, remoteVideo, buttonId) {
 
     var configuration = {
         media: {
+            constraints: { audio: true, video: true },
             remote: {
                 video: remoteVideoElement,
                 // Need audio to be not null to do audio & video instead of just video
                 audio: remoteVideoElement
             }
         },
-        ua: {
-            traceSip: true,
-            uri: callerURI,
+        aor: callerURI,
+        userAgentOptions: {
             displayName: displayName,
-            userAgentString: SIP.C.USER_AGENT + " sipjs.com"
+            userAgentString: SIP.name + "." + SIP.version + " sipjs.com"
         }
     };
-    var simple = new SIP.Web.Simple(configuration);
+    var simple = new SIP.Web.SimpleUser("wss://edge.sip.onsip.com", configuration);
 
-    // Adjust the style of the demo based on what is happening
-    simple.on('ended', function() {
-        remoteVideoElement.style.visibility = 'hidden';
-        button.firstChild.nodeValue = 'video';
-    });
+    simple.delegate = {
+        onCallReceived: () => {
+            simple.answer();
+        },
 
-    simple.on('connected', function() {
-        remoteVideoElement.style.visibility = 'visible';
-        button.firstChild.nodeValue = 'hang up';
-    });
+        onCallHangup: () => {
+            remoteVideoElement.style.visibility = 'hidden';
+            button.firstChild.nodeValue = 'video';
+            hasCall = false;
+        },
 
-    simple.on('ringing', function() {
-      simple.answer();
+        onCallAnswered: () => {
+            remoteVideoElement.style.visibility = 'visible';
+            button.firstChild.nodeValue = 'hang up';
+        }
+    }
+
+    // Connect to server
+    simple.connect().then(() => {
+        // Register to receive inbound calls (optional)
+        simple.register();
     });
 
     button.addEventListener('click', function() {
         // No current call up
-        if (simple.state === SIP.Web.Simple.C.STATUS_NULL ||
-            simple.state === SIP.Web.Simple.C.STATUS_COMPLETED) {
+        if (!hasCall) {
             simple.call(target);
+            hasCall = true;
         } else {
             simple.hangup();
+            hasCall = false;
         }
     });
 
@@ -132,7 +142,7 @@ function setUpMessageInterface(simple, target,
     var noMessages = true;
 
     // Receive a message and put it in the message display div
-    simple.on('message', function (msg) {
+    simple.delegate.onMessageReceived = (msg) => {
         // If we have not received any messages yet, remove the placeholder
         // text.
         if (noMessages) {
@@ -142,7 +152,7 @@ function setUpMessageInterface(simple, target,
         }
         var msgTag = createMsgTag(msg.remoteIdentity.displayName, msg.body);
         messageRender.appendChild(msgTag);
-    });
+    };
     // Cut the content from the input textarea and send it
     button.addEventListener('click', function () {
         sendMessage();
@@ -199,46 +209,46 @@ if (window.RTCPeerConnection) {
     setFeatureArrowColor('rgb(193,191,182)');
 
     // Now we do SIP.js stuff
-    var aliceSimple = createSimple(aliceURI, aliceName, bobURI, 'video-of-bob', 'alice-video-button');
-    var bobSimple   = createSimple(bobURI, bobName, aliceURI, 'video-of-alice', 'bob-video-button');
+    var aliceSimple = createSimple(aliceAor, aliceName, bobAor, 'video-of-bob', 'alice-video-button');
+    var bobSimple   = createSimple(bobAor, bobName, aliceAor, 'video-of-alice', 'bob-video-button');
 
     // We want to only run the demo if all users for the demo can register
     var numToRegister = 2;
     var numRegistered = 0;
     var registrationFailed = false;
-    var markAsRegistered = function () {
+    var markAsRegistered = () => {
         numRegistered += 1;
         if (numRegistered >= numToRegister && !registrationFailed) {
             setupInterfaces();
         }
     };
-    var failRegistration = function () {
+    var failRegistration = () => {
         registrationFailed = true;
         failInterfaceSetup();
     };
     // We don't want to proceed until we've registered all users.
     // For each registered user, increase the counter.
-    aliceSimple.on('registered', markAsRegistered);
-    bobSimple.on('registered', markAsRegistered);
+    aliceSimple.delegate.onRegistered = markAsRegistered;
+    bobSimple.delegate.onRegistered = markAsRegistered;
     // If any registration fails, then we need to disable the app and tell the
     // user that we could not register them.
-    aliceSimple.on('registrationFailed', failRegistration);
-    bobSimple.on('registrationFailed', failRegistration);
+    aliceSimple.delegate.onUnregistered = failRegistration;
+    bobSimple.delegate.onUnregistered = failRegistration;
 
     // Unregister the user agents and terminate all active sessions when the
     // window closes or when we navigate away from the page
     window.onunload = function () {
-        aliceSimple.stop();
-        bobSimple.stop();
+        aliceSimple.unregister();
+        bobSimple.unregister();
     };
 
     // Only run the demo if we could register every user agent
     function setupInterfaces() {
-        setUpMessageInterface(aliceSimple, bobURI,
+        setUpMessageInterface(aliceSimple, bobAor,
                               'alice-message-display',
                               'alice-message-input',
                               'alice-message-button');
-        setUpMessageInterface(bobSimple, aliceURI,
+        setUpMessageInterface(bobSimple, aliceAor,
                               'bob-message-display',
                               'bob-message-input',
                               'bob-message-button');

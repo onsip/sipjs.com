@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -81,39 +81,19 @@
 <h3 id="expires"><code>expires</code></h3>
 <p>Registration expiry time (in seconds) (<code>Number</code>). Default value is <code>600</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>expires: <span style="color:#00D">300</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">expires</span><span class="o">:</span> <span class="mi">300</span></code></pre>
 
 <h3 id="extracontactheaderparams"><code>extraContactHeaderParams</code></h3>
 <p>Contact header parameters to include on Register requests.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>extraContactHeaderParams: [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">foo: bar</span><span style="color:#710">'</span></span>]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">extraContactHeaderParams</span><span class="o">:</span> <span class="p">[</span><span class="s1">'foo: bar'</span><span class="p">]</span></code></pre>
 
 <h3 id="instanceid"><code>instanceId</code></h3>
 <p><code>String</code> indicating the UUID URI to be used as instance ID to identify the UA instance when using GRUU.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>instanceId: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">uuid:8f1fa16a-1165-4a96-8341-785b1ef24f12</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">instanceId</span><span class="o">:</span> <span class="s2">"uuid:8f1fa16a-1165-4a96-8341-785b1ef24f12"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>instanceId: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">8f1fa16a-1165-4a96-8341-785b1ef24f12</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">instanceId</span><span class="o">:</span> <span class="s2">"8f1fa16a-1165-4a96-8341-785b1ef24f12"</span></code></pre>
 
 <h3 id="params"><code>params</code></h3>
 <p>Advanced configuration options that are typically set automatically by the <a href="../ua"><code>SIP.UA</code></a>. <code>Object</code> of various parameters to use on Registration.</p>
@@ -124,32 +104,17 @@
 <h3 id="registrar"><code>registrar</code></h3>
 <p>Set the SIP registrar URI. Valid value is a SIP URI without username. Default value is <code>null</code> which means that the registrar URI is taken from the uri parameter (by removing the username).</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>registrar: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sip:registrar.mydomain.com</span><span style="color:#710">'</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">registrar</span><span class="o">:</span> <span class="s1">'sip:registrar.mydomain.com'</span></code></pre>
 
 <h3 id="examples">Examples</h3>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// Sends a new message</span>
-myUA.message(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.com</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hello Alice!</span><span style="color:#710">'</span></span>);
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="c1">// Sends a new message</span>
+<span class="nx">myUA</span><span class="p">.</span><span class="nx">message</span><span class="p">(</span><span class="s1">'alice@example.com'</span><span class="p">,</span> <span class="s1">'Hello Alice!'</span><span class="p">);</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// When receiving a message, prints it out</span>
-myUA.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">message</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span> (message) {
-  console.log(message.body);
-});
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="c1">// When receiving a message, prints it out</span>
+<span class="nx">myUA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span></code></pre>
 
 <h2 id="instance-variables">Instance Variables</h2>
 

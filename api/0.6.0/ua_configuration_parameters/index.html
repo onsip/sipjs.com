@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -108,132 +108,67 @@
 <code>Array</code> of <code>Object</code> to define multiple WebSocket URIs with weight. URIs with higher weights are attempted before those with lower weights.</li>
 </ul>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws.example.com</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="s2">"ws://sip-ws.example.com"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws.example.com:8443/sip?KEY=1234</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="s2">"ws://sip-ws.example.com:8443/sip?KEY=1234"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: [
-  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-1.example.com</span><span style="color:#710">"</span></span>,
-  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-2.example.com</span><span style="color:#710">"</span></span>
-]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="p">[</span>
+  <span class="s2">"ws://sip-ws-1.example.com"</span><span class="p">,</span>
+  <span class="s2">"ws://sip-ws-2.example.com"</span>
+<span class="p">]</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: [
-  { <span style="color:#777">// First connection attempt</span>
-    <span style="color:#606">ws_uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-1.example.com</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">weight</span>: <span style="color:#00D">10</span>
-  },
-  {
-    <span style="color:#606">ws_uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://sip-ws-2.example.com</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">weight</span>: <span style="color:#00D">1</span>
-  }
-]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="c1">// First connection attempt</span>
+    <span class="nx">ws_uri</span><span class="o">:</span> <span class="s2">"ws://sip-ws-1.example.com"</span><span class="p">,</span>
+    <span class="nx">weight</span><span class="o">:</span> <span class="mi">10</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">ws_uri</span><span class="o">:</span> <span class="s2">"ws://sip-ws-2.example.com"</span><span class="p">,</span>
+    <span class="nx">weight</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
 
 <h2 id="authorizationuser">authorizationUser</h2>
 <p>Username (<code>String</code>) to use when generating authentication credentials. If not defined the value in uri parameter is used.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>authorizationUser: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">alice123</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">authorizationUser</span><span class="o">:</span> <span class="s2">"alice123"</span></code></pre>
 
 <h2 id="autostart">autostart</h2>
 <p>If set to true, the user agent calls the <code>.start()</code> method upon being created.  Default value is true.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>autostart: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">autostart</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="connectionrecoverymaxinterval">connectionRecoveryMaxInterval</h2>
 <p>Maximum interval (<code>Number</code>) in seconds between WebSocket reconnection attempts. Default value is 30.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>connectionRecoveryMaxInterval: <span style="color:#00D">60</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">connectionRecoveryMaxInterval</span><span class="o">:</span> <span class="mi">60</span></code></pre>
 
 <h2 id="connectionrecoverymininterval">connectionRecoveryMinInterval</h2>
 <p>Minimum interval (<code>Number</code>) in seconds between WebSocket reconnection attempts. Default value is 2.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>connectionRecoveryMinInterval: <span style="color:#00D">4</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">connectionRecoveryMinInterval</span><span class="o">:</span> <span class="mi">4</span></code></pre>
 
 <h2 id="displayname">displayName</h2>
 <p>Descriptive name (<code>String</code>) to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the <code>display_name</code> value between double quotes).</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>displayName: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Alice ¶€ĸøĸø</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">displayName</span><span class="o">:</span> <span class="s2">"Alice ¶€ĸøĸø"</span></code></pre>
 
 <h2 id="hackipincontact">hackIpInContact</h2>
 <p>Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>false</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>hackIpInContact: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">hackIpInContact</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="hackviatcp">hackViaTcp</h2>
 <p>Set Via transport parameter in outgoing SIP requests to “TCP”. Useful when traversing SIP nodes that are not ready to parse Via headers with “WS” or “WSS” value in a Via header. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>false</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>hackViaTcp: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">hackViaTcp</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="instanceid">instanceId</h2>
 <p><code>String</code> indicating the UUID URI to be used as instance ID to identify the UA instance when using GRUU.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>instanceId: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">uuid:8f1fa16a-1165-4a96-8341-785b1ef24f12</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">instanceId</span><span class="o">:</span> <span class="s2">"uuid:8f1fa16a-1165-4a96-8341-785b1ef24f12"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>instanceId: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">8f1fa16a-1165-4a96-8341-785b1ef24f12</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">instanceId</span><span class="o">:</span> <span class="s2">"8f1fa16a-1165-4a96-8341-785b1ef24f12"</span></code></pre>
 
 <h2 id="log">log</h2>
 <p><code>Object</code> providing the desired log behavior.</p>
@@ -252,24 +187,19 @@
 
 <p>The function is called with the following semantics:</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">/*
-  level: String representing the level of the log message
-('debug', 'log', 'warn', 'error')
+<pre><code class="language-javascript"><span class="cm">/*</span>
+<span class="cm">  level: String representing the level of the log message</span>
+<span class="cm">('debug', 'log', 'warn', 'error')</span>
 
-  category: String representing the SIPjs instance class firing
-the log. ie: 'sipjs.ua'
+<span class="cm">  category: String representing the SIPjs instance class firing</span>
+<span class="cm">the log. ie: 'sipjs.ua'</span>
 
-  label: String indicating the 'identifier' of the class instance
- when the log level is '3' (debug). ie: transaction.id
+<span class="cm">  label: String indicating the 'identifier' of the class instance</span>
+<span class="cm"> when the log level is '3' (debug). ie: transaction.id</span>
 
-  content: String representing the log message
-*/</span>
-connector(level, category, label, content);
-</pre></div>
-</div>
-</div>
+<span class="cm">  content: String representing the log message</span>
+<span class="cm">*/</span>
+<span class="nx">connector</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">label</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span></code></pre>
 
 <h2 id="mediahandlerfactory">mediaHandlerFactory</h2>
 <p>A function(session, options) that returns an object that acts like a SIP.MediaHandler. See SIP.WebRTC.MediaHandler.defaultFactory for an example.</p>
@@ -277,173 +207,93 @@ connector(level, category, label, content);
 <h2 id="noanswertimeout">noAnswerTimeout</h2>
 <p>Time (in seconds) (<code>Number</code>) after which an incoming call is rejected if not answered. Default value is <code>30</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>noAnswerTimeout: <span style="color:#00D">120</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">noAnswerTimeout</span><span class="o">:</span> <span class="mi">120</span></code></pre>
 
 <h2 id="password">password</h2>
 <p>SIP Authentication password (<code>String</code>).   Default value is <code>null</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>password: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">1234</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">password</span><span class="o">:</span> <span class="s2">"1234"</span></code></pre>
 
 <h2 id="register">register</h2>
 <p>Indicate if a SIP User Agent should register automatically when starting. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>true</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>register: <span style="color:#069">false</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">register</span><span class="o">:</span> <span class="kc">false</span></code></pre>
 
 <h2 id="registerexpires">registerExpires</h2>
 <p>Registration expiry time (in seconds) (<code>Number</code>). Default value is <code>600</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>registerExpires: <span style="color:#00D">300</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">registerExpires</span><span class="o">:</span> <span class="mi">300</span></code></pre>
 
 <h2 id="registrarserver">registrarServer</h2>
 <p>Set the SIP registrar URI. Valid value is a SIP URI without username. Default value is <code>null</code> which means that the registrar URI is taken from the uri parameter (by removing the username).</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>registrarServer: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sip:registrar.mydomain.com</span><span style="color:#710">'</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">registrarServer</span><span class="o">:</span> <span class="s1">'sip:registrar.mydomain.com'</span></code></pre>
 
 <h2 id="rel100">rel100</h2>
 <p><code>Constant</code> representing whether the UA should do 100rel. Accepts <code>SIP.C.supported.REQUIRED</code>, <code>SIP.C.supported.SUPPORTED</code>, and <code>SIP.C.supported.UNSUPPORTED</code>. Default value is <code>SIP.C.supported.UNSUPPORTED</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>rel100: SIP.C.supported.REQUIRED
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">rel100</span><span class="o">:</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">C</span><span class="p">.</span><span class="nx">supported</span><span class="p">.</span><span class="nx">REQUIRED</span></code></pre>
 
 <h2 id="stunservers">stunServers</h2>
 <p><code>String</code> or <code>Array</code> of <code>Strings</code> indicating the STUN server(s) to use for IP address discovery. Values must include “stun:” or “stuns:” schema. Default value is [<code>"stun:stun.l.google.com:19302"</code>].</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>stunServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">stun:example.org</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">stunServers</span><span class="o">:</span> <span class="s2">"stun:example.org"</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>stunServers: [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">stun:example.org</span><span style="color:#710">"</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">stuns:example.org</span><span style="color:#710">"</span></span>]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">stunServers</span><span class="o">:</span> <span class="p">[</span><span class="s2">"stun:example.org"</span><span class="p">,</span> <span class="s2">"stuns:example.org"</span><span class="p">]</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>stunServers: [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">stun:example.org:8000</span><span style="color:#710">"</span></span>]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">stunServers</span><span class="o">:</span> <span class="p">[</span><span class="s2">"stun:example.org:8000"</span><span class="p">]</span></code></pre>
 
 <h2 id="tracesip">traceSip</h2>
 <p>Indicate whether incoming and outgoing SIP request/responses must be logged in the browser console (<code>Boolean</code>). Default value is <code>false</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>traceSip: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">traceSip</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="turnservers">turnServers</h2>
 <p><code>Object</code> or <code>Array</code> of <code>Objects</code> indicating the TURN server(s) and corresponding username and password to be used for media relay. ‘url’ values can include “turn:” or “turns” schema. No TURN server is set by default.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>turnServers: {
-  <span style="color:#606">urls</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">turn:exam.org</span><span style="color:#710">"</span></span>,
-  <span style="color:#606">username</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">alice</span><span style="color:#710">"</span></span>,
-  <span style="color:#606">password</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">racecar</span><span style="color:#710">"</span></span>
-}
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">turnServers</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">urls</span><span class="o">:</span><span class="s2">"turn:exam.org"</span><span class="p">,</span>
+  <span class="nx">username</span><span class="o">:</span><span class="s2">"alice"</span><span class="p">,</span>
+  <span class="nx">password</span><span class="o">:</span><span class="s2">"racecar"</span>
+<span class="p">}</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>turnServers: {
-  <span style="color:#606">urls</span>:[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">turn:exam.org</span><span style="color:#710">"</span></span>,
-  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">turn:exam.org</span><span style="color:#710">"</span></span>],
-  <span style="color:#606">username</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Al</span><span style="color:#710">"</span></span>,
-  <span style="color:#606">password</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">yo</span><span style="color:#710">"</span></span>
-}
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">turnServers</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">urls</span><span class="o">:</span><span class="p">[</span><span class="s2">"turn:exam.org"</span><span class="p">,</span>
+  <span class="s2">"turn:exam.org"</span><span class="p">],</span>
+  <span class="nx">username</span><span class="o">:</span><span class="s2">"Al"</span><span class="p">,</span>
+  <span class="nx">password</span><span class="o">:</span><span class="s2">"yo"</span>
+<span class="p">}</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>turnServers: [{
-  <span style="color:#606">urls</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">turn:exam.org</span><span style="color:#710">"</span></span>,
-  <span style="color:#606">username</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">alice</span><span style="color:#710">"</span></span>,
-  <span style="color:#606">password</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">racecar</span><span style="color:#710">"</span></span>
-}]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">turnServers</span><span class="o">:</span> <span class="p">[{</span>
+  <span class="nx">urls</span><span class="o">:</span><span class="s2">"turn:exam.org"</span><span class="p">,</span>
+  <span class="nx">username</span><span class="o">:</span><span class="s2">"alice"</span><span class="p">,</span>
+  <span class="nx">password</span><span class="o">:</span><span class="s2">"racecar"</span>
+<span class="p">}]</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>turnServers: [
-  {
-    <span style="color:#606">urls</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">turn:exam.org</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">username</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">alice</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">password</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">racecar</span><span style="color:#710">"</span></span>
-  },
-  {
-    <span style="color:#606">urls</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">turn:exam.org?transport=udp</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">username</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">bob</span><span style="color:#710">"</span></span>,
-    <span style="color:#606">password</span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">dog</span><span style="color:#710">"</span></span>
-  }
-]
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">turnServers</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">urls</span><span class="o">:</span><span class="s2">"turn:exam.org"</span><span class="p">,</span>
+    <span class="nx">username</span><span class="o">:</span><span class="s2">"alice"</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span><span class="s2">"racecar"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">urls</span><span class="o">:</span><span class="s2">"turn:exam.org?transport=udp"</span><span class="p">,</span>
+    <span class="nx">username</span><span class="o">:</span><span class="s2">"bob"</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span><span class="s2">"dog"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
 
 <h2 id="usepreloadedroute">usePreloadedRoute</h2>
 
 <p>If set to true every SIP initial request sent by SIP.js includes a Route header with the SIP URI associated to the WebSocket server as value. Some SIP Outbound Proxies require such a header. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>false</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">ws://example.org/sip-ws</span><span style="color:#710">"</span></span>
-usePreloadedRoute: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="s2">"ws://example.org/sip-ws"</span>
+<span class="nx">usePreloadedRoute</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <p>The Route header will look like Route: <code>&lt;sip:example.org;lr;transport=ws&gt;</code></p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>wsServers: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">wss://example.org:8443</span><span style="color:#710">"</span></span>
-usePreloadedRoute: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="s2">"wss://example.org:8443"</span>
+<span class="nx">usePreloadedRoute</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <p>The Route header will look like Route: <code>&lt;sip:example.org:8443;lr;transport=ws&gt;</code></p>
 
@@ -451,12 +301,7 @@ usePreloadedRoute: <span style="color:#069">true</span>
 
 <p>If this is set then the User-Agent header will have this string appended after name and version.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>userAgentString: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">myAwesomeApp</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">userAgentString</span><span class="o">:</span> <span class="s2">"myAwesomeApp"</span></code></pre>
 
 <p>The User-Agent header will look like User-Agent: SIP.js/0.6.0 myAwesomeApp</p>
 

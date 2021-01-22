@@ -2,811 +2,1123 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sipjs.com/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-07-23</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/CNAME</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/aboutus/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/refer/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/refer/referClientContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/refer/referServerContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/sessionDescriptionHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/simple/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/simple_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.10.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/publish/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/publish/publishClientContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/refer/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/refer/referClientContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/refer/referServerContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/sessionDescriptionHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/simple/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/simple_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/ws_transport_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.11.0/wstransport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/refer/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/refer/referClientContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/refer/referServerContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/register/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/sessionDescriptionHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/simple/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/simple_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/subscription/publishClientContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/subscription/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.12.0/wstransport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/causes/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/context/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/context/client/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/context/server/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/grammar/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/message/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/nameAddrHeader/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/parser/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/refer/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/refer/referClientContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/refer/referServerContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/register/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/session/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/sessionDescriptionHandler/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/simple/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/simple_configuration_parameters/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/sipMessage/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/subscription/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/subscription/publishClientContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/subscription/subscription/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/transport/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/ua/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/ua_configuration_parameters/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/uri/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.13.0/wstransport/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/causes/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/context/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/context/client/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/context/server/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/grammar/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/message/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/nameAddrHeader/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/parser/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/refer/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/refer/referClientContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/refer/referServerContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/register/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/session/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/sessionDescriptionHandler/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/simple/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/simple_configuration_parameters/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/sipMessage/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/subscription/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/subscription/publishClientContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/subscription/subscription/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/transport/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/ua/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/ua_configuration_parameters/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/uri/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.14.0/wstransport/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/causes/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/context/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/context/client/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/context/server/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/grammar/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/message/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/nameAddrHeader/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/parser/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/refer/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/refer/referClientContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/refer/referServerContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/register/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/session/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/sessionDescriptionHandler/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/simple/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/simple_configuration_parameters/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/sipMessage/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/subscription/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/subscription/publishClientContext/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/subscription/subscription/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/transport/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/ua/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/ua_configuration_parameters/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/uri/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/api/0.15.0/wstransport/</loc>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/incomingMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/outgoingRequest/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.5.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/mediaHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.6.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/mediaHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.7.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/sessionDescriptionHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/simple/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/simple_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.8.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/causes/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/context/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/context/client/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/context/server/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/eventEmitter/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/grammar/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/nameAddrHeader/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/parser/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/refer/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/refer/referClientContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/refer/referServerContext/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/session/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/sessionDescriptionHandler/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/simple/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/simple_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/sipMessage/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/subscription/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/transport/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/ua/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/ua_configuration_parameters/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/api/0.9.0/uri/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/download/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/faq/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-06-25</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-06-25</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/attach-media/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
-    <loc>https://sipjs.com/guides/convert-to-sipjs/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <loc>https://sipjs.com/guides/end-call/</loc>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/full-demo-app/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/getting-started/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/make-call/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/mobile/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/mobile/android-native/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/mobile/cordova/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/receive-call/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/renegotiation/</loc>
-    <lastmod>2019-01-18</lastmod>
-  </url>
-  <url>
-    <loc>https://sipjs.com/guides/reuse-mediastreams/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/send-dtmf/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/send-message/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/server-configuration/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/server-configuration/asterisk-legacy/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/server-configuration/asterisk/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/server-configuration/freeswitch-legacy/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/server-configuration/freeswitch/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/server-configuration/onsip-network/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://sipjs.com/guides/simple-user/</loc>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/simple/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-08-28</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/guides/transfer/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
-    <loc>https://sipjs.com/guides/user-agent-construction/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <loc>https://sipjs.com/guides/user-agent/</loc>
+    <lastmod>2020-04-29</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/license/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/sitemap.xml</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
   <url>
     <loc>https://sipjs.com/thank-you/</loc>
-    <lastmod>2019-01-18</lastmod>
+    <lastmod>2019-11-19</lastmod>
   </url>
 </urlset>
 

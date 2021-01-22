@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -48,28 +48,25 @@
 <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
 
 <h2 id="my-sipjs-application-isnt-working--where-do-i-get-help">My SIP.js application isn’t working!  Where do I get help?</h2>
-<p>The best way to get help is through our <a href="https://groups.google.com/forum/#!forum/sip_js">Google Group mailing list</a>. Make sure that you include logs with <a href="/api/0.12.0/wstransport#tracesip">traceSip</a> enabled in a <a href="https://gist.github.com/">gist</a>. The Github issue tracker is reserved for bugs within the library.</p>
+<p>The best way to get help is through our <a href="https://groups.google.com/forum/#!forum/sip_js">Google Group mailing list</a>. Make sure that you include logs with <a href="https://github.com/onsip/SIP.js/blob/master/docs/transport/sip.js.transportoptions.md">traceSip</a> enabled in a <a href="https://gist.github.com/">gist</a>. The Github issue tracker is reserved for bugs within the library.</p>
 
 <h2 id="i-would-like-to-use-sipjs-in-nodejs-react-native-nativescript-some-other-non-web-browser-environment-how-can-i-do-this">I would like to use SIP.js in Node.js, React Native, Nativescript, some other non web browser environment. How can I do this?</h2>
-<p>We are a small team at OnSIP and an even smaller subset of us actively working on SIP.js. We cannot support all of these different environments, so we choose to support only the latest versions of the major browsers. Chrome, Firefox, Safari, Microsoft Edge (with adapter.js), and Opera. If you do get something working in a different environment we would happily take a pull request back to the library to help out the rest of the community.</p>
+<p>We are a small team at OnSIP and an even smaller subset of us actively working on SIP.js. We cannot support all of these different environments, so we choose to support only the latest versions of the major browsers. Chrome, Firefox, Safari, Microsoft Edge (with adapter.js), and Opera. If you do get something working in a different environment we would happily take a pull request back to the library to help out the rest of the community. You will most likely need to create a <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.sessiondescriptionhandler.md">Session Description Handler</a> and <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.transport.md">Transport</a> for your enviornment. SIP.js is set up to override these thngs at runtime.</p>
 
 <h2 id="does-sipjs-work-on-mobile">Does SIP.js work on mobile?</h2>
 <p>See the previous answer, but we choose to support only the latest versions of major mobile browsers. This would be Chrome on Android and Safari on iOS.</p>
 
-<h2 id="i-am-using-simple-and-would-like-to-do-something-that-is-not-supported-can-you-add-support-for-it">I am using Simple and would like to do something that is not supported. Can you add support for it?</h2>
-<p>No. Simple is intended to help get someone up and running quickly. If you need to do something more please upgrade to the full <a href="/api/0.11.0/">SIP.js API</a>.</p>
+<h2 id="i-am-using-simple-user-and-would-like-to-do-something-that-is-not-supported-can-you-add-support-for-it">I am using Simple User and would like to do something that is not supported. Can you add support for it?</h2>
+<p>No. Simple User is intended to help get someone up and running quickly. If you need to do something more please upgrade to the full <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md">SIP.js API</a>.</p>
 
 <h2 id="sipjs-is-not-working-with-my-asterisk-freeswitch-etc-pbx-can-you-fix-it">SIP.js is not working with my Asterisk, FreeSWITCH, etc. pbx. Can you fix it?</h2>
 <p>No. We cannot support SIP server configurations outside of our <a href="/guides/server-configuration/">guides</a>. You are responsible for making SIP.js work in your own environment.</p>
 
 <h2 id="the-default-session-description-handler-does-not-do-everything-i-need-can-you-make-it-do-more">The default Session Description Handler does not do everything I need. Can you make it do more?</h2>
-<p>No. We are trying to build a SIP signaling library. We do not want to be in the business of handling all the different media cases. You should build your own <a href="/api/0.11.0/sessionDescriptionHandler/">Session Description Handler</a>.</p>
+<p>No. We are trying to build a SIP signaling library. We do not want to be in the business of handling all the different media cases. You should build your own <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.sessiondescriptionhandler.md">Session Description Handler</a>.</p>
 
 <h2 id="how-can-i-play-early-media-with-an-invite-with-sdp">How can I play early media (with an invite with SDP)?</h2>
-<p>Early media can be played if you do an <a href="/api/0.11.0/ua/#invitetarget-options-modifiers">invite without SDP</a> and <a href="/api/0.11.0/ua_configuration_parameters/#rel100">100rel</a>. As of writing this the browsers do not currently support early media. SIP.js uses a “hack” where we set the early media as final media. Since each peer connection can only have a single offer and answer we need to create a new peer connection for each endpoint that sends us media. We cannot create multiple offers and send it to each fork, so we send no offer and force each fork to send us an offer. We can then create an individual peer connection and answer for each fork. This is fully compliant with the <a href="https://tools.ietf.org/html/rfc3261">SIP RFC</a> and compatible with most major SIP implementations. This is why we cannot support early media on invites with SDP.</p>
-
-<h2 id="my-call-does-not-fork-so-can-you-add-early-media-support-for-invite-with-sdp">My call does not fork, so can you add early media support for invite with SDP?</h2>
-<p>No. Since we cannot support this for all users, we cannot add it to the library unless it supports all use cases.</p>
+<p>With the release of 0.16 you can now play early media on an invite with SDP and 100 rel enabled. This requires that <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.inviteroptions.md">InviterOptions.earlyMedia</a> is set to true. At the moment, SIP.js only supports early media on an invite with SDP if the call does not fork. If your call does fork SIP.js will throw an error and the call will not connect (regardless of who answers the call). If you want to do early media with a call that forks, please use <a href="ttps://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.inviteroptions.md">InviterOptions.inviteWithoutSdp</a>.</p>
 
 <h2 id="what-can-i-do-with-sipjs">What can I do with SIP.js?</h2>
 <p>You can add a signaling layer to your WebRTC app so it can create, modify, and terminate communication sessions between its peers. In other words, you can create a full SIP user agent right in a web page. With this SIP user agent, you can send and receive voice and video calls as well as SIP messages.</p>
@@ -81,7 +78,7 @@
 <p>A user agent (UA for short) is generally a software agent that is acting on behalf of a user. In the land of SIP, the term user agent refers to both end points of a communications session. SIP.js associates a SIP address to a UA, and that SIP address can make and receive requests on that user’s behalf. The UA also maintains the WebSocket, on which the signaling travels.</p>
 
 <h2 id="i-see-references-to-something-called-a-context-in-your-documentation-thats-not-a-sip-term-what-is-it">I see references to something called a context in your documentation. That’s not a SIP term! What is it?</h2>
-<p>This is a term we created in order to group together related SIP transactions.  For more information, we have <a href="/api/0.11.0/context/">an in-depth explanation in our documentation</a>.</p>
+<p>This is a term used in our legacy API. This is a term we created in order to group together related SIP transactions.  For more information, we have <a href="/api/0.15.0/context/">an in-depth explanation in our documentation</a>.</p>
 
 	</article>
 

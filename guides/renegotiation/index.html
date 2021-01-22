@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -51,7 +51,7 @@
       
 <h1 id="renegotiation">Renegotiation</h1>
 
-<p>As of SIP.js 0.8.0 renegotiation is supported through the <a href="../../api/0.8.0/session/#reinvite"><code>reinvite()</code></a> and <a href="../../api/0.8.0/session/#hold"><code>hold()</code></a> functions. Renegotiation allows you to do things such as add video in the middle of a call, put a call on hold, or change codecs that you are using. This guide will go over starting an audio only call and then adding video to it. This is not an extensive guide as to what can be accomplished with renegotition, but merely a starting point.</p>
+<p>As of SIP.js 0.8.0 renegotiation is supported through the <a href="../../api/0.15.0/session/#reinvite"><code>reinvite()</code></a> and <a href="../../api/0.15.0/session/#hold"><code>hold()</code></a> functions. Renegotiation allows you to do things such as add video in the middle of a call, put a call on hold, or change codecs that you are using. This guide will go over starting an audio only call and then adding video to it. This is not an extensive guide as to what can be accomplished with renegotition, but merely a starting point.</p>
 
 <ul>
   <li>SIP.js 0.9.1 adds support for receiving a re-invite without SDP</li>
@@ -65,63 +65,31 @@
 
 <p>First, a user agent and call will need to be set up to do audio only.</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td>
-  <td class="code"><pre>  <span class="comment">// Create a user agent using the default settings of SIP.js</span>
-  <span class="keyword">var</span> userAgent = <span class="keyword">new</span> SIP.UA();
+<pre><code class="language-javascript">  <span class="c1">// Create a user agent using the default settings of SIP.js</span>
+  <span class="kd">var</span> <span class="nx">userAgent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UA</span><span class="p">();</span>
 
-  <span class="comment">// Make a call to 'test@example.onsip.com' with audio only</span>
-  session = userAgent.invite(<span class="string"><span class="delimiter">'</span><span class="content">test@example.onsip.com</span><span class="delimiter">'</span></span>, {
-    <span class="key">sessionDescriptionHandlerOptions</span>: {
-      <span class="key">constraints</span>: {
-        <span class="key">audio</span>: <span class="predefined-constant">true</span>,
-        <span class="key">video</span>: <span class="predefined-constant">false</span>
-      }
-    }
-  });
-</pre></td>
-</tr></table>
-</div>
+  <span class="c1">// Make a call to 'test@example.onsip.com' with audio only</span>
+  <span class="nx">session</span> <span class="o">=</span> <span class="nx">userAgent</span><span class="p">.</span><span class="nx">invite</span><span class="p">(</span><span class="s1">'test@example.onsip.com'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">sessionDescriptionHandlerOptions</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">constraints</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">audio</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">video</span><span class="o">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">});</span></code></pre>
 
 <h2 id="sending-a-reinvite">Sending a Reinvite</h2>
 
 <p>Once the session is established a reinvite can be sent to enable video. A target is not used for reinvite because the messages are sent in an already established session.</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-  <td class="code"><pre>  session.reinvite({
-    <span class="key">sessionDescriptionHandlerOptions</span>: {
-      <span class="key">constraints</span>: {
-        <span class="key">audio</span>: <span class="predefined-constant">true</span>,
-        <span class="key">video</span>: <span class="predefined-constant">true</span>
-      }
-    }
-  });
-</pre></td>
-</tr></table>
-</div>
+<pre><code class="language-javascript">  <span class="nx">session</span><span class="p">.</span><span class="nx">reinvite</span><span class="p">({</span>
+    <span class="nx">sessionDescriptionHandlerOptions</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">constraints</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">audio</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">video</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">});</span></code></pre>
 
 <h2 id="handling-a-reinvite">Handling a Reinvite</h2>
 
@@ -140,16 +108,15 @@
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

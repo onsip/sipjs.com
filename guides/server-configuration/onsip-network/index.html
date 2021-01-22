@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -65,18 +65,9 @@
 
 <p>If no Web Socket server is specified, SIP.js attempts to connect to OnSIP. Creating and registering user agents with OnSIP is as simple as specifying a SIP address to use:</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-</pre></td>
-  <td class="code"><pre><span class="comment">// Replace 'any_username' with any username and 'your_subdomain'</span>
-<span class="comment">// with your OnSIP subdomain.</span>
-<span class="keyword">var</span> ua = <span class="keyword">new</span> SIP.UA(<span class="string"><span class="delimiter">'</span><span class="content">any_username@your_subdomain.onsip.com</span><span class="delimiter">'</span></span>);
-</pre></td>
-</tr></table>
-</div>
+<pre><code class="language-javascript"><span class="c1">// Replace 'any_username' with any username and 'your_subdomain'</span>
+<span class="c1">// with your OnSIP subdomain.</span>
+<span class="kd">var</span> <span class="nx">ua</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">UA</span><span class="p">(</span><span class="s1">'any_username@your_subdomain.onsip.com'</span><span class="p">);</span></code></pre>
 
 <h2 id="troubleshooting">Troubleshooting</h2>
 
@@ -95,16 +86,15 @@
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

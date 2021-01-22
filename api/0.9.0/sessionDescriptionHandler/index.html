@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -77,22 +77,17 @@ the <a href="../ua/">UA</a>’s <a href="../ua_configuration_parameters/#session
 
 <p>This is an example of how to attach the remote media to a DOM element using the new Session Description Handler in WebRTC.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#080;font-weight:bold">var</span> domElement = document.getElementById(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">remoteMedia</span><span style="color:#710">'</span></span>);
-<span style="color:#080;font-weight:bold">var</span> pc = session.SessionDescriptionHandler.peerConnection;
-<span style="color:#080;font-weight:bold">var</span> remoteStream = <span style="color:#080;font-weight:bold">new</span> MediaStream();
-pc.getReceivers().forEach(<span style="color:#080;font-weight:bold">function</span>(receiver) {
-  <span style="color:#080;font-weight:bold">var</span> track = receiver.track;
-  <span style="color:#080;font-weight:bold">if</span> (track) {
-    remoteStream.addTrack(track);
-  }
-});
-domElement.srcObject = remoteStream;
-domElement.play();
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="kd">var</span> <span class="nx">domElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'remoteMedia'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">pc</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">SessionDescriptionHandler</span><span class="p">.</span><span class="nx">peerConnection</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">remoteStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MediaStream</span><span class="p">();</span>
+<span class="nx">pc</span><span class="p">.</span><span class="nx">getReceivers</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">track</span> <span class="o">=</span> <span class="nx">receiver</span><span class="p">.</span><span class="nx">track</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">track</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">remoteStream</span><span class="p">.</span><span class="nx">addTrack</span><span class="p">(</span><span class="nx">track</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">domElement</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">remoteStream</span><span class="p">;</span>
+<span class="nx">domElement</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span></code></pre>
 
 <h3 class="no_toc" id="modifiers">Modifiers</h3>
 
@@ -451,20 +446,14 @@ domElement.play();
 
 <h4 id="example-1">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#080;font-weight:bold">var</span> <span style="color:#06B;font-weight:bold">myModifier</span> = <span style="color:#080;font-weight:bold">function</span>(description) {
-  description.sdp = description.sdp.replace(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">^a=candidate:</span><span style="color:#D20">\d</span><span style="color:#808">+ </span><span style="color:#D20">\d</span><span style="color:#808">+ tcp .*?</span><span style="color:#D20">\r</span><span style="color:#D20">\n</span><span style="color:#404">/</span><span style="color:#C2C">img</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#710">"</span></span>);
-  <span style="color:#080;font-weight:bold">return</span> Promise.resolve(description);
-};
+<pre><code class="language-javascript"><span class="kd">var</span> <span class="nx">myModifier</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">description</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">description</span><span class="p">.</span><span class="nx">sdp</span> <span class="o">=</span> <span class="nx">description</span><span class="p">.</span><span class="nx">sdp</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^a=candidate:\d+ \d+ tcp .*?\r\n/img</span><span class="p">,</span> <span class="s2">""</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">description</span><span class="p">);</span>
+<span class="p">};</span>
 
-<span style="color:#080;font-weight:bold">var</span> modifierArray = [myModifier, SIP.WebRTC.Modifiers.stripTelephoneEvent];
+<span class="kd">var</span> <span class="nx">modifierArray</span> <span class="o">=</span> <span class="p">[</span><span class="nx">myModifier</span><span class="p">,</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">WebRTC</span><span class="p">.</span><span class="nx">Modifiers</span><span class="p">.</span><span class="nx">stripTelephoneEvent</span><span class="p">];</span>
 
-ua.invite(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alice@example.onsip.com</span><span style="color:#710">'</span></span>, {}, modifierArray);
-
-</pre></div>
-</div>
-</div>
+<span class="nx">ua</span><span class="p">.</span><span class="nx">invite</span><span class="p">(</span><span class="s1">'alice@example.onsip.com'</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">modifierArray</span><span class="p">);</span></code></pre>
 
 <h2 id="default-options">Default Options</h2>
 
@@ -477,15 +466,10 @@ ua.invite(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="colo
 <p>Constraints to be used on calls to the WebRTC <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia"><code>getUserMedia</code></a> function.
 Default value is audio true, and video true.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>constraints: {
-  <span style="color:#606">audio</span>: <span style="color:#069">true</span>,
-  <span style="color:#606">video</span>: <span style="color:#069">true</span>
-}
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">constraints</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">audio</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">video</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span></code></pre>
 
 <h3 id="icecheckingtimeout"><code>iceCheckingTimeout</code></h3>
 
@@ -493,12 +477,7 @@ Default value is audio true, and video true.</p>
 Lowering this timeout will speed up signaling but potentially fail to set up connections in some network topologies.
 Default value is 5 seconds, and this can be set as low as 0.5 seconds.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>iceCheckingTimeout: <span style="color:#00D">5000</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">iceCheckingTimeout</span><span class="o">:</span> <span class="mi">5000</span></code></pre>
 
 <h3 id="modifiers-3"><code>modifiers</code></h3>
 

@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -110,37 +110,17 @@
 
 <p>Start by editing the internal SIP profile <code>sip_profiles/internal.xml</code>. Uncomment the line <code>&lt;param name="ws-binding"  value=":5066"/&gt;</code> to allow web sockets to talk to FreeSWITCH. No other configuration changes are necessary to make FreeSWITCH work with WebRTC.</p>
 
-<div class="language-xml highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-</pre></td>
-  <td class="code"><pre><span class="comment">&lt;!--internal.xml--&gt;</span>
-<span class="comment">&lt;!-- Uncomment the following: --&gt;</span>
-<span class="tag">&lt;param</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">"</span><span class="content">ws-binding</span><span class="delimiter">"</span></span>  <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">"</span><span class="content">:5066</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
-</pre></td>
-</tr></table>
-</div>
+<pre><code class="language-xml"><span class="c">&lt;!--internal.xml--&gt;</span>
+<span class="c">&lt;!-- Uncomment the following: --&gt;</span>
+<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ws-binding"</span>  <span class="na">value=</span><span class="s">":5066"</span><span class="nt">/&gt;</span></code></pre>
 
 <p>If you’d like to enable video as well as audio, adjust FreeSWITCH’s codec preferences to include VP8.</p>
 
-<div class="language-xml highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-</pre></td>
-  <td class="code"><pre><span class="comment">&lt;!--vars.xml--&gt;</span>
+<pre><code class="language-xml"><span class="c">&lt;!--vars.xml--&gt;</span>
 ...
-<span class="tag">&lt;X-PRE-PROCESS</span> <span class="attribute-name">cmd</span>=<span class="string"><span class="delimiter">"</span><span class="content">set</span><span class="delimiter">"</span></span> <span class="attribute-name">data</span>=<span class="string"><span class="delimiter">"</span><span class="content">global_codec_prefs=PCMU,PCMA,VP8</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
-<span class="tag">&lt;X-PRE-PROCESS</span> <span class="attribute-name">cmd</span>=<span class="string"><span class="delimiter">"</span><span class="content">set</span><span class="delimiter">"</span></span> <span class="attribute-name">data</span>=<span class="string"><span class="delimiter">"</span><span class="content">outbound_codec_prefs=PCMU,PCMA,VP8</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
-...
-</pre></td>
-</tr></table>
-</div>
+<span class="nt">&lt;X-PRE-PROCESS</span> <span class="na">cmd=</span><span class="s">"set"</span> <span class="na">data=</span><span class="s">"global_codec_prefs=PCMU,PCMA,VP8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;X-PRE-PROCESS</span> <span class="na">cmd=</span><span class="s">"set"</span> <span class="na">data=</span><span class="s">"outbound_codec_prefs=PCMU,PCMA,VP8"</span><span class="nt">&gt;</span>
+...</code></pre>
 
 <p>Start FreeSWITCH: <code>/usr/local/freeswitch/bin/freeswitch</code>.</p>
 
@@ -148,57 +128,28 @@
 
 <p>SIP.js works with FreeSWITCH without any special configuration parameters. The following UA is configured to connect to a default FreeSWITCH configuration. Replace <code>127.0.0.1</code> with the IP address of your FreeSWITCH server.</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td>
-  <td class="code"><pre><span class="keyword">var</span> config = {
-  <span class="comment">// Replace this IP address with your FreeSWITCH IP address</span>
-  <span class="key">uri</span>: <span class="string"><span class="delimiter">'</span><span class="content">1000@127.0.0.1</span><span class="delimiter">'</span></span>,
+<pre><code class="language-javascript"><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Replace this IP address with your FreeSWITCH IP address</span>
+  <span class="nx">uri</span><span class="o">:</span> <span class="s1">'1000@127.0.0.1'</span><span class="p">,</span>
 
-  <span class="comment">// Replace this IP address with your FreeSWITCH IP address</span>
-  <span class="comment">// and replace the port with your FreeSWITCH port</span>
-  <span class="key">ws_servers</span>: <span class="string"><span class="delimiter">'</span><span class="content">ws://127.0.0.1:5066</span><span class="delimiter">'</span></span>,
+  <span class="c1">// Replace this IP address with your FreeSWITCH IP address</span>
+  <span class="c1">// and replace the port with your FreeSWITCH port</span>
+  <span class="nx">ws_servers</span><span class="o">:</span> <span class="s1">'ws://127.0.0.1:5066'</span><span class="p">,</span>
 
-  <span class="comment">// FreeSWITCH Default Username</span>
-  <span class="key">authorizationUser</span>: <span class="string"><span class="delimiter">'</span><span class="content">1000</span><span class="delimiter">'</span></span>,
+  <span class="c1">// FreeSWITCH Default Username</span>
+  <span class="nx">authorizationUser</span><span class="o">:</span> <span class="s1">'1000'</span><span class="p">,</span>
 
-  <span class="comment">// FreeSWITCH Default Password</span>
-  <span class="key">password</span>: <span class="string"><span class="delimiter">'</span><span class="content">1234</span><span class="delimiter">'</span></span>
-};
+  <span class="c1">// FreeSWITCH Default Password</span>
+  <span class="nx">password</span><span class="o">:</span> <span class="s1">'1234'</span>
+<span class="p">};</span>
 
-<span class="keyword">var</span> ua = <span class="keyword">new</span> SIP.UA(config);
-</pre></td>
-</tr></table>
-</div>
+<span class="kd">var</span> <span class="nx">ua</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">UA</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span></code></pre>
 
 <h2 id="troubleshooting">Troubleshooting</h2>
 
 <p>It is known that SIP.js and FreeSWITCH might not interop well if you have the following option enabled on FreeSWITCH:</p>
 
-<div class="language-xml highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-</pre></td>
-  <td class="code"><pre><span class="tag">&lt;variable</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">"</span><span class="content">sip-force-contact</span><span class="delimiter">"</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">"</span><span class="content">NDLB-connectile-dysfunction</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
-</pre></td>
-</tr></table>
-</div>
+<pre><code class="language-xml"><span class="nt">&lt;variable</span> <span class="na">name=</span><span class="s">"sip-force-contact"</span> <span class="na">value=</span><span class="s">"NDLB-connectile-dysfunction"</span><span class="nt">/&gt;</span></code></pre>
 
 <p>Firefox 34+ requires <a href="/download/">SIP.js 0.6.4 or later</a> to interop with FreeSWITCH or Asterisk.</p>
 
@@ -217,16 +168,15 @@
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

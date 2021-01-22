@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <meta name="description" content="An example demo app of video chat, text chat, and data transfer with WebRTC using SIP.js" />
+  <meta name="description" content="An example demo app of SIP.js with WebRTC" />
   <meta name="viewport" content="initial-scale=1" />
-  <title>Video, Chat, and Data Demo | SIP.js</title>
+  <title>Demo App | SIP.js</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -49,18 +49,13 @@
     </header>
     <div id="content">
       
-<h1 id="video-chat-and-data-demo">Video, Chat, and Data Demo</h1>
+<h1 id="simple-user-demo">Simple User Demo</h1>
 
-<p>SIP.js is capable of voice and audio communications, text-based messaging,
-and data transfers, among other features. Here is some demo code that shows you
-how a simple app might support these features. This is the same demo that
-appears on the homepage, minus all of the extra CSS styling. Both endpoint
-users, Bob and Alice, are on the same machine, but you can easily set up Alice
-and Bob on different machines by splitting up the HTML and only instantiating
-one user’s UserAgent object and application interfaces per host.</p>
+<p>We have created a demo that uses the Simple User interface in our <a href="https://github.com/onsip/SIP.js/tree/master/demo">Github repository</a>. You can clone the repository and follow the instructions to build and run the demo.</p>
 
-<iframe style="width: 100%; height: 800px;" src="https://jsfiddle.net/OnSIP/xv00uLur/embedded/js,html,css,result/" allowfullscreen="allowfullscreen" frameborder="0">
-</iframe>
+<h1 id="full-api-demo">Full API Demo</h1>
+
+<p>SIP.js maintains the <code>SimpleUser</code> interface which is a wrapper around our full API. We do not use anything outside of the API to create the <code>SimpleUser</code>. This allows you to reference the <a href="https://github.com/onsip/SIP.js/blob/master/src/platform/web/simple-user/simple-user.ts">code for <code>SimpleUser</code></a> as a reference point for the full SIP.js API.</p>
 
     </div>
 
@@ -75,16 +70,15 @@ one user’s UserAgent object and application interfaces per host.</p>
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

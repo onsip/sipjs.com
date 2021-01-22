@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta name="description" content="SIP.js Transport provides a parent class in which an implementation transport layer is built on top of. This layer handles the actual sending and receiving of SIP requests and responses." />
+  <meta name="viewport" content="initial-scale=1" />
+  <title>Transport | SIP.js</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300|Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css" />
+    
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/shared/img/favicon-7.ico"/>
+</head>
+
+
+<body class="api">
+	<div id="dev"></div>
+<header id="siteHeader">
+  <div class="wrapper">
+    <nav id="mainNav">
+      <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
+      <ul id="full-nav" class="horizontal mobile-hide">
+        <li><a href="/download/">Download</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
+        <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+	<article id="main" class="wrapper group">
+		<header id="sectionHeader">
+			<h1><a href="/api/">API</a></h1>
+			<nav id="subNav">
+				<ul class="horizontal">
+					<li class="first"><a href="/api/0.14.0/">0.14.x</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			
+<h1 id="siptransport">SIP.Transport</h1>
+
+<p>SIP.js Transport provides a parent class in which an implementation transport layer is built on top of. This layer handles the actual sending and receiving of SIP requests and responses.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#construction" id="markdown-toc-construction">Construction</a></li>
+  <li>
+<a href="#instance-methods" id="markdown-toc-instance-methods">Instance Methods</a>    <ul>
+      <li><a href="#sendmsg" id="markdown-toc-sendmsg"><code>send(msg)</code></a></li>
+      <li><a href="#sendpromise" id="markdown-toc-sendpromise"><code>sendPromise()</code></a></li>
+      <li><a href="#connect" id="markdown-toc-connect"><code>connect()</code></a></li>
+      <li><a href="#connectpromise" id="markdown-toc-connectpromise"><code>connectPromise()</code></a></li>
+      <li><a href="#disconnect" id="markdown-toc-disconnect"><code>disconnect()</code></a></li>
+      <li><a href="#disconnectpromise" id="markdown-toc-disconnectpromise"><code>disconnectPromise()</code></a></li>
+      <li><a href="#isconnected" id="markdown-toc-isconnected"><code>isConnected()</code></a></li>
+      <li><a href="#afterconnected" id="markdown-toc-afterconnected"><code>afterConnected()</code></a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#events" id="markdown-toc-events">Events</a>    <ul>
+      <li><a href="#connecting" id="markdown-toc-connecting"><code>connecting</code></a></li>
+      <li><a href="#connected" id="markdown-toc-connected"><code>connected</code></a></li>
+      <li><a href="#disconnecting" id="markdown-toc-disconnecting"><code>disconnecting</code></a></li>
+      <li><a href="#disconnected" id="markdown-toc-disconnected"><code>disconnected</code></a></li>
+      <li><a href="#messagesent" id="markdown-toc-messagesent"><code>messageSent</code></a></li>
+      <li><a href="#message" id="markdown-toc-message"><code>message</code></a></li>
+      <li><a href="#transporterror" id="markdown-toc-transporterror"><code>transportError</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="construction">Construction</h2>
+
+<p>The construction of a transport is not meant to be done manually. Instead, SIP.js user agents create a transport to use for themselves. As of 0.11.0, transport in SIP.js represents a generic layer upon which an implementation is built, with websockets being the default. A transport implementation can be specified in the UA passing in the constructor as the <code>transportConstructor</code> configuration option. Any configuration options required for the transport layer will be passed in as the <code>transportOptions</code> UA configuration option.</p>
+
+<p>When constructed, the UA will assign the new Transport as its own transport property before automatically attempting to connect (configurable by <code>ua.configuration.autostart</code>).</p>
+
+<h2 id="instance-methods">Instance Methods</h2>
+
+<h3 id="sendmsg"><code>send(msg)</code></h3>
+
+<p>Send a message and automatically emits a <code>messageSent</code> event. Implementation delegated to abstract method <code>sendPromise</code>.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>msg</code></td>
+      <td>Yes</td>
+      <td>SIP.OutgoingRequest | String</td>
+      <td>A SIP Request (represented as a String or <a href="../sipMessage/">SIP.OutgoingRequest</a>) to send along the WebSocket.</td>
+    </tr>
+    <tr>
+      <td><code>options</code></td>
+      <td>No</td>
+      <td>Object</td>
+      <td>Object to pass to <code>sendPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns">Returns</h4>
+
+<p><code>Promise</code></p>
+
+<h3 id="sendpromise"><code>sendPromise()</code></h3>
+
+<p><em>Abstract</em>
+Implementation of sending a message over the transport. MUST return a promise that resolves with an object with mandatory parameter <code>msg</code> and optional parameter <code>overrideEvent</code>.</p>
+
+<h4 id="parameters-1">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>msg</code></td>
+      <td>Yes</td>
+      <td>SIP.OutgoingRequest | String</td>
+      <td>A SIP Request (represented as a String or <a href="../sipMessage/">SIP.OutgoingRequest</a>) to send along the WebSocket.</td>
+    </tr>
+    <tr>
+      <td><code>options</code></td>
+      <td>No</td>
+      <td>Object</td>
+      <td>Options to pass to the implementation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-1">Returns</h4>
+<p><code>Promise</code> that resolves with an object with 2 parameters, <code>overrideEvent</code> and <code>msg</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>msg</code></td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>A SIP Request (represented as a String or <a href="../sipMessage/">SIP.OutgoingRequest</a>) to send along the WebSocket.</td>
+    </tr>
+    <tr>
+      <td><code>overrideEvent</code></td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>If set to <code>true</code>, the default <code>messageSent</code> event emitted by <code>send()</code> will not be emitted. If you override the event in this fashion, you SHOULD emit it in your implementation of <code>sendPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="connect"><code>connect()</code></h3>
+
+<p>Connects the transport and automatically emits a <code>connected</code> event. Implementation is delegated to abstract method <code>connectPromise()</code>.</p>
+
+<h4 id="parameters-2">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>options</code></td>
+      <td>No</td>
+      <td>Object</td>
+      <td>Object to pass to <code>connectPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-2">Returns</h4>
+
+<p><code>Promise</code></p>
+
+<h3 id="connectpromise"><code>connectPromise()</code></h3>
+
+<p><em>Abstract</em>
+Implementation of connecting the transport. Called by <code>connect()</code>. MUST return a promise that resolves with an object.</p>
+
+<h4 id="returns-3">Returns</h4>
+<p><code>Promise</code> that resolves with an object with properties:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>overrideEvent</code></td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>If set to <code>true</code>, the default <code>connected</code> event emitted by <code>connect()</code> will not be emitted. If you override the event in this fashion, you SHOULD emit it in your implementation of <code>connectPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="disconnect"><code>disconnect()</code></h3>
+
+<p>Disconnects the transport and automatically emits a <code>disconnected</code> event. Implementation is delegated to abstract method <code>disconnectPromise()</code>.</p>
+
+<h4 id="parameters-3">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>options</code></td>
+      <td>No</td>
+      <td>Object</td>
+      <td>Object to pass to <code>disconnectPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="returns-4">Returns</h4>
+
+<p><code>Promise</code></p>
+
+<h3 id="disconnectpromise"><code>disconnectPromise()</code></h3>
+
+<p><em>Abstract</em>
+Implementation of disconnecting the transport. Called by <code>disconnect()</code>. MUST return a promise that resolves with an object.</p>
+
+<h4 id="returns-5">Returns</h4>
+<p><code>Promise</code> that resolves with an object with properties:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mandatory?</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>overrideEvent</code></td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>If set to <code>true</code>, the default <code>disconnected</code> event emitted by <code>disconnect()</code> will not be emitted. If you override the event in this fashion, you SHOULD emit it in your implementation of <code>disconnectPromise()</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="isconnected"><code>isConnected()</code></h3>
+<p><em>Abstract</em></p>
+
+<h4 id="returns-6">Returns</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Boolean</code></td>
+      <td>
+<code>true</code> if the connection is established, <code>false</code> otherwise</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="afterconnected"><code>afterConnected()</code></h3>
+
+<p>If the transport is connected, the <code>callback</code> is executed immediately- otherwise sets up a <code>once</code> listener on own <code>connected</code> event supplying the given <code>callback</code>. Checks connection state via own <code>isConnected()</code> method.</p>
+
+<h4 id="parameters-4">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>callback</code></td>
+      <td>Function</td>
+      <td>A callback to be executed</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="events">Events</h2>
+
+<p>Transport objects extends EventEmitter interface.  Each event emitted by the transport passes specific relevant arguments to its callbacks. Additional events MAY be added for child implementations.</p>
+
+<h3 id="connecting"><code>connecting</code></h3>
+
+<p>Fired when the transport is attempting to connect.</p>
+
+<h4 id="onconnecting-function-"><code>on('connecting', function() {})</code></h4>
+
+<p><em>There are no documented arguments for this event.</em></p>
+
+<h3 id="connected"><code>connected</code></h3>
+
+<p>Fired when the connection is established.</p>
+
+<h4 id="onconnected-function--"><code>on('connected', function () {})</code></h4>
+
+<p><em>There are no documented arguments for this event.</em></p>
+
+<h3 id="disconnecting"><code>disconnecting</code></h3>
+
+<p>Fired when the connection is attempting to disconnect.</p>
+
+<h4 id="ondisconnecting-function-"><code>on('disconnecting', function() {})</code></h4>
+
+<p><em>There are no documented arguments for this event.</em></p>
+
+<h3 id="disconnected"><code>disconnected</code></h3>
+
+<p>Fired when the connection is interrupted or lost</p>
+
+<h4 id="ondisconnected-function--"><code>on('disconnected', function () {})</code></h4>
+
+<p><em>There are no documented arguments for this event.</em></p>
+
+<h3 id="messagesent"><code>messageSent</code></h3>
+
+<p>Fired when a message is sent over the transport</p>
+
+<h4 id="onmessagesent-function-message-"><code>on('messageSent', function (message) {})</code></h4>
+
+<h4 id="arguments">Arguments</h4>
+<p><code>message</code> - <code>String</code> - The message that was sent</p>
+
+<h3 id="message"><code>message</code></h3>
+
+<p>Fired when a message is received over the transport</p>
+
+<h4 id="onmessage-function-message-"><code>on('message', function (message) {})</code></h4>
+
+<h4 id="arguments-1">Arguments</h4>
+<p><code>message</code> - <code>String</code> - The message that was received</p>
+
+<h3 id="transporterror"><code>transportError</code></h3>
+
+<p>Fired when an error occurs in the transport layer and other layers need to be notified</p>
+
+<h4 id="ontransporterror-function--"><code>on('transportError', function () {})</code></h4>
+
+<p><em>There are no documented arguments for this event.</em></p>
+
+		</div>
+
+		<nav id="sideNav">
+  <ul>
+
+
+    <li class="header"><a href="/api/0.14.0/">Overview</a></li>
+
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/simple/">Simple</a>
+      <ul>
+        <li><a href="/api/0.14.0/simple_configuration_parameters/">Simple Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/ua/">UA (User Agent)</a>
+      <ul>
+        <li><a href="/api/0.14.0/ua_configuration_parameters/">UA Configuration Parameters</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.14.0/session/">Session</a></li>
+    <li><a href="/api/0.14.0/sessionDescriptionHandler/">Session Description Handler</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/transport/">Transport</a>
+      <ul>
+        <li><a class="parent" href="/api/0.14.0/wstransport/">WebSocket Transport</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><a href="/api/0.14.0/context/">Contexts</a></li>
+
+
+    <li><a href="/api/0.14.0/context/client/">Client Context</a></li>
+    <li><a href="/api/0.14.0/context/server/">Server Context</a></li>
+
+    <li><a href="/api/0.14.0/message/">Message</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/refer/">Refer</a>
+      <ul>
+        <li><a href="/api/0.14.0/refer/referClientContext/">Refer Client Context</a></li>
+        <li><a href="/api/0.14.0/refer/referServerContext/">Refer Server Context</a></li>
+      </ul>
+    </li>
+    <li><a href="/api/0.14.0/register">Register Context</a></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/subscription/">Subscription</a>
+      <ul>
+        <li><a href="/api/0.14.0/subscription/publishClientContext/">Publish Client Context</a></li>
+        <li><a href="/api/0.14.0/subscription/subscription/">Subscription Client Context</a></li>
+      </ul>
+    </li>
+
+    <li class="header"><div class="title">Data Structures</li>
+
+
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/uri/">URI</a>
+      <ul>
+        <li><a href="/api/0.14.0/uri/#construction">Construction</a></li>
+        <li><a href="/api/0.14.0/uri/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.14.0/uri/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/nameAddrHeader/">NameAddrHeader</a>
+      <ul>
+	<li><a href="/api/0.14.0/nameAddrHeader/#construction">Construction</a></li>
+        <li><a href="/api/0.14.0/nameAddrHeader/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.14.0/nameAddrHeader/#instance-methods">Instance Methods</a></li>
+	<li><a href="/api/0.14.0/nameAddrHeader/#static-methods">Static Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/sipMessage/">Requests and Responses</a>
+      <ul>
+        <li><a href="/api/0.14.0/sipMessage/#instance-variables">Instance Variables</a></li>
+        <li><a href="/api/0.14.0/sipMessage/#instance-methods">Instance Methods</a></li>
+      </ul>
+    </li>
+
+
+    <li class="header"><div class="title">Advanced</div></li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/grammar/">SIP.Grammar</a>
+      <ul>
+        <li><a href="/api/0.14.0/grammar/#instance-variables">Instance Variables</a></li>
+	<li><a href="/api/0.14.0/grammar/#methods">Methods</a></li>
+      </ul>
+    </li>
+    <li class="parent">
+      <a class="parent" href="/api/0.14.0/causes/">Failure and End Causes</a>
+      <ul>
+        <li><a href="/api/0.14.0/causes/#common-causes">Common Causes</a></li>
+        <li><a href="/api/0.14.0/causes/#sip-error-causes">Sip Error Causes</a></li>
+        <li><a href="/api/0.14.0/causes/#session-causes">Session Causes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+	</article>
+
+	<footer class="light-gray-bg">
+  <div class="wrapper">
+    <div id="onsip-stamp">
+      <span id="made-by-prefix">made by</span>
+      <a href="http://developer.onsip.com" id="onsip"></a>
+    </div>
+    <nav class="left">
+      <ul class="horizontal">
+        <li><a href="https://groups.google.com/forum/#!forum/sip_js" target="_blank">Mailing List</a></li>
+        <li><a href="https://github.com/onsip/sip.js/issues" target="_blank">Report Issues</a></li>
+        <li><a href="/license/">License</a></li>
+      </ul>
+    </nav>
+    <nav class="right">
+      <ul class="horizontal">
+        <li><a href="https://travis-ci.org/onsip/SIP.js"><img src="https://travis-ci.org/onsip/SIP.js.png?branch=master"/></a></li>
+        <li><a href="http://onsip.com/blog" target="_blank">Blog</a></li>
+        <li><a href="/aboutus/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1008379-16', 'sipjs.com');
+  ga('send', 'pageview');
+</script>
+<script>
+  // Remove all 'no-js-hide' classes because Javascript is working
+  $(function () {
+      $('.no-js-hide').each(function (i, e) {
+          $(e).removeClass('no-js-hide');
+      });
+      $('.no-js-block').each(function (i, e) {
+          $(e).removeClass('no-js-block');
+      });
+  });
+</script>
+
+
+</body>
+</html>

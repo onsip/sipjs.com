@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -51,77 +51,38 @@
       
 <h1 id="transfer">Transfer</h1>
 
-<h2 id="setup">Setup</h2>
+<p>This guide uses the full <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md">SIP.js API</a>. The <a href="./simple">Simple User</a> is intended to help get beginners up and running quickly. This guide is adopted from the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api.md">SIP.js Github API documentation</a>.</p>
 
-<p>This guide assumes that you have a SIP.UA set up and working. This guide is for the full SIP.js API and is not compatible with Simple.</p>
+<h2 id="make-a-blind-transfer">Make a Blind Transfer</h2>
 
-<h2 id="making-the-call">Making the Call</h2>
-<p>As before, we will create a user agent using <code>SIP.UA()</code> and create a call using <code>userAgent.invite('test@example.onsip.com')</code></p>
+<p>In SIP to make a transfer you must send a <code>REFER</code> message to the endpoint that you have a session with. To do this in SIP.js you must call <code>sesion.refer(target, options)</code>. The target can be either a valid URI or a SIP.js session. To make a blind transfer you should provide a SIP URI. We will use the <code>UserAgent.makeUri()</code> helper to make the URI of the transfer target.</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-</pre></td>
-  <td class="code"><pre>  <span class="comment">// Create a user agent using the default settings of SIP.js</span>
-  <span class="keyword">var</span> userAgent = <span class="keyword">new</span> SIP.UA();
+<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeUri</span><span class="p">(</span><span class="s1">'sip:bob@example.com'</span><span class="p">);</span>
+<span class="nx">session</span><span class="p">.</span><span class="nx">refer</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span></code></pre>
 
-  <span class="comment">// Make a call to 'test@example.onsip.com`</span>
-  session = userAgent.invite(<span class="string"><span class="delimiter">'</span><span class="content">test@example.onsip.com</span><span class="delimiter">'</span></span>);
-</pre></td>
-</tr></table>
-</div>
+<h2 id="make-an-attended-transfer">Make an Attended Transfer</h2>
 
-<h2 id="making-a-blind-transfer">Making a Blind Transfer</h2>
-<p>SIP.js supports making blind transfers only.  A blind transfer occurs when A causes B to create a session with C.</p>
+<p>The process to make an attended transfer is very similar to that of a Blind Transfer. Instead of providing a <code>URI</code> as the target you must provide a SIP.js <code>session</code>.</p>
 
-<p>Use the <code>session.refer(target)</code> method to make a blind transfer between the current user agent on the <code>session</code> call and the user agent at the <code>target</code> address.</p>
+<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">replacementSession</span> <span class="o">=</span> <span class="nx">newInviter</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">));</span>
+<span class="nx">session</span><span class="p">.</span><span class="nx">refer</span><span class="p">(</span><span class="nx">replacementSession</span><span class="p">);</span></code></pre>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-</pre></td>
-  <td class="code"><pre>  <span class="comment">//target address</span>
-  <span class="keyword">var</span> target = <span class="error">`</span>test2<span class="error">@</span>example.onsip.com<span class="error">`</span>;
+<h2 id="handle-an-incoming-refer">Handle an Incoming REFER</h2>
 
-  <span class="comment">//refers the call to `test2@example.onsip.com`</span>
-  session.refer(target);
-</pre></td>
-</tr></table>
-</div>
+<p>When an incoming <code>REFER</code> is received SIP.js by default will automatically follow it. If you would like more control over handling the incoming <code>REFER</code> you can create a callback function on the session delegate called <code>onRefer(referral)</code>. This will get called with the <code>referral</code> when a <code>REFER</code> is received by SIP.js. If a callback is provided in the delegate SIP.js will no longer automaticall follow the <code>REFER</code> and the delegate is responsible for handling the message. If the referral is accepted, you will also need to write the code to follow it. There is a helper function on the referral called <code>makeInviter()</code> that can be used to make a new <code>Inviter</code> and follow the <code>REFER</code>.</p>
 
-<h2 id="handling-a-blind-transfer">Handling a Blind Transfer</h2>
-<p>When receiving a refer, if you do not have a handler on the <code>referRequested</code> event, SIP.js will automatically follow the refer.</p>
-
-<p>If you have a handle the <code>referRequested</code> event, you can simply accept or reject the refer, by calling <code>.accept()</code> or <code>.reject()</code> on the referServerContext passed to the event handler.</p>
-
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td>
-  <td class="code"><pre>  session.on(<span class="string"><span class="delimiter">'</span><span class="content">referRequested</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(referServerContext) {
-    <span class="keyword">if</span> (shouldAcceptRefer(referServerContext)) {
-      referServerContext.accept();
-    } <span class="keyword">else</span> {
-      referServerContext.reject();
-    }
-  });
-</pre></td>
-</tr></table>
-</div>
+<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">delegate</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">onRefer</span><span class="o">:</span> <span class="p">(</span><span class="nx">referral</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Determine if you should accept or reject the referral</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">shouldAcceptReferral</span><span class="p">(</span><span class="nx">referral</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">referral</span><span class="p">.</span><span class="nx">accept</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">referral</span><span class="p">.</span><span class="nx">makeInviter</span><span class="p">().</span><span class="nx">invite</span><span class="p">();</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">referral</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
 
     </div>
 
@@ -136,16 +97,15 @@
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

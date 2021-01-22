@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -385,50 +385,45 @@
 
 <h4 id="example">Example</h4>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>incomingMessage.toString();
+<pre><code class="language-javascript"><span class="nx">incomingMessage</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
 
-<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">INVITE sip:jl5as9dj@7n93g7oohn8t.invalid;transport=ws;aor=alice%40example.com SIP/2.0
-Record-Route: &lt;sip:3ad1a7b505@1.2.3.4:443;transport=wss;lr;ovid=7cb85a5c&gt;
-Record-Route: &lt;sip:1.2.3.4:5060;transport=udp;lr;ovid=7cb85a5c&gt;
-Via: SIP/2.0/WSS 1.2.3.4:443;branch=z9hG4bK9f901aba80f26a0c9ba3c655711867914bf4c53e;rport
-Max-Forwards: 65
-From: "Alice" &lt;sip:alice@example.com&gt;;tag=eceN3v52HaQtD
-To: &lt;sip:jl5as9dj@7n93g7oohn8t.invalid;transport=ws;aor=bob%40example.com&gt;
-Call-ID: fdf5e4d7-ee93-1231-1a94-52540040a380
-CSeq: 54012202 INVITE
-Contact: &lt;sip:alice@example.com:5060&gt;
-Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY
-Supported: timer, precondition, path, replaces
-Content-Type: application/sdp
-Content-Disposition: session
-Content-Length: 916
+<span class="s1">'INVITE sip:jl5as9dj@7n93g7oohn8t.invalid;transport=ws;aor=alice%40example.com SIP/2.0</span>
+<span class="s1">Record-Route: &lt;sip:3ad1a7b505@1.2.3.4:443;transport=wss;lr;ovid=7cb85a5c&gt;</span>
+<span class="s1">Record-Route: &lt;sip:1.2.3.4:5060;transport=udp;lr;ovid=7cb85a5c&gt;</span>
+<span class="s1">Via: SIP/2.0/WSS 1.2.3.4:443;branch=z9hG4bK9f901aba80f26a0c9ba3c655711867914bf4c53e;rport</span>
+<span class="s1">Max-Forwards: 65</span>
+<span class="s1">From: "Alice" &lt;sip:alice@example.com&gt;;tag=eceN3v52HaQtD</span>
+<span class="s1">To: &lt;sip:jl5as9dj@7n93g7oohn8t.invalid;transport=ws;aor=bob%40example.com&gt;</span>
+<span class="s1">Call-ID: fdf5e4d7-ee93-1231-1a94-52540040a380</span>
+<span class="s1">CSeq: 54012202 INVITE</span>
+<span class="s1">Contact: &lt;sip:alice@example.com:5060&gt;</span>
+<span class="s1">Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, MESSAGE, INFO, UPDATE, REGISTER, REFER, NOTIFY</span>
+<span class="s1">Supported: timer, precondition, path, replaces</span>
+<span class="s1">Content-Type: application/sdp</span>
+<span class="s1">Content-Disposition: session</span>
+<span class="s1">Content-Length: 916</span>
 
-v=0
-o=UserAgent 1388671790 1388671791 IN IP4 1.2.3.4
-s=UserAgent
-c=IN IP4 1.2.3.4
-t=0 0
-a=msid-semantic: WMS KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk
-m=audio 24742 RTP/SAVPF 0 101
-a=rtpmap:101 telephone-event/8000
-a=fingerprint:sha-256 24:C2:A8:62:EF:65:E5:C4:F5:77:D9:A1:7F:29:29:3D:D1:53:84:B5:0F:DB:1D:D2:F7:8E:62:7D:10:91:0A:11
-a=rtcp:24743 IN IP4 1.2.3.4
-a=ssrc:3737708532 cname:3E4TuokvePWfbo0Q
-a=ssrc:3737708532 msid:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk a0
-a=ssrc:3737708532 mslabel:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk
-a=ssrc:3737708532 label:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwka0
-a=ice-ufrag:pkurgNxQHpUhegr7
-a=ice-pwd:KmQ5A1rFGdKIsAoH
-a=candidate:8521483177 1 udp 659136 1.2.3.4 24742 typ host generation 0
-a=candidate:8521483177 2 udp 659136 1.2.3.4 24743 typ host generation 0
-a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:q6Nvw6KpcRJEsGYf71U9lsB0a+d6nq/ZtC068SHF
-a=ptime:20
-</span><span style="color:#710">'</span></span>
-</pre></div>
-</div>
-</div>
+<span class="s1">v=0</span>
+<span class="s1">o=UserAgent 1388671790 1388671791 IN IP4 1.2.3.4</span>
+<span class="s1">s=UserAgent</span>
+<span class="s1">c=IN IP4 1.2.3.4</span>
+<span class="s1">t=0 0</span>
+<span class="s1">a=msid-semantic: WMS KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk</span>
+<span class="s1">m=audio 24742 RTP/SAVPF 0 101</span>
+<span class="s1">a=rtpmap:101 telephone-event/8000</span>
+<span class="s1">a=fingerprint:sha-256 24:C2:A8:62:EF:65:E5:C4:F5:77:D9:A1:7F:29:29:3D:D1:53:84:B5:0F:DB:1D:D2:F7:8E:62:7D:10:91:0A:11</span>
+<span class="s1">a=rtcp:24743 IN IP4 1.2.3.4</span>
+<span class="s1">a=ssrc:3737708532 cname:3E4TuokvePWfbo0Q</span>
+<span class="s1">a=ssrc:3737708532 msid:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk a0</span>
+<span class="s1">a=ssrc:3737708532 mslabel:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwk</span>
+<span class="s1">a=ssrc:3737708532 label:KfiUZ0uBaZEAawCUOatOc6sgJ42dJYwka0</span>
+<span class="s1">a=ice-ufrag:pkurgNxQHpUhegr7</span>
+<span class="s1">a=ice-pwd:KmQ5A1rFGdKIsAoH</span>
+<span class="s1">a=candidate:8521483177 1 udp 659136 1.2.3.4 24742 typ host generation 0</span>
+<span class="s1">a=candidate:8521483177 2 udp 659136 1.2.3.4 24743 typ host generation 0</span>
+<span class="s1">a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:q6Nvw6KpcRJEsGYf71U9lsB0a+d6nq/ZtC068SHF</span>
+<span class="s1">a=ptime:20</span>
+<span class="s1">'</span></code></pre>
 
 		</div>
 

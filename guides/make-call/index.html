@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -51,97 +51,23 @@
       
 <h1 id="make-a-call">Make a Call</h1>
 
-<h2 id="overview">Overview</h2>
+<p>This guide uses the full <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md">SIP.js API</a>. The <a href="./simple">Simple User</a> is intended to help get beginners up and running quickly. This guide is adopted from the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api.md">SIP.js Github API documentation</a>.</p>
 
-<p>This guide uses the full <a href="../../api/0.10.0">SIP.js API</a>. The <a href="../../api/0.10.0/simple">SIP.js Simple API</a> is intended to help get beginners up and running quickly.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<h3 id="html">HTML</h3>
+<p>See the <a href="./user-agent">User Agent</a> guide on how to create a user agent. This guide requires a user agent.</p>
 
-<p>Create an HTML file. In the file include the <a href="/download/">SIP.js library</a>, as well as any other javascript that will be used.</p>
+<h2 id="sending-an-invite">Sending an Invite</h2>
 
-<p>A <code>&lt;video&gt;</code> element is need to display the video stream.  The <code>&lt;video&gt;</code> element adds a standard way for browsers to display video over the internet without additional plugins. This makes <code>&lt;video&gt;</code> elements perfect for WebRTC.</p>
+<p>To send an ivite to a remote SIP endpoint use an <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.inviter.md"><code>Inviter</code></a>. To create a new <code>Inviter</code> a valid <code>UserAgent</code> is required along with the target URI. The <code>UserAgent.makeURI()</code> helper can create a URI from a string. Once the <code>Inviter</code> is constructed, calling the <code>invite()</code> function on it will send the SIP INVITE.</p>
 
-<p>Within the <code>&lt;body&gt;</code> tags, there is a <code>remoteVideo</code> <code>&lt;video&gt;</code> element, to display the video of the person being called.  There is also a <code>localVideo</code> <code>&lt;video&gt;</code> element, to display the video stream that is being sent to the person being called.  The local video stream should always be muted to prevent feedback.</p>
+<pre><code class="language-javascript"><span class="c1">// userAgent defined elsewhere</span>
+<span class="nx">userAgent</span><span class="p">.</span><span class="nx">start</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">);</span>
 
-<div class="language-html highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td>
-  <td class="code"><pre><span class="tag">&lt;html&gt;</span>
-  <span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;link</span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">"</span><span class="content">stylesheet</span><span class="delimiter">"</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">"</span><span class="content">my-styles.css</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
-  <span class="tag">&lt;/head&gt;</span>
-  <span class="tag">&lt;body&gt;</span>
-    <span class="tag">&lt;video</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">remoteVideo</span><span class="delimiter">"</span></span><span class="tag">&gt;</span><span class="tag">&lt;/video&gt;</span>
-    <span class="tag">&lt;video</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">localVideo</span><span class="delimiter">"</span></span> <span class="attribute-name">muted</span>=<span class="string"><span class="delimiter">"</span><span class="content">muted</span><span class="delimiter">"</span></span><span class="tag">&gt;</span><span class="tag">&lt;/video&gt;</span>
-
-    <span class="tag">&lt;script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">"</span><span class="content">sip-0.10.0.min.js</span><span class="delimiter">"</span></span><span class="tag">&gt;</span><span class="tag">&lt;/script&gt;</span>
-    <span class="tag">&lt;script</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">"</span><span class="content">my-javascript.js</span><span class="delimiter">"</span></span><span class="tag">&gt;</span><span class="tag">&lt;/script&gt;</span>
-  <span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span>
-</pre></td>
-</tr></table>
-</div>
-
-<h3 id="javascript">Javascript</h3>
-
-<h4 id="creating-a-ua">Creating a UA</h4>
-
-<p>In order to send messages, create a SIP user agent.  Calling <code>SIP.UA()</code> method, with no parameters, creates an anonymous user agent.</p>
-
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-</pre></td>
-  <td class="code"><pre><span class="keyword">var</span> userAgent = <span class="keyword">new</span> SIP.UA();
-</pre></td>
-</tr></table>
-</div>
-
-<p>After the user agent has connected to the SIP server, an invite can be sent to make a call and thereby create a SIP session.</p>
-
-<h4 id="sending-an-invite">Sending an Invite</h4>
-
-<p>To send an invite you will need the target user’s SIP address and any extra options to define the session. Then you can call the <a href="/api/0.10.0/ua/#invitetraget-options-modifiers">invite method</a> on the user agent. The invite function returns a session object that will be used for the current session.</p>
-
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-</pre></td>
-  <td class="code"><pre><span class="keyword">var</span> session = userAgent.invite(<span class="string"><span class="delimiter">'</span><span class="content">bob@example.com</span><span class="delimiter">'</span></span>);
-</pre></td>
-</tr></table>
-</div>
-
-<p>After the invite method is invoked, the browser will ask for permission to access the camera and microphone.  Permission must be allowed to make the call.  The person being called has the choice of accepting or rejecting the call.</p>
-
-<h4 id="attaching-media">Attaching Media</h4>
-
-<p>Please see the <a href="../attach-media">attach media guide</a>.</p>
-
-<h4 id="ending-a-session">Ending a Session</h4>
-
-<p>To end a session, simply call the <a href="/api/0.10.0/session/#terminateoptions">terminate method</a> on the session to send a bye.</p>
-
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-</pre></td>
-  <td class="code"><pre>session.terminate();
-</pre></td>
-</tr></table>
-</div>
+  <span class="kr">const</span> <span class="nx">inviter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Inviter</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+  <span class="nx">inviter</span><span class="p">.</span><span class="nx">invite</span><span class="p">();</span>
+<span class="p">});</span></code></pre>
 
     </div>
 
@@ -156,16 +82,15 @@
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

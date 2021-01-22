@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -96,12 +96,7 @@
 <h2 id="allowlegacynotifications">allowLegacyNotifications</h2>
 <p>If set to true, the user agent will allow NOTIFYs received without subscriptions to be emitted to a <code>notify</code> event listener on the UA.  Default value is false.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>allowLegacyNotifications: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">allowLegacyNotifications</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="allowoutofdialogrefers">allowOutOfDialogRefers</h2>
 
@@ -109,12 +104,7 @@
 
 <p>If enabled a malicious endpoint could take control of your client. This option should only be enabled if you have a listener on <a href="../ua/#outofdialogreferrequested"><code>outOfDialogReferRequested</code></a> event. If there is no listener, the default behavior of SIP.js is to follow the <code>REFER</code>. Default value is false.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>allowOutOfDialogRefers: <span style="color:#069">false</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">allowOutOfDialogRefers</span><span class="o">:</span> <span class="kc">false</span></code></pre>
 
 <h2 id="authenticationfactory">authenticationFactory</h2>
 
@@ -130,72 +120,37 @@ The factory is passed the UA and should return credentials.  Modifying this is v
 <h2 id="authorizationuser">authorizationUser</h2>
 <p>Username (<code>String</code>) to use when generating authentication credentials. If not defined the value in uri parameter is used.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>authorizationUser: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">alice123</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">authorizationUser</span><span class="o">:</span> <span class="s2">"alice123"</span></code></pre>
 
 <h2 id="autostart">autostart</h2>
 <p>If set to true, the user agent calls the <code>.start()</code> method upon being created.  Default value is true.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>autostart: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">autostart</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="displayname">displayName</h2>
 <p>Descriptive name (<code>String</code>) to be shown to the called party when calling or sending IM messages. It must NOT be enclosed between double quotes even if the given name contains multi-byte symbols (SIPjs will always enclose the <code>display_name</code> value between double quotes).</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>displayName: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Alice ¶€ĸøĸø</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">displayName</span><span class="o">:</span> <span class="s2">"Alice ¶€ĸøĸø"</span></code></pre>
 
 <h2 id="dtmftype">dtmfType</h2>
 <p>The type of DTMF that SIP.js should do, either INFO packets or in-band DTMF. In-band DTMF requires support from the Session Description Handler. Valid values are <code>SIP.C.dtmfType.INFO</code> and <code>SIP.C.dtmfType.RTP</code>. If you choose to send in-band DTMF and it fails on the Session Description Handler, then SIP.js will automatically try to send the DTMF via INFO packet. Default value is <code>SIP.C.dtmfType.INFO</code>. The default will change in a future release of SIP.js.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>dtmfType: SIP.C.dtmfType.INFO
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">dtmfType</span><span class="o">:</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">C</span><span class="p">.</span><span class="nx">dtmfType</span><span class="p">.</span><span class="nx">INFO</span></code></pre>
 
 <h2 id="hackipincontact">hackIpInContact</h2>
 <p>Set a random IP address as the host value in the Contact header field and Via sent-by parameter. Useful for SIP registrars not allowing domain names in the Contact URI. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>false</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>hackIpInContact: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">hackIpInContact</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="hackviatcp">hackViaTcp</h2>
 <p>Set Via transport parameter in outgoing SIP requests to “TCP”. Useful when traversing SIP nodes that are not ready to parse Via headers with “WS” or “WSS” value in a Via header. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>false</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>hackViaTcp: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">hackViaTcp</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="hackwssintransport">hackWssInTransport</h2>
 <p>Set the transport parameter to <code>wss</code> when used in SIP URIs.  This replaces <code>ws</code>, which is the default and required by RFC 7118, but some SIP servers do not like that.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>hackWssInTransport: <span style="color:#069">true</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">hackWssInTransport</span><span class="o">:</span> <span class="kc">true</span></code></pre>
 
 <h2 id="log">log</h2>
 <p><code>Object</code> providing the desired log behavior.</p>
@@ -214,44 +169,29 @@ The factory is passed the UA and should return credentials.  Modifying this is v
 
 <p>The function is called with the following semantics:</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">/*
-  level: String representing the level of the log message
-('debug', 'log', 'warn', 'error')
+<pre><code class="language-javascript"><span class="cm">/*</span>
+<span class="cm">  level: String representing the level of the log message</span>
+<span class="cm">('debug', 'log', 'warn', 'error')</span>
 
-  category: String representing the SIPjs instance class firing
-the log. ie: 'sipjs.ua'
+<span class="cm">  category: String representing the SIPjs instance class firing</span>
+<span class="cm">the log. ie: 'sipjs.ua'</span>
 
-  label: String indicating the 'identifier' of the class instance
- when the log level is '3' (debug). ie: transaction.id
+<span class="cm">  label: String indicating the 'identifier' of the class instance</span>
+<span class="cm"> when the log level is '3' (debug). ie: transaction.id</span>
 
-  content: String representing the log message
-*/</span>
-connector(level, category, label, content);
-</pre></div>
-</div>
-</div>
+<span class="cm">  content: String representing the log message</span>
+<span class="cm">*/</span>
+<span class="nx">connector</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">label</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span></code></pre>
 
 <h2 id="noanswertimeout">noAnswerTimeout</h2>
 <p>Time (in seconds) (<code>Number</code>) after which an incoming call is rejected if not answered. Default value is <code>60</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>noAnswerTimeout: <span style="color:#00D">120</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">noAnswerTimeout</span><span class="o">:</span> <span class="mi">120</span></code></pre>
 
 <h2 id="password">password</h2>
 <p>SIP Authentication password (<code>String</code>).   Default value is <code>null</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>password: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">1234</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">password</span><span class="o">:</span> <span class="s2">"1234"</span></code></pre>
 
 <h2 id="registeroptions">registerOptions</h2>
 <p><code>Object</code> - An object to the be passed to the <a href="../register"><code>SIP.RegisterContext</code></a> when instantiated. See <a href="../register#configuration-options">Register Configuration Options</a> for the full of options for the <code>SIP.RegisterContext</code>.</p>
@@ -259,48 +199,28 @@ connector(level, category, label, content);
 <h2 id="register">register</h2>
 <p>Indicate if a SIP User Agent should register automatically when starting. Valid values are <code>true</code> and <code>false</code> (<code>Boolean</code>). Default value is <code>true</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>register: <span style="color:#069">false</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">register</span><span class="o">:</span> <span class="kc">false</span></code></pre>
 
 <h2 id="rel100">rel100</h2>
 <p><code>Constant</code> representing whether the UA should do 100rel. Accepts <code>SIP.C.supported.REQUIRED</code>, <code>SIP.C.supported.SUPPORTED</code>, and <code>SIP.C.supported.UNSUPPORTED</code>. Default value is <code>SIP.C.supported.UNSUPPORTED</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>rel100: SIP.C.supported.REQUIRED
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">rel100</span><span class="o">:</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">C</span><span class="p">.</span><span class="nx">supported</span><span class="p">.</span><span class="nx">REQUIRED</span></code></pre>
 
 <h2 id="replaces">replaces</h2>
 <p><code>Constant</code> representing whether the UA should support the SIP Replaces header.
 If you enable support for Replaces, please be sure to listen for the <a href="../session/#replaced"><code>replaced</code> event</a> event on each Session.
 Accepts <code>SIP.C.supported.SUPPORTED</code>, and <code>SIP.C.supported.UNSUPPORTED</code>. Default value is <code>SIP.C.supported.UNSUPPORTED</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>replaces: SIP.C.supported.SUPPORTED
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">replaces</span><span class="o">:</span> <span class="nx">SIP</span><span class="p">.</span><span class="nx">C</span><span class="p">.</span><span class="nx">supported</span><span class="p">.</span><span class="nx">SUPPORTED</span></code></pre>
 
 <h2 id="sessiondescriptionhandlerfactory">sessionDescriptionHandlerFactory</h2>
 <p><code>function</code> that is a factory for generating sessionDescriptionHandlers. The factory will be passed a <code>session</code> object for the current session and the <code>sessionDescriptionHandlerFactoryOptions</code> object defined on the UA.</p>
 
 <p>See the <a href="../sessionDescriptionHandler"><code>Web.SessionDescriptionHandler</code></a> documentation for more information on how to create this factory.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre><span style="color:#06B;font-weight:bold">sessionDescriptionHandlerFactory</span>: <span style="color:#080;font-weight:bold">function</span>(session, options) {
-  <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">new</span> SessionDescriptionHandler(session, options);
-}
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">sessionDescriptionHandlerFactory</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">session</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">SessionDescriptionHandler</span><span class="p">(</span><span class="nx">session</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
 
 <h2 id="sessiondescriptionhandlerfactoryoptions">sessionDescriptionHandlerFactoryOptions</h2>
 <p>Options that will be passed to the SessionDescriptionHandlerFactory.</p>
@@ -321,12 +241,7 @@ Accepts <code>SIP.C.supported.SUPPORTED</code>, and <code>SIP.C.supported.UNSUPP
 
 <p>If this is set then the User-Agent header will have this string appended after name and version.</p>
 
-<div class="language-javascript highlighter-coderay">
-<div class="CodeRay">
-  <div class="code"><pre>userAgentString: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">myAwesomeApp</span><span style="color:#710">"</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-javascript"><span class="nx">userAgentString</span><span class="o">:</span> <span class="s2">"myAwesomeApp"</span></code></pre>
 
 <p>The User-Agent header will look like User-Agent: myAwesomeApp</p>
 

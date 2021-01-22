@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -51,84 +51,41 @@
       
 <h1 id="send-dtmf">Send DTMF</h1>
 
-<h3 id="overview">Overview</h3>
+<p>This guide uses the full <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md">SIP.js API</a>. The <a href="./simple">Simple User</a> is intended to help get beginners up and running quickly. This guide is adopted from the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api.md">SIP.js Github API documentation</a>.</p>
 
-<p>Let’s write code that calls an attendant menu and sends DTMF to make menu choices. We’ll
-resue the code from the <a href="/guides/make-call">making a call guide</a> to setup the call. If you haven’t read it, you
-may want to do so first for an explanation of core API concepts</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<h3 id="create-the-dial-pad">Create The Dial Pad</h3>
+<p>See the <a href="./user-agent">User Agent</a> guide on how to create a user agent. This guide requires a registered user agent.</p>
 
-<p>Let’s add a set of buttons to our html that accept DTMF input.</p>
+<p>See the <a href="./make-call">Make a Call</a> guide on how to make a call.</p>
 
-<div class="language-html highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-  <td class="code"><pre> <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">1</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>1<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">2</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>2<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">3</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>3<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">4</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>4<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">5</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>5<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">6</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>6<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">7</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>7<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">8</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>8<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">9</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>9<span class="tag">&lt;/button&gt;</span>
- <span class="tag">&lt;button</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">0</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>0<span class="tag">&lt;/button&gt;</span>
-</pre></td>
-</tr></table>
-</div>
+<p>See the <a href="./receive-call">Receive a Call</a> guide on how to receive a call.</p>
 
-<h3 id="send-the-dial-tone">Send the Dial Tone</h3>
+<h2 id="dtmf-info-body">DTMF INFO Body</h2>
 
-<p>Listen for clicks on our dial pad and respond by sending DTMF to the session.
-This is done by using the <code>dtmf(number)</code> method, which can be used to send one or multiple dial tones at the same time</p>
+<p>A DTMF tone can be a SIP INFO packet with a specific body to be interpreted by another SIP endpoint. You will need to create the body of the packet to send. The fields needed to send a DTMF INFO are the <code>contentDisposition</code>, <code>contentType</code>, <code>content</code>.</p>
 
-<div class="language-javascript highlighter-coderay">
-<table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-  <td class="code"><pre>document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">1</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">1</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">2</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">2</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">3</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">3</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">4</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">4</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">5</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">5</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">6</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">6</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">7</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">7</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">8</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">8</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">9</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">9</span>);}, <span class="predefined-constant">false</span>);
-document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">0</span><span class="delimiter">'</span></span>).addEventListener(<span class="string"><span class="delimiter">"</span><span class="content">click</span><span class="delimiter">"</span></span>, <span class="keyword">function</span>() { session.dtmf(<span class="integer">0</span>);}, <span class="predefined-constant">false</span>);
-</pre></td>
-</tr></table>
-</div>
+<p>The <code>contentDisposition</code> field should be set to <code>render</code>. This tells the endpoint to render the content to the user.</p>
 
-<h3 id="putting-it-together">Putting It Together</h3>
+<p>The <code>contentType</code> field should be set to <code>application/dtmf-relay</code>. This tells the endpoint that message is a DTMF message.</p>
 
-<p>Click the result tab of the fiddle to start a call to the attendant menu.  The menu is not video enabled,
-so you’ll only see local video.  The destination address (<code>userAgent.invite('sip:welcome@junctionnetworks.com' ... </code>) in the
-fiddle can be changed to call any SIP endpoint.
-To further explore SIP.js, try using the <code>session.on('dtmf', ...)</code> event to play a tone sound when DTMF is sent.</p>
+<p>The <code>content</code> field needs to contain the <code>Signal=&lt;DTMF_SIGNAL&gt;</code> and <code>Duration=&lt;DTMF_DURATION&gt;</code> each on it’s own line. This tells the application the signal to send and how long it was sent for.</p>
 
-<iframe style="width: 100%; height: 600px" src="https://jsfiddle.net/NBUS3/embedded/js,html,css,result/">
-</iframe>
+<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">requestOptions</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">body</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">contentDisposition</span><span class="o">:</span> <span class="s2">"render"</span><span class="p">,</span>
+      <span class="nx">contentType</span><span class="o">:</span> <span class="s2">"application/dtmf-relay"</span><span class="p">,</span>
+      <span class="nx">content</span><span class="o">:</span> <span class="s2">"Signal=1\r\nDuration=1000"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span></code></pre>
+
+<h2 id="send-the-message">Send The Message</h2>
+
+<p>Once the body is constructed the message can be sent by calling the <code>session.info(options)</code> function.</p>
+
+<pre><code class="language-javascript"><span class="nx">infoer</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span></code></pre>
 
     </div>
 
@@ -143,16 +100,15 @@ To further explore SIP.js, try using the <code>session.on('dtmf', ...)</code> ev
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>

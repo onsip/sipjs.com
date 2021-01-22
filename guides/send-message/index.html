@@ -31,7 +31,7 @@
       <a id="logo-link" href="/"><img id="logo" src="/shared/img/logo.png" alt="sip.js"></a>
       <ul id="full-nav" class="horizontal mobile-hide">
         <li><a href="/download/">Download</a></li>
-        <li><a id="api-nav" href="/api/0.12.0/">API</a></li>
+        <li><a id="api-nav" href="/api/0.15.0/">API</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://github.com/onsip/sip.js" target="_blank">Github</a></li>
         <li><a href="/aboutus/" class="nav-aboutus">About Us</a></li>
@@ -51,36 +51,25 @@
       
 <h1 id="send-a-message">Send a Message</h1>
 
+<p>This guide uses the full <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.md">SIP.js API</a>. The <a href="./simple">Simple User</a> is intended to help get beginners up and running quickly. This guide is adopted from the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api.md">SIP.js Github API documentation</a>.</p>
 
-<p>Let’s walk through how to send a message.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<h3 id="setup">Setup</h3>
+<p>See the <a href="./user-agent">User Agent</a> guide on how to create a user agent. This guide requires a registered user agent.</p>
 
-<p>We must create the files index.html and main.js in the same folder.  In the index.html file we need to include the <a href="/download/">SIP.js library</a>, as well as the main.js file.</p>
+<h2 id="construct-the-messager">Construct The Messager</h2>
 
-<p>A <code>&lt;button&gt;</code> element is included to determine when to send the message.</p>
+<p>A <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.messager.md"><code>Messager</code></a> is required to send the message. This will send a message to a targeted URI. This will be an out of dialog sip message. Please see the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api.md">API Documentation</a> to determine how to send an in dialog message. The <code>Messager</code> constructor requires that the User Agent, target URI, and message content be passed into it.</p>
 
-<iframe style="width: 100%; height: 250px" src="https://jsfiddle.net/5JbvL/3/embedded/html,js,result/">
-</iframe>
-
-<h3 id="creating-the-user-agent">Creating the User Agent</h3>
-
-<p>In order to send messages, create a SIP user agent.  Calling <code>SIP.UA()</code> method, with no parameters, creates an anonymous user agent.</p>
-
-<iframe style="width: 100%; height: 250px" src="https://jsfiddle.net/gk3p4/5/embedded/js,html,result/">
-</iframe>
+<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="s1">'Hello World'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">messager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Messager</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span></code></pre>
 
 <h3 id="sending-the-message">Sending the Message</h3>
 
-<p>After the user agent has been created we can send the message.</p>
+<p>Once the messager is constructed call <code>messager.message()</code> to send the message.</p>
 
-<p>To send the message, call the <code>.message(target, body)</code> method, along with the address that the message is being sent to in the <code>target</code> argument and the message that we are sending in the <code>body</code> argument.</p>
-
-<p>Add a click event to the <code>&lt;button&gt;</code> element, that calls the <code>message()</code> method.</p>
-
-<iframe style="width: 100%; height: 250px" src="https://jsfiddle.net/8Cg6M/5/embedded/js,html,result/">
-</iframe>
-
+<pre><code class="language-javascript"><span class="nx">messager</span><span class="p">.</span><span class="nx">message</span><span class="p">();</span></code></pre>
 
     </div>
 
@@ -95,16 +84,15 @@
         <li><a href="/guides/server-configuration/onsip-network/">OnSIP</a></li>
       </ul>
     </li>
-    <li><a href="/guides/convert-to-sipjs/">Convert to SIP.js</a></li>
-    <li><a href="/guides/simple/">Simple</a></li>
-    <li><a href="/guides/user-agent-construction/">User Agent Construction</a></li>
+    <li><a href="/guides/simple-user/">Simple User</a></li>
+    <li><a href="/guides/user-agent/">User Agent</a></li>
     <li><a href="/guides/make-call/">Make a Call</a></li>
     <li><a href="/guides/receive-call/">Receive a Call</a></li>
-    <li><a href="/guides/attach-media">Attach Media</a></li>
+    <li><a href="/guides/end-call/">End a Call</a></li>
+    <li><a href="/guides/attach-media/">Attach Media</a></li>
     <li><a href="/guides/send-dtmf/">Send DTMF</a></li>
     <li><a href="/guides/send-message/">Send Message</a></li>
     <li><a href="/guides/transfer/">Make a Transfer</a></li>
-    <li><a href="/guides/renegotiation">Renegotiation</a></li>
     <li><a class="last" href="/guides/full-demo-app/">Application Demo</a></li>
   </ul>
 </nav>
