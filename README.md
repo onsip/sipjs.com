@@ -14,7 +14,8 @@ Development
     git clone https://gitlab.com/onsip/sipjs.com
     cd sipjs.com
     gem install bundler # http://bundler.io
-    bundle install --path vendor/bundle
+    bundle config set --local path 'vendor/bundle'
+    bundle install
 
     bundle exec nanoc # build once
     bundle exec nanoc view # serve over localhost:3000
