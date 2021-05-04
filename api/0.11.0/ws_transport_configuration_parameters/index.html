@@ -92,38 +92,38 @@
 <pre><code class="language-javascript"><span class="nx">wsServers</span><span class="o">:</span> <span class="p">[</span>
   <span class="p">{</span> <span class="c1">// First connection attempt</span>
     <span class="nx">ws_uri</span><span class="o">:</span> <span class="s2">"ws://sip-ws-1.example.com"</span><span class="p">,</span>
-    <span class="nx">weight</span><span class="o">:</span> <span class="mi">10</span>
+    <span class="nx">weight</span><span class="o">:</span> <span class="mf">10</span>
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="nx">ws_uri</span><span class="o">:</span> <span class="s2">"ws://sip-ws-2.example.com"</span><span class="p">,</span>
-    <span class="nx">weight</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">weight</span><span class="o">:</span> <span class="mf">1</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
 <h2 id="connectiontimeout">connectionTimeout</h2>
 <p>Maximum time (<code>Number</code>) in seconds for WebSocket initial connection. Default value is 5.</p>
 
-<pre><code class="language-javascript"><span class="nx">connectionTimeout</span><span class="o">:</span> <span class="mi">5</span></code></pre>
+<pre><code class="language-javascript"><span class="nx">connectionTimeout</span><span class="o">:</span> <span class="mf">5</span></code></pre>
 
 <h2 id="maxreconnectionattempts">maxReconnectionAttempts</h2>
 <p><code>Number</code> of times to attempt to reconnect to a WebSocket when the connection drops. The default value is 3.</p>
 
-<pre><code class="language-javascript"><span class="nx">maxReconnectionAttempts</span><span class="o">:</span> <span class="mi">3</span></code></pre>
+<pre><code class="language-javascript"><span class="nx">maxReconnectionAttempts</span><span class="o">:</span> <span class="mf">3</span></code></pre>
 
 <h2 id="reconnectiontimeout">reconnectionTimeout</h2>
 <p>The time (<code>Number</code>) in seconds to wait between WebSocket reconnection attempts. The default timeout is 4 seconds.</p>
 
-<pre><code class="language-javascript"><span class="nx">reconnectionTimeout</span><span class="o">:</span> <span class="mi">4</span></code></pre>
+<pre><code class="language-javascript"><span class="nx">reconnectionTimeout</span><span class="o">:</span> <span class="mf">4</span></code></pre>
 
 <h2 id="keepaliveinterval">keepAliveInterval</h2>
 <p>The time (<code>Number</code>) in seconds to wait in between CLRF keepAlive sequences are sent. The default is 0.</p>
 
-<pre><code class="language-javascript"><span class="nx">keepAliveInterval</span><span class="o">:</span> <span class="mi">0</span></code></pre>
+<pre><code class="language-javascript"><span class="nx">keepAliveInterval</span><span class="o">:</span> <span class="mf">0</span></code></pre>
 
 <h2 id="keepalivedebounce">keepAliveDebounce</h2>
 <p>The time (<code>Number</code>) in seconds to debounce sending CLRF keepAlive sequences by. The default is 10.</p>
 
-<pre><code class="language-javascript"><span class="nx">keepAliveInterval</span><span class="o">:</span> <span class="mi">10</span></code></pre>
+<pre><code class="language-javascript"><span class="nx">keepAliveInterval</span><span class="o">:</span> <span class="mf">10</span></code></pre>
 
 <h2 id="tracesip">traceSip</h2>
 <p>Indicate whether incoming and outgoing SIP request/responses must be logged in the browser console (<code>Boolean</code>). Default value is <code>false</code>.</p>

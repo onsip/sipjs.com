@@ -57,7 +57,7 @@
 
 <p>The first thing SIP.js needs to know is where it will connect to. This guide assumes that you are using the default WebSocket Transport that is included with SIP.js. The only parameter that is required is a Websocket URL for your SIP Websocket server.</p>
 
-<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">transportOptions</span> <span class="o">=</span> <span class="p">{</span>
+<pre><code class="language-javascript"><span class="kd">const</span> <span class="nx">transportOptions</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">server</span><span class="o">:</span> <span class="s2">"wss://example.com:8443"</span>
 <span class="p">};</span></code></pre>
 
@@ -65,28 +65,28 @@
 
 <p>In order to make calls and send messages you must create a SIP user agent.  In this example, we will create an anonymous user agent.  To do this, call the <code>new UserAgent(userAgentOptions)</code> constructor. No options are required by the library, but it is recommended that you pass <code>transportOptions</code> to indicate where SIP.js should connect to. An anonymous user agent can make calls and send messages to SIP endpoints.  It cannot receive calls or messages.</p>
 
-<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">userAgent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserAgent</span><span class="p">({</span><span class="nx">transportOptions</span><span class="p">});</span>
+<pre><code class="language-javascript"><span class="kd">const</span> <span class="nx">userAgent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserAgent</span><span class="p">({</span><span class="nx">transportOptions</span><span class="p">});</span>
 <span class="nx">userAgent</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span></code></pre>
 
 <h3 id="authenticated-user-agent">Authenticated User Agent</h3>
 
 <p>To create an authenticated user agent add a <code>URI</code>, <code>authorizationUsername</code>, <code>authorizationPassword</code> to the configuration option passed to the <code>new UserAgent(userAgentOptions)</code> constructor. The <code>URI</code> option is specifically typed as a <code>URI</code> type and not a string. There is a static helper function <code>makeURI(uri: string)</code> on the <code>UserAgent</code> that can help create this type.</p>
 
-<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:alice@example.com"</span><span class="p">);</span></code></pre>
+<pre><code class="language-javascript"><span class="kd">const</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:alice@example.com"</span><span class="p">);</span></code></pre>
 
 <p>Once a URI is created the rest of the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.useragentoptions.md">user agent options</a> can be added to the options object. The Most platforms will require and <code>authorizationUsername</code> and <code>authorizationPassword</code> to authorize your user.</p>
 
-<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">userAgentOptions</span><span class="o">:</span> <span class="nx">UserAgentOptions</span> <span class="o">=</span> <span class="p">{</span>
+<pre><code class="language-javascript"><span class="kd">const</span> <span class="nx">userAgentOptions</span><span class="o">:</span> <span class="nx">UserAgentOptions</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">authorizationPassword</span><span class="o">:</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
   <span class="nx">authorizationUsername</span><span class="o">:</span> <span class="s1">'authorizationUsername'</span><span class="p">,</span>
   <span class="nx">transportOptions</span><span class="p">,</span>
   <span class="nx">uri</span>
 <span class="p">};</span>
-<span class="kr">const</span> <span class="nx">userAgent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserAgent</span><span class="p">(</span><span class="nx">userAgentOptions</span><span class="p">);</span></code></pre>
+<span class="kd">const</span> <span class="nx">userAgent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserAgent</span><span class="p">(</span><span class="nx">userAgentOptions</span><span class="p">);</span></code></pre>
 
 <p>After the User Agent is created it will need to Register in order to authenticate with the server and receive messages. To do this a <code>new Registerer(userAgent: UserAgent)</code> needs to be created. A <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.registerer.md"><code>Registerer</code></a> will register and automatically handle re-registrations when required.</p>
 
-<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">registerer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Registerer</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">);</span></code></pre>
+<pre><code class="language-javascript"><span class="kd">const</span> <span class="nx">registerer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Registerer</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">);</span></code></pre>
 
 <p>Now that everything is created it can all be started. First the <code>UserAgent</code> must be started. This tells the user agent to connect to the Transport. Once the user agent is started then the <code>Registerer</code> can be told to <code>register()</code> the user agent.</p>
 

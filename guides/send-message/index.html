@@ -61,9 +61,9 @@
 
 <p>A <a href="https://github.com/onsip/SIP.js/blob/master/docs/api/sip.js.messager.md"><code>Messager</code></a> is required to send the message. This will send a message to a targeted URI. This will be an out of dialog sip message. Please see the <a href="https://github.com/onsip/SIP.js/blob/master/docs/api.md">API Documentation</a> to determine how to send an in dialog message. The <code>Messager</code> constructor requires that the User Agent, target URI, and message content be passed into it.</p>
 
-<pre><code class="language-javascript"><span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="s1">'Hello World'</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">messager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Messager</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span></code></pre>
+<pre><code class="language-javascript"><span class="kd">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="s1">'Hello World'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">messager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Messager</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span></code></pre>
 
 <h3 id="sending-the-message">Sending the Message</h3>
 

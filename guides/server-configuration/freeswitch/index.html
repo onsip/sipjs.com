@@ -93,11 +93,11 @@ systemctl start freeswitch</code></pre>
   <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Your browser doesn't support HTML5 audio.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">audio</span><span class="p">&gt;</span></code></pre>
 
-<pre><code class="language-javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SimpleUser</span><span class="p">,</span> <span class="nx">SimpleUserOptions</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"sip.js/lib/platform/web"</span><span class="p">;</span>
+<pre><code class="language-javascript"><span class="k">import</span> <span class="p">{</span> <span class="nx">SimpleUser</span><span class="p">,</span> <span class="nx">SimpleUserOptions</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"sip.js/lib/platform/web"</span><span class="p">;</span>
 
 <span class="c1">// Helper function to get an HTML audio element</span>
 <span class="kd">function</span> <span class="nx">getAudioElement</span><span class="p">(</span><span class="nx">id</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">HTMLAudioElement</span> <span class="p">{</span>
-  <span class="kr">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">el</span> <span class="k">instanceof</span> <span class="nx">HTMLAudioElement</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`Element "</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">" not found or not an audio element.`</span><span class="p">);</span>
   <span class="p">}</span>
@@ -105,14 +105,14 @@ systemctl start freeswitch</code></pre>
 <span class="p">}</span>
 
 <span class="c1">// Helper function to wait</span>
-<span class="nx">async</span> <span class="kd">function</span> <span class="nx">wait</span><span class="p">(</span><span class="nx">ms</span><span class="o">:</span> <span class="nx">number</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">wait</span><span class="p">(</span><span class="nx">ms</span><span class="o">:</span> <span class="nx">number</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">);</span>
   <span class="p">});</span>
 <span class="p">}</span>
 
 <span class="c1">// Main function</span>
-<span class="nx">async</span> <span class="kd">function</span> <span class="nx">main</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">main</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
 
   <span class="c1">// SIP over WebSocket Server URL</span>
   <span class="c1">// The URL of a SIP over WebSocket server which will complete the call.</span>
@@ -120,35 +120,35 @@ systemctl start freeswitch</code></pre>
   <span class="c1">// SIP over WebSocket is an internet standard the details of which are</span>
   <span class="c1">// outside the scope of this documentation, but there are many resources</span>
   <span class="c1">// available. See: https://tools.ietf.org/html/rfc7118 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="s2">"wss://127.0.0.1:5066"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="s2">"wss://127.0.0.1:5066"</span><span class="p">;</span>
 
   <span class="c1">// SIP Request URI</span>
   <span class="c1">// The SIP Request URI of the destination. It's "Who you wanna call?"</span>
   <span class="c1">// SIP is an internet standard the details of which are outside the</span>
   <span class="c1">// scope of this documentation, but there are many resources available.</span>
   <span class="c1">// See: https://tools.ietf.org/html/rfc3261 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">destination</span> <span class="o">=</span> <span class="s2">"sip:1001@127.0.0.1"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">destination</span> <span class="o">=</span> <span class="s2">"sip:1001@127.0.0.1"</span><span class="p">;</span>
 
   <span class="c1">// SIP Address of Record (AOR)</span>
   <span class="c1">// This is the user's SIP address. It's "Where people can reach you."</span>
   <span class="c1">// SIP is an internet standard the details of which are outside the</span>
   <span class="c1">// scope of this documentation, but there are many resources available.</span>
   <span class="c1">// See: https://tools.ietf.org/html/rfc3261 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">aor</span> <span class="o">=</span> <span class="s2">"sip:1000@127.0.0.1"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">aor</span> <span class="o">=</span> <span class="s2">"sip:1000@127.0.0.1"</span><span class="p">;</span>
 
   <span class="c1">// SIP Authorization Username</span>
   <span class="c1">// This is the user's authorization username used for authorizing requests.</span>
   <span class="c1">// SIP is an internet standard the details of which are outside the</span>
   <span class="c1">// scope of this documentation, but there are many resources available.</span>
   <span class="c1">// See: https://tools.ietf.org/html/rfc3261 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">authorizationUsername</span> <span class="o">=</span> <span class="s1">'1000'</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">authorizationUsername</span> <span class="o">=</span> <span class="s1">'1000'</span><span class="p">;</span>
 
   <span class="c1">// SIP Authorization Password</span>
   <span class="c1">// This is the user's authorization password used for authorizing requests.</span>
   <span class="c1">// SIP is an internet standard the details of which are outside the</span>
   <span class="c1">// scope of this documentation, but there are many resources available.</span>
   <span class="c1">// See: https://tools.ietf.org/html/rfc3261 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">authorizationPassword</span> <span class="o">=</span> <span class="s1">'1234'</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">authorizationPassword</span> <span class="o">=</span> <span class="s1">'1234'</span><span class="p">;</span>
 
   <span class="c1">// Configuration Options</span>
   <span class="c1">// These are configuration options for the `SimpleUser` instance.</span>
@@ -157,7 +157,7 @@ systemctl start freeswitch</code></pre>
   <span class="c1">// An audio element is needed to play the audio received from the</span>
   <span class="c1">// remote end of the call. Once the call is established, a `MediaStream`</span>
   <span class="c1">// is attached to the provided audio element's `src` attribute.</span>
-  <span class="kr">const</span> <span class="nx">options</span><span class="o">:</span> <span class="nx">SimpleUserOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">options</span><span class="o">:</span> <span class="nx">SimpleUserOptions</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">aor</span><span class="p">,</span>
     <span class="nx">media</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">remote</span><span class="o">:</span> <span class="p">{</span>
@@ -171,29 +171,29 @@ systemctl start freeswitch</code></pre>
   <span class="p">};</span>
 
   <span class="c1">// Construct a SimpleUser instance</span>
-  <span class="kr">const</span> <span class="nx">simpleUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleUser</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">simpleUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleUser</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 
   <span class="c1">// Supply delegate to handle inbound calls (optional)</span>
   <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">delegate</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">onCallReceived</span><span class="o">:</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">answer</span><span class="p">();</span>
+    <span class="nx">onCallReceived</span><span class="o">:</span> <span class="k">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">answer</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">};</span>
 
   <span class="c1">// Connect to server</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
   <span class="c1">// Register to receive inbound calls (optional)</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">register</span><span class="p">();</span>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">register</span><span class="p">();</span>
 
   <span class="c1">// Place call to the destination</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">destination</span><span class="p">);</span>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">destination</span><span class="p">);</span>
 
   <span class="c1">// Wait some number of milliseconds</span>
-  <span class="nx">await</span> <span class="nx">wait</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+  <span class="k">await</span> <span class="nx">wait</span><span class="p">(</span><span class="mf">5000</span><span class="p">);</span>
 
   <span class="c1">// Hangup call</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">hangup</span><span class="p">();</span>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">hangup</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="c1">// Run it</span>

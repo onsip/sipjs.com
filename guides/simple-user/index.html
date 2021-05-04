@@ -94,13 +94,13 @@
 
 <p>SIP.js is built as a standard module and can be imported into your application. You should only import the individual components that you need for your application. For these demo’s we will be using the <code>SimpleUser</code> and <code>SimpleUserOptions</code> components.</p>
 
-<pre><code class="language-javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SimpleUser</span><span class="p">,</span> <span class="nx">SimpleUserOptions</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"sip.js/lib/platform/web"</span><span class="p">;</span></code></pre>
+<pre><code class="language-javascript"><span class="k">import</span> <span class="p">{</span> <span class="nx">SimpleUser</span><span class="p">,</span> <span class="nx">SimpleUserOptions</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"sip.js/lib/platform/web"</span><span class="p">;</span></code></pre>
 
 <h3 id="creating-a-simple-user">Creating a Simple User</h3>
 
 <p>In order to make calls and send messages, create a Simple User.  Calling <code>new SimpleUser(server, options)</code> constructor, with a websocket server and options will create a new Simple User. A Simple User can handle attaching meda elements for you.</p>
 
-<pre><code class="language-javascript">  <span class="kr">const</span> <span class="nx">simpleUser</span><span class="o">:</span> <span class="nx">SimpleUser</span><span class="p">;</span>
+<pre><code class="language-javascript">  <span class="kd">const</span> <span class="nx">simpleUser</span><span class="o">:</span> <span class="nx">SimpleUser</span><span class="p">;</span>
 
   <span class="c1">// SIP over WebSocket Server URL</span>
   <span class="c1">// The URL of a SIP over WebSocket server which will complete the call.</span>
@@ -108,14 +108,14 @@
   <span class="c1">// SIP over WebSocket is an internet standard the details of which are</span>
   <span class="c1">// outside the scope of this documentation, but there are many resources</span>
   <span class="c1">// available. See: https://tools.ietf.org/html/rfc7118 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="s2">"wss://sip.example.com"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="s2">"wss://sip.example.com"</span><span class="p">;</span>
 
   <span class="c1">// SIP Address of Record (AOR)</span>
   <span class="c1">// This is the user's SIP address. It's "Where people can reach you."</span>
   <span class="c1">// SIP is an internet standard the details of which are outside the</span>
   <span class="c1">// scope of this documentation, but there are many resources available.</span>
   <span class="c1">// See: https://tools.ietf.org/html/rfc3261 for the specification.</span>
-  <span class="kr">const</span> <span class="nx">aor</span> <span class="o">=</span> <span class="s2">"sip:alice@example.com"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">aor</span> <span class="o">=</span> <span class="s2">"sip:alice@example.com"</span><span class="p">;</span>
 
   <span class="c1">// Configuration Options</span>
   <span class="c1">// These are configuration options for the `SimpleUser` instance.</span>
@@ -124,7 +124,7 @@
   <span class="c1">// An audio element is needed to play the audio received from the</span>
   <span class="c1">// remote end of the call. Once the call is established, a `MediaStream`</span>
   <span class="c1">// is attached to the provided audio element's `src` attribute.</span>
-  <span class="kr">const</span> <span class="nx">options</span><span class="o">:</span> <span class="nx">SimpleUserOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">options</span><span class="o">:</span> <span class="nx">SimpleUserOptions</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">aor</span><span class="p">,</span>
     <span class="nx">media</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">local</span><span class="o">:</span> <span class="p">{</span>
@@ -144,10 +144,10 @@
 <p>Once the Simple User is created. We then need to connect it to our server. See our Server Guide’s for information on setting up a SIP server. To connect our Simple User we need to call the <code>connect()</code> function. This function returns a promise that resolves when the Simple User is connected. Once we are connected we will then need to register.</p>
 
 <pre><code class="language-javascript">  <span class="c1">// Connect to server</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
   <span class="c1">// Register to receive inbound calls</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">register</span><span class="p">();</span></code></pre>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">register</span><span class="p">();</span></code></pre>
 
 <h3 id="starting-a-call">Starting a Call</h3>
 
@@ -163,16 +163,16 @@
 
 <p>To know if you are getting call you need to register a Simple User Delegate that has callback methods for the Simple User to call when an event happens. The delegate is passed in the <code>SimpleUserOptions</code> To know when a call is received you need an <code>onCallReceived()</code> function.</p>
 
-<pre><code class="language-javascript">  <span class="kr">const</span> <span class="nx">simpleUser</span><span class="o">:</span> <span class="nx">SimpleUser</span><span class="p">;</span>
+<pre><code class="language-javascript">  <span class="kd">const</span> <span class="nx">simpleUser</span><span class="o">:</span> <span class="nx">SimpleUser</span><span class="p">;</span>
 
-  <span class="kr">const</span> <span class="nx">delegate</span><span class="o">:</span> <span class="nx">SimpleUserDelegate</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">onCallReceived</span><span class="o">:</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">delegate</span><span class="o">:</span> <span class="nx">SimpleUserDelegate</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">onCallReceived</span><span class="o">:</span> <span class="k">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Incoming Call!'</span><span class="p">);</span>
-      <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">answer</span><span class="p">();</span>
+      <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">answer</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">};</span>
 
-  <span class="kr">const</span> <span class="nx">options</span><span class="o">:</span> <span class="nx">SimpleUserOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">options</span><span class="o">:</span> <span class="nx">SimpleUserOptions</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">aor</span><span class="p">,</span>
     <span class="nx">delegate</span><span class="o">:</span> <span class="nx">delegate</span><span class="p">,</span>
     <span class="nx">media</span><span class="o">:</span> <span class="p">{</span>
@@ -188,10 +188,10 @@
   <span class="nx">simpleUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleUser</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 
   <span class="c1">// Connect to server</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
   <span class="c1">// Register to receive inbound calls</span>
-  <span class="nx">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">register</span><span class="p">();</span></code></pre>
+  <span class="k">await</span> <span class="nx">simpleUser</span><span class="p">.</span><span class="nx">register</span><span class="p">();</span></code></pre>
 
 <h3 id="placing-a-call-on-hold">Placing a Call on Hold</h3>
 

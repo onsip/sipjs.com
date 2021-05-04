@@ -63,9 +63,9 @@
 
 <pre><code class="language-javascript"><span class="c1">// userAgent defined elsewhere</span>
 <span class="nx">userAgent</span><span class="p">.</span><span class="nx">start</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">UserAgent</span><span class="p">.</span><span class="nx">makeURI</span><span class="p">(</span><span class="s2">"sip:bob@example.com"</span><span class="p">);</span>
 
-  <span class="kr">const</span> <span class="nx">inviter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Inviter</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">inviter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Inviter</span><span class="p">(</span><span class="nx">userAgent</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
   <span class="nx">inviter</span><span class="p">.</span><span class="nx">invite</span><span class="p">();</span>
 <span class="p">});</span></code></pre>
 
