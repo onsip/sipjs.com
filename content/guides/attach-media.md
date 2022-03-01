@@ -23,7 +23,7 @@ When SIP.js sets up a session, the session goes through a life cycle. When the s
 
 ~~~javascript
 const inviter = new Inviter(userAgent, target);
-inviter.statChange.addListener((state: SessionState) => {
+inviter.stateChange.addListener((state: SessionState) => {
   console.log(`Session state changed to ${state}`);
   switch (state) {
     case SessionState.Initial:
