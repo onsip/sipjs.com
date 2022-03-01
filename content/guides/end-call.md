@@ -32,7 +32,7 @@ function endCall() {
   switch(session.state) {
     case SessionState.Initial:
     case SessionState.Establishing:
-      if (session instanceOf Inviter) {
+      if (session instanceof Inviter) {
         // An unestablished outgoing session
         session.cancel();
       } else {
